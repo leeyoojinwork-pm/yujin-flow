@@ -53,6 +53,7 @@
     return '<pre class="code-preview">' + esc(content) + '</pre><div class="button-row" style="margin-top:16px">' + button('복사', 'copy-prompt', 'copy', 'secondary', 'data-prompt="' + name + '"') + button('MD로 저장', 'download-prompt', 'download', 'secondary', 'data-prompt="' + name + '"') + '</div>';
   }
   function titleMarkup(s) {
+    if (s.id === 'yujin-framework') return '<span class="framework-title-lead">문제에서 실행까지.</span><span class="framework-wordmark">YUJIN <span class="title-emphasis">FLOW.</span><span class="framework-title-arrow">' + icon('arrow-up-right') + '</span></span>';
     const phrase = {
       'finish-line': '네 가지', 'from-last-week': '내 업무', 'taxi': '어떤 문제',
       'solution-trap': '챗봇', 'rethink-work': '없애도 되는 일', 'yujin-framework': 'YUJIN FLOW',
