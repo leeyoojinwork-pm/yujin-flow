@@ -1,4 +1,5 @@
 :root{--accent:#7442bd;--accent-bright:#d7baff;--accent-tint:#eee7f8;--lime:var(--accent-bright);--blue:var(--accent);--paper:#f8f8fa;--ink:#1c1b20;--muted:#696670;--line:#dddbe2;--dark:#19181d}
+.brand .awac-mark{display:grid;place-content:center;flex:none;padding:0;font-size:14px;font-weight:850;line-height:1;letter-spacing:0;text-align:center;color:var(--accent-bright)}
 .title-emphasis{color:var(--accent)}
 .hero-slide .title-emphasis,.closing-slide .title-emphasis{color:var(--accent-bright)}
 .hero-strip b,.framework-letter,.role-row b,.skill-part b,.editorial-row h3,.pipeline-node h3,.deliverable h3,.compare-column:last-child h3,.formula-example,.tree-loop b,.checkpoint b,.verification-strip b{color:var(--accent)}
