@@ -103,7 +103,10 @@
     return lab.fields.map((f, i) => '### ' + (i + 1) + '. ' + f.label + '\n\n' + (answer(state, lab.id, f.id).trim() || '[미입력: 이 질문은 먼저 사용자에게 확인하세요.]')).join('\n\n');
   }
   function context(state, exclude) {
-    return labs.filter(l => ['gap', 'problem', 'job', 'journey', 'boundary'].includes(l.id) && l.id !== exclude)
+    const related = ['gap', 'problem', 'job', 'journey', 'boundary'];
+    if (['skill', 'run1', 'run2', 'ownflow'].includes(exclude)) related.push('instructions');
+    if (['run2', 'ownflow'].includes(exclude)) related.push('skill');
+    return labs.filter(l => related.includes(l.id) && l.id !== exclude)
       .filter(l => l.fields.some(f => answer(state, l.id, f.id).trim()))
       .map(l => '## 앞에서 작성한 내용: ' + l.title + '\n\n' + qa(l, state)).join('\n\n');
   }
