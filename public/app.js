@@ -126,11 +126,11 @@
         ['package', 'Skill 하나', '다시 쓸 절차가 들어 있는 SKILL.md와 ZIP.'],
         ['git-branch', '업무 흐름 한 장', '시작·분업·검수·승인·중단까지 연결.'],
         ['file-check-2', '실행 기록 두 번', '다른 입력으로 확인한 결과와 수정 이유.']
-      ].map((x, i) => '<div class="deliverable" style="--output-index:' + i + '"><div class="num">0' + (i + 1) + ' / OUTPUT</div>' + icon(x[0]) + '<h3>' + x[1] + '</h3><p>' + x[2] + '</p></div>').join('') + '</div><div class="practice-cadence">' + [
-        ['01', '문제정의', '내 업무 병목 찾기', '20분'],
-        ['02', 'Agent 설계', 'YUJIN으로 Agent 스펙 만들기', '35분'],
-        ['03', '실행·검수', 'Claude에 넣고 결과 검수하기', '25분']
-      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p><small>' + x[3] + '</small></article>').join('') + '</div><div class="schedule">' + D.chapters.map(c => '<div><small>' + c.n + ' / ' + c.en + '</small><b>' + c.name + '</b><span>' + c.minutes + '분</span></div>').join('') + '</div>';
+      ].map((x, i) => '<div class="deliverable" style="--output-index:' + i + '"><div class="num">0' + (i + 1) + ' / OUTPUT</div>' + icon(x[0]) + '<h3>' + x[1] + '</h3><p>' + x[2] + '</p></div>').join('') + '</div><div class="practice-cadence compact"><div class="contents-label"><span>CONTENTS</span><b>오늘의 흐름</b></div>' + [
+        ['01', '문제정의', '병목 찾기 · 문제 후보 고르기', '20분'],
+        ['02', 'Agent 설계', 'YUJIN → Project → Skill', '55분'],
+        ['03', '실행·검수', '첫 실행 · QA Loop · 2주차 과제', '45분']
+      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p><small>' + x[3] + '</small></article>').join('') + '</div>';
       case 'compare': return '<div class="compare-grid">' + [s.left, s.right].map(c => '<section class="compare-column"><p class="compare-label">' + esc(c.label) + '</p><h3>' + esc(c.title) + '</h3><ul>' + c.items.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section>').join('') + '</div>';
       case 'reveal': return taxiMarkup(s);
       case 'editorial': return (s.intro ? '<p class="leadline">' + esc(s.intro) + '</p>' : '') + '<div class="editorial-list">' + s.rows.map(r => '<div class="editorial-row"><h3>' + esc(r[0]) + '</h3><p>' + esc(r[1]) + '</p></div>').join('') + '</div>' + (s.caption ? '<p class="caption">' + esc(s.caption) + '</p>' : '');
