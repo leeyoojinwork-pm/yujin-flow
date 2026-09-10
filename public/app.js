@@ -55,7 +55,7 @@
   function titleMarkup(s) {
     if (s.id === 'yujin-framework') return '<span class="framework-title-lead">문제에서 실행까지.</span><span class="framework-wordmark">YUJIN <span class="title-emphasis">FLOW.</span><span class="framework-title-arrow">' + icon('arrow-up-right') + '</span></span>';
     const phrase = {
-      'opening': 'AI AGENT', 'finish-line': '결과물 4개', 'from-last-week': '내 업무', 'taxi': '어떤 문제',
+      'opening': 'AI AGENT', 'finish-line': '결과물 4개', 'from-last-week': '내 업무', 'homework-to-poc': 'PoC 명세', 'taxi': '어떤 문제',
       'solution-trap': '챗봇', 'bottleneck-diagnosis': '병목 진단가', 'rethink-work': '없애도 되는 일', 'yujin-framework': 'YUJIN FLOW',
       'ax-planning': 'Problem', 'problem-governance': '어떤 문제',
       'problem-formula': '한 문장', 'jtbd': '문의 해결', 'hmw': '여러 해결책',
@@ -121,6 +121,18 @@
     switch (s.type) {
       case 'prompt-techniques': return window.YFPromptTechniques.markup();
       case 'homework-bridge': return '<div class="homework-bridge"><section><span class="eyebrow">01 / 가져오기</span><h2>1주차에 적은 세 가지</h2><ol><li>내가 풀고 싶은 문제 하나</li><li>왜 불편한지</li><li>Agent가 해줬으면 하는 일</li></ol><p>내 1주차 상세 페이지에서 가져오세요. 짧은 메모나 음성으로 풀어 쓴 내용도 괜찮습니다.</p></section><section><span class="eyebrow">02 / 구체화하기</span><h2>기능보다 문제부터</h2><p class="homework-before">“CS 문의가 많아서 챗봇을 만들고 싶다.”</p><p>누가, 언제, 무엇 때문에 어려운가요? FAQ를 찾는 시간인지, 예외 문의를 판단하는 일인지 나눠봅니다.</p><p><b>가설:</b> 문의가 몰릴 때 CS 담당자가 FAQ를 반복해서 찾느라 첫 답변이 늦어진다.</p></section></div><div class="homework-next"><p>오늘은 이 문제를 작은 PoC로 검증한 뒤 Agent의 역할·입력·완료 기준으로 옮깁니다.</p>' + button('1주차 과제 가져오기', 'goto', 'notebook-pen', 'primary', 'data-slide="lab-gap"') + '</div>';
+      case 'homework-poc': return '<div class="homework-poc"><section class="poc-source"><span class="eyebrow">FROM NOTION</span><h2>1주차에 쓴 세 문장</h2>' + [
+        ['01', '내가 풀고 싶은 문제 하나', '기능 아이디어가 아니라 실제 업무 병목으로 바꿉니다.'],
+        ['02', '왜 불편한지', '시간 지연·누락·재작업·판단 어려움 중 무엇인지 고릅니다.'],
+        ['03', 'Agent가 해줬으면 하는 일', 'AI의 일과 사람의 검수 지점을 분리합니다.']
+      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p></article>').join('') + '</section><section class="poc-spec"><span class="eyebrow">TO POC SPEC</span><h2>오늘 검증할 여섯 칸</h2><div>' + [
+        ['문제정의', '누가 · 어떤 상황에서 · 무엇 때문에 막히나'],
+        ['검증 가설', 'AI가 어디까지 대신하면 좋아지는가'],
+        ['입력', '작은 샘플 데이터와 기준 문서'],
+        ['AI의 일', '분류 · 근거 매칭 · 초안 생성'],
+        ['사람 검수', '근거 · 표현 · 예외 · 누락 확인'],
+        ['성공 기준', '몇 건 중 몇 건이 통과해야 하는가']
+      ].map((x, i) => '<div><small>0' + (i + 1) + '</small><b>' + x[0] + '</b><p>' + x[1] + '</p></div>').join('') + '</div></section></div><p class="poc-one-line">PoC는 완성품이 아니라, 내 문제가 AI로 해결 가능한 구조인지 작은 데이터로 확인하는 실험입니다.</p>';
       case 'deliverables': return '<div class="practice-cadence compact"><div class="contents-label"><span>CONTENTS</span><b>오늘의 흐름</b></div>' + [
         ['01', '문제정의', '병목 찾기 · 문제 후보 고르기', '20분'],
         ['02', 'Agent 설계', 'YUJIN → Project → Skill', '55분'],
