@@ -60,7 +60,7 @@
       'problem-formula': '한 문장', 'jtbd': '문의 해결', 'hmw': '여러 해결책',
       'experiment': 'PoC', 'workflow-map': '여섯 칸', 'what-is-agent': 'Agent',
       'onboarding': '일할 조건', 'orchestration-concept': 'Orchestration', 'split-criteria': '언제',
-      'orchestration-live': '다시 돌아갈까요?',
+      'example-gallery': '내 문제',
       'case-brief': '내 Agent', 'case-files': '두 곳', 'case-flow': '파일이 나올 때까지', 'skill-structure': '업무 절차 묶음',
       'skill-vs-sub': '일하는 방법', 'code-start': '실제 역할', 'code-files': 'Subagent 검수', 'code-run': '실행 기록',
       'loop-control': '끝나는 조건', 'evaluation': '운영 기준', 'success-metrics': '검수와 재작업',
@@ -145,6 +145,7 @@
       case 'concepts': return '<div class="table-scroll"><table class="concept-table"><thead><tr><th>구분</th><th>어떻게 일하나</th><th>우리 실습에서</th></tr></thead><tbody><tr><td>Prompt</td><td>한 번의 작업을 요청한다.</td><td>“이 CSV를 분류해줘.”</td></tr><tr><td>Workflow</td><td>정해둔 단계와 분기를 따른다.</td><td>읽기 → 분류 → 집계 → 검수</td></tr><tr class="highlight"><td>Agent</td><td>목표·관찰 결과에 맞춰 도구와 다음 행동을 선택한다.</td><td>누락을 발견하면 해당 입력을 다시 읽고 수정</td></tr><tr><td>Project / Skill</td><td>공통 맥락 / 재사용 절차를 제공한다.</td><td>기준 문서 / triage-and-draft</td></tr></tbody></table></div><p class="caption">웹 실습은 도구를 쓰는 Agentic workflow부터 시작합니다. Project를 만드는 것만으로 예약 실행이나 다중 Agent가 생기지는 않습니다.</p>';
       case 'anatomy': return window.YFOrchestration.markup();
       case 'split-criteria': return splitCriteriaMarkup();
+      case 'example-gallery': return exampleGalleryMarkup();
       case 'flow': return flowMarkup(s.case);
       case 'lab': return (s.lab === 'skill' ? '<div class="button-row">' + button('내 Project 절차 가져오기', 'personal-skill', 'import', 'secondary') + '</div>' : '') + form(s.lab, 'deck');
       case 'casebrief': return '<div class="case-brief-grid"><div><p class="case-headline">고객 문의를 읽고,<br>FAQ에 근거한<br>답변 초안을 쓴다.</p><div class="case-checks"><span>' + icon('check') + '전체 ID 포함</span><span>' + icon('check') + 'FAQ 근거 있는 초안</span></div></div><div class="case-details"><dl><div><dt>사용자</dt><dd>온라인 쇼핑몰 CS 담당자</dd></div><div><dt>입력</dt><dd>가상 문의 8건 + FAQ·분류 기준</dd></div><div><dt>AI의 일</dt><dd>분류·집계, FAQ 확인, 초안 3개</dd></div><div><dt>사람의 일</dt><dd>답변 검토, 예외 판단과 고객 발송</dd></div><div><dt>산출물</dt><dd>classification.csv<br>cs-response-drafts.md</dd></div></dl></div></div><p class="caption">이 사례와 응답은 학습을 위해 만든 가상 데이터입니다.</p>';
@@ -196,6 +197,17 @@
       ['QA reviewer', '시간, 누락, 번역체, 검수 지점, 파일 열림 여부를 확인한다.']
     ];
     return '<div class="split-layout"><section class="split-rule"><span class="eyebrow">START SIMPLE</span><h2>처음부터 쪼개지 않습니다.</h2><p>하나의 Project와 Skill로 실행해보고, 역할을 나눌 이유가 생길 때만 Subagent를 둡니다.</p><div class="split-gate"><b>질문</b><span>이 일을 한 사람이 같은 기준으로 끝낼 수 있나?</span></div></section><section class="split-criteria-list">' + criteria.map((x, i) => '<div class="split-criterion"><span>0' + (i + 1) + '</span><h3>' + x[0] + '</h3><p>' + x[1] + '</p><small>' + x[2] + '</small></div>').join('') + '</section></div><div class="split-example"><div><span class="eyebrow">YUJIN FLOW → N</span><h3>강의자료 제작 Agent라면</h3><p>문제정의와 Journey에서 나눌 지점을 찾고, Intelligence Fit에서 사람이 승인할 곳을 정합니다.</p></div><ol>' + agents.map(x => '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>').join('') + '</ol></div>';
+  }
+  function exampleGalleryMarkup() {
+    const examples = [
+      ['강의자료', '자료가 흩어져 덱 흐름 잡는 데 오래 걸린다.', '브리프·원문을 읽고 6장 초안과 검수표를 만든다.', '강사가 톤·사실·시간을 승인한다.'],
+      ['CS', '문의가 몰릴 때 FAQ를 반복해서 찾느라 첫 답변이 늦다.', '문의 분류, FAQ 근거 확인, 답변 초안 3개를 만든다.', '담당자가 예외 문의와 발송을 판단한다.'],
+      ['취준생', '공고별로 어떤 경험을 써야 할지 매번 막힌다.', '공고 요건과 경험 기록을 매칭해 지원서 초안을 만든다.', '본인이 사실·수치·표현을 확인한다.'],
+      ['개발', '버그 제보가 모호해 원인 파악과 수정 범위가 흔들린다.', '재현 조건을 정리하고 수정 후보와 테스트 체크를 만든다.', '개발자가 코드 변경·PR·배포를 승인한다.'],
+      ['HR', '반복 문의에 정책 근거를 붙여 답하는 데 시간이 든다.', '문의 유형을 나누고 규정 근거와 답변 초안을 만든다.', '담당자가 개인별 예외와 민감 판단을 맡는다.'],
+      ['기획·마케팅', 'VOC·브리프가 흩어져 우선순위와 메시지가 흔들린다.', '주제 분류, 초안 작성, 근거 부족 항목을 표시한다.', '사람이 주장·예산·외부 공개를 승인한다.']
+    ];
+    return '<div class="example-gallery"><section class="example-focus"><span class="eyebrow">ONE FLOW</span><h2>공식은 같습니다.</h2><p>문제정의 → AI가 할 일 → 사람이 검수할 지점을 같은 순서로 적으면, 직무가 달라도 Agent 설계가 흔들리지 않습니다.</p>' + button('내 Guardrails 쓰기', 'goto', 'arrow-right', 'primary', 'data-slide="lab-boundary"') + '</section><section class="example-cards">' + examples.map((x, i) => '<article class="example-card"><span>' + String(i + 1).padStart(2, '0') + '</span><h3>' + x[0] + '</h3><dl><div><dt>문제정의</dt><dd>' + x[1] + '</dd></div><div><dt>AI의 일</dt><dd>' + x[2] + '</dd></div><div><dt>사람 검수</dt><dd>' + x[3] + '</dd></div></dl></article>').join('') + '</section></div>';
   }
   let exampleTimer = null, exampleIndex = 0, examplesPaused = false;
   const reducedExamples = window.matchMedia('(prefers-reduced-motion: reduce)');
