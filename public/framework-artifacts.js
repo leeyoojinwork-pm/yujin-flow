@@ -17,11 +17,9 @@
     N: ['Project 지침 → 첫 실행', 'Skill 등록 → 다른 입력 실행']
   };
   const buildPath = [
-    ['case-brief', '내 Agent 명세'], ['case-files', '입력·기준 자료'],
-    ['case-flow', '실행 순서 확인'], ['claude-project', 'Project 생성'],
-    ['project-context', '지식·작업 자료 구분'], ['prompt-techniques', '프롬프트 기법'],
+    ['case-brief', '내 Agent 명세'], ['claude-project', 'Project 생성'],
     ['lab-instructions', '내 지침 작성'], ['save-instructions', 'Project 지침 저장'],
-    ['first-run', '첫 입력으로 실행'], ['expected-result', '결과 검수'],
+    ['first-run', 'workflow 실행'], ['expected-result', '결과 검수'],
     ['lab-run1', '첫 실행 기록'], ['skill-structure', 'Skill 구조 확인'],
     ['lab-skill', '내 Skill 작성'], ['skill-export', 'Skill 파일 생성'],
     ['upload-skill', 'Skill 업로드·활성화'], ['second-run', '새 입력으로 실행'],

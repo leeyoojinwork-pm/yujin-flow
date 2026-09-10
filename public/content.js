@@ -14,7 +14,6 @@
     subagents: { title: 'Claude Code · Subagents', url: 'https://code.claude.com/docs/en/sub-agents' },
     effective: { title: 'Anthropic · Building effective agents', url: 'https://www.anthropic.com/engineering/building-effective-agents' },
     onboarding: { title: 'Anthropic · 신입사원 비유와 명확한 지시', url: 'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#be-clear-and-direct' },
-    brunch: { title: '사용자 제공 · 문제정의 참고 글', url: 'https://brunch.co.kr/@e5e1a02595174a7/2' },
     ax1: { title: 'Digital iNSIGHT · AX는 업무 재설계다', url: 'https://ditoday.com/%ec%9d%b8%ea%b0%84-%ec%a4%91%ec%8b%ac-ax-%e2%91%a0-ax%eb%8a%94-%ec%97%85%eb%ac%b4-%ec%9e%ac%ec%84%a4%ea%b3%84%eb%8b%a4/' },
     ax2: { title: 'Digital iNSIGHT · 인간과 AI의 업무를 구분하는 법', url: 'https://ditoday.com/%ec%9d%b8%ea%b0%84-%ec%a4%91%ec%8b%ac-ax%e2%91%a1-%ec%9d%b8%ea%b0%84%ea%b3%bc-ai%ec%9d%98-%ec%97%85%eb%ac%b4%eb%a5%bc-%ea%b5%ac%eb%b6%84%ed%95%98%eb%8a%94-%eb%b2%95/' },
     ax3: { title: 'Digital iNSIGHT · DX와 AX는 무엇이 다를까', url: 'https://ditoday.com/%ec%9d%b8%ea%b0%84-%ec%a4%91%ec%8b%ac-ax%e2%91%a2-dx%ec%99%80-ax%eb%8a%94-%eb%ac%b4%ec%97%87%ec%9d%b4-%eb%8b%a4%eb%a5%bc%ea%b9%8c/' },
@@ -50,7 +49,7 @@
       field('job', '사용자는 무엇을 해내고 싶나요?', '예: 미작성자만 빠르게 골라내고 알림 메시지를 준비하고 싶다.', '미작성자만 빠르게 골라내고 알림 메시지를 준비하고 싶다.'),
       field('outcome', '최종적으로 어떤 결과를 얻고 싶나요?', '예: 담당자는 대상자와 메시지만 검수한 뒤 승인할 수 있다.', '담당자는 대상자와 메시지만 검수한 뒤 승인할 수 있다.')
     ] },
-    { id: 'hmw', letter: 'U', title: 'HMW로 대안 찾기: 세 가지 해결 방법 비교', minutes: 3, purpose: 'HMW 질문을 쓰고, AI를 쓰는 방법과 쓰지 않는 방법을 함께 비교하세요.', task: '아래 HMW와 대안을 비교해줘. 업무를 없애기·단순화하기·규칙 자동화하기·AI에게 맡기기를 함께 검토하고, 가장 작게 검증할 대안 하나를 골라 이유를 말해줘.', fields: [
+    { id: 'hmw', letter: 'U', title: 'HMW(How Might We)로 대안 찾기: 세 가지 해결 방법 비교', minutes: 3, purpose: 'HMW(How Might We) 질문을 쓰고, AI를 쓰는 방법과 쓰지 않는 방법을 함께 비교하세요.', task: '아래 HMW(How Might We)와 대안을 비교해줘. 업무를 없애기·단순화하기·규칙 자동화하기·AI에게 맡기기를 함께 검토하고, 가장 작게 검증할 대안 하나를 골라 이유를 말해줘.', fields: [
       field('question', '어떻게 하면 누가 어떤 변화를 이룰 수 있을까요?', '예: 어떻게 하면 CS 담당자가 문의가 몰릴 때도 정확한 첫 답변을 빠르게 준비할 수 있을까?', '어떻게 하면 CS 담당자가 문의가 몰릴 때도 정확한 첫 답변을 빠르게 준비할 수 있을까?'),
       field('option1', '대안 1: 업무를 줄이거나 단순화한다면?', '예: 주문 화면에서 배송·반품 안내를 더 잘 보여줘 반복 문의 자체를 줄인다.', '주문 화면에서 배송·반품 안내를 더 잘 보여줘 반복 문의 자체를 줄인다.'),
       field('option2', '대안 2: 규칙으로 처리한다면?', '예: 고객이 문의 유형을 선택하면 정해진 FAQ와 담당 부서로 안내한다.', '고객이 문의 유형을 선택하면 정해진 FAQ와 담당 부서로 안내한다.'),
@@ -63,21 +62,15 @@
       field('pass', '어떤 결과여야 통과인가요?', '예: 입력 ID 5개 모두 포함, 원문 인용 일치, 답변 3개에 FAQ ID 표시. 실제 주문 상태나 환불 승인을 지어내지 않는다.', '입력 ID 5개 모두 포함, 원문 인용 일치, 답변 3개에 FAQ ID 표시. 실제 주문 상태나 환불 승인을 지어내지 않는다.'),
       field('observed', '실제로 실행해보니 어디까지 가능했나요?', '실행 후 작성: 바로 사용 / 수정 후 사용 / 재설계 + 이유', '')
     ] },
-    { id: 'journey', letter: 'J', title: '흐름 설계하기: 업무 단계를 순서로 연결', minutes: 4, purpose: '업무를 순서대로 적고, 각 단계에 필요한 자료와 담당자를 표시하세요.', task: '아래 현재 업무를 시작 조건 → 입력 → 처리 → 판단 → 출력 → 검수의 순서도로 만들어줘. 단계 사이에 전달되는 자료와 담당자를 표시하고, 병렬화 가능한 단계는 근거를 설명해줘.', fields: [
-      field('trigger', '언제 시작하나요?', '예: CS 담당자가 분석할 익명 문의 CSV를 준비했을 때', 'CS 담당자가 분석할 익명 문의 CSV를 준비했을 때'),
-      field('input', '입력은 어디에 있고 어떤 형식인가요?', '예: id, score, comment 열의 inquiries-a.csv와 rubric.md, report-template.md. score는 고객이 남긴 만족도이며 분류 우선순위로 쓰지 않는다.', 'id, score, comment 열의 inquiries-a.csv와 rubric.md, report-template.md. score는 고객이 남긴 만족도이며 분류 우선순위로 쓰지 않는다.'),
-      field('process', '지금 사람이 하는 작업을 순서대로 적으세요.', '예: 문의 읽기 → 유형 분류 → FAQ 찾기 → 답변 초안 작성 → 근거 검수 → 담당자 승인', '문의 읽기 → 유형 분류 → FAQ 찾기 → 답변 초안 작성 → 근거 검수 → 담당자 승인'),
-      field('decision', '어디에서 판단이 필요한가요?', '예: 문의가 여러 유형에 걸칠 때, FAQ에 답이 없을 때, 주문 조회나 환불 판단이 필요할 때', '문의가 여러 유형에 걸칠 때, FAQ에 답이 없을 때, 주문 조회나 환불 판단이 필요할 때'),
-      field('output', '끝나면 무엇이 어디에 남아야 하나요?', '예: classification.csv와 cs-response-drafts.md를 다운로드한다.', 'classification.csv와 cs-response-drafts.md를 다운로드한다.'),
-      field('reviewer', '누가 무엇을 확인하고 다음 단계로 넘기나요?', '예: CS 담당자가 문의 누락, 인용한 FAQ, 추가 확인 사항을 검토한다. 이 실습에서는 고객에게 실제 발송하지 않는다.', 'CS 담당자가 문의 누락, 인용한 FAQ, 추가 확인 사항을 검토한다. 이 실습에서는 고객에게 실제 발송하지 않는다.')
+    { id: 'journey', letter: 'J', title: '흐름 설계하기: 업무를 순서도로 바꾸기', minutes: 3, purpose: '업무 단계를 동사형으로 적고, 사람이 검수해야 하는 지점만 표시하세요.', task: '아래 업무 단계를 Mermaid flowchart로 만들어줘. 각 단계는 동사형으로 짧게 쓰고, 사람이 검수해야 하는 지점은 [사람 검수]로 표시해줘. 입력 자료와 최종 산출물도 시작과 끝에 넣어줘.', fields: [
+      field('input', '시작할 때 필요한 입력 자료는 무엇인가요?', '예: 익명 문의 CSV, FAQ 기준표, 답변 양식', '익명 문의 CSV, FAQ 기준표, 답변 양식'),
+      field('steps', '업무 단계를 동사형으로 순서대로 적으세요.', '예: 문의 읽기 → 유형 분류하기 → FAQ 찾기 → 답변 초안 쓰기 → 근거 확인하기 → 발송 승인하기', '문의 읽기 → 유형 분류하기 → FAQ 찾기 → 답변 초안 쓰기 → 근거 확인하기 → 발송 승인하기'),
+      field('review', '사람이 꼭 검수해야 하는 포인트는 어디인가요?', '예: FAQ 근거가 맞는지 확인, 예외 문의 판단, 고객 발송 승인', 'FAQ 근거가 맞는지 확인, 예외 문의 판단, 고객 발송 승인')
     ] },
-    { id: 'boundary', letter: 'I', title: 'Guardrails 정하기: 권한·승인·중단 조건', minutes: 3, purpose: 'Guardrails는 Agent의 행동 범위입니다. 허용할 작업, 사람 승인, 재시도 한도를 정하세요.', task: '아래 답변으로 Agent의 실행 범위를 정해줘. 통과/수정/중단을 구분하는 조건문과 최대 반복 횟수를 써줘. 명시된 승인 전에 외부 시스템에 쓰거나 발송하지 마.', fields: [
-      field('ai', 'AI가 바로 수행할 작업은 무엇인가요?', '예: CSV 읽기, 문의 분류·집계, FAQ 검색, 답변 초안 파일 작성', 'CSV 읽기, 문의 분류·집계, FAQ 검색, 답변 초안 파일 작성'),
-      field('human', '사람이 직접 판단하거나 승인할 것은?', '예: 고객 답변 발송, 실제 주문 조회, 환불 승인, 계정 변경', '고객 답변 발송, 실제 주문 조회, 환불 승인, 계정 변경'),
-      field('criteria', '결과를 통과시키는 기준은?', '예: 입력 ID가 정확히 한 번씩 나오고 집계가 일치한다. 초안마다 원문 ID와 FAQ ID가 있으며, 확인하지 않은 주문 상태를 단정하지 않는다.', '입력 ID가 정확히 한 번씩 나오고 집계가 일치한다. 초안마다 원문 ID와 FAQ ID가 있으며, 확인하지 않은 주문 상태를 단정하지 않는다.'),
-      field('return', '실패하면 어느 단계로 돌아가나요?', '예: 빠진 ID만 다시 분류한 뒤 재집계', '누락된 ID의 분류 단계로 돌아가 수정하고 다시 집계한다.'),
-      field('max', '최대 몇 번 수정하고 멈추나요?', '예: 2', '2', { type: 'number', min: 0, max: 5 }),
-      field('stop', '즉시 멈추고 사람에게 물을 조건은?', '예: 필수 열이 없거나 파일을 읽지 못하면 중단한다. FAQ에 근거가 없으면 담당자에게 질문한다. 최대 2회 수정해도 실패하면 멈춘다.', '필수 열이 없거나 파일을 읽지 못하면 중단한다. FAQ에 근거가 없으면 담당자에게 질문한다. 최대 2회 수정해도 실패하면 멈춘다.')
+    { id: 'boundary', letter: 'I', title: '역할 나누기: AI·사람·검토 영역 정하기', minutes: 3, purpose: '업무를 AI에게 맡길 부분, 사람이 해야 할 부분, 사람이 다시 확인할 부분으로 나누세요.', task: '이 업무를 아래 세 영역으로 나눠 제안해줘.\n\n- AI: 기준·규칙·양식을 설명하면 처리할 수 있는 부분\n- 사람: 문의·협의·승인처럼 관계·경험·책임이 필요한 부분\n- 검토: AI에게 맡기되 사람이 다시 확인해야 하는 부분\n\n업무를 너무 잘게 쪼개지 말고 주요 부분만 나눠줘.\n판단하기 어려운 부분은 추측하지 말고 질문해줘.\n\n[Format]\n아래처럼 각 영역별로 한 줄에 하나씩 목록으로 정리해줘.\n\n1. AI에게 맡길 부분\n- ~한다\n- ~한다\n\n2. 사람이 할 부분\n- ~한다\n- ~한다\n\n3. 사람이 검토할 부분\n- ~을 확인한다\n- ~을 대조한다', fields: [
+      field('work', '나누고 싶은 업무는 무엇인가요?', '예: 고객 문의를 읽고 FAQ 근거가 있는 답변 초안을 준비한다.', '고객 문의를 읽고 FAQ 근거가 있는 답변 초안을 준비한다.'),
+      field('ai_candidate', 'AI에게 맡겨도 될 것 같은 부분은?', '예: 문의 유형 분류, FAQ 후보 찾기, 답변 초안 작성', '문의 유형 분류, FAQ 후보 찾기, 답변 초안 작성'),
+      field('human_candidate', '사람이 책임지거나 다시 확인해야 할 부분은?', '예: 예외 문의 판단, FAQ 근거 확인, 고객 발송 승인', '예외 문의 판단, FAQ 근거 확인, 고객 발송 승인')
     ] },
     { id: 'instructions', letter: 'N', title: '지침 만들기: Claude Project 업무 규칙 작성', minutes: 5, purpose: '앞에서 정한 문제와 업무 흐름을 Claude Project 지침으로 옮겨보세요.', task: '아래 답변을 실제 Claude Project instructions로 정리해줘. 역할, 목표, 입력, 절차, 규칙, 출력, 사람 확인 조건을 빠짐없이 포함해줘. 프로젝트 제목만 보고 목적을 추측하지 마.', fields: [
       field('role', '너는 어떤 업무를 맡는 역할인가요?', '예: 너는 온라인 쇼핑몰 CS 담당자의 문의 분류와 답변 초안을 돕는 Agent다.', '너는 온라인 쇼핑몰 CS 담당자의 문의 분류와 답변 초안을 돕는 Agent다.'),
@@ -208,11 +201,11 @@
       { menu: 'Project knowledge', button: '+', title: '기준 파일 첨부하기', body: '내 업무 기준과 결과 양식을 추가합니다. 강사 시연은 deck-criteria.md와 slide-template.md. 매번 바뀌는 입력은 실행할 채팅에 첨부합니다.', result: '반복해서 참고할 기준과 양식', view: 'knowledge' },
       { menu: 'Set project instructions', button: 'Save instructions', title: '업무 지침 저장하기', body: '실습에서 작성한 Project 지침을 붙여넣고 저장합니다. 목표는 지침 안에도 적습니다.', result: '다음 채팅에도 적용할 업무 지침', view: 'instructions' }
     ] },
-    run: { title: '파일을 넣고 첫 실행.', source: 'projects', link: 'https://claude.ai/projects', steps: [
-      { menu: '내 업무 Project', button: 'New chat', title: 'Project 안에서 채팅 시작', body: '프로젝트 이름과 지침·지식 파일이 맞는지 확인합니다.', result: '이번 작업에 쓸 새 대화', view: 'chat' },
-      { menu: '첨부', button: '+', title: '이번 입력 파일 첨부', body: '내 명세의 입력 파일을 첨부합니다. 강사 시연은 brief-a.md와 sources.md를 첨부합니다.', result: '이번 입력이 보이는 대화', view: 'attach' },
-      { menu: '메시지', button: '전송', title: '첫 실행 요청 보내기', body: '아래의 내 실행 프롬프트를 복사해 붙여넣습니다. 강사 시연은 시연 ZIP의 first-run.md를 사용하고 개요 승인 앞에서 멈춥니다.', result: '내가 정한 산출물 / 강사 시연: 개요 승인 후 PPTX', view: 'send' },
-      { menu: '생성된 파일', button: 'Download', title: '결과 파일과 원문 비교하기', body: '내 통과 기준과 대조합니다. 강사 시연은 6장·10분·원문 근거·화면을 확인합니다. 결과가 없으면 실행 기록을 먼저 확인합니다.', result: '검수한 결과물과 수정 기록', view: 'files' }
+    run: { title: '저장한 workflow를 한 번 실행합니다.', source: 'projects', link: 'https://claude.ai/projects', steps: [
+      { menu: '내 업무 Project', button: 'New chat', title: 'Project 안에서 새 실행 시작', body: '방금 저장한 Project 지침이 적용된 상태에서 새 채팅을 엽니다.', result: 'workflow를 실행할 새 대화', view: 'chat' },
+      { menu: '첨부', button: '+', title: '이번 입력 넣기', body: '오늘 처리할 작은 입력을 넣습니다. 내부 자료가 없으면 앞에서 만든 가상 데이터나 HTML 프로토타입 기준을 붙입니다.', result: 'Agent가 읽을 입력 자료', view: 'attach' },
+      { menu: '메시지', button: '전송', title: 'workflow 실행 요청 보내기', body: 'Y/U/J/I 지침대로 입력 확인, 분류·작성, 사람 검수 대기까지 실행해달라고 요청합니다.', result: '검수 전 결과 초안', view: 'send' },
+      { menu: '생성된 결과', button: 'Download', title: '결과와 검수 기록 확인하기', body: 'HTML 프로토타입에서 봤던 화면·파일 기준으로 결과가 맞는지 확인합니다. 근거 없는 부분은 미검증으로 남깁니다.', result: '결과물과 수정할 지침', view: 'files' }
     ] },
     skill: { title: 'Skill을 Claude에 등록합니다.', source: 'skills', link: 'https://claude.ai/customize/skills', steps: [
       { menu: 'Settings → Capabilities', button: 'Code execution and file creation', title: '코드 실행·파일 생성 켜기', body: '개인 계정은 설정의 Capabilities에서 코드 실행·파일 생성을 켭니다. 조직 계정은 관리자 설정도 적용됩니다.', result: 'Skill을 사용할 실행 환경', view: 'capabilities' },
@@ -257,20 +250,18 @@
   s('problem-formula', 'define', 'formula', 'Agent가 해결할 문제를\n한 문장으로 적어보세요.', { tokens: ['누가', '어떤 상황에서', '무엇 때문에', '어떤 어려움을'], example: 'CS 담당자는 문의가 몰릴 때, FAQ를 매번 찾아야 해서\n정확한 첫 답변을 준비하는 데 오래 걸린다.', caption: 'Problem Statement · 실제 원인과 지연 시간은 상담 기록으로 확인할 가설입니다.', note: '“AI가 없어서”를 원인으로 쓰지 않게 한다. 시간·누락·재작업처럼 관찰 가능한 어려움을 택한다.' });
   lab('problem', 'define');
   s('jtbd', 'define', 'compare', '답변을 쓰는 것과\n문의를 해결하는 것은 다릅니다.', { left: { label: 'ACTION', title: '고객에게 답변을 보낸다', items: ['문의 읽기', 'FAQ 복사', '답변 전송'] }, right: { label: 'JOB TO BE DONE', title: '고객의 문의를 정확하게 해결한다', items: ['문의에 맞는 근거를 찾는다', '고객이 다음에 할 일을 안내한다', '예외 문의는 담당자에게 넘긴다'] }, note: '제공된 JTBD 예시를 재구성. 행동보다 최종 결과를 보되, 제품이 어디까지 책임질지 범위를 정한다.' });
-  lab('job', 'define');
-  s('hmw', 'define', 'formula', 'HMW로 질문하고,\n여러 해결책을 비교해보세요.', { tokens: ['어떻게 하면', '이 사용자가', '이 상황에서', '이 변화를'], example: '어떻게 하면 CS 담당자가 문의가 몰릴 때도\n정확한 첫 답변을 빠르게 준비할 수 있을까?', caption: '문의 자체 줄이기 · FAQ 자동 안내 · AI 답변 초안을 함께 비교합니다.', note: 'HMW는 창의성을 열어두는 질문이다. 문제의 범위와 제약까지 모두 없애는 질문은 피한다.' });
+  s('hmw', 'define', 'formula', 'HMW(How Might We)로 질문하고,\n여러 해결책을 비교해보세요.', { tokens: ['어떻게 하면', '이 사용자가', '이 상황에서', '이 변화를'], example: '어떻게 하면 CS 담당자가 문의가 몰릴 때도\n정확한 첫 답변을 빠르게 준비할 수 있을까?', caption: '문의 자체 줄이기 · FAQ 자동 안내 · AI 답변 초안을 함께 비교합니다.', note: 'HMW(How Might We)는 창의성을 열어두는 질문이다. 문제의 범위와 제약까지 모두 없애는 질문은 피한다.' });
   lab('hmw', 'define');
-  s('experiment', 'define', 'traffic', 'PoC: 만들기 전에,\n작게 검증해봅니다.', { note: '기능을 만든 뒤가 아니라 샘플 3~5개로 성능과 실패 방식을 본다. 초록도 영구 무검수라는 뜻은 아니다.' });
+  s('experiment', 'define', 'poc-prompt', 'I: HTML 프로토타입으로\n먼저 확인합니다.', { note: 'I 단계는 긴 실습노트보다, 앞에서 쓴 Y/U/J/I를 붙여 사용자가 볼 수 있는 HTML 프로토타입을 만들어보게 한다. 꼭 대시보드가 아니라 검토 화면·체크리스트·상태판이어도 된다.' });
+  s('team-share-poc', 'define', 'team-task', '팀끼리 문제와 화면을\n짧게 확인합니다.', { note: '17페이지 HTML 프로토타입 프롬프트 직후 팀 공유. 각자 어떤 문제를 골랐는지, 입력·판단 기준·사람 검수 지점이 있는지 말하고 오늘 만들 화면의 범위를 한 줄로 확정한다. 토론이 길어지지 않게 누락 질문 하나와 확정 문장 하나만 남긴다.' });
   s('agent-prd', 'define', 'agent-prd', 'Y/U/J/I를\nAgent PRD로 묶습니다.', { note: 'PRD는 HMW 하나가 아니라 문제정의, 사용자 목표, 업무 흐름, AI 역할과 검수 기준을 모은 설계 문서다. Intelligence Fit까지 정리한 뒤 N 단계의 Project와 Skill로 옮긴다.' });
-  lab('experiment', 'define');
-  s('workflow-map', 'map', 'pipeline', '한 업무를 여섯 칸으로.', { steps: ['시작 조건', '입력', '처리', '판단', '출력', '검수'], details: ['언제 시작하나', '무엇을 받나', '어떤 작업을 하나', '어떤 기준을 쓰나', '무엇을 남기나', '누가 통과시키나'], note: '화면 클릭과 업무 단계를 구분한다. 각 단계의 출력이 다음 입력이 되는지 확인한다.' });
-  lab('journey', 'map');
+  s('workflow-map', 'map', 'workflow-example', 'J: 업무 흐름을\n예시 순서도로 봅니다.', { note: 'J 실습 전에 동사형 단계가 어떻게 flowchart가 되는지 보여준다. 입력부터 사람 승인 전까지 주요 행동만 남긴다.' });
   s('build-your-agent', 'map', 'agent-intro', '이제, 내 일을 맡길\nAGENT를 만듭니다.', { note: '20초 전환 장면. 앞에서 작성한 업무 흐름을 떠올리게 한다. 이제 그 일을 수행할 목표, 도구, 판단 기준, 실행 범위를 갖춘 Agent를 설계한다고 말한 뒤 다음 장의 개념 설명으로 이어간다. 이 장면은 구성 요소를 연결하는 개념 모션이다.' });
   s('what-is-agent', 'map', 'concepts', '어디까지를 Agent라고 부를까요?', { source: 'effective', note: 'Workflow는 사람이 정한 경로를 중심으로 실행한다. Agent는 목표와 관찰된 결과에 따라 도구·다음 행동을 선택한다. 한 번의 프롬프트나 Project 생성만으로 자율 Agent가 완성되지는 않는다.' });
   s('onboarding', 'map', 'editorial', '신입 동료에게 맡기듯,\n필요한 정보를 알려주세요.', { eyebrow: 'AGENT ONBOARDING', source: 'onboarding', intro: 'Anthropic도 Claude를 우리 팀의 규칙과 업무 방식을 모르는 신입에 비유합니다.', rows: [['목표', '무엇을 만들면 일이 끝나는지'], ['맥락', '입력 자료와 기준 문서'], ['도구', '파일 읽기·쓰기처럼 실제로 쓸 수 있는 기능'], ['권한', '스스로 처리해도 되는 일'], ['피드백', '검수 기준과 멈추는 조건']], caption: '공식 문서의 비유를 바탕으로 일을 맡기기 전에 알려줄 다섯 가지를 정리했습니다. AI에 사람의 책임을 넘긴다는 뜻은 아닙니다.', note: 'Anthropic Prompting best practices의 Be clear and direct에 신입사원 비유가 나온다. 비유는 공식 자료에 있지만 이 다섯 조건 묶음은 이유진 강의용 재구성이다. 업무 맥락을 모르는 동료도 수행할 수 있을 만큼 명확하게 적어야 한다.' });
   s('orchestration-concept', 'map', 'anatomy', 'Orchestration.\n위임하고, 검수하고, 다시 고칩니다.', { source: 'effective', note: '자동 반복되는 학습용 시연이다. Orchestrator는 작업 분배와 결과 통합을 맡는 역할이고, Claude Code에서는 메인 대화가 그 역할을 수행할 수 있다. Subagent는 별도 맥락에서 검수한다. Skill 사용과 Subagent 위임은 구분한다. 검수 실패 반환 → 총괄 수정 → 재위임 → 통과 → 사람 승인 대기를 설명한다. 마지막에 반복되는 것은 애니메이션이며 실제 업무의 무한 재시도가 아니다. 실제 실행에는 최대 수정 횟수와 승인·중단 조건이 필요하다.' });
   s('split-criteria', 'map', 'split-criteria', 'Subagent는 언제\n나눠야 할까요?', { source: 'effective', note: 'Anthropic의 Building effective agents에서 설명하는 prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer 패턴을 그대로 베끼지 않고 수업용 기준으로 재구성한다. 처음부터 여러 Agent로 시작하지 않고, 하나의 Project와 Skill로 실행한 뒤 전문성·단계·병렬성·분기·검수 루프가 필요할 때 나눈다. 예시는 강의자료 제작 Agent다.' });
-  s('example-gallery', 'map', 'example-gallery', '예시는 한 번에 보고,\n내 문제로 돌아옵니다.', { note: '직무별 흐름 예시는 한 장으로 압축한다. 수업 중에는 CS와 강의자료 제작 Agent만 짧게 말하고, 취준생·개발·HR·기획·마케팅은 자신의 업무로 바꿔볼 수 있는 참고 패턴으로 다룬다. 여기서 길게 시연하지 않고 바로 Guardrails 실습으로 이동한다.' });
+  s('example-gallery', 'map', 'example-gallery', '예시는 한 번에 보고,\n내 문제로 돌아옵니다.', { note: '직무별 흐름 예시는 한 장으로 압축한다. 수업 중에는 CS와 강의자료 제작 Agent만 짧게 말하고, 취준생·개발·HR·기획·마케팅은 자신의 업무로 바꿔볼 수 있는 참고 패턴으로 다룬다. 여기서 길게 시연하지 않고 바로 역할 나누기 실습으로 이동한다.' });
   lab('boundary', 'map');
   s('case-brief', 'build', 'casebrief', '이제, 내 문제를 해결할\n내 Agent를 만듭니다.', { note: '수강생은 각자 1주차 문제로 설계한다. 앞 답변 가져오기는 빈칸만 채운다. 강사 이유진은 강의자료 제작 Agent를 별도 시연한다. CS는 앞단 문제정의 및 별도 검수 미션의 참고 사례이지 공통 제작 과제가 아니다.' });
   s('case-files', 'build', 'assets', '내 자료를,\n두 곳에 나눕니다.', { note: '공통 기준·양식은 Project knowledge, 이번 입력은 새 채팅에 넣는다. 강사는 강의자료 제작 시연 ZIP으로 기준과 브리프를 구분해 보여준다. 수강생은 각자 사용 가능한 자료를 첨부한다.' });
@@ -279,8 +270,8 @@
   s('project-context', 'build', 'compare', '매번 바뀌는 입력과\n계속 쓸 기준을 구분합니다.', { left: { label: 'PROJECT KNOWLEDGE', title: '기준과 양식', items: ['내 업무 기준·검수 기준·결과 양식', '강사 예시: deck-criteria.md / slide-template.md', '검토한 최신 버전으로 유지'] }, right: { label: 'THIS RUN', title: '이번 작업 데이터', items: ['내 업무의 첫 입력 / 다른 입력', '강사 예시: brief-a.md → brief-b.md + sources.md', '이전 결과를 이번 작업에 섞지 않기'] }, source: 'projects', note: '프로젝트 내 다른 대화가 언제나 통째로 공유된다고 가정하지 않는다. 반복 사용할 핵심 정보는 지식 파일과 지침으로 남긴다.' });
   s('prompt-techniques', 'build', 'prompt-techniques', 'AI에게 일을 맡기는,\n세 가지 프롬프트 기법.', { note: 'BUILD 30분 중 3분. 세 AI를 모두 실행하지 않는다. 메타프롬프팅은 요청을 개선하는 단계, XML과 Few-shot 예시는 실제 개요를 생성하는 단계임을 구분한다. 같은 가상 회의 준비 자료를 쓰되 AI별 전용·최적 기법으로 단정하지 않는다. Copilot은 서비스 이름이며 GPT는 모델 계열이다. 자기 업무에 맞게 한 기법을 선택한 뒤 다음 장의 지침을 작성한다. XML 자체가 보안 장벽은 아니고, 좋은 프롬프트가 실제 도구·Agent 런타임을 생성하지도 않는다.' });
   lab('instructions', 'build');
-  s('save-instructions', 'build', 'project-export', '02. 작성한 지침을 저장합니다.', { source: 'projects', note: '여기의 Project 지침 복사/MD는 실제 실행 지침이며 질문·답변을 뒤에 포함한다. 전체 노트 내보내기는 설계 검토용이다.' });
-  s('first-run', 'build', 'guide', '03. 내 자료로 첫 실행.', { guide: 'run', note: '내 실행 프롬프트는 각자 작성한 지침을 포함한다. 강사 시연은 26페이지의 별도 ZIP과 요청을 사용한다. AI의 답변을 기다린 뒤 생성 파일을 직접 연다.' });
+  s('save-instructions', 'build', 'project-export', '02. YUJI와 화면 검토를\nProject 지침으로 저장합니다.', { source: 'projects', note: 'YUJI에서 정한 문제·사용자 결과·업무 흐름·AI/사람 역할과 HTML 프로토타입에서 확인한 화면 범위를 Project 지침으로 옮긴다. 이 파일은 반복 실행할 업무 규칙이며, 전체 노트 내보내기는 설계 검토용이다.' });
+  s('first-run', 'build', 'guide', '03. 저장한 workflow를\n한 번 실행합니다.', { guide: 'run', note: 'Project 지침으로 저장한 YUJI와 HTML 프로토타입 기준을 실제 입력에 한 번 태워본다. 목표는 완성품 제작이 아니라 입력 확인, 처리, 검수 대기, 결과 기록까지 workflow가 작동하는지 보는 것이다.' });
   s('expected-result', 'build', 'result', '내가 정한 성공 기준,\n실제 결과와 맞나요?', { note: '26페이지의 목표·산출물·검수 기준을 다시 대조한다. 강사는 PPTX 6장, 10분, 원문 근거와 렌더링 화면을 확인한다. 생성·내용·화면 검증을 구분한다.' });
   lab('run1', 'build');
   s('skill-structure', 'skill', 'skill-structure', '한 번 정한 업무 절차,\nSkill로 저장해두세요.', { source: 'custom', note: 'Skill은 긴 프롬프트 파일 하나와 같지 않다. 언제 쓸지 찾을 description, 실제 절차, 필요할 때 참고할 기준·예시를 함께 구성한다. 여기서는 표준 SKILL.md 대문자 파일명을 사용한다.' });
@@ -334,11 +325,6 @@
       field('observed', '내 파일을 검수해 확인한 결과는?', '검사한 파일·검사 결과·사람이 추가 확인할 점.', '')
     ]
   });
-  const missionAt = slides.findIndex(x => x.id === 'lab-run2') + 1;
-  slides.splice(missionAt, 0,
-    { id: 'mission-brief', chapter: 'skill', type: 'mission-brief', title: '그럴듯한 결과보다,\n빠진 입력을 먼저 봅니다.', note: '12분 타임박스 시작 전에 검수 관점을 정한다. 각자 만든 Agent 결과도 같은 방식으로 본다. 연습 데이터는 CS 문의지만 핵심은 입력 누락, 새 입력 재검증, 필수 입력 부족 시 질문·중단 판단이다. 한 명은 실행, 한 명은 검수 담당. 혼자라면 먼저 실행하고 검수 관점으로 다시 읽는다.' },
-    { id: 'mission', chapter: 'skill', type: 'mission', title: '12분, 실무 투입 리허설.', note: '0~4분: A08 누락 찾고 되돌리기. 4~8분: B 파일을 Skill로 재실행하고 로컬 CSV 검사. 8~12분: 필수 열 누락 시 질문·중단 결정, Skill 한 줄 수정. 타이머는 진행 보조이며 종료해도 입력을 잠그지 않는다.' }
-  );
   sources.jtbd = { title: 'Christensen Institute · Jobs to Be Done', url: 'https://www.christenseninstitute.org/theory/jobs-to-be-done/' };
   sources.hmw = { title: 'IDEO.org · How Might We', url: 'https://www.designkit.org/methods/how-might-we.html' };
   sources.poc = { title: 'AWS · 생성형 AI PoC와 성공 기준', url: 'https://docs.aws.amazon.com/prescriptive-guidance/latest/gen-ai-lifecycle-operational-excellence/dev-architecting.html' };
@@ -358,7 +344,16 @@
     'problem-governance',
     'rethink-work',
     'ax-planning',
-    'jtbd'
+    'example-gallery',
+    'case-files',
+    'case-flow',
+    'project-context',
+    'prompt-techniques',
+    'code-run',
+    'success-metrics',
+    'troubleshooting',
+    'references',
+    'faq-practice'
   ]);
   for (let i = slides.length - 1; i >= 0; i--) {
     if (removedSlides.has(slides[i].id)) slides.splice(i, 1);
@@ -374,7 +369,11 @@
   moveAfter(['taxi', 'solution-trap', 'bottleneck-diagnosis'], 'finish-line');
   moveAfter(['yujin-framework', 'why-agent-fit', 'choose-problem-source'], 'bottleneck-diagnosis');
   moveAfter(['agent-prd'], 'lab-boundary');
-  moveAfter(['lab-job'], 'lab-hmw');
+  moveAfter(['workflow-map'], 'lab-hmw');
+  moveAfter(['experiment'], 'workflow-map');
+  moveAfter(['team-share-poc'], 'experiment');
+  const experimentLabIndex = labs.findIndex(l => l.id === 'experiment');
+  if (experimentLabIndex >= 0) labs.splice(experimentLabIndex, 1);
   const visibleChapters = new Set(slides.map(s => s.chapter));
   for (let i = chapters.length - 1; i >= 0; i--) {
     if (!visibleChapters.has(chapters[i].id)) chapters.splice(i, 1);

@@ -32,7 +32,7 @@
   }
   function getLab(id) { return D.labs.find(l => l.id === id); }
   function labCount(id) { const l = getLab(id); return l.fields.filter(f => E.answer(state, id, f.id).trim()).length + ' / ' + l.fields.length; }
-  function refreshPromptPreviews() { $$('[data-lab-prompt]').forEach(x => x.textContent = E.labPrompt(x.dataset.labPrompt, state)); window.YFPersonal.refresh(); window.YFArtifacts.refresh(); }
+  function refreshPromptPreviews() { $$('[data-lab-prompt]').forEach(x => x.textContent = E.labPrompt(x.dataset.labPrompt, state)); $$('[data-dynamic-prompt]').forEach(x => x.textContent = E[x.dataset.dynamicPrompt](state)); window.YFPersonal.refresh(); window.YFArtifacts.refresh(); }
   function form(id, prefix) {
     const l = getLab(id);
     const fields = l.fields.map((f, i) => {
@@ -42,7 +42,7 @@
       return '<div class="field"><label for="' + domId + '"><span class="field-num">' + String(i + 1).padStart(2, '0') + '</span>' + esc(f.label) + '</label>' + input + '</div>';
     }).join('');
     const prompt = E.labPrompt(id, state);
-    return '<div class="lab-content">' + window.YFArtifacts.bridge(id) + window.YFOperations.checkpoint(id) + (id === 'problem' ? '<aside class="problem-anchor"><span class="eyebrow">AGENT DESIGN / 출발점</span><h2>이 문제정의가 뒤에서 만들 Agent의 기준입니다.</h2><p>누구의 어떤 어려움을 줄일지 정한 뒤, 지침과 검수 조건으로 옮깁니다.</p><div class="button-row">' + button('문제 → Project 지침', 'goto', 'arrow-right', 'secondary', 'data-slide="lab-instructions"') + button('성공 기준 → 검증', 'goto', 'check-check', 'secondary', 'data-slide="lab-experiment"') + '</div></aside>' : '') + (id === 'experiment' ? '<div class="poc-materials"><p>PoC 입력: 가상 문의 A01~A05 + rubric.md. 아래 두 파일을 Claude 대화에 첨부한 뒤, 이 실습의 프롬프트를 사용하세요.</p><div class="button-row">' + button('문의 CSV', 'download-sample', 'download', 'secondary', 'data-file="inquiries-a.csv"') + button('분류 기준·FAQ', 'download-sample', 'download', 'secondary', 'data-file="rubric.md"') + '</div></div>' : '') + '<div class="lab-heading"><p>' + esc(l.purpose) + '</p>' + window.YFTimers.markup(id) + '</div><div class="lab-form">' + fields + '</div>' + (id === 'metrics' ? metricInline() : '') + '<div class="lab-actions"><div class="lab-actions-left">' + (l.fields.some(f => f.example) ? '<button type="button" class="text-button" data-action="fill-example" data-lab-id="' + id + '">' + icon('corner-down-right') + 'CS 참고 예시 넣기</button>' : '<span class="lab-time">직접 실행한 결과를 기록합니다.</span>') + '<span class="lab-progress" data-progress="' + id + '">' + labCount(id) + ' 입력</span></div></div><section class="lab-prompt-panel" aria-label="Claude 실행 프롬프트"><div class="lab-prompt-heading"><div><span class="eyebrow">READY-TO-USE PROMPT</span><h3>Claude에 이렇게 요청하세요.</h3></div>' + icon('message-square-code') + '</div><p class="lab-prompt-task">' + esc(l.task) + '</p><p class="lab-prompt-note">위 질문과 내가 쓴 답변, 앞에서 정한 관련 맥락까지 자동으로 함께 붙습니다.</p><details><summary>복사되는 전체 프롬프트 미리보기' + icon('chevron-down') + '</summary><pre class="code-preview" data-lab-prompt="' + id + '">' + esc(prompt) + '</pre></details><div class="button-row">' + button('프롬프트 복사', 'copy-lab', 'copy', 'primary', 'data-lab-id="' + id + '"') + button('프롬프트 MD 저장', 'download-lab', 'download', 'secondary', 'data-lab-id="' + id + '"') + '</div></section></div>';
+    return '<div class="lab-content">' + window.YFArtifacts.bridge(id) + window.YFOperations.checkpoint(id) + (id === 'problem' ? '<aside class="problem-anchor"><span class="eyebrow">AGENT DESIGN / 출발점</span><h2>이 문제정의가 뒤에서 만들 Agent의 기준입니다.</h2><p>누구의 어떤 어려움을 줄일지 정한 뒤, 지침과 검수 조건으로 옮깁니다.</p><div class="button-row">' + button('문제 → Project 지침', 'goto', 'arrow-right', 'secondary', 'data-slide="lab-instructions"') + button('성공 기준 → 검증', 'goto', 'check-check', 'secondary', 'data-slide="lab-experiment"') + '</div></aside>' : '') + (id === 'experiment' ? '<div class="poc-materials"><p>PoC 입력: 가상 문의 A01~A05 + rubric.md. 아래 두 파일을 Claude 대화에 첨부한 뒤, 이 실습의 프롬프트를 사용하세요.</p><div class="button-row">' + button('문의 CSV', 'download-sample', 'download', 'secondary', 'data-file="inquiries-a.csv"') + button('분류 기준·FAQ', 'download-sample', 'download', 'secondary', 'data-file="rubric.md"') + '</div></div>' : '') + '<div class="lab-heading"><p>' + esc(l.purpose) + '</p>' + window.YFTimers.markup(id) + '</div><div class="lab-form">' + fields + '</div>' + (id === 'metrics' ? metricInline() : '') + '<div class="lab-actions"><div class="lab-actions-left"><span class="lab-progress" data-progress="' + id + '">' + labCount(id) + ' 입력</span></div></div><section class="lab-prompt-panel" aria-label="Claude 실행 프롬프트"><div class="lab-prompt-heading"><div><span class="eyebrow">READY-TO-USE PROMPT</span><h3>Claude에 이렇게 요청하세요.</h3></div>' + icon('message-square-code') + '</div><p class="lab-prompt-task">' + esc(l.task) + '</p><p class="lab-prompt-note">위 질문과 내가 쓴 답변, 앞에서 정한 관련 맥락까지 자동으로 함께 붙습니다.</p><details><summary>복사되는 전체 프롬프트 미리보기' + icon('chevron-down') + '</summary><pre class="code-preview" data-lab-prompt="' + id + '">' + esc(prompt) + '</pre></details><div class="button-row">' + button('프롬프트 복사', 'copy-lab', 'copy', 'primary', 'data-lab-id="' + id + '"') + button('프롬프트 MD 저장', 'download-lab', 'download', 'secondary', 'data-lab-id="' + id + '"') + '</div></section></div>';
   }
   function metricInline() {
     const m = E.metrics(state);
@@ -51,6 +51,32 @@
   function format(n) { return new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 1 }).format(n); }
   function promptBlock(content, name) {
     return '<pre class="code-preview">' + esc(content) + '</pre><div class="button-row" style="margin-top:16px">' + button('복사', 'copy-prompt', 'copy', 'secondary', 'data-prompt="' + name + '"') + button('MD로 저장', 'download-prompt', 'download', 'secondary', 'data-prompt="' + name + '"') + '</div>';
+  }
+  function dynamicPromptBlock(content, name, title) {
+    return '<pre class="code-preview tall" data-dynamic-prompt="' + name + '">' + esc(content) + '</pre><div class="button-row" style="margin-top:16px">' + button('프롬프트 복사', 'copy-dynamic-prompt', 'copy', 'primary', 'data-prompt="' + name + '"') + button('MD 저장', 'download-dynamic-prompt', 'download', 'secondary', 'data-prompt="' + name + '" data-title="' + title + '"') + '</div>';
+  }
+  function workflowExampleMarkup() {
+    const stageNav = ['Y', 'U', 'J', 'I', 'N'].map(id => '<span class="' + (id === 'J' ? 'active ' : '') + 'workflow-stage-pill">' + id + '</span>').join('');
+    const steps = [
+      ['01', '문의 읽기', 'CSV·폼·메일'],
+      ['02', '유형 분류하기', '배송 / 결제 / 환불'],
+      ['03', 'FAQ 찾기', '정책·근거 대조'],
+      ['04', '초안 쓰기', '답변 후보 작성'],
+      ['05', '사람 검수하기', '근거·예외 확인'],
+      ['06', '승인 남기기', '발송 전 멈춤']
+    ];
+    return '<div class="workflow-example"><section class="workflow-stage-bridge" aria-label="J 과제 연결"><nav aria-label="YUJIN 단계">' + stageNav + '</nav><div class="workflow-stage-chain"><span>이어받기 / job-story.md</span>' + icon('arrow-right') + '<strong>J · 업무 흐름 연결</strong>' + icon('arrow-right') + '<code>workflow.md</code></div><p>처리 절차·도구·위임 구조에 사용합니다. 시작부터 출력까지를 동사로 잇고, 사람이 검수해야 하는 지점만 표시합니다.</p><div class="workflow-stage-notes"><span>동사 flow</span><span>입력 자료</span><span>사람 검수</span><span>최종 산출물</span></div></section><section class="workflow-example-lead"><span class="eyebrow">EXAMPLE FLOWCHART</span><h2>동사로 쓰면<br>바로 순서도가 됩니다.</h2><p>J 단계에서는 완벽한 시스템 설계보다, 입력이 들어와 사람이 승인하기 전까지의 주요 행동을 이어 붙입니다.</p></section><section class="workflow-example-board">' + steps.map((s, i) => '<article class="' + (i === 4 ? 'needs-review ' : '') + 'workflow-example-step"><span>' + s[0] + '</span><b>' + s[1] + '</b><small>' + s[2] + '</small></article>').join('<div class="workflow-example-arrow">' + icon('arrow-right') + '</div>') + '</section><section class="workflow-example-bottom"><div><b>이렇게 적어보세요</b><p>문의 읽기 → 유형 분류하기 → FAQ 찾기 → 답변 초안 쓰기 → 근거 확인하기 → 발송 승인 남기기</p></div><div><b>사람 검수 포인트</b><p>FAQ 근거 확인, 예외 문의 판단, 고객 발송 승인</p></div></section></div>';
+  }
+  function pocPromptMarkup() {
+    return '<div class="poc-prompt-layout"><section class="poc-prompt-intro"><span class="eyebrow">I / PROTOTYPE PROMPT</span><h2>바로 HTML로<br>보여달라고 합니다.</h2><p>앞에서 쓴 문제, 목표, 흐름, 검수 포인트를 붙여 실제 업무 화면처럼 만들어봅니다. 대시보드가 아니어도 됩니다.</p><div class="poc-prompt-points"><span>문제</span><span>목표</span><span>Flow</span><span>검수</span></div></section><section>' + dynamicPromptBlock(E.pocHtmlPrompt(state), 'pocHtmlPrompt', 'HTML 프로토타입 요청') + '</section></div>';
+  }
+  function teamTaskMarkup() {
+    const cards = [
+      ['01', '각자 말하기', '내가 고른 문제는 무엇인가요?', '누가 · 언제 · 무엇 때문에 오래 걸리는지 30초로 말합니다.'],
+      ['02', '팀이 묻기', 'Agent가 보려면 무엇이 더 필요한가요?', '입력 자료, 판단 기준, 사람 검수 지점 중 비어 있는 것을 하나만 묻습니다.'],
+      ['03', '범위 정하기', '오늘 화면으로 확인할 것은 무엇인가요?', '대시보드, 검토 화면, 체크리스트, 상태판 중 가장 작은 형태로 정합니다.']
+    ];
+    return '<div class="team-task-layout"><section class="team-task-main"><span class="eyebrow">TEAM CHECK / 6 MIN</span><h2>내 문제를 말하고,<br>비어 있는 조건 하나만 찾습니다.</h2><p>좋은 아이디어를 뽑는 시간이 아니라, 오늘 HTML 프로토타입으로 확인할 범위를 좁히는 시간입니다.</p></section><section class="team-task-cards">' + cards.map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><h3>' + x[2] + '</h3><p>' + x[3] + '</p></article>').join('') + '</section><section class="team-task-box"><b>TASK</b><ol><li>한 사람씩 30초 안에 문제, 사용자, 원하는 결과를 말합니다.</li><li>듣는 사람은 입력 자료, 판단 기준, 사람 검수 지점 중 빠진 것 하나만 질문합니다.</li><li>각자 “오늘은 ___을 보여주는 HTML 화면을 만든다” 한 문장으로 확정합니다.</li></ol></section><section class="team-task-output"><b>남길 문장</b><p>오늘은 <span>문의 유형과 답변 초안을 검토하는 HTML 화면</span>을 만든다. 사람은 <span>FAQ 근거와 예외 문의</span>를 확인한다.</p></section></div>';
   }
   function titleMarkup(s) {
     if (s.id === 'yujin-framework') return esc(s.title);
@@ -148,7 +174,7 @@
       ].map(x => '<article>' + icon(x[0]) + '<b>' + x[1] + '</b></article>').join('') + '</section></div>';
       case 'compare': return '<div class="compare-grid">' + [s.left, s.right].map(c => '<section class="compare-column"><p class="compare-label">' + esc(c.label) + '</p><h3>' + esc(c.title) + '</h3><ul>' + c.items.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section>').join('') + '</div>';
       case 'reveal': return taxiMarkup(s);
-      case 'editorial': return s.id === 'why-agent-fit' ? whyAgentFitMarkup(s) : (s.intro ? '<p class="leadline">' + esc(s.intro) + '</p>' : '') + '<div class="editorial-list">' + s.rows.map(r => '<div class="editorial-row"><h3>' + esc(r[0]) + '</h3><p>' + esc(r[1]) + '</p></div>').join('') + '</div>' + (s.caption ? '<p class="caption">' + esc(s.caption) + '</p>' : '');
+      case 'editorial': return s.id === 'why-agent-fit' ? whyAgentFitMarkup(s) : (s.intro ? '<p class="leadline">' + esc(s.intro) + '</p>' : '') + '<div class="editorial-list">' + s.rows.map(r => '<div class="editorial-row"><h3>' + esc(r[0]) + '</h3><p>' + esc(r[1]) + '</p></div>').join('') + '</div>' + (s.caption ? '<p class="caption">' + esc(s.caption) + '</p>' : '') + (s.id === 'evaluation' ? '<section class="agent-check-prompt"><div><span class="eyebrow">READY-TO-RUN PROMPT</span><h3>Agent 실행과 Subagent 구성을 함께 확인합니다.</h3><p>실행 결과만 보지 말고, Skill·Subagent·검수 기록이 실제로 남았는지 확인합니다.</p></div>' + dynamicPromptBlock(E.agentExecutionCheckPrompt(state), 'agentExecutionCheckPrompt', 'Agent 실행·Subagent 확인') + '</section>' : '');
       case 'framework': return '<div class="framework-grid soft-framework">' + [
         ['01', '반복되나요?', '한 번만 하는 일이 아니라 비슷한 형태로 다시 생기는 일인가요?'],
         ['02', '입력 자료가 있나요?', 'Agent가 읽을 문서, 표, 메모, 예시 데이터가 있나요?'],
@@ -159,6 +185,9 @@
       case 'yujin-flow-map': return yujinFlowMapMarkup();
       case 'problem-source': return problemSourceMarkup();
       case 'formula': return '<div class="formula-tokens">' + s.tokens.map(t => '<span>' + esc(t) + '</span>').join('') + '</div>' + (s.id === 'hmw' ? examplesMarkup() : '<p class="formula-example">' + esc(s.example) + '</p><p class="caption">' + esc(s.caption) + '</p>');
+      case 'poc-prompt': return pocPromptMarkup();
+      case 'team-task': return teamTaskMarkup();
+      case 'workflow-example': return workflowExampleMarkup();
       case 'traffic': return '<p class="poc-definition"><b>PoC (Proof of Concept) · 개념 검증</b><br>작은 데이터로 구현 가능성과 품질을 확인합니다. 오늘은 가상 문의 5건으로 분류·FAQ 기반 초안을 검증합니다. 고객이 쓰는 최소 제품인 MVP나 실제 운영 배포와는 다릅니다.</p><div class="traffic-grid">' + [
         ['GREEN / 사용 가능', '이 범위에서는\n쓸 수 있다.', '작은 입력에서도 ID와 형식이 맞고 결과를 쉽게 확인할 수 있다.', '맡길 범위를 좁게 유지'],
         ['AMBER / 검수 후 사용', '초안은 되지만,\n검수가 필요하다.', '분류 기준이나 표현이 모호해 사람이 확인해야 한다.', '기준표 + 검수 지점 추가'],
@@ -177,7 +206,7 @@
       case 'casebrief': return '<div class="case-brief-grid"><div><p class="case-headline">고객 문의를 읽고,<br>FAQ에 근거한<br>답변 초안을 쓴다.</p><div class="case-checks"><span>' + icon('check') + '전체 ID 포함</span><span>' + icon('check') + 'FAQ 근거 있는 초안</span></div></div><div class="case-details"><dl><div><dt>사용자</dt><dd>온라인 쇼핑몰 CS 담당자</dd></div><div><dt>입력</dt><dd>가상 문의 8건 + FAQ·분류 기준</dd></div><div><dt>AI의 일</dt><dd>분류·집계, FAQ 확인, 초안 3개</dd></div><div><dt>사람의 일</dt><dd>답변 검토, 예외 판단과 고객 발송</dd></div><div><dt>산출물</dt><dd>classification.csv<br>cs-response-drafts.md</dd></div></dl></div></div><p class="caption">이 사례와 응답은 학습을 위해 만든 가상 데이터입니다.</p>';
       case 'assets': return assetsMarkup();
       case 'guide': return '<div id="guide-container">' + guideMarkup(s.guide) + '</div>';
-      case 'project-export': return '<div class="export-layout"><div><pre class="code-preview">' + esc(E.projectInstructions(state)) + '</pre><div class="button-row" style="margin-top:16px">' + button('내 Project 지침 복사', 'copy-project', 'copy', 'primary') + button('지침 MD 저장', 'download-project', 'download', 'secondary') + '</div></div><div class="export-sidebar"><h3>Set project instructions<br>→ Save instructions</h3><p>앞에서 쓴 질문과 답변이 모두 포함됩니다. 미입력 항목을 먼저 채우고 Project에 붙여넣으세요.</p><p>지침은 이름·설명과 별도로 저장해야 합니다.</p><div class="button-row">' + button('지침 작성으로', 'goto', 'pencil', 'secondary', 'data-slide="lab-instructions"') + button('CS 참고 예시 지침', 'copy-example-project', 'copy', 'secondary') + '</div></div></div>';
+      case 'project-export': return '<div class="export-layout project-save-layout"><div><pre class="code-preview">' + esc(E.projectInstructions(state)) + '</pre><div class="button-row" style="margin-top:16px">' + button('Project 지침 복사', 'copy-project', 'copy', 'primary') + button('지침 MD 저장', 'download-project', 'download', 'secondary') + '</div></div><div class="export-sidebar project-save-sidebar"><span class="eyebrow">SAVE AS PROJECT INSTRUCTIONS</span><h3>방금 만든 HTML 화면이<br>다시 실행될 규칙이 됩니다.</h3><p>앞에서 정한 Y/U/J/I와 프로토타입 확인 내용을 Claude Project의 Instructions에 붙여넣습니다.</p><div class="project-save-checks"><b>지침에 들어가야 할 것</b><ol><li>무슨 문제를 줄이는지</li><li>어떤 입력을 읽는지</li><li>어떤 순서로 처리하는지</li><li>AI가 할 일과 사람이 승인할 일</li><li>결과를 어떤 화면·파일로 남길지</li></ol></div><p class="caption">빈 항목은 AI가 추측하지 않게 “먼저 질문한다”로 남깁니다. 지침은 Project 이름·설명과 별도로 저장합니다.</p><div class="button-row">' + button('지침 작성으로', 'goto', 'pencil', 'secondary', 'data-slide="lab-instructions"') + button('CS 참고 예시', 'copy-example-project', 'copy', 'secondary') + '</div></div></div>';
       case 'result': return resultMarkup();
       case 'skill-structure': return '<div class="skill-structure-grid"><div class="filetree">my-skill/\n├── SKILL.md\n└── references/\n    ├── 업무-기준.md\n    └── 출력-양식.md</div><div class="skill-parts"><div class="skill-part"><b>name + description</b><p>무슨 Skill이고 언제 사용할지 찾는 표지.</p></div><div class="skill-part"><b>SKILL.md 본문</b><p>입력, 절차, 결과 형식, 검수, 멈출 조건.</p></div><div class="skill-part"><b>references/</b><p>필요할 때 읽는 기준과 양식. 본문에 경로를 연결합니다.</p></div></div></div><p class="caption">Skill 자체는 사람도, 예약 실행기도 아닙니다. 실행 환경이 읽고 사용하는 업무 자산입니다.</p>';
       case 'skill-export': return skillExportMarkup();
@@ -195,7 +224,7 @@
         ['다른 기기에서 내 노트가 안 보여요.', '노트는 작성한 브라우저의 로컬 저장소에 있습니다. 내보낸 MD를 가져가세요. 브라우저 저장소를 지우거나 비공개 창을 닫으면 기록이 사라질 수 있습니다.'],
         ['이 HTML이 Claude를 직접 실행하나요?', '아니요. 이 덱은 설계·기록·파일 만들기와 학습용 순서도 시연을 제공합니다. 실제 AI 작업은 본인의 Claude에서 실행하고 관찰한 결과를 기록합니다.']
       ].map(x => '<details><summary>' + x[0] + '</summary><p>' + x[1] + '</p></details>').join('') + '</div>';
-      case 'references': return '<div class="source-list">' + Object.values(D.sources).map(x => '<div class="source-item">' + ext(x.url, x.title) + '<p>' + (x === D.sources.brunch ? '제공 자료 · 문제에서 출발하는 기획 관점' : '기술 개념과 실습 경로 확인 · ' + D.checked) + '</p></div>').join('') + '</div><p class="source-note">추가 참고: 사용자가 제공한 designbywani의 문제정의·JTBD·HMW 이미지, NAVER CONNECT TechRun의 AI 가능성 실험 이미지, AX·일의 변화 관련 게시물과 Trevari 소개 자료.</p><p class="source-note">YUJIN FLOW와 실습 사례·질문·파일은 이유진 강의 맥락으로 새로 구성했습니다. 화면 안내는 학습용 재구성입니다.</p>';
+      case 'references': return '<div class="source-list">' + Object.values(D.sources).map(x => '<div class="source-item">' + ext(x.url, x.title) + '<p>공식 문서 또는 신뢰 가능한 기사 확인 · ' + D.checked + '</p></div>').join('') + '</div><p class="source-note">출처는 Claude/OpenAI/Microsoft/AWS/IDEO/Christensen Institute 공식 자료와 Digital iNSIGHT AX 기사 중심으로 정리했습니다.</p><p class="source-note">YUJIN FLOW와 실습 사례·질문·파일은 이유진 강의 맥락으로 새로 구성했습니다. 화면 안내는 학습용 재구성입니다.</p>';
       case 'faq': return faqMarkup(s);
       case 'homework2': return week2HomeworkMarkup();
       case 'survey': return surveyMarkup(s);
@@ -244,7 +273,7 @@
       ['승인자', '누가 최종 사용·발송·제출을 결정하는가'],
       ['실패 시', '어디로 돌아가고 몇 번까지 수정하는가']
     ];
-    return '<div class="prd-translation"><section><span class="eyebrow">Y/U/J/I → PRD</span><h2>이제 Agent에게 맡길 일을<br>한 장의 설계서로 묶습니다.</h2><p>문제, 사용자 목표, 업무 흐름, AI 역할과 검수 기준을 N 단계로 넘길 준비입니다.</p><div class="prd-names"><b>AI Agent PRD</b><b>업무 병목 정의서</b><b>AX 적용 후보 검토서</b></div></section><ol>' + rows.map(x => '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>').join('') + '</ol></div><div class="button-row" style="margin-top:24px">' + button('Guardrails로 돌아가기', 'goto', 'arrow-left', 'secondary', 'data-slide="lab-boundary"') + button('N 단계로 이동', 'goto', 'arrow-right', 'primary', 'data-slide="case-brief"') + '</div>';
+    return '<div class="prd-translation"><section><span class="eyebrow">Y/U/J/I → PRD</span><h2>이제 Agent에게 맡길 일을<br>한 장의 설계서로 묶습니다.</h2><p>문제, 사용자 목표, 업무 흐름, AI 역할과 검수 기준을 N 단계로 넘길 준비입니다.</p><div class="prd-names"><b>AI Agent PRD</b><b>업무 병목 정의서</b><b>AX 적용 후보 검토서</b></div></section><ol>' + rows.map(x => '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>').join('') + '</ol></div><div class="button-row" style="margin-top:24px">' + button('역할 나누기로 돌아가기', 'goto', 'arrow-left', 'secondary', 'data-slide="lab-boundary"') + button('N 단계로 이동', 'goto', 'arrow-right', 'primary', 'data-slide="case-brief"') + '</div>';
   }
   function week2HomeworkMarkup() {
     const deliverables = [
@@ -284,7 +313,7 @@
       ['HR', '반복 문의에 정책 근거를 붙여 답하는 데 시간이 든다.', '문의 유형을 나누고 규정 근거와 답변 초안을 만든다.', '담당자가 개인별 예외와 민감 판단을 맡는다.'],
       ['기획·마케팅', 'VOC·브리프가 흩어져 우선순위와 메시지가 흔들린다.', '주제 분류, 초안 작성, 근거 부족 항목을 표시한다.', '사람이 주장·예산·외부 공개를 승인한다.']
     ];
-    return '<div class="example-gallery"><section class="example-focus"><span class="eyebrow">ONE FLOW</span><h2>공식은 같습니다.</h2><p>문제정의 → AI가 할 일 → 사람이 검수할 지점을 같은 순서로 적으면, 직무가 달라도 Agent 설계가 흔들리지 않습니다.</p>' + button('내 Guardrails 쓰기', 'goto', 'arrow-right', 'primary', 'data-slide="lab-boundary"') + '</section><section class="example-cards">' + examples.map((x, i) => '<article class="example-card"><span>' + String(i + 1).padStart(2, '0') + '</span><h3>' + x[0] + '</h3><dl><div><dt>문제정의</dt><dd>' + x[1] + '</dd></div><div><dt>AI의 일</dt><dd>' + x[2] + '</dd></div><div><dt>사람 검수</dt><dd>' + x[3] + '</dd></div></dl></article>').join('') + '</section></div>';
+    return '<div class="example-gallery"><section class="example-focus"><span class="eyebrow">ONE FLOW</span><h2>공식은 같습니다.</h2><p>문제정의 → AI가 할 일 → 사람이 검수할 지점을 같은 순서로 적으면, 직무가 달라도 Agent 설계가 흔들리지 않습니다.</p>' + button('내 역할 나누기', 'goto', 'arrow-right', 'primary', 'data-slide="lab-boundary"') + '</section><section class="example-cards">' + examples.map((x, i) => '<article class="example-card"><span>' + String(i + 1).padStart(2, '0') + '</span><h3>' + x[0] + '</h3><dl><div><dt>문제정의</dt><dd>' + x[1] + '</dd></div><div><dt>AI의 일</dt><dd>' + x[2] + '</dd></div><div><dt>사람 검수</dt><dd>' + x[3] + '</dd></div></dl></article>').join('') + '</section></div>';
   }
   let exampleTimer = null, exampleIndex = 0, examplesPaused = false;
   const reducedExamples = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -345,7 +374,7 @@
       ['Y', 'Why Gap', '현재 업무 방식의 진짜 병목은 어디인가?', '원하는 상태와 지금 상태의 차이.', 'problem.md', ['1. 1주차 메모 가져오기', '2. 문제정의 한 문장 확정'], '내 과제의 입력으로'],
       ['U', 'User Job', 'AI에게 시킬 Input/Output 구조는 무엇인가?', '누가 어떤 결과를 얻으려는지.', 'job-story.md', ['1. 사용자와 상황·목표 작성', '2. 해결 대안 비교'], 'J 과제의 입력으로'],
       ['J', 'Journey', '업무의 세부 흐름과 예외 상황은 어떻게 되는가?', '실제 업무의 앞뒤와 판단 지점.', 'workflow.md', ['1. 입력부터 결과까지 연결', '2. 분기·검수 위치 표시'], 'I 과제의 입력으로'],
-      ['I', 'Intelligence Fit', '이 단계에 맞는 AI 모델·툴은 무엇인가?', 'AI의 일, 사람의 일, 중단 기준.', 'boundaries.md', ['1. 작은 PoC로 확인', '2. 승인·재시도·중단 조건 작성'], 'N 과제의 입력으로'],
+      ['I', 'Intelligence Fit', '이 단계에 맞는 AI 모델·툴은 무엇인가?', 'AI의 일, 사람의 일, 사람이 검토할 일.', 'boundaries.md', ['1. AI·사람·검토 영역 나누기', '2. 판단하기 어려운 부분 질문하기'], 'N 과제의 입력으로'],
       ['N', 'Next Agent', '이 흐름을 어떻게 지속 가능한 Agent로 만드는가?', '등록하고 실행하고 다시 쓸 설계.', 'SKILL.md', ['1. Project 지침 → 첫 실행', '2. Skill 등록 → 다른 입력 실행'], '내 Agent의 재사용 절차로']
     ];
     return '<div class="yujin-map-grid">' + steps.map((r, i) => '<article data-yujin-step="' + i + '"><small>0' + (i + 1) + '</small><strong>' + r[0] + '</strong><h2>' + r[1] + '</h2><h3>' + r[2] + '</h3><p>' + r[3] + '</p><code>' + r[4] + ' ' + icon('arrow-right') + '</code><ol>' + r[5].map(x => '<li>' + x + '</li>').join('') + '</ol><em>' + r[6] + '</em></article>').join('') + '</div><div class="yujin-map-bottom"><button type="button" class="button secondary small" data-action="yujin-map-next">' + icon('play') + '한 단계씩 보기</button><p id="yujin-map-desc">병목 → 사용자 일 → 업무 흐름 → AI 적합성 → 실행 Agent로 번역합니다.</p></div>';
@@ -368,13 +397,20 @@
       case 'enabled': inner = '<h3>Your skills</h3><div class="mock-field">' + esc(E.answer(state,'skill','name') || '내 Skill') + '<span class="mock-toggle mock-highlight"></span></div><p class="mock-check">새 대화 + 다른 입력<br>같은 기준으로 다시 실행</p>'; break;
       case 'chat': inner = '<h3>내 업무 Project</h3>' + action('New chat') + '<div class="mock-field" style="margin-top:24px">이번 업무를 시작합니다.</div>'; break;
       case 'attach': inner = '<h3>New chat</h3><div class="mock-field">' + esc(E.answer(state,'instructions','input') || '내 입력 파일 / 시연: brief-a.md + sources.md') + '</div>' + action('+ 첨부'); break;
-      case 'send': inner = '<h3>New chat</h3><div class="mock-field">아래의 내 실행 프롬프트 붙여넣기<br>입력 확인 → 작업 → 승인 대기</div>' + action('전송 ↑'); break;
-      case 'files': inner = '<h3>생성된 결과물 확인</h3><div class="mock-file">' + esc(E.answer(state,'instructions','output') || '내가 정한 산출물') + '</div><div style="margin-top:20px">' + action('Download') + '</div>'; break;
+      case 'send': inner = '<h3>Workflow 실행 요청</h3><div class="mock-field">입력 확인 → 처리 → 검수 대기<br>사람 승인 전에는 멈추기</div>' + action('전송 ↑'); break;
+      case 'files': inner = '<h3>검수 전 결과 확인</h3><div class="mock-file">' + esc(E.answer(state,'instructions','output') || '내가 정한 화면·파일') + '</div><p class="mock-check">근거 · 누락 · 사람 승인 지점 확인</p><div style="margin-top:20px">' + action('Download') + '</div>'; break;
     }
     return '<div class="mock-window"><div class="mock-topbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>claude.ai / ' + esc(step.menu) + '</span></div><div class="mock-body"><div class="mock-sidebar"><b>Claude</b><span>New chat</span><span class="' + (['projects', 'create', 'knowledge', 'instructions', 'chat', 'attach', 'send', 'files'].includes(step.view) ? 'selected' : '') + '">Projects</span><span class="' + (['skills', 'upload', 'enabled'].includes(step.view) ? 'selected' : '') + '">Customize</span><span>Settings</span></div><div class="mock-main">' + inner + '</div></div></div>';
   }
   function resultMarkup() {
-    return '<span class="demo-label">A 데이터의 수업용 기대 결과 · 실제 모델 실행 결과 아님</span><div class="json-result"><div><table class="result-table"><thead><tr><th>주 분류</th><th>건수</th><th>근거 ID</th></tr></thead><tbody>' + [['배송',2,'A01, A06'],['반품·환불',2,'A02, A05'],['결제',2,'A03, A07'],['계정',1,'A04'],['미응답',1,'A08'],['합계',8,'A01–A08']].map(r => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>').join('') + '</tbody></table><div class="result-pass"><span>누락 0</span><span>중복 0</span><span>집계 8/8</span></div></div><div class="result-actions"><h3>담당자가 확인할 답변 초안 3개</h3><ol><li>배송 조회 메뉴 안내<span>A01 / FAQ-D01 · 실제 배송 상태는 알 수 없음</span></li><li>반품 접수 메뉴 안내<span>A02 / FAQ-R01 · 가능 여부는 담당자 확인</span></li><li>중복 결제 확인에 필요한 정보 안내<span>A03 / FAQ-P01 · 결제 취소를 단정하지 않음</span></li></ol>' + button('검수용 정답 CSV', 'download-sample', 'download', 'secondary', 'data-file="expected-classification-a.csv"') + '</div></div>';
+    const val = (lab, field) => E.answer(state, lab, field).trim();
+    const cards = [
+      ['target', '목표가 맞는가', val('instructions','goal') || val('job','outcome') || '아직 작성 전', '결과가 내가 줄이려던 문제와 연결되는지 본다.'],
+      ['file-check-2', '산출물이 맞는가', val('instructions','output') || val('journey','output') || '아직 작성 전', 'HTML 화면, 표, 문서, 파일 이름과 형식이 맞는지 본다.'],
+      ['shield-check', '기준을 지켰는가', val('instructions','check') || val('boundary','criteria') || '아직 작성 전', '근거, 누락, 형식, 금지 행동을 대조한다.'],
+      ['hand', '사람 앞에서 멈췄는가', val('boundary','human') || val('journey','reviewer') || '아직 작성 전', '발송, 승인, 공개, 변경처럼 책임이 생기는 일은 사람이 결정한다.']
+    ];
+    return '<div class="result-rubric"><section class="result-rubric-lead"><span class="eyebrow">SUCCESS CRITERIA</span><h2>각자 Agent의 성공 기준은<br>네 가지로 잡습니다.</h2><p>정답표를 맞히는 시간이 아니라, 내가 저장한 workflow가 업무 결과와 검수 기준을 지켰는지 확인하는 시간입니다.</p></section><section class="result-rubric-cards">' + cards.map((x, i) => '<article><div>' + icon(x[0]) + '<span>0' + (i + 1) + '</span></div><h3>' + x[1] + '</h3><b>' + esc(x[2]) + '</b><p>' + x[3] + '</p></article>').join('') + '</section><section class="result-rubric-task"><b>TASK</b><ol><li>Claude 결과에서 목표·산출물·기준·사람 승인 지점을 표시합니다.</li><li>맞으면 통과, 애매하면 검토 후 사용, 빠졌으면 지침을 고쳐 다시 실행합니다.</li><li>확인하지 못한 내용은 성공으로 쓰지 말고 “미검증”으로 남깁니다.</li></ol></section></div>';
   }
   function skillExportMarkup() {
     const errors = E.skillErrors(state);
@@ -534,6 +570,8 @@
       case 'download-sample':download(E.samples[el.dataset.file],el.dataset.file,el.dataset.file.endsWith('.csv')?'text/csv;charset=utf-8':'text/markdown;charset=utf-8');break;
       case 'copy-prompt':await copy(E[el.dataset.prompt]);break;
       case 'download-prompt':download('# YUJIN FLOW | '+el.dataset.prompt+'\n\n'+E[el.dataset.prompt]+'\n',el.dataset.prompt+'.md');break;
+      case 'copy-dynamic-prompt':await copy(E[el.dataset.prompt](state));break;
+      case 'download-dynamic-prompt':download('# YUJIN FLOW | '+el.dataset.title+'\n\n'+E[el.dataset.prompt](state)+'\n',el.dataset.prompt+'.md');break;
       case 'sample-kit':await zipFiles(E.samples,'YUJIN-FLOW-classroom-data.zip');break;
       case 'example-skill':await zipFiles(E.skillFiles(state,true),'triage-and-draft-example.zip');break;
       case 'skill-zip':if(skillReady())await zipFiles(E.skillFiles(state),E.answer(state,'skill','name').trim()+'.zip');break;
