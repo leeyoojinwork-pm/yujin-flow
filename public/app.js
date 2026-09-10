@@ -88,7 +88,7 @@
     } else if (s.type === 'closing') {
       article.innerHTML = '<div class="slide-inner">' + header(s, active) + '<div class="closing-content"><h1>' + titleMarkup(s) + '</h1><p>' + esc(s.subtitle) + '</p><div class="button-row">' + button('내 결과물 가져가기', 'export-open', 'download', 'lime') + button('실습노트 열기', 'notebook', 'notebook-pen', 'secondary') + '</div></div><div class="closing-end"><b>YUJIN FLOW</b><span>일을 맡기는 사람, 이유진</span></div></div>';
     } else {
-      article.innerHTML = '<div class="slide-inner">' + header(s, active) + '<h1 class="slide-title">' + titleMarkup(s) + '</h1>' + (s.subtitle ? '<p class="slide-subtitle">' + esc(s.subtitle) + '</p>' : '') + '<div class="slide-body">' + window.YFOperations.criteria(s) + window.YFOperations.verification(s) + body(s) + '</div>' + credit(s) + '</div>';
+      article.innerHTML = '<div class="slide-inner">' + header(s, active) + '<h1 class="slide-title">' + titleMarkup(s) + '</h1>' + (s.subtitle ? '<p class="slide-subtitle">' + esc(s.subtitle) + '</p>' : '') + '<div class="slide-body">' + window.YFOperations.criteria(s) + window.YFOperations.verification(s) + body(s) + window.YFArtifacts.slideFooter(s) + '</div>' + credit(s) + '</div>';
     }
     article.scrollTop = 0;
     $('#current').textContent = String(active + 1).padStart(2, '0');
@@ -132,7 +132,7 @@
         ['J', 'Journey', '실제 업무의 앞뒤와 판단 지점.', 'workflow.md'],
         ['I', 'Intelligence Fit', 'AI의 일, 사람의 일, 중단 기준.', 'boundaries.md'],
         ['N', 'Next Agent', '등록하고 실행하고 다시 쓸 설계.', 'SKILL.md']
-      ].map((r, i) => '<div class="framework-step" style="--i:' + i + '"><div class="framework-letter">' + r[0] + '</div><b>' + r[1] + '</b><p>' + r[2] + '</p><button type="button" class="file-tag artifact-link" data-action="artifact-open" data-stage="' + r[0] + '" title="' + r[0] + ' 과제 시작">' + r[3] + icon('arrow-right') + '</button></div>').join('') + '</div><div class="framework-controls">' + button('한 단계씩 보기', 'framework-next', 'step-forward', 'secondary') + '<p class="framework-desc" id="framework-desc">각 칸이 실제 파일과 실행 기준으로 이어집니다.</p></div>';
+      ].map((r, i) => '<div class="framework-step" style="--i:' + i + '"><div class="framework-letter">' + r[0] + '</div><b>' + r[1] + '</b><p>' + r[2] + '</p><button type="button" class="file-tag artifact-link" data-action="artifact-open" data-stage="' + r[0] + '" title="' + r[0] + ' 과제 시작">' + r[3] + icon('arrow-right') + '</button>' + window.YFArtifacts.assignment(r[0]) + '</div>').join('') + '</div><div class="framework-controls">' + button('한 단계씩 보기', 'framework-next', 'step-forward', 'secondary') + '<p class="framework-desc" id="framework-desc">각 칸이 실제 파일과 실행 기준으로 이어집니다.</p></div>';
       case 'formula': return '<div class="formula-tokens">' + s.tokens.map(t => '<span>' + esc(t) + '</span>').join('') + '</div>' + (s.id === 'hmw' ? examplesMarkup() : '<p class="formula-example">' + esc(s.example) + '</p><p class="caption">' + esc(s.caption) + '</p>');
       case 'traffic': return '<p class="poc-definition"><b>PoC (Proof of Concept) · 개념 검증</b><br>작은 데이터로 구현 가능성과 품질을 확인합니다. 오늘은 가상 문의 5건으로 분류·FAQ 기반 초안을 검증합니다. 고객이 쓰는 최소 제품인 MVP나 실제 운영 배포와는 다릅니다.</p><div class="traffic-grid">' + [
         ['GREEN / 사용 가능', '이 범위에서는\n쓸 수 있다.', '작은 입력에서도 ID와 형식이 맞고 결과를 쉽게 확인할 수 있다.', '맡길 범위를 좁게 유지'],

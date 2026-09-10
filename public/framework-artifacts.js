@@ -9,6 +9,24 @@
     { id: 'N', name: 'Next Agent', file: 'SKILL.md', title: '만들고 실행하고 재사용', labs: ['instructions', 'run1', 'skill', 'run2'], output: 'Project 지침·재사용 Skill·두 번의 실행 기록', use: '등록하고 시험할 내 Agent', task: '앞의 네 MD를 역할·목표·입력·절차·권한·검수 조건으로 연결하고 Project 지침과 SKILL.md를 검토해줘. 실제 실행 기록을 근거로 재사용 가능성을 판단하고, 없는 실행 결과를 만들지 마.', next: null }
   ];
   const extras = ['mission', 'ownflow', 'peer', 'metrics', 'pitch'];
+  const assignments = {
+    Y: ['1주차 메모 가져오기', '문제정의 한 문장 확정'],
+    U: ['사용자의 상황·목표 작성', '해결 대안 비교'],
+    J: ['입력부터 결과까지 연결', '분기·검수 위치 표시'],
+    I: ['작은 PoC로 확인', '승인·재시도·중단 조건 작성'],
+    N: ['Project 지침 → 첫 실행', 'Skill 등록 → 다른 입력 실행']
+  };
+  const buildPath = [
+    ['case-brief', '내 Agent 명세'], ['case-files', '입력·기준 자료'],
+    ['case-flow', '실행 순서 확인'], ['claude-project', 'Project 생성'],
+    ['project-context', '지식·작업 자료 구분'], ['prompt-techniques', '프롬프트 기법'],
+    ['lab-instructions', '내 지침 작성'], ['save-instructions', 'Project 지침 저장'],
+    ['first-run', '첫 입력으로 실행'], ['expected-result', '결과 검수'],
+    ['lab-run1', '첫 실행 기록'], ['skill-structure', 'Skill 구조 확인'],
+    ['lab-skill', '내 Skill 작성'], ['skill-export', 'Skill 파일 생성'],
+    ['upload-skill', 'Skill 업로드·활성화'], ['second-run', '새 입력으로 실행'],
+    ['lab-run2', '재사용 검증 기록']
+  ];
   const app = () => window.YFApp;
   const esc = value => app().esc(value);
   const get = id => stages.find(s => s.id === id);
@@ -17,6 +35,20 @@
   const getState = () => app().getState();
   const attrs = id => 'data-stage="' + id + '"';
   const button = (label, action, symbol, id) => app().button(label, action, symbol, 'secondary', attrs(id));
+  function assignment(id) {
+    const s = get(id);
+    return '<ol class="artifact-assignment" aria-label="' + id + ' 실습과제">' + assignments[id].map(t => '<li>' + esc(t) + '</li>').join('') + '</ol><span class="artifact-assignment-output">' + (s.next ? s.next + ' 과제의 입력으로' : '내 Agent의 재사용 절차로') + '</span>';
+  }
+  function buildNavigation(slideId) {
+    const index = buildPath.findIndex(([id]) => id === slideId);
+    if (index < 0) return '';
+    const prev = buildPath[index - 1], next = buildPath[index + 1];
+    const jump = (entry, label, symbol, cls) => app().button(label, 'goto', symbol, cls, 'data-slide="' + entry[0] + '"');
+    return '<section class="artifact-build-navigation" aria-label="N 과제 제작 순서"><header><span class="eyebrow">과제 05 / N · Next Agent</span><strong>' + String(index+1).padStart(2,'0') + ' / ' + buildPath.length + ' · ' + esc(buildPath[index][1]) + '</strong></header><div class="button-row">' + (prev ? jump(prev, '이전 / ' + prev[1], 'arrow-left', 'secondary') : '') + (next ? jump(next, '다음 / ' + next[1], 'arrow-right', 'primary') : '<p>두 실행의 근거를 기록한 뒤, 아래에서 SKILL.md와 다섯 MD를 저장합니다.</p>') + '</div><details><summary>전체 제작 순서</summary><ol>' + buildPath.map(([id, label], i) => '<li><button type="button" data-action="goto" data-slide="' + id + '" aria-current="' + (id === slideId ? 'step' : 'false') + '"><span>' + String(i+1).padStart(2,'0') + '</span>' + esc(label) + '</button></li>').join('') + '</ol></details><p class="caption">화면을 넘긴 것만으로 실행이 완료되지는 않습니다. Claude에서 수행하고 실제 결과를 기록합니다.</p></section>';
+  }
+  function slideFooter(slide) {
+    return slide.type === 'lab' ? '' : buildNavigation(slide.id);
+  }
   function progress(stage, state) {
     const fields = stage.labs.flatMap(id => lab(id).fields.map(f => [id, f.id]));
     return { total: fields.length, filled: fields.filter(([id, f]) => E.answer(state, id, f).trim()).length };
@@ -58,7 +90,7 @@
   function bridge(labId) {
     const s = stageForLab(labId); if (!s) return '';
     const index = stages.indexOf(s), previous = stages[index - 1];
-    return '<section class="artifact-bridge" aria-label="YUJIN 과제 연결"><nav aria-label="다섯 MD 과제">' + stages.map(t => '<button type="button" data-action="artifact-open" ' + attrs(t.id) + ' aria-current="' + (t.id === s.id ? 'step' : 'false') + '" title="' + t.name + ' / ' + t.file + '">' + t.id + '</button>').join('') + '</nav><div class="artifact-bridge-chain"><span>' + (previous ? '이어받기 / ' + previous.file : '시작 / 1주차 과제') + '</span>' + app().icon('arrow-right') + '<strong>' + s.id + ' · ' + s.title + '</strong>' + app().icon('arrow-right') + '<code>' + s.file + '</code></div><p>' + s.use + '에 사용합니다.</p></section>';
+    return '<section class="artifact-bridge" aria-label="YUJIN 과제 연결"><nav aria-label="다섯 MD 과제">' + stages.map(t => '<button type="button" data-action="artifact-open" ' + attrs(t.id) + ' aria-current="' + (t.id === s.id ? 'step' : 'false') + '" title="' + t.name + ' / ' + t.file + '">' + t.id + '</button>').join('') + '</nav><div class="artifact-bridge-chain"><span>' + (previous ? '이어받기 / ' + previous.file : '시작 / 1주차 과제') + '</span>' + app().icon('arrow-right') + '<strong>' + s.id + ' · ' + s.title + '</strong>' + app().icon('arrow-right') + '<code>' + s.file + '</code></div><p>' + s.use + '에 사용합니다.</p>' + (s.id !== 'N' ? '<nav class="artifact-subtasks" aria-label="현재 과제의 실습 순서">' + s.labs.map((id, i) => '<button type="button" data-action="goto" data-slide="lab-' + id + '" aria-current="' + (id === labId ? 'step' : 'false') + '"><span>0' + (i+1) + '</span>' + esc(lab(id).title) + '</button>').join('') + '</nav>' : '') + '</section>';
   }
   function panel(id, allowNext = true) {
     const s = get(id), p = progress(s, getState());
@@ -66,6 +98,7 @@
   }
   function footer(labId) {
     const s = stageForLab(labId); if (!s) return '';
+    if (s.id === 'N') return buildNavigation('lab-' + labId) + panel('N', false);
     const next = s.labs[s.labs.indexOf(labId)+1];
     const route = { instructions: ['지침을 Claude에 저장하기', 'save-instructions'], skill: ['Skill 파일로 만들기', 'skill-export'] }[labId];
     const intermediate = route || next ? '<div class="artifact-next-question">' + app().button(route ? route[0] : '다음 실습 / ' + lab(next).title, 'goto', 'arrow-right', 'primary', 'data-slide="' + (route ? route[1] : 'lab-' + next) + '"') + '</div>' : '';
@@ -99,5 +132,5 @@
       await app().zipFiles(Object.fromEntries(stages.map(s => [s.file, markdown(s.id, getState())])), 'YUJIN-five-assignments.zip');
     }
   }
-  window.YFArtifacts = { stages, extras, get, stageForLab, progress, markdown, stagePrompt, inputContext, skillContext, bridge, footer, panel, notebookGroup, mapping, refresh, action };
+  window.YFArtifacts = { stages, extras, get, stageForLab, progress, markdown, stagePrompt, inputContext, skillContext, bridge, footer, panel, notebookGroup, mapping, refresh, action, assignment, buildPath, slideFooter };
 })();
