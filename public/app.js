@@ -59,7 +59,7 @@
       'solution-trap': '챗봇', 'rethink-work': '없애도 되는 일', 'yujin-framework': 'YUJIN FLOW',
       'problem-formula': '한 문장', 'jtbd': '문의 해결', 'hmw': '여러 해결책',
       'experiment': 'PoC', 'workflow-map': '여섯 칸', 'what-is-agent': 'Agent',
-      'onboarding': '일할 조건', 'orchestration-concept': 'Skill', 'orchestration-live': '다시 돌아갈까요?',
+      'onboarding': '일할 조건', 'orchestration-concept': 'Orchestration', 'orchestration-live': '다시 돌아갈까요?',
       'case-brief': 'FAQ 기반 답변 초안', 'case-files': '두 곳', 'case-flow': '파일이 나올 때까지', 'skill-structure': '업무 절차 묶음',
       'skill-vs-sub': '일하는 방법', 'code-start': '실제 역할', 'code-files': 'Sub가 검수', 'code-run': '실행 기록',
       'loop-control': '끝나는 조건', 'evaluation': '운영 기준', 'success-metrics': '검수와 재작업',
@@ -76,7 +76,7 @@
     return '<footer class="slide-credit"><span>YUJIN FLOW / 이유진</span>' + (s.source ? ext(D.sources[s.source].url, D.sources[s.source].title) : '') + '<span class="stage-meta">' + (s.source ? '공식 문서 확인 ' + D.checked : 'AFTER WORK AI CLUB') + '</span></footer>';
   }
   function renderSlide(n, focus = false) {
-    cancelFlow(); stopExamples(); window.YFCLI.stop(); guideStep = 0; frameworkIndex = -1;
+    cancelFlow(); stopExamples(); window.YFOrchestration.stop(); window.YFCLI.stop(); guideStep = 0; frameworkIndex = -1;
     active = Math.max(0, Math.min(D.slides.length - 1, n));
     const s = D.slides[active]; state.slide = s.id;
     const article = $('#slide');
@@ -102,6 +102,7 @@
     $$('.chapter-button').forEach(b => b.setAttribute('aria-current', b.dataset.chapter === s.chapter ? 'step' : 'false'));
     $('#speaker-notes').innerHTML = '<b>INSTRUCTOR NOTE · ' + String(active + 1).padStart(2, '0') + '</b>' + esc(s.note || '');
     window.YFMascot.mount(s);
+    if (s.type === 'anatomy') window.YFOrchestration.mount();
     if (s.type === 'flow') setupFlow(s.case);
     if (s.type === 'mission') setupMission();
     if (s.type === 'code-run') window.YFCLI.setup();
@@ -137,12 +138,7 @@
       ].map(x => '<div class="traffic-item"><div class="light">' + x[0] + '</div><h3>' + esc(x[1]).replace(/\n/g, '<br>') + '</h3><p>' + x[2] + '</p><div class="decision">' + x[3] + '</div></div>').join('') + '</div>';
       case 'pipeline': return '<div class="pipeline">' + s.steps.map((x, i) => '<div class="pipeline-node"><span class="num">STEP 0' + (i + 1) + '</span><h3>' + esc(x) + '</h3><p>' + esc(s.details[i]) + '</p></div>').join('') + '</div><p class="pipeline-note">앞 단계의 출력이 다음 단계의 입력이 됩니다.<br>“정리한다”를 “무엇을 읽어 어떤 표를 만든다”로 바꿔보세요.</p>';
       case 'concepts': return '<div class="table-scroll"><table class="concept-table"><thead><tr><th>구분</th><th>어떻게 일하나</th><th>우리 실습에서</th></tr></thead><tbody><tr><td>Prompt</td><td>한 번의 작업을 요청한다.</td><td>“이 CSV를 분류해줘.”</td></tr><tr><td>Workflow</td><td>정해둔 단계와 분기를 따른다.</td><td>읽기 → 분류 → 집계 → 검수</td></tr><tr class="highlight"><td>Agent</td><td>목표·관찰 결과에 맞춰 도구와 다음 행동을 선택한다.</td><td>누락을 발견하면 해당 입력을 다시 읽고 수정</td></tr><tr><td>Project / Skill</td><td>공통 맥락 / 재사용 절차를 제공한다.</td><td>기준 문서 / triage-and-draft</td></tr></tbody></table></div><p class="caption">웹 실습은 도구를 쓰는 Agentic workflow부터 시작합니다. Project를 만드는 것만으로 예약 실행이나 다중 Agent가 생기지는 않습니다.</p>';
-      case 'anatomy': return '<div class="anatomy-grid"><div class="anatomy-roles">' + [
-        ['Head', '전체 목표와 진행 상태를 관리한다.', '메인 대화 / Orchestrator'],
-        ['Sub', '분리된 작업을 맡고 결과를 돌려준다.', '별도 맥락의 Worker / Subagent'],
-        ['Skill', '반복해서 쓸 기준과 절차를 제공한다.', 'SKILL.md + 필요한 참고 파일'],
-        ['Loop', '결과를 검사하고 필요한 단계로 돌아간다.', '통과 기준 + 최대 반복 + 중단']
-      ].map(r => '<div class="role-row"><b>' + r[0] + '</b><p>' + r[1] + '<small>' + r[2] + '</small></p></div>').join('') + '</div><figure class="anatomy-tree" aria-label="Head가 Skill을 사용하고 Sub에 검수를 위임하는 트리"><div class="tree-node tree-head"><span class="tree-role">Head</span><h2>CS 문의 처리 담당</h2><p>전체 진행 · 분류 · 결과 통합</p></div><ul class="tree-branches"><li><span class="tree-edge-label">사용</span><div class="tree-node tree-skill"><span class="tree-role">Skill</span><h3>재사용할 업무 절차</h3><p>분류 기준 · FAQ · 답변 양식</p><code>SKILL.md</code></div></li><li><span class="tree-edge-label">검수 위임</span><div class="tree-node tree-sub"><span class="tree-role">Sub</span><h3>독립 검수 담당</h3><p>누락 · 원문 · FAQ 근거 확인</p><span class="tree-return">검수 결과를 Head에 반환</span></div></li></ul><figcaption class="tree-loop">' + icon('repeat-2') + '<div><b>Loop / 누락이 있으면 다시</b><p>Sub의 검수 결과 → Head가 재분류 → 재검수</p></div></figcaption></figure></div><p class="caption">Skill은 별도 담당자가 아니라 사용하는 절차입니다. Head·Sub는 수업의 설명용 이름이며, 이 트리 자체가 실제 다중 Agent 실행을 의미하지는 않습니다.</p>';
+      case 'anatomy': return window.YFOrchestration.markup();
       case 'flow': return flowMarkup(s.case);
       case 'lab': return form(s.lab, 'deck');
       case 'casebrief': return '<div class="case-brief-grid"><div><p class="case-headline">고객 문의를 읽고,<br>FAQ에 근거한<br>답변 초안을 쓴다.</p><div class="case-checks"><span>' + icon('check') + '전체 ID 포함</span><span>' + icon('check') + 'FAQ 근거 있는 초안</span></div></div><div class="case-details"><dl><div><dt>사용자</dt><dd>온라인 쇼핑몰 CS 담당자</dd></div><div><dt>입력</dt><dd>가상 문의 8건 + FAQ·분류 기준</dd></div><div><dt>AI의 일</dt><dd>분류·집계, FAQ 확인, 초안 3개</dd></div><div><dt>사람의 일</dt><dd>답변 검토, 예외 판단과 고객 발송</dd></div><div><dt>산출물</dt><dd>classification.csv<br>cs-response-drafts.md</dd></div></dl></div></div><p class="caption">이 사례와 응답은 학습을 위해 만든 가상 데이터입니다.</p>';
@@ -300,7 +296,7 @@
     icons();
   }
   function setMode(next) {
-    mode=next; cancelFlow(); stopExamples(); window.YFCLI.stop();
+    mode=next; cancelFlow(); stopExamples(); window.YFOrchestration.stop(); window.YFCLI.stop();
     $('#slide').hidden=next!=='deck';$('#notebook').hidden=next!=='notebook';
     $('#deck-mode').setAttribute('aria-pressed',next==='deck');$('#lab-mode').setAttribute('aria-pressed',next==='notebook');
     $('#notes-toggle').disabled=next!=='deck';$('#speaker-notes').hidden=next!=='deck'||!notesVisible;
