@@ -115,6 +115,7 @@
     const personal = window.YFPersonal.body(s);
     if (personal !== null) return personal;
     switch (s.type) {
+      case 'prompt-techniques': return window.YFPromptTechniques.markup();
       case 'homework-bridge': return '<div class="homework-bridge"><section><span class="eyebrow">01 / 가져오기</span><h2>1주차에 적은 세 가지</h2><ol><li>내가 풀고 싶은 문제 하나</li><li>왜 불편한지</li><li>Agent가 해줬으면 하는 일</li></ol><p>내 1주차 상세 페이지에서 가져오세요. 짧은 메모나 음성으로 풀어 쓴 내용도 괜찮습니다.</p></section><section><span class="eyebrow">02 / 구체화하기</span><h2>기능보다 문제부터</h2><p class="homework-before">“CS 문의가 많아서 챗봇을 만들고 싶다.”</p><p>누가, 언제, 무엇 때문에 어려운가요? FAQ를 찾는 시간인지, 예외 문의를 판단하는 일인지 나눠봅니다.</p><p><b>가설:</b> 문의가 몰릴 때 CS 담당자가 FAQ를 반복해서 찾느라 첫 답변이 늦어진다.</p></section></div><div class="homework-next"><p>오늘은 이 문제를 작은 PoC로 검증한 뒤 Agent의 역할·입력·완료 기준으로 옮깁니다.</p>' + button('1주차 과제 가져오기', 'goto', 'notebook-pen', 'primary', 'data-slide="lab-gap"') + '</div>';
       case 'deliverables': return '<div class="deliverable-motion-tools"><span>DESIGN → BUILD → RUN → VERIFY</span><button type="button" class="icon-button" data-action="deliverables-motion" aria-label="흐름 애니메이션 일시 정지" aria-pressed="false" title="흐름 애니메이션 일시 정지">' + icon('pause') + '</button></div><div class="deliverable-ribbon" aria-hidden="true"><div>' + Array(2).fill('<span>MY PROJECT <b>→</b> MY SKILL <b>→</b> MY WORKFLOW <b>→</b> MY RESULTS <b>→</b> </span>').join('') + '</div></div><div class="deliverable-list">' + [
         ['folder-open', 'Project 하나', '내 지침과 기준 파일을 등록한 업무 공간.'],
@@ -357,6 +358,7 @@
     const a=el.dataset.action;
     if(a && a.startsWith('personal-')) { await window.YFPersonal.action(a); return; }
     if(a && a.startsWith('artifact-')) { await window.YFArtifacts.action(a,el.dataset.stage); return; }
+    if(a && a.startsWith('technique-')) { await window.YFPromptTechniques.action(a,el.dataset.method); return; }
     switch(a){
       case 'deliverables-motion':{const paused=$('#slide').classList.toggle('motion-paused');el.setAttribute('aria-pressed',String(paused));el.setAttribute('aria-label',paused?'흐름 애니메이션 재생':'흐름 애니메이션 일시 정지');el.title=el.getAttribute('aria-label');el.innerHTML=icon(paused?'play':'pause');icons();break;}
       case 'example-prev':moveExample(-1);break;

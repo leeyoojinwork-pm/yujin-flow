@@ -2,6 +2,11 @@
   'use strict';
   const field = (id, label, placeholder, example, extra = {}) => ({ id, label, placeholder, example, ...extra });
   const sources = {
+    copilotPrompt: { title: 'Microsoft · Copilot 프롬프트 4요소', url: 'https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-writing-prompts-in-microsoft-365-copilot' },
+    copilotCoach: { title: 'Microsoft · Prompt Coach', url: 'https://support.microsoft.com/en-us/microsoft-365-copilot/agents-built-by-microsoft' },
+    msSystemPrompt: { title: 'Microsoft · System message와 metaprompt', url: 'https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/advanced-prompt-engineering' },
+    claudePrompt: { title: 'Anthropic · XML 구조화', url: 'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#structure-prompts-with-xml-tags' },
+    openaiPrompt: { title: 'OpenAI · Few-shot과 명확한 지시', url: 'https://developers.openai.com/api/docs/guides/prompt-engineering#few-shot-learning' },
     projects: { title: 'Claude · Project 생성과 지침', url: 'https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects' },
     skills: { title: 'Claude · Skill 활성화와 업로드', url: 'https://support.claude.com/en/articles/12512180-use-skills-in-claude' },
     custom: { title: 'Claude · Custom Skill 구조', url: 'https://support.claude.com/en/articles/12512198-how-to-create-custom-skills' },
@@ -245,6 +250,7 @@
   s('case-flow', 'build', 'personal-flow', '내 입력에서 결과까지,\n이 순서로 만듭니다.', { note: '26페이지에 적은 내 명세가 그대로 보인다. 강사 예시는 개요 승인 전 PPT를 만들지 않고, 내용·레이아웃 검수 후 최종 승인을 받는다. 실제 다중 Agent 실행 화면이 아니다.' });
   s('claude-project', 'build', 'guide', '01. Claude에서 작업 공간을 만듭니다.', { guide: 'project', note: '실제 계정에서 함께 진행. 메뉴 안내는 2026-09-10 공식 도움말 기준이다. UI는 학습용으로 재구성했으며 실제 서비스 화면 캡처가 아니다.' });
   s('project-context', 'build', 'compare', '매번 바뀌는 입력과\n계속 쓸 기준을 구분합니다.', { left: { label: 'PROJECT KNOWLEDGE', title: '기준과 양식', items: ['내 업무 기준·검수 기준·결과 양식', '강사 예시: deck-criteria.md / slide-template.md', '검토한 최신 버전으로 유지'] }, right: { label: 'THIS RUN', title: '이번 작업 데이터', items: ['내 업무의 첫 입력 / 다른 입력', '강사 예시: brief-a.md → brief-b.md + sources.md', '이전 결과를 이번 작업에 섞지 않기'] }, source: 'projects', note: '프로젝트 내 다른 대화가 언제나 통째로 공유된다고 가정하지 않는다. 반복 사용할 핵심 정보는 지식 파일과 지침으로 남긴다.' });
+  s('prompt-techniques', 'build', 'prompt-techniques', 'AI에게 일을 맡기는,\n세 가지 프롬프트 기법.', { note: 'BUILD 30분 중 3분. 세 AI를 모두 실행하지 않는다. 메타프롬프팅은 요청을 개선하는 단계, XML과 Few-shot 예시는 실제 개요를 생성하는 단계임을 구분한다. 같은 가상 회의 준비 자료를 쓰되 AI별 전용·최적 기법으로 단정하지 않는다. Copilot은 서비스 이름이며 GPT는 모델 계열이다. 자기 업무에 맞게 한 기법을 선택한 뒤 다음 장의 지침을 작성한다. XML 자체가 보안 장벽은 아니고, 좋은 프롬프트가 실제 도구·Agent 런타임을 생성하지도 않는다.' });
   lab('instructions', 'build');
   s('save-instructions', 'build', 'project-export', '02. 작성한 지침을 저장합니다.', { source: 'projects', note: '여기의 Project 지침 복사/MD는 실제 실행 지침이며 질문·답변을 뒤에 포함한다. 전체 노트 내보내기는 설계 검토용이다.' });
   s('first-run', 'build', 'guide', '03. 내 자료로 첫 실행.', { guide: 'run', note: '내 실행 프롬프트는 각자 작성한 지침을 포함한다. 강사 시연은 26페이지의 별도 ZIP과 요청을 사용한다. AI의 답변을 기다린 뒤 생성 파일을 직접 연다.' });
