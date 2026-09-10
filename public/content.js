@@ -14,7 +14,11 @@
     subagents: { title: 'Claude Code · Subagents', url: 'https://code.claude.com/docs/en/sub-agents' },
     effective: { title: 'Anthropic · Building effective agents', url: 'https://www.anthropic.com/engineering/building-effective-agents' },
     onboarding: { title: 'Anthropic · 신입사원 비유와 명확한 지시', url: 'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#be-clear-and-direct' },
-    brunch: { title: '사용자 제공 · 문제정의 참고 글', url: 'https://brunch.co.kr/@e5e1a02595174a7/2' }
+    brunch: { title: '사용자 제공 · 문제정의 참고 글', url: 'https://brunch.co.kr/@e5e1a02595174a7/2' },
+    ax1: { title: 'Digital iNSIGHT · AX는 업무 재설계다', url: 'https://ditoday.com/%ec%9d%b8%ea%b0%84-%ec%a4%91%ec%8b%ac-ax-%e2%91%a0-ax%eb%8a%94-%ec%97%85%eb%ac%b4-%ec%9e%ac%ec%84%a4%ea%b3%84%eb%8b%a4/' },
+    ax2: { title: 'Digital iNSIGHT · 인간과 AI의 업무를 구분하는 법', url: 'https://ditoday.com/%ec%9d%b8%ea%b0%84-%ec%a4%91%ec%8b%ac-ax%e2%91%a1-%ec%9d%b8%ea%b0%84%ea%b3%bc-ai%ec%9d%98-%ec%97%85%eb%ac%b4%eb%a5%bc-%ea%b5%ac%eb%b6%84%ed%95%98%eb%8a%94-%eb%b2%95/' },
+    ax3: { title: 'Digital iNSIGHT · DX와 AX는 무엇이 다를까', url: 'https://ditoday.com/%ec%9d%b8%ea%b0%84-%ec%a4%91%ec%8b%ac-ax%e2%91%a2-dx%ec%99%80-ax%eb%8a%94-%eb%ac%b4%ec%97%87%ec%9d%b4-%eb%8b%a4%eb%a5%bc%ea%b9%8c/' },
+    ax4: { title: 'Digital iNSIGHT · 기획자는 AX를 어떻게 기획해야 할까', url: 'https://ditoday.com/%ec%9d%b8%ea%b0%84-%ec%a4%91%ec%8b%ac-ax-%e2%91%a3-%ea%b8%b0%ed%9a%8d%ec%9e%90%eb%8a%94-ax%eb%a5%bc-%ec%96%b4%eb%96%bb%ea%b2%8c-%ea%b8%b0%ed%9a%8d%ed%95%b4%ec%95%bc-%ed%95%a0%ea%b9%8c/' }
   };
   const chapters = [
     { id: 'opening', n: '00', name: '시작', en: 'RETHINK', minutes: 10 },
@@ -220,13 +224,16 @@
   const slides = [];
   const s = (id, chapter, type, title, extra = {}) => slides.push({ id, chapter, type, title, ...extra });
   const lab = (id, chapter) => s('lab-' + id, chapter, 'lab', labs.find(x => x.id === id).title, { lab: id });
-  s('opening', 'opening', 'hero', '내 일을 대신할\n나만의 AI AGENT 만들기.', { kicker: 'YUJIN FLOW', subtitle: '내 업무 발굴부터 PoC 검증,\nAI AGENT 설계 및 실행까지 End-to-End', impact: '반복하던 복사·분류 업무 → 내 Agent가 초안 처리, 사람은 검수와 승인.', hook: 'Agent 실패의 90%는 AI 성능보다 문제정의와 Process Flow 부재에서 시작합니다.', note: '오프닝. 오늘 가져갈 것은 Project, Skill ZIP, 실행 기록이다. 코드 심화는 선택 트랙이며 기본 실습은 Claude 웹으로 진행한다. 초반부터 결과물과 실패 원인을 제시해 왜 문제정의부터 하는지 설득한다.' });
-  s('finish-line', 'opening', 'deliverables', '두 시간 동안 만들 네 가지.', { subtitle: '매일 반복하던 업무 하나를 Project, Skill, Workflow, 실행 기록으로 남깁니다.', note: '7개 챕터 합계 120분. 직무 예시는 자신의 직무 한 개를 골라 본다. 나머지 예시와 Claude Code 심화는 복습용이다. 수강생이 손에 가져갈 산출물을 첫 2분 안에 명확히 선언한다.' });
+  s('opening', 'opening', 'hero', '내 일을 대신할\n나만의 AI AGENT 만들기.', { kicker: 'YUJIN FLOW', subtitle: '내 업무 발굴부터 PoC 검증,\nAI AGENT 설계 및 실행까지 End-to-End', impact: '반복하던 복사·분류 업무 → 내 Agent가 초안 처리, 사람은 검수와 승인.', hook: 'Solution을 만드는 비용은 내려가고, Problem을 정의하는 능력의 가치는 올라갑니다. Agent 실패의 90%는 AI 성능보다 문제정의와 Process Flow 부재에서 시작합니다.', note: '오프닝. 오늘 가져갈 것은 Project, Skill ZIP, 실행 기록이다. 코드 심화는 선택 트랙이며 기본 실습은 Claude 웹으로 진행한다. 초반부터 문제정의 PM 포지션과 결과물, 실패 원인을 제시해 왜 문제정의부터 하는지 설득한다.' });
+  s('finish-line', 'opening', 'deliverables', '두 시간 동안 만들 네 가지.', { subtitle: '오늘의 결과물은 AI 기능이 아니라, 내 업무 병목을 실행 가능한 Agent 스펙으로 바꾼 문서입니다.', note: '7개 챕터 합계 120분. 직무 예시는 자신의 직무 한 개를 골라 본다. 나머지 예시와 Claude Code 심화는 복습용이다. 수강생이 손에 가져갈 산출물을 첫 2분 안에 명확히 선언한다.' });
   s('from-last-week', 'opening', 'homework-bridge', '지난주에 적어온 문제,\n오늘의 출발점입니다.', { left: { label: 'LAST WEEK', title: '주어진 지침 실행', items: ['회사 조사와 리서치', '결과가 나오는 경험', '도구와 대화에 익숙해지기'] }, right: { label: 'THIS WEEK', title: '설계 · 등록 · 재실행', items: ['내 문제와 완료 기준', 'Project와 Skill 등록', '새 입력에서도 같은 기준 확인'] }, note: '잘 만든 프롬프트도 필요하다. 오늘은 그 앞의 업무 선택과 뒤의 파일·재사용·검수를 연결한다.' });
   s('taxi', 'opening', 'reveal', '택시는 사람의 어떤 문제를\n해결해 줄까요?', { prompt: '“원하는 때에, 원하는 곳으로 이동하고 싶다.”', reveal: '늦은 밤, 언제 차를 탈 수 있을지 몰라\n약속 시간에 맞춰 도착할 수 있을지 불안하다.', after: '원하는 이동을 가로막는 것은 무엇일까요? 이 장면에서는 기다림과 도착의 불확실성이 문제입니다.', note: '먼저 20초 동안 택시가 해결하는 문제에 대한 답을 받는다. 원하는 이동 결과를 짚고, 버튼을 눌러 구체적인 상황과 어려움으로 좁힌다. 속도·접근성·안전 등 다른 답도 받을 수 있다. 공개 문장은 관찰로 검증할 가설 예시이지 모든 택시 사용자의 유일한 문제는 아니다.' });
   s('solution-trap', 'opening', 'compare', '“CS 문의가 많아요.\n챗봇을 만들면 될까요?”', { left: { label: 'IDEA', title: 'CS 챗봇을 만들고 싶다', items: ['챗봇 말투', '채팅창 디자인', '자동 답변 기능'] }, right: { label: 'PROBLEM', title: '정확한 첫 답변이 늦어진다', items: ['반복 문의 유형 확인', 'FAQ를 찾는 데 걸리는 시간', '실제 지연 원인은 상담 기록으로 확인'] }, note: '기능은 후보가 될 수 있다. 그 후보가 해결할 상황과 손실을 적어야 비교와 검증이 가능해진다.' });
+  s('bottleneck-diagnosis', 'opening', 'compare', '솔루션 제안자에서\n병목 진단가로.', { left: { label: 'SOLUTION SELLER', title: '무엇을 붙일까요?', items: ['챗봇 만들까요?', '자동화할까요?', 'GPT 붙일까요?'] }, right: { label: 'BOTTLENECK DIAGNOSER', title: '어디가 막히나요?', items: ['어떤 입력이 필요하나요?', '누가 무엇을 검수하나요?', '성공 기준은 무엇인가요?'] }, note: '강사의 포지션을 명확히 한다. AI 시대의 차이는 툴 선택보다 문제를 실행 가능한 구조로 바꾸는 능력에서 난다.' });
   s('rethink-work', 'opening', 'editorial', 'AI에 맡기기 전,\n업무를 먼저 정리합니다.', { eyebrow: 'AX / WORK REDESIGN', intro: '순서는 없애기 → 줄이기 → 규칙화 → AI에 맡기기. 아무도 안 쓰는 일을 더 빠르게 만드는 것은 자동화가 아닙니다.', rows: [['01 없애기', '누가 읽고 어떤 결정을 내리는지 확인한다.'], ['02 줄이기', '중복 입력과 불필요한 승인 단계를 줄인다.'], ['03 규칙화', '정해진 계산이나 형식 변환은 수식과 코드로 처리한다.'], ['04 AI에 맡기기', '자유롭게 쓴 문의처럼 내용을 읽고 해석해야 하는 일에 AI를 쓴다.']], note: '제공된 AX·일의 변화 자료를 수업 의사결정 순서로 재구성했다. 불필요한 업무를 AI 도입 후보에서 먼저 제외한다. 6페이지는 네 가지 옵션이 아니라 적용 순서로 읽히게 말한다.' });
-  s('yujin-framework', 'define', 'framework', '문제에서 실행까지.\nYUJIN FLOW.', { note: 'Y Why Gap, U User Job, J Journey, I Intelligence Fit, N Next Agent. YUJIN FLOW는 수업을 위해 재구성한 교육 프레임이며 표준 기술 분류가 아니다.' });
+  s('ax-planning', 'opening', 'ax-principles', 'Solution은 쉬워지고,\nProblem은 비싸집니다.', { source: 'ax1', note: 'Digital iNSIGHT 인간 중심 AX 1~4편을 바탕으로 강의 맥락에 맞게 요약했다. 핵심은 AI 도입 여부가 아니라 업무 흐름, 인간-AI 역할, 판단·개입·복구 구조를 다시 설계하는 것이다. 세부 문구는 원문을 복제하지 않고 YUJIN FLOW와 2주차 실습 언어로 재구성한다.' });
+  s('yujin-framework', 'define', 'framework', '문제에서 실행까지.\nYUJIN FLOW.', { note: 'Y Why Gap, U User Job, J Journey, I Intelligence Fit, N Next Agent. YUJIN FLOW는 문제를 기능으로 바로 바꾸지 않고 병목 → 사용자 일 → 업무 흐름 → AI 적합성 → 실행 Agent로 번역하는 프레임이다. 수업을 위해 재구성한 교육 프레임이며 표준 기술 분류가 아니다.' });
+  s('problem-governance', 'define', 'governance', '어떤 문제부터\nAgent로 만들까요?', { source: 'ax4', note: '문제 후보를 고르는 우선순위 기준을 Problem Governance로 제시한다. 반복 빈도와 소요 시간만 보지 않고 판단 기준, 입력 데이터, 승인 지점, 실패 리스크까지 함께 본다.' });
   lab('gap', 'define');
   s('problem-formula', 'define', 'formula', 'Agent가 해결할 문제를\n한 문장으로 적어보세요.', { tokens: ['누가', '어떤 상황에서', '무엇 때문에', '어떤 어려움을'], example: 'CS 담당자는 문의가 몰릴 때, FAQ를 매번 찾아야 해서\n정확한 첫 답변을 준비하는 데 오래 걸린다.', caption: 'Problem Statement · 실제 원인과 지연 시간은 상담 기록으로 확인할 가설입니다.', note: '“AI가 없어서”를 원인으로 쓰지 않게 한다. 시간·누락·재작업처럼 관찰 가능한 어려움을 택한다.' });
   lab('problem', 'define');
@@ -235,6 +242,7 @@
   s('hmw', 'define', 'formula', 'HMW로 질문하고,\n여러 해결책을 비교해보세요.', { tokens: ['어떻게 하면', '이 사용자가', '이 상황에서', '이 변화를'], example: '어떻게 하면 CS 담당자가 문의가 몰릴 때도\n정확한 첫 답변을 빠르게 준비할 수 있을까?', caption: '문의 자체 줄이기 · FAQ 자동 안내 · AI 답변 초안을 함께 비교합니다.', note: 'HMW는 창의성을 열어두는 질문이다. 문제의 범위와 제약까지 모두 없애는 질문은 피한다.' });
   lab('hmw', 'define');
   s('experiment', 'define', 'traffic', 'PoC: 만들기 전에,\n작게 검증해봅니다.', { note: '기능을 만든 뒤가 아니라 샘플 3~5개로 성능과 실패 방식을 본다. 초록도 영구 무검수라는 뜻은 아니다.' });
+  s('agent-prd', 'define', 'agent-prd', '문제정의를\nAgent PRD로 번역합니다.', { note: 'PoC가 끝난 뒤 문제정의가 사라지지 않게 Agent PRD로 연결한다. 수강생 산출물 이름을 AI Agent 요구스펙, 업무 병목 정의서, AX 적용 후보 검토서로도 부를 수 있게 한다.' });
   lab('experiment', 'define');
   s('workflow-map', 'map', 'pipeline', '한 업무를 여섯 칸으로.', { steps: ['시작 조건', '입력', '처리', '판단', '출력', '검수'], details: ['언제 시작하나', '무엇을 받나', '어떤 작업을 하나', '어떤 기준을 쓰나', '무엇을 남기나', '누가 통과시키나'], note: '화면 클릭과 업무 단계를 구분한다. 각 단계의 출력이 다음 입력이 되는지 확인한다.' });
   lab('journey', 'map');
@@ -292,6 +300,7 @@
     ['프롬프트만 잘 쓰면 Agent가 되나요?', '아니요. 프롬프트는 시작이고, Agent는 기준·자료·절차·검수·재실행이 함께 있어야 합니다.', '오늘 만든 다섯 파일 problem.md, job-story.md, workflow.md, boundaries.md, SKILL.md가 그 연결고리입니다.'],
     ['동시에 접속하면 답변이 섞이나요?', '아니요. 이 덱의 입력값은 각자 브라우저의 로컬 저장소에만 남습니다.', 'GitHub Pages에 같이 접속해도 서버 DB에 저장하지 않습니다. 다만 같은 기기, 같은 브라우저 프로필을 함께 쓰면 그 프로필 안에서는 같은 기록을 볼 수 있습니다.']
   ], note: '마지막 Q&A 직전 안내. 수강생의 심리적 허들을 낮추되, 프롬프트와 Agent 설계의 차이를 다시 잡는다.' });
+  s('week2-homework', 'ship', 'homework2', '2주차 제출.\n내 업무 Agent 설계 보고서.', { note: '1주차 문제정의를 2주차 과제로 이어준다. 제출물은 완성된 Agent가 아니라 Agent가 일할 수 있을 만큼 업무를 설명한 보고서다. 실제 데이터가 없으면 가상 데이터를 만들게 한다. Notion 1주차 상세 페이지 하단에 붙이거나 week2-agent-report.md로 저장하게 안내한다.' });
   s('closing', 'ship', 'closing', '이제 내 업무에\n직접 써볼 차례입니다.', { subtitle: '오늘 만든 지침과 Skill을 가져가세요.\n다음에는 실제 업무에 써본 결과를 함께 봅니다.', note: '좋은 발표보다 다시 쓸 수 있는 파일과 기록을 남긴다. 다음 주에는 실제 실행에서 바뀐 점을 중심으로 이야기한다.' });
   s('survey-week2', 'ship', 'survey', '2주차 만족도 조사.', { url: 'https://docs.google.com/forms/d/e/1FAIpQLSdbXTYYYHfQilP4GmDDeqN5Lv7NHmWPfdeop8lTXHltEetiLg/viewform?usp=publish-editor', qr: './assets/survey-week2-qr.svg', note: '마지막 장에서 바로 QR을 띄워 참여자가 휴대폰으로 설문에 들어가게 한다. 링크도 함께 제공하되, 수업 마무리 멘트는 짧게 유지한다.' });
   labs.splice(labs.findIndex(l => l.id === 'ownflow'), 0, {
