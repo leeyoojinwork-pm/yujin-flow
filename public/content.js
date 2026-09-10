@@ -24,7 +24,7 @@
     { id: 'define', n: '01', name: '문제 발견', en: 'DEFINE', minutes: 18 },
     { id: 'map', n: '02', name: '흐름 설계', en: 'MAP', minutes: 12 },
     { id: 'build', n: '03', name: 'Claude 실습', en: 'BUILD', minutes: 30 },
-    { id: 'skill', n: '04', name: 'Skill · 미션', en: 'REUSE', minutes: 30 },
+    { id: 'skill', n: '04', name: 'N · Next Agent', en: 'NEXT AGENT', minutes: 30 },
     { id: 'orchestrate', n: '05', name: '역할 연결', en: 'ORCHESTRATE', minutes: 10 },
     { id: 'ship', n: '06', name: '내 일에 적용', en: 'SHIP', minutes: 10 }
   ];
@@ -270,15 +270,15 @@
   s('project-context', 'build', 'compare', '매번 바뀌는 입력과\n계속 쓸 기준을 구분합니다.', { left: { label: 'PROJECT KNOWLEDGE', title: '기준과 양식', items: ['내 업무 기준·검수 기준·결과 양식', '강사 예시: deck-criteria.md / slide-template.md', '검토한 최신 버전으로 유지'] }, right: { label: 'THIS RUN', title: '이번 작업 데이터', items: ['내 업무의 첫 입력 / 다른 입력', '강사 예시: brief-a.md → brief-b.md + sources.md', '이전 결과를 이번 작업에 섞지 않기'] }, source: 'projects', note: '프로젝트 내 다른 대화가 언제나 통째로 공유된다고 가정하지 않는다. 반복 사용할 핵심 정보는 지식 파일과 지침으로 남긴다.' });
   s('prompt-techniques', 'build', 'prompt-techniques', 'AI에게 일을 맡기는,\n세 가지 프롬프트 기법.', { note: 'BUILD 30분 중 3분. 세 AI를 모두 실행하지 않는다. 메타프롬프팅은 요청을 개선하는 단계, XML과 Few-shot 예시는 실제 개요를 생성하는 단계임을 구분한다. 같은 가상 회의 준비 자료를 쓰되 AI별 전용·최적 기법으로 단정하지 않는다. Copilot은 서비스 이름이며 GPT는 모델 계열이다. 자기 업무에 맞게 한 기법을 선택한 뒤 다음 장의 지침을 작성한다. XML 자체가 보안 장벽은 아니고, 좋은 프롬프트가 실제 도구·Agent 런타임을 생성하지도 않는다.' });
   lab('instructions', 'build');
-  s('save-instructions', 'build', 'project-export', '02. YUJI와 화면 검토를\nProject 지침으로 저장합니다.', { source: 'projects', note: 'YUJI에서 정한 문제·사용자 결과·업무 흐름·AI/사람 역할과 HTML 프로토타입에서 확인한 화면 범위를 Project 지침으로 옮긴다. 이 파일은 반복 실행할 업무 규칙이며, 전체 노트 내보내기는 설계 검토용이다.' });
-  s('first-run', 'build', 'guide', '03. 저장한 workflow를\n한 번 실행합니다.', { guide: 'run', note: 'Project 지침으로 저장한 YUJI와 HTML 프로토타입 기준을 실제 입력에 한 번 태워본다. 목표는 완성품 제작이 아니라 입력 확인, 처리, 검수 대기, 결과 기록까지 workflow가 작동하는지 보는 것이다.' });
+  s('save-instructions', 'build', 'project-export', 'YUJI와 화면 검토를\nProject 지침으로 저장합니다.', { source: 'projects', note: 'YUJI에서 정한 문제·사용자 결과·업무 흐름·AI/사람 역할과 HTML 프로토타입에서 확인한 화면 범위를 Project 지침으로 옮긴다. 이 파일은 반복 실행할 업무 규칙이며, 전체 노트 내보내기는 설계 검토용이다.' });
+  s('first-run', 'build', 'guide', '저장한 workflow를\n한 번 실행합니다.', { guide: 'run', note: 'Project 지침으로 저장한 YUJI와 HTML 프로토타입 기준을 실제 입력에 한 번 태워본다. 목표는 완성품 제작이 아니라 입력 확인, 처리, 검수 대기, 결과 기록까지 workflow가 작동하는지 보는 것이다.' });
   s('expected-result', 'build', 'result', '내가 정한 성공 기준,\n실제 결과와 맞나요?', { note: '26페이지의 목표·산출물·검수 기준을 다시 대조한다. 강사는 PPTX 6장, 10분, 원문 근거와 렌더링 화면을 확인한다. 생성·내용·화면 검증을 구분한다.' });
   lab('run1', 'build');
   s('skill-structure', 'skill', 'skill-structure', '한 번 정한 업무 절차,\nSkill로 저장해두세요.', { source: 'custom', note: 'Skill은 긴 프롬프트 파일 하나와 같지 않다. 언제 쓸지 찾을 description, 실제 절차, 필요할 때 참고할 기준·예시를 함께 구성한다. 여기서는 표준 SKILL.md 대문자 파일명을 사용한다.' });
   lab('skill', 'skill');
-  s('skill-export', 'skill', 'skill-export', '04. 내 Skill을 파일로 만듭니다.', { source: 'custom', note: '내 Skill 필수 항목이 비어 있으면 다운로드를 막고 해당 실습으로 안내한다. 완성 예시 ZIP은 별도 버튼으로 제공한다.' });
-  s('upload-skill', 'skill', 'guide', '05. 업로드하고 활성화합니다.', { guide: 'skill', note: '현재 도움말은 Customize > Skills > + > Create skill > Upload a skill. 과거 Settings > Capabilities > Skills 안내만 믿지 않는다. 코드 실행은 Settings > Capabilities에서 활성화한다.' });
-  s('second-run', 'skill', 'rerun', '06. 다른 입력으로 다시 시킵니다.', { source: 'skills', note: '첫 결과를 잘 만들었다는 사실과 재사용 가능하다는 사실은 다르다. 새 대화, 다른 입력, 같은 기준으로 테스트한다. 강의자료 시연은 brief-b.md의 인수인계 주제만 다룬다.' });
+  s('skill-export', 'skill', 'skill-export', '내 Skill을\n파일로 만듭니다.', { source: 'custom', note: '내 Skill 필수 항목이 비어 있으면 다운로드를 막고 해당 실습으로 안내한다. 완성 예시 ZIP은 별도 버튼으로 제공한다.' });
+  s('upload-skill', 'skill', 'guide', '업로드하고\n활성화합니다.', { guide: 'skill', note: '현재 도움말은 Customize > Skills > + > Create skill > Upload a skill. 과거 Settings > Capabilities > Skills 안내만 믿지 않는다. 코드 실행은 Settings > Capabilities에서 활성화한다.' });
+  s('second-run', 'skill', 'rerun', 'N: 새 입력으로\n재사용을 검증합니다.', { source: 'skills', note: '첫 결과를 잘 만들었다는 사실과 재사용 가능하다는 사실은 다르다. 새 대화, 다른 입력, 같은 기준으로 테스트한다. 강의자료 시연은 brief-b.md의 인수인계 주제만 다룬다.' });
   lab('run2', 'skill');
   s('skill-vs-sub', 'orchestrate', 'compare', 'Skill은 일하는 방법,\nSubagent는 따로 일하는 담당자.', { left: { label: 'SKILL', title: '재사용할 업무 절차', items: ['분류 기준과 출력 양식', 'Agent가 필요할 때 참고', '스스로 작업을 시작하지 않음'] }, right: { label: 'SUBAGENT', title: '따로 작업하는 담당 Agent', items: ['자기 역할에 맞는 지침과 도구 사용', 'Orchestrator가 작업과 자료를 전달', 'Orchestrator에게 결과를 보내면 총괄이 정리'] }, source: 'subagents', note: 'Project instructions에 역할을 적는 것만으로 여러 프로세스나 실제 병렬 에이전트가 생성되지는 않는다. 웹 기본 실습은 Agentic workflow, 실제 Subagent 심화는 Claude Code에서 수행한다.' });
   s('code-start', 'orchestrate', 'code-start', 'Claude Code 심화:\n담당할 일을 파일로 나눠봅니다.', { source: 'subagents', note: '선택 실습. 설치·로그인이 끝난 Claude Code에서 준비 폴더를 연다. 현재 공식 문서에서 /agents 생성 마법사는 2.1.198부터 제거됐다. 자연어로 파일 생성을 요청하거나 제공된 시작 키트를 사용한다.' });
@@ -347,10 +347,19 @@
     'example-gallery',
     'case-files',
     'case-flow',
+    'case-brief',
     'project-context',
     'prompt-techniques',
+    'claude-project',
+    'code-start',
     'code-run',
+    'loop-control',
     'success-metrics',
+    'expected-result',
+    'split-criteria',
+    'skill-vs-sub',
+    'lab-ownflow',
+    'lab-peer',
     'troubleshooting',
     'references',
     'faq-practice'

@@ -17,10 +17,10 @@
     N: ['Project 지침 → 첫 실행', 'Skill 등록 → 다른 입력 실행']
   };
   const buildPath = [
-    ['case-brief', '내 Agent 명세'], ['claude-project', 'Project 생성'],
-    ['lab-instructions', '내 지침 작성'], ['save-instructions', 'Project 지침 저장'],
-    ['first-run', 'workflow 실행'], ['expected-result', '결과 검수'],
-    ['lab-run1', '첫 실행 기록'], ['skill-structure', 'Skill 구조 확인'],
+    ['lab-instructions', '내 지침 작성'],
+    ['save-instructions', 'Project 지침 저장'],
+    ['first-run', 'workflow 실행'], ['lab-run1', '첫 실행 기록'],
+    ['skill-structure', 'Skill 구조 확인'],
     ['lab-skill', '내 Skill 작성'], ['skill-export', 'Skill 파일 생성'],
     ['upload-skill', 'Skill 업로드·활성화'], ['second-run', '새 입력으로 실행'],
     ['lab-run2', '재사용 검증 기록']
@@ -112,7 +112,7 @@
     document.querySelectorAll('[data-artifact-preview]').forEach(el => { el.textContent = stagePrompt(el.dataset.artifactPreview, getState()); });
     document.querySelectorAll('[data-artifact-progress]').forEach(el => { const p = progress(get(el.dataset.artifactProgress), getState()); el.textContent = '답변 ' + p.filled + ' / ' + p.total; });
   }
-  function open(id) { app().go(id === 'N' ? 'case-brief' : 'lab-' + get(id).labs[0]); }
+  function open(id) { app().go(id === 'N' ? 'lab-instructions' : 'lab-' + get(id).labs[0]); }
   function ready(id) {
     if (id !== 'N' || !E.skillErrors(getState()).length) return true;
     app().toast('SKILL.md를 저장하려면 Skill의 이름·사용 시점·입력·절차·출력·검수 조건을 채워주세요.');
