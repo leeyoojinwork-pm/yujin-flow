@@ -56,7 +56,7 @@
       process: join([val('journey', 'process'), val('journey', 'decision')]),
       rules: join([val('boundary', 'ai') && 'AI 담당: ' + val('boundary', 'ai'), val('boundary', 'human') && '사람 담당: ' + val('boundary', 'human'), val('boundary', 'stop')]),
       output: val('journey', 'output'),
-      check: join([val('boundary', 'criteria') || val('journey', 'check') || val('experiment', 'pass'), val('boundary', 'return'), val('boundary', 'max') && '최대 수정 횟수: ' + val('boundary', 'max')])
+      check: join([val('boundary', 'criteria') || val('journey', 'reviewer') || val('experiment', 'pass'), val('boundary', 'return'), val('boundary', 'max') && '최대 수정 횟수: ' + val('boundary', 'max')])
     } : { input: val('instructions', 'input'), steps: val('instructions', 'process'), output: val('instructions', 'output'), guard: join([val('instructions', 'rules'), val('instructions', 'check')]) };
     s.answers[target] ||= {};
     let count = 0;
@@ -80,7 +80,7 @@
     return '<section class="personal-origin"><span class="eyebrow">내 설계의 출발점</span><p>' + display(problem) + '</p>' + jump('문제정의 다시 보기', 'lab-problem') + '</section><div class="personal-toolbar"><h2>내 Agent 제작 명세</h2>' + btn('앞에서 쓴 답변 가져오기', 'personal-import', 'import') + '</div><div class="lab-form personal-fields">' + fields.map((f,i) => '<div class="field"><label for="personal-' + f.id + '"><span class="field-num">0' + (i+1) + '</span>' + esc(f.label) + '</label><textarea id="personal-' + f.id + '" rows="3" maxlength="20000" data-lab="instructions" data-field="' + f.id + '" placeholder="' + esc(hints[f.id]) + '">' + esc(val('instructions',f.id)) + '</textarea></div>').join('') + '</div><div class="personal-next"><p>이 답변은 뒤의 Project 지침과 같은 기록입니다. 가져오기는 빈칸만 채웁니다.</p><div class="button-row">' + btn('Project 지침 복사', 'copy-project', 'copy') + btn('지침 MD 저장', 'download-project', 'download') + jump('Claude에서 만들기', 'claude-project') + '</div></div>' + demo();
   }
   function body(s) {
-    if (s.type === 'casebrief') return brief();
+    if (s.type === 'casebrief') return window.YFArtifacts.mapping() + brief() + window.YFArtifacts.panel('N');
     if (s.id === 'case-files') return '<div class="compare-grid"><section class="compare-column"><span class="eyebrow">PROJECT KNOWLEDGE</span><h3>계속 쓸 기준</h3><p>업무 규칙 · 검수 기준 · 결과 양식</p><p class="caption">강사 시연: deck-criteria.md / slide-template.md</p></section><section class="compare-column"><span class="eyebrow">NEW CHAT</span><h3>이번에 처리할 자료</h3><p>' + display(val('instructions','input')) + '</p><p class="caption">강사 시연: brief-a.md + sources.md<br>재실행: brief-b.md + sources.md</p></section></div><div class="button-row">' + btn('강사 시연 자료 ZIP', 'personal-lesson-kit', 'folder-down') + jump('내 입력·기준 수정', 'case-brief') + '</div><p class="caption">내 자료는 직접 첨부합니다. 민감정보는 제외하고 사용할 권한이 있는 자료만 준비하세요.</p>';
     if (s.id === 'case-flow') return '<div class="personal-route">' + [['입력 확인',val('instructions','input')],['작업·분기',val('instructions','process')],['산출물 생성',val('instructions','output')],['검수·승인',val('instructions','check')]].map((x,i)=>'<section><span class="eyebrow">0'+(i+1)+'</span><h3>'+x[0]+'</h3><p>'+display(x[1])+'</p></section>').join('') + '</div><p class="pipeline-note">실패 → 정한 단계로 돌아가 수정 · 수정 한도 초과 → 중단하고 사람에게 질문</p>' + demo();
     if (s.id === 'second-run') return promptPanel(true) + '<p class="caption">첫 실행과 다른 자료를 새 채팅에 첨부하세요. Skill을 읽고 사용한 흔적과 결과 파일을 각각 확인합니다. 강사 시연은 brief-b.md의 인수인계 덱을 만듭니다.</p>' + jump('실제 결과 기록', 'lab-run2');
