@@ -66,7 +66,7 @@
       'loop-control': '끝나는 조건', 'evaluation': '운영 기준', 'success-metrics': '검수와 재작업',
       'next-week': '세 번의 실행 기록', 'takeaway': '내 일의 설계도', 'troubleshooting': '여기부터 확인',
       'faq-agent-roles': 'Agent 역할', 'faq-qa-loop': 'QA와 Loop', 'faq-practice': '실습',
-      'references': '유진의 재구성', 'closing': '실행 기준'
+      'references': '유진의 재구성', 'closing': '실행 기준', 'survey-week2': '만족도 조사'
     }[s.id];
     return phrase ? s.title.split(phrase).map(esc).join('<span class="title-emphasis">' + esc(phrase) + '</span>') : esc(s.title);
   }
@@ -171,6 +171,7 @@
       ].map(x => '<details><summary>' + x[0] + '</summary><p>' + x[1] + '</p></details>').join('') + '</div>';
       case 'references': return '<div class="source-list">' + Object.values(D.sources).map(x => '<div class="source-item">' + ext(x.url, x.title) + '<p>' + (x === D.sources.brunch ? '제공 자료 · 문제에서 출발하는 기획 관점' : '기술 개념과 실습 경로 확인 · ' + D.checked) + '</p></div>').join('') + '</div><p class="source-note">추가 참고: 사용자가 제공한 designbywani의 문제정의·JTBD·HMW 이미지, NAVER CONNECT TechRun의 AI 가능성 실험 이미지, AX·일의 변화 관련 게시물과 Trevari 소개 자료.</p><p class="source-note">YUJIN FLOW와 실습 사례·질문·파일은 이유진 강의 맥락으로 새로 구성했습니다. 화면 안내는 학습용 재구성입니다.</p>';
       case 'faq': return faqMarkup(s);
+      case 'survey': return surveyMarkup(s);
       case 'mission-brief': return missionBrief();
       case 'mission': return missionMarkup();
       default: return '';
@@ -182,6 +183,9 @@
   }
   function faqMarkup(s) {
     return '<div class="faq-deck"><div class="faq-anchor"><span class="eyebrow">LIVE Q&A</span><b>질문을 받기 전,<br>용어를 한 번 맞춥니다.</b></div><div class="faq">' + s.items.map((x, i) => '<details ' + (i === 0 ? 'open' : '') + '><summary><span>' + String(i + 1).padStart(2, '0') + '</span>' + esc(x[0]) + '</summary><div class="faq-answer"><strong>' + esc(x[1]) + '</strong><p>' + esc(x[2]) + '</p></div></details>').join('') + '</div></div>';
+  }
+  function surveyMarkup(s) {
+    return '<div class="survey-layout"><section class="survey-copy"><span class="eyebrow">WRAP-UP</span><h2>휴대폰 카메라로 QR을 찍고<br>오늘 수업을 남겨주세요.</h2><p>좋았던 점, 헷갈린 지점, 다음 시간에 더 보고 싶은 실습을 적어주시면 3주차 흐름에 바로 반영합니다.</p><a class="button primary" href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer">' + icon('external-link') + '설문 링크 열기</a></section><section class="survey-qr-card"><img src="' + esc(s.qr) + '" alt="2주차 만족도 조사 QR 코드"><p>2주차 만족도 조사</p></section></div>';
   }
   function splitCriteriaMarkup() {
     const criteria = [

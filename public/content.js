@@ -293,6 +293,7 @@
     ['동시에 접속하면 답변이 섞이나요?', '아니요. 이 덱의 입력값은 각자 브라우저의 로컬 저장소에만 남습니다.', 'GitHub Pages에 같이 접속해도 서버 DB에 저장하지 않습니다. 다만 같은 기기, 같은 브라우저 프로필을 함께 쓰면 그 프로필 안에서는 같은 기록을 볼 수 있습니다.']
   ], note: '마지막 Q&A 직전 안내. 수강생의 심리적 허들을 낮추되, 프롬프트와 Agent 설계의 차이를 다시 잡는다.' });
   s('closing', 'ship', 'closing', '이제 내 업무에\n직접 써볼 차례입니다.', { subtitle: '오늘 만든 지침과 Skill을 가져가세요.\n다음에는 실제 업무에 써본 결과를 함께 봅니다.', note: '좋은 발표보다 다시 쓸 수 있는 파일과 기록을 남긴다. 다음 주에는 실제 실행에서 바뀐 점을 중심으로 이야기한다.' });
+  s('survey-week2', 'ship', 'survey', '2주차 만족도 조사.', { url: 'https://docs.google.com/forms/d/e/1FAIpQLSdbXTYYYHfQilP4GmDDeqN5Lv7NHmWPfdeop8lTXHltEetiLg/viewform?usp=publish-editor', qr: './assets/survey-week2-qr.svg', note: '마지막 장에서 바로 QR을 띄워 참여자가 휴대폰으로 설문에 들어가게 한다. 링크도 함께 제공하되, 수업 마무리 멘트는 짧게 유지한다.' });
   labs.splice(labs.findIndex(l => l.id === 'ownflow'), 0, {
     id: 'mission', letter: 'LAB', title: '오류 수정하기: 12분 검수 미션', minutes: 12,
     purpose: '빠진 문의나 잘못된 자료를 발견하면, 다시 시킬지 멈출지 판단해보세요.',
