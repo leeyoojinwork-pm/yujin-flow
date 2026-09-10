@@ -55,7 +55,7 @@
   function titleMarkup(s) {
     if (s.id === 'yujin-framework') return '<span class="framework-title-lead">문제에서 실행까지.</span><span class="framework-wordmark">YUJIN <span class="title-emphasis">FLOW.</span><span class="framework-title-arrow">' + icon('arrow-up-right') + '</span></span>';
     const phrase = {
-      'opening': 'AI AGENT', 'finish-line': '네 가지', 'from-last-week': '내 업무', 'taxi': '어떤 문제',
+      'opening': 'AI AGENT', 'finish-line': '결과물 4개', 'from-last-week': '내 업무', 'taxi': '어떤 문제',
       'solution-trap': '챗봇', 'bottleneck-diagnosis': '병목 진단가', 'rethink-work': '없애도 되는 일', 'yujin-framework': 'YUJIN FLOW',
       'ax-planning': 'Problem', 'problem-governance': '어떤 문제',
       'problem-formula': '한 문장', 'jtbd': '문의 해결', 'hmw': '여러 해결책',
@@ -121,16 +121,16 @@
     switch (s.type) {
       case 'prompt-techniques': return window.YFPromptTechniques.markup();
       case 'homework-bridge': return '<div class="homework-bridge"><section><span class="eyebrow">01 / 가져오기</span><h2>1주차에 적은 세 가지</h2><ol><li>내가 풀고 싶은 문제 하나</li><li>왜 불편한지</li><li>Agent가 해줬으면 하는 일</li></ol><p>내 1주차 상세 페이지에서 가져오세요. 짧은 메모나 음성으로 풀어 쓴 내용도 괜찮습니다.</p></section><section><span class="eyebrow">02 / 구체화하기</span><h2>기능보다 문제부터</h2><p class="homework-before">“CS 문의가 많아서 챗봇을 만들고 싶다.”</p><p>누가, 언제, 무엇 때문에 어려운가요? FAQ를 찾는 시간인지, 예외 문의를 판단하는 일인지 나눠봅니다.</p><p><b>가설:</b> 문의가 몰릴 때 CS 담당자가 FAQ를 반복해서 찾느라 첫 답변이 늦어진다.</p></section></div><div class="homework-next"><p>오늘은 이 문제를 작은 PoC로 검증한 뒤 Agent의 역할·입력·완료 기준으로 옮깁니다.</p>' + button('1주차 과제 가져오기', 'goto', 'notebook-pen', 'primary', 'data-slide="lab-gap"') + '</div>';
-      case 'deliverables': return '<p class="deliverable-impact">Before: 반복 분류와 복사·붙여넣기 <span>After: 내 Agent가 초안을 만들고, 사람은 검수와 승인</span></p><div class="deliverable-motion-tools"><span>DESIGN → BUILD → RUN → VERIFY</span><button type="button" class="icon-button" data-action="deliverables-motion" aria-label="흐름 애니메이션 일시 정지" aria-pressed="false" title="흐름 애니메이션 일시 정지">' + icon('pause') + '</button></div><div class="deliverable-ribbon" aria-hidden="true"><div>' + Array(2).fill('<span>MY PROJECT <b>→</b> MY SKILL <b>→</b> MY WORKFLOW <b>→</b> MY RESULTS <b>→</b> </span>').join('') + '</div></div><div class="deliverable-list">' + [
-        ['folder-open', 'Project 하나', '내 지침과 기준 파일을 등록한 업무 공간.'],
-        ['package', 'Skill 하나', '다시 쓸 절차가 들어 있는 SKILL.md와 ZIP.'],
-        ['git-branch', '업무 흐름 한 장', '시작·분업·검수·승인·중단까지 연결.'],
-        ['file-check-2', '실행 기록 두 번', '다른 입력으로 확인한 결과와 수정 이유.']
-      ].map((x, i) => '<div class="deliverable" style="--output-index:' + i + '"><div class="num">0' + (i + 1) + ' / OUTPUT</div>' + icon(x[0]) + '<h3>' + x[1] + '</h3><p>' + x[2] + '</p></div>').join('') + '</div><div class="practice-cadence compact"><div class="contents-label"><span>CONTENTS</span><b>오늘의 흐름</b></div>' + [
+      case 'deliverables': return '<div class="practice-cadence compact"><div class="contents-label"><span>CONTENTS</span><b>오늘의 흐름</b></div>' + [
         ['01', '문제정의', '병목 찾기 · 문제 후보 고르기', '20분'],
         ['02', 'Agent 설계', 'YUJIN → Project → Skill', '55분'],
         ['03', '실행·검수', '첫 실행 · QA Loop · 2주차 과제', '45분']
-      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p><small>' + x[3] + '</small></article>').join('') + '</div>';
+      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p><small>' + x[3] + '</small></article>').join('') + '</div><div class="deliverable-summary"><div class="contents-label"><span>OUTPUT</span><b>남는 결과물</b></div>' + [
+        ['folder-open', 'Project', '업무 지침과 기준 파일'],
+        ['package', 'Skill', '재사용 절차와 ZIP'],
+        ['git-branch', 'Workflow', '입력·처리·검수 흐름'],
+        ['file-check-2', 'Run Log', '2번 실행한 검수 기록']
+      ].map((x, i) => '<div class="deliverable-mini" style="--output-index:' + i + '">' + icon(x[0]) + '<span>0' + (i + 1) + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p></div>').join('') + '</div>';
       case 'compare': return '<div class="compare-grid">' + [s.left, s.right].map(c => '<section class="compare-column"><p class="compare-label">' + esc(c.label) + '</p><h3>' + esc(c.title) + '</h3><ul>' + c.items.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section>').join('') + '</div>';
       case 'reveal': return taxiMarkup(s);
       case 'editorial': return (s.intro ? '<p class="leadline">' + esc(s.intro) + '</p>' : '') + '<div class="editorial-list">' + s.rows.map(r => '<div class="editorial-row"><h3>' + esc(r[0]) + '</h3><p>' + esc(r[1]) + '</p></div>').join('') + '</div>' + (s.caption ? '<p class="caption">' + esc(s.caption) + '</p>' : '');
