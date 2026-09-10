@@ -279,15 +279,18 @@
     const deliverables = [
       ['01', 'Agent 설계 보고서', '문제정의, 업무 흐름, Agent 역할, 사람 검수 지점을 한 문서로 정리합니다.'],
       ['02', '테스트용 입력 자료', '현업 데이터가 없으면 가상 데이터로 만듭니다. 문의 10건, 회의록 3개, 강의 브리프 2개처럼 작게 시작합니다.'],
-      ['03', '실행 프롬프트', '목표, 입력, 기준, 출력 형식, 검수 기준을 포함해 다음 주에 바로 실행할 요청문을 남깁니다.']
+      ['03', '업무 순서도', '입력, 처리, 검수, 수정, 승인 흐름이 한눈에 보이도록 연결합니다.'],
+      ['04', 'HTML/PDF 결과물', '최종은 HTML 한 파일로 만들고, 브라우저 인쇄로 PDF 저장까지 가능하게 합니다.']
     ];
     const guide = [
       ['문제 정의', '내가 풀고 싶은 문제, 왜 불편한지, 반복되면 생기는 비용을 적습니다.'],
-      ['업무 흐름', '입력 → 처리 → 판단 → 출력 → 검수 순서로 씁니다.'],
+      ['업무 흐름', '입력 → 처리 → 판단 → 출력 → 검수 순서가 순서도로 보이게 씁니다.'],
       ['Agent 역할', 'AI가 대신할 일과 절대 자동으로 하면 안 되는 일을 나눕니다.'],
-      ['가상 데이터', '실제와 같은 열·형식·예외를 넣되 민감 정보는 빼고 만듭니다.']
+      ['가상 데이터', '실제와 같은 열·형식·예외를 넣되 민감 정보는 빼고 만듭니다.'],
+      ['최종 파일', 'HTML로 제출하고, PDF가 필요하면 브라우저에서 인쇄 저장합니다.']
     ];
-    return '<div class="homework2-layout"><section class="homework2-hero"><span class="eyebrow">NEXT ASSIGNMENT</span><h2>완성할 것은 Agent가 아니라,<br>Agent가 일할 수 있는 <span>설계 보고서</span>입니다.</h2><p>1주차 문제정의를 오늘 만든 YUJIN FLOW에 연결해, 다음 주 실행 자료로 가져옵니다.</p><div class="homework2-flow"><b>1주차 문제</b>' + icon('arrow-right') + '<b>2주차 보고서</b>' + icon('arrow-right') + '<b>3주차 실행 기록</b></div></section><section class="homework2-deliverables">' + deliverables.map(x => '<article><span>' + x[0] + '</span><h3>' + x[1] + '</h3><p>' + x[2] + '</p></article>').join('') + '</section></div><div class="homework2-bottom"><section class="homework2-guide"><h3>작성 TIP</h3><div>' + guide.map(x => '<p><b>' + x[0] + '</b>' + x[1] + '</p>').join('') + '</div></section><section class="homework2-prompt"><div class="lab-prompt-heading"><div><span class="eyebrow">READY-TO-SUBMIT</span><h3>수업 기록을 보고서로 바꾸는 프롬프트</h3></div>' + icon('file-text') + '</div><details><summary>복사되는 전체 프롬프트 미리보기' + icon('chevron-down') + '</summary><pre class="code-preview tall">' + esc(E.week2Homework(state)) + '</pre></details><div class="button-row">' + button('2주차 보고서 프롬프트 복사', 'copy-homework2', 'copy', 'primary') + button('week2-agent-report.md 저장', 'download-homework2', 'download', 'secondary') + '</div></section></div>';
+    const templatePreview = ['문제 정의', '업무 순서도', 'AI/사람 역할', '입력 자료', '실행 프롬프트', 'HTML/PDF 출력'].map((x, i) => '<span><b>' + String(i + 1).padStart(2, '0') + '</b>' + x + '</span>').join('');
+    return '<div class="homework2-layout"><section class="homework2-hero"><span class="eyebrow">NEXT ASSIGNMENT</span><h2>완성할 것은 Agent가 아니라,<br>Agent가 일할 수 있는 <span>설계 보고서</span>입니다.</h2><p>1주차 문제정의를 오늘 만든 YUJIN FLOW에 연결해, 다음 주 실행 자료로 가져옵니다.</p><div class="homework2-flow"><b>1주차 문제</b>' + icon('arrow-right') + '<b>순서도 보고서</b>' + icon('arrow-right') + '<b>HTML/PDF 제출</b></div></section><section class="homework2-template"><div><span class="eyebrow">REPORT TEMPLATE</span><h3>순서도가 나오는 보고서 템플릿</h3><p>템플릿을 먼저 받은 뒤, Claude에게 HTML 한 파일로 정리시키세요. PDF가 필요하면 완성된 HTML을 열고 인쇄 저장합니다.</p><div class="button-row">' + button('템플릿 복사', 'copy-sample', 'copy', 'primary', 'data-file="agent-report-template.md"') + button('agent-report-template.md', 'download-sample', 'download', 'secondary', 'data-file="agent-report-template.md"') + '</div></div><div class="homework2-template-map" aria-label="보고서 템플릿 구성">' + templatePreview + '</div></section></div><section class="homework2-deliverables homework2-deliverables-wide">' + deliverables.map(x => '<article><span>' + x[0] + '</span><h3>' + x[1] + '</h3><p>' + x[2] + '</p></article>').join('') + '</section><div class="homework2-bottom"><section class="homework2-guide"><h3>작성 TIP</h3><div>' + guide.map(x => '<p><b>' + x[0] + '</b>' + x[1] + '</p>').join('') + '</div></section><section class="homework2-prompt"><div class="lab-prompt-heading"><div><span class="eyebrow">READY-TO-SUBMIT</span><h3>수업 기록을 HTML 보고서로 바꾸는 프롬프트</h3></div>' + icon('file-text') + '</div><details><summary>복사되는 전체 프롬프트 미리보기' + icon('chevron-down') + '</summary><pre class="code-preview tall">' + esc(E.week2Homework(state)) + '</pre></details><div class="button-row">' + button('HTML 보고서 프롬프트 복사', 'copy-homework2', 'copy', 'primary') + button('프롬프트 MD 저장', 'download-homework2', 'download', 'secondary') + '</div></section></div>';
   }
   function splitCriteriaMarkup() {
     const criteria = [
@@ -565,7 +568,7 @@
       case 'copy-example-project':await copy(E.projectInstructions(state,true));break;
       case 'download-project':download(E.projectInstructions(state),'project-instructions.md');break;
       case 'copy-homework2':await copy(E.week2Homework(state));break;
-      case 'download-homework2':download(E.week2Homework(state),'week2-agent-report.md');break;
+      case 'download-homework2':download(E.week2Homework(state),'week2-html-report-prompt.md');break;
       case 'copy-sample':await copy(E.samples[el.dataset.file]);break;
       case 'download-sample':download(E.samples[el.dataset.file],el.dataset.file,el.dataset.file.endsWith('.csv')?'text/csv;charset=utf-8':'text/markdown;charset=utf-8');break;
       case 'copy-prompt':await copy(E[el.dataset.prompt]);break;
