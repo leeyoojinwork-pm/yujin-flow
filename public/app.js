@@ -54,7 +54,7 @@
   }
   function titleMarkup(s) {
     const phrase = {
-      'finish-line': '네 가지', 'from-last-week': '내 업무', 'taxi': '이동 그 자체',
+      'finish-line': '네 가지', 'from-last-week': '내 업무', 'taxi': '어떤 문제',
       'solution-trap': '챗봇', 'rethink-work': '없애도 되는 일', 'yujin-framework': 'YUJIN FLOW',
       'problem-formula': '한 문장', 'jtbd': '문의 해결', 'hmw': '여러 해결책',
       'experiment': 'PoC', 'workflow-map': '여섯 칸', 'what-is-agent': 'Agent',
@@ -210,7 +210,7 @@
   function taxiMarkup(s) {
     const key = '언제 차를 탈 수 있을지 몰라';
     const reveal = s.reveal.split(key).map(esc).join('<span class="motion-underline">' + esc(key) + '</span>');
-    return '<div class="taxi-scene"><div class="taxi-route"><span>현재 위치</span><span class="destination">약속 장소</span></div><div class="taxi-skyline" aria-hidden="true"></div><div class="taxi-road" aria-hidden="true"></div><div class="taxi-car" aria-hidden="true"><div class="taxi-speed"></div><div class="taxi-sign">TAXI</div><div class="taxi-car-body"></div><span class="taxi-wheel left"></span><span class="taxi-wheel right"></span></div></div><div class="taxi-copy"><section class="taxi-purpose"><span class="eyebrow">본질적 목적</span><p class="reveal-question"><span class="motion-underline">' + esc(s.prompt) + '</span></p><p class="caption">택시는 이 목적을 이루는 여러 수단 중 하나입니다.</p></section><button type="button" class="icon-button taxi-expand" data-action="reveal" aria-label="상황을 더해 문제정의로 확장" title="상황을 더해 문제정의로 확장" aria-expanded="false">' + icon('arrow-right') + '</button><div class="reveal-answer" role="status" aria-live="polite" hidden><span class="eyebrow">상황을 반영한 문제정의</span><h3>' + reveal.replace(/\n/g, '<br>') + '</h3><p>' + esc(s.after) + '</p><p class="caption">관찰로 확인할 문제 가설 예시</p></div></div>';
+    return '<div class="taxi-scene"><div class="taxi-route"><span>현재 위치</span><span class="destination">약속 장소</span></div><div class="taxi-skyline" aria-hidden="true"></div><div class="taxi-road" aria-hidden="true"></div><div class="taxi-car" aria-hidden="true"><div class="taxi-speed"></div><div class="taxi-sign">TAXI</div><div class="taxi-car-body"></div><span class="taxi-wheel left"></span><span class="taxi-wheel right"></span></div></div><div class="taxi-copy"><section class="taxi-purpose"><button type="button" class="button primary" data-action="taxi-answer" aria-controls="taxi-purpose-answer" aria-expanded="false">답 보기</button><div id="taxi-purpose-answer" role="status" aria-live="polite" hidden><span class="eyebrow">본질적 목적</span><p class="reveal-question"><span class="motion-underline">' + esc(s.prompt) + '</span></p><p class="caption">택시는 이 목적을 이루는 여러 수단 중 하나입니다.</p></div></section><button type="button" class="icon-button taxi-expand" data-action="reveal" aria-controls="taxi-context-answer" aria-label="상황을 더해 문제정의로 확장" title="상황을 더해 문제정의로 확장" aria-expanded="false" hidden>' + icon('arrow-right') + '</button><div id="taxi-context-answer" class="reveal-answer" role="status" aria-live="polite" hidden><span class="eyebrow">상황을 반영한 문제정의</span><h3>' + reveal.replace(/\n/g, '<br>') + '</h3><p>' + esc(s.after) + '</p><p class="caption">관찰로 확인할 문제 가설 예시</p></div></div>';
   }
   function guideMarkup(id) {
     const g = D.guides[id], step = g.steps[guideStep];
@@ -358,6 +358,7 @@
       case 'goto':closeDialogs();go(el.dataset.slide);break;
       case 'notebook':setMode('notebook');break;
       case 'agent-replay':renderSlide(active);$('.agent-intro-bottom button').focus({preventScroll:true});break;
+      case 'taxi-answer':{$('#taxi-purpose-answer').hidden=false;const next=$('.taxi-expand');next.hidden=false;el.setAttribute('aria-expanded','true');el.hidden=true;next.focus({preventScroll:true});break;}
       case 'reveal':{const scene=$('.taxi-scene');if(scene)scene.classList.add('is-revealed');$('.reveal-answer').hidden=false;el.setAttribute('aria-expanded','true');el.disabled=true;break;}
       case 'framework-next':{
         frameworkIndex=(frameworkIndex+1)%5;

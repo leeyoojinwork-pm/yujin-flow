@@ -240,8 +240,8 @@
   sources.hmw = { title: 'IDEO.org · How Might We', url: 'https://www.designkit.org/methods/how-might-we.html' };
   sources.poc = { title: 'AWS · 생성형 AI PoC와 성공 기준', url: 'https://docs.aws.amazon.com/prescriptive-guidance/latest/gen-ai-lifecycle-operational-excellence/dev-architecting.html' };
   Object.assign(slides.find(x => x.id === 'taxi'), {
-    title: '택시를 타는 이유,\n이동 그 자체에서 출발해볼까요?',
-    prompt: '원하는 곳으로 이동하고 싶다.',
+    title: '택시는 어떤 문제를\n해결해 줄까요?',
+    prompt: '“원하는 때에, 원하는 곳으로 이동하고 싶다.”',
     reveal: '늦은 밤, 언제 차를 탈 수 있을지 몰라\n약속 시간에 맞춰 도착할 수 있을지 불안하다.',
     after: '이 상황에서는 대기 시간과 예상 도착 시간을 알 수 있는 방법도 해결책이 됩니다.',
     source: 'jtbd'
