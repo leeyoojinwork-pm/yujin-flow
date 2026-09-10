@@ -107,7 +107,7 @@
     { id: 'ownflow', letter: 'J', title: '내 업무에 적용하기: Agent 흐름 완성', minutes: 5, purpose: '지금까지 만든 내 Agent의 실행 결과를 반영해 역할·검수·승인을 연결하세요.', task: '아래 설계를 전체 순서도로 표현하고 각 단계의 입력·출력·담당 역할을 붙여줘. 사람이 고정한 단계와 AI가 선택할 단계, 재시도와 중단을 구분해줘.', fields: [
       field('domain', '어떤 직무·업무에 적용하나요?', '예: HR / 입사 첫 주 문의 응대', ''),
       field('trigger', '무엇이 들어오면 시작하나요?', '예: 신입사원의 복지·장비·출입 문의', ''),
-      field('head', 'Head는 무엇을 결정하나요?', '예: 문의 유형과 필요한 정책 문서', ''),
+      field('head', 'Orchestrator는 무엇을 결정하나요?', '예: 문의 유형과 필요한 정책 문서', ''),
       field('sub', '독립된 역할이 정말 필요한 작업은?', '예: 정책 근거 찾기 / 답변 초안 검수', ''),
       field('skill', '재사용할 기준과 절차는?', '예: 정책 버전 확인, 조항 인용, 근거 없는 답변 보류', ''),
       field('loop', '무엇을 검사하고 어디로 돌아가나요?', '예: 근거 누락 시 정책 검색 단계로, 최대 2회', ''),
@@ -225,7 +225,7 @@
   s('from-last-week', 'opening', 'homework-bridge', '지난주에 적어온 문제,\n오늘의 출발점입니다.', { left: { label: 'LAST WEEK', title: '주어진 지침 실행', items: ['회사 조사와 리서치', '결과가 나오는 경험', '도구와 대화에 익숙해지기'] }, right: { label: 'THIS WEEK', title: '설계 · 등록 · 재실행', items: ['내 문제와 완료 기준', 'Project와 Skill 등록', '새 입력에서도 같은 기준 확인'] }, note: '잘 만든 프롬프트도 필요하다. 오늘은 그 앞의 업무 선택과 뒤의 파일·재사용·검수를 연결한다.' });
   s('taxi', 'opening', 'reveal', '택시는 사람의 어떤 문제를\n해결해 줄까요?', { prompt: '“원하는 때에, 원하는 곳으로 이동하고 싶다.”', reveal: '늦은 밤, 언제 차를 탈 수 있을지 몰라\n약속 시간에 맞춰 도착할 수 있을지 불안하다.', after: '원하는 이동을 가로막는 것은 무엇일까요? 이 장면에서는 기다림과 도착의 불확실성이 문제입니다.', note: '먼저 20초 동안 택시가 해결하는 문제에 대한 답을 받는다. 원하는 이동 결과를 짚고, 버튼을 눌러 구체적인 상황과 어려움으로 좁힌다. 속도·접근성·안전 등 다른 답도 받을 수 있다. 공개 문장은 관찰로 검증할 가설 예시이지 모든 택시 사용자의 유일한 문제는 아니다.' });
   s('solution-trap', 'opening', 'compare', '“CS 문의가 많아요.\n챗봇을 만들면 될까요?”', { left: { label: 'IDEA', title: 'CS 챗봇을 만들고 싶다', items: ['챗봇 말투', '채팅창 디자인', '자동 답변 기능'] }, right: { label: 'PROBLEM', title: '정확한 첫 답변이 늦어진다', items: ['반복 문의 유형 확인', 'FAQ를 찾는 데 걸리는 시간', '실제 지연 원인은 상담 기록으로 확인'] }, note: '기능은 후보가 될 수 있다. 그 후보가 해결할 상황과 손실을 적어야 비교와 검증이 가능해진다.' });
-  s('rethink-work', 'opening', 'editorial', '자동화하기 전에,\n없애도 되는 일부터.', { eyebrow: 'AX / WORK REDESIGN', intro: '아무도 안 읽는 보고서라면, 빨리 만드는 것보다 없애는 게 먼저예요.', rows: [['없애기', '누가 읽고 어떤 결정을 내리는지 확인한다.'], ['줄이기', '중복 입력과 불필요한 승인 단계를 줄인다.'], ['규칙화', '정해진 계산이나 형식 변환은 수식과 코드로 처리한다.'], ['AI에 맡기기', '자유롭게 쓴 문의처럼 내용을 읽고 해석해야 하는 일에 AI를 쓴다.']], note: '제공된 AX·일의 변화 자료를 수업 의사결정 순서로 재구성했다. 불필요한 업무를 AI 도입 후보에서 먼저 제외한다.' });
+  s('rethink-work', 'opening', 'editorial', 'AI에 맡기기 전,\n업무를 먼저 정리합니다.', { eyebrow: 'AX / WORK REDESIGN', intro: '순서는 없애기 → 줄이기 → 규칙화 → AI에 맡기기. 아무도 안 쓰는 일을 더 빠르게 만드는 것은 자동화가 아닙니다.', rows: [['01 없애기', '누가 읽고 어떤 결정을 내리는지 확인한다.'], ['02 줄이기', '중복 입력과 불필요한 승인 단계를 줄인다.'], ['03 규칙화', '정해진 계산이나 형식 변환은 수식과 코드로 처리한다.'], ['04 AI에 맡기기', '자유롭게 쓴 문의처럼 내용을 읽고 해석해야 하는 일에 AI를 쓴다.']], note: '제공된 AX·일의 변화 자료를 수업 의사결정 순서로 재구성했다. 불필요한 업무를 AI 도입 후보에서 먼저 제외한다. 6페이지는 네 가지 옵션이 아니라 적용 순서로 읽히게 말한다.' });
   s('yujin-framework', 'define', 'framework', '문제에서 실행까지.\nYUJIN FLOW.', { note: 'Y Why Gap, U User Job, J Journey, I Intelligence Fit, N Next Agent. YUJIN FLOW는 수업을 위해 재구성한 교육 프레임이며 표준 기술 분류가 아니다.' });
   lab('gap', 'define');
   s('problem-formula', 'define', 'formula', 'Agent가 해결할 문제를\n한 문장으로 적어보세요.', { tokens: ['누가', '어떤 상황에서', '무엇 때문에', '어떤 어려움을'], example: 'CS 담당자는 문의가 몰릴 때, FAQ를 매번 찾아야 해서\n정확한 첫 답변을 준비하는 데 오래 걸린다.', caption: 'Problem Statement · 실제 원인과 지연 시간은 상담 기록으로 확인할 가설입니다.', note: '“AI가 없어서”를 원인으로 쓰지 않게 한다. 시간·누락·재작업처럼 관찰 가능한 어려움을 택한다.' });
@@ -241,8 +241,9 @@
   s('build-your-agent', 'map', 'agent-intro', '이제, 내 일을 맡길\nAGENT를 만듭니다.', { note: '20초 전환 장면. 앞에서 작성한 업무 흐름을 떠올리게 한다. 이제 그 일을 수행할 목표, 도구, 판단 기준, 실행 범위를 갖춘 Agent를 설계한다고 말한 뒤 다음 장의 개념 설명으로 이어간다. 이 장면은 구성 요소를 연결하는 개념 모션이다.' });
   s('what-is-agent', 'map', 'concepts', '어디까지를 Agent라고 부를까요?', { source: 'effective', note: 'Workflow는 사람이 정한 경로를 중심으로 실행한다. Agent는 목표와 관찰된 결과에 따라 도구·다음 행동을 선택한다. 한 번의 프롬프트나 Project 생성만으로 자율 Agent가 완성되지는 않는다.' });
   s('onboarding', 'map', 'editorial', '신입 동료에게 맡기듯,\n필요한 정보를 알려주세요.', { eyebrow: 'AGENT ONBOARDING', source: 'onboarding', intro: 'Anthropic도 Claude를 우리 팀의 규칙과 업무 방식을 모르는 신입에 비유합니다.', rows: [['목표', '무엇을 만들면 일이 끝나는지'], ['맥락', '입력 자료와 기준 문서'], ['도구', '파일 읽기·쓰기처럼 실제로 쓸 수 있는 기능'], ['권한', '스스로 처리해도 되는 일'], ['피드백', '검수 기준과 멈추는 조건']], caption: '공식 문서의 비유를 바탕으로 일을 맡기기 전에 알려줄 다섯 가지를 정리했습니다. AI에 사람의 책임을 넘긴다는 뜻은 아닙니다.', note: 'Anthropic Prompting best practices의 Be clear and direct에 신입사원 비유가 나온다. 비유는 공식 자료에 있지만 이 다섯 조건 묶음은 이유진 강의용 재구성이다. 업무 맥락을 모르는 동료도 수행할 수 있을 만큼 명확하게 적어야 한다.' });
-  s('orchestration-concept', 'map', 'anatomy', 'Orchestration.\n위임하고, 검수하고, 다시 고칩니다.', { source: 'effective', note: '자동 반복되는 학습용 시연이다. Orchestrator는 작업 분배와 결과 통합을 맡는 역할이고, Claude Code에서는 메인 대화가 그 역할을 수행할 수 있다. Subagent는 별도 맥락에서 검수한다. 기존 Head/Sub는 설명용 약칭이다. Skill 사용과 Subagent 위임은 구분한다. 검수 실패 반환 → 총괄 수정 → 재위임 → 통과 → 사람 승인 대기를 설명한다. 마지막에 반복되는 것은 애니메이션이며 실제 업무의 무한 재시도가 아니다. 실제 실행에는 최대 수정 횟수와 승인·중단 조건이 필요하다.' });
-  s('jobseeker-agent', 'map', 'flow', '취준생 Agent /\n내 경험을 지원서로 연결하기.', { case: 'jobseeker', subtitle: '마케팅 신입 지원 예시: 채용공고 + 동아리 홍보 경험.md → 근거 있는 지원서 초안', note: 'Head·Sub·Skill·Loop 설명 직후에 보여준다. Head는 지원 목표와 부족한 입력을 판단하고, Sub 1은 공고의 요건을 추출하며 Sub 2는 경험 기록에서 근거를 연결한다. Head가 STAR 작성 Skill을 참고해 초안을 통합한다. 재생 중 경험 기록에 없는 전환율 30%가 등장하면 왜 돌아가야 하는지 묻는다. 검수 실패 시 경험 근거를 다시 확인하고 수치를 지운다. 없는 성과는 만들지 않고 보완 질문으로 남긴다. 지원자가 사실과 표현을 확인한 뒤 제출한다. 가상의 학습 시나리오이며 실제 다중 Agent를 실행하는 화면은 아니다.' });
+  s('orchestration-concept', 'map', 'anatomy', 'Orchestration.\n위임하고, 검수하고, 다시 고칩니다.', { source: 'effective', note: '자동 반복되는 학습용 시연이다. Orchestrator는 작업 분배와 결과 통합을 맡는 역할이고, Claude Code에서는 메인 대화가 그 역할을 수행할 수 있다. Subagent는 별도 맥락에서 검수한다. Skill 사용과 Subagent 위임은 구분한다. 검수 실패 반환 → 총괄 수정 → 재위임 → 통과 → 사람 승인 대기를 설명한다. 마지막에 반복되는 것은 애니메이션이며 실제 업무의 무한 재시도가 아니다. 실제 실행에는 최대 수정 횟수와 승인·중단 조건이 필요하다.' });
+  s('split-criteria', 'map', 'split-criteria', 'Subagent는 언제\n나눠야 할까요?', { source: 'effective', note: 'Anthropic의 Building effective agents에서 설명하는 prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer 패턴을 그대로 베끼지 않고 수업용 기준으로 재구성한다. 처음부터 여러 Agent로 시작하지 않고, 하나의 Project와 Skill로 실행한 뒤 전문성·단계·병렬성·분기·검수 루프가 필요할 때 나눈다. 예시는 강의자료 제작 Agent다.' });
+  s('jobseeker-agent', 'map', 'flow', '취준생 Agent /\n내 경험을 지원서로 연결하기.', { case: 'jobseeker', subtitle: '마케팅 신입 지원 예시: 채용공고 + 동아리 홍보 경험.md → 근거 있는 지원서 초안', note: 'Orchestrator·Subagent·Skill·Loop 설명 직후에 보여준다. Orchestrator는 지원 목표와 부족한 입력을 판단하고, Subagent 1은 공고의 요건을 추출하며 Subagent 2는 경험 기록에서 근거를 연결한다. Orchestrator가 STAR 작성 Skill을 참고해 초안을 통합한다. 재생 중 경험 기록에 없는 전환율 30%가 등장하면 왜 돌아가야 하는지 묻는다. 검수 실패 시 경험 근거를 다시 확인하고 수치를 지운다. 없는 성과는 만들지 않고 보완 질문으로 남긴다. 지원자가 사실과 표현을 확인한 뒤 제출한다. 가상의 학습 시나리오이며 실제 다중 Agent를 실행하는 화면은 아니다.' });
   s('orchestration-live', 'map', 'flow', '누가 맡고,\n언제 다시 돌아갈까요?', { case: 'feedback', note: '흐름 시연은 고정 데이터로 동작하는 학습용 애니메이션이다. 실제 AI 호출이 아니다. 누락 시 해당 단계로 돌아가고 승인 앞에서 멈추는 것을 보여준다.' });
   lab('boundary', 'map');
   s('case-brief', 'build', 'casebrief', '이제, 내 문제를 해결할\n내 Agent를 만듭니다.', { note: '수강생은 각자 1주차 문제로 설계한다. 앞 답변 가져오기는 빈칸만 채운다. 강사 이유진은 강의자료 제작 Agent를 별도 시연한다. CS는 앞단 문제정의 및 별도 검수 미션의 참고 사례이지 공통 제작 과제가 아니다.' });
@@ -262,10 +263,10 @@
   s('upload-skill', 'skill', 'guide', '05. 업로드하고 활성화합니다.', { guide: 'skill', note: '현재 도움말은 Customize > Skills > + > Create skill > Upload a skill. 과거 Settings > Capabilities > Skills 안내만 믿지 않는다. 코드 실행은 Settings > Capabilities에서 활성화한다.' });
   s('second-run', 'skill', 'rerun', '06. 다른 입력으로 다시 시킵니다.', { source: 'skills', note: '첫 결과를 잘 만들었다는 사실과 재사용 가능하다는 사실은 다르다. 새 대화, 다른 입력, 같은 기준으로 테스트한다. 강의자료 시연은 brief-b.md의 인수인계 주제만 다룬다.' });
   lab('run2', 'skill');
-  s('skill-vs-sub', 'orchestrate', 'compare', 'Skill은 일하는 방법,\nSubagent는 따로 일하는 담당자.', { left: { label: 'SKILL', title: '재사용할 업무 절차', items: ['분류 기준과 출력 양식', 'Agent가 필요할 때 참고', '스스로 작업을 시작하지 않음'] }, right: { label: 'SUBAGENT', title: '따로 작업하는 담당 Agent', items: ['자기 역할에 맞는 지침과 도구 사용', 'Head가 작업과 자료를 전달', 'Head에게 결과를 보내면 Head가 정리'] }, source: 'subagents', note: 'Project instructions에 Head/Sub라고 적는 것만으로 여러 프로세스나 실제 병렬 에이전트가 생성되지는 않는다. 웹 기본 실습은 Agentic workflow, 실제 Subagent 심화는 Claude Code에서 수행한다.' });
+  s('skill-vs-sub', 'orchestrate', 'compare', 'Skill은 일하는 방법,\nSubagent는 따로 일하는 담당자.', { left: { label: 'SKILL', title: '재사용할 업무 절차', items: ['분류 기준과 출력 양식', 'Agent가 필요할 때 참고', '스스로 작업을 시작하지 않음'] }, right: { label: 'SUBAGENT', title: '따로 작업하는 담당 Agent', items: ['자기 역할에 맞는 지침과 도구 사용', 'Orchestrator가 작업과 자료를 전달', 'Orchestrator에게 결과를 보내면 총괄이 정리'] }, source: 'subagents', note: 'Project instructions에 역할을 적는 것만으로 여러 프로세스나 실제 병렬 에이전트가 생성되지는 않는다. 웹 기본 실습은 Agentic workflow, 실제 Subagent 심화는 Claude Code에서 수행한다.' });
   s('code-start', 'orchestrate', 'code-start', 'Claude Code 심화:\n담당할 일을 파일로 나눠봅니다.', { source: 'subagents', note: '선택 실습. 설치·로그인이 끝난 Claude Code에서 준비 폴더를 연다. 현재 공식 문서에서 /agents 생성 마법사는 2.1.198부터 제거됐다. 자연어로 파일 생성을 요청하거나 제공된 시작 키트를 사용한다.' });
-  s('code-files', 'orchestrate', 'code-files', 'Orchestrator가 일을 나누고,\nSubagent가 맡은 일을 수행합니다.', { source: 'subagents', note: 'Head/Sub는 수업용 약칭이다. 총괄은 작업을 분해·위임·통합하며 직접 작업할 수도 있다. Subagent는 조사·작성·검수 등 지정된 일을 도구 권한 안에서 수행한다. 왼쪽 CS 시작 키트는 메인이 제작하고 review-cs에 검수만 맡긴 특정 구성이다. 이것이 유일한 구조는 아니다.' });
-  s('code-run', 'orchestrate', 'code-run', 'Sub에게 정말 일을 맡겼을까요?\n실행 기록을 확인하세요.', { source: 'subagents', note: '재생을 누르면 CLI 시작, 요청, Skill 읽기, 파일 작성, 구조 검사, Sub 위임, 실패 반환, Head 수정, 재검수를 보여준다. 마지막에는 사람 승인 앞에서 멈춘다. 7단계 NEEDS_REVISION에서 잠깐 멈춰 누가 무엇을 고칠지 묻는다. 모든 로그와 검수 결과는 수업용 고정 시나리오이며 실제 Claude 실행이 아니다. 실제 실습에서는 위임 대상·전달 경로·반환 결과를 확인한다. AI가 “검수했다”고 쓴 문장만으로 판정하지 않는다.' });
+  s('code-files', 'orchestrate', 'code-files', 'Orchestrator가 일을 나누고,\nSubagent가 맡은 일을 수행합니다.', { source: 'subagents', note: '총괄은 작업을 분해·위임·통합하며 직접 작업할 수도 있다. Subagent는 조사·작성·검수 등 지정된 일을 도구 권한 안에서 수행한다. 왼쪽 CS 시작 키트는 메인이 제작하고 review-cs에 검수만 맡긴 특정 구성이다. 이것이 유일한 구조는 아니다.' });
+  s('code-run', 'orchestrate', 'code-run', 'Subagent에게 정말 일을 맡겼을까요?\n실행 기록을 확인하세요.', { source: 'subagents', note: '재생을 누르면 CLI 시작, 요청, Skill 읽기, 파일 작성, 구조 검사, Subagent 위임, 실패 반환, Orchestrator 수정, 재검수를 보여준다. 마지막에는 사람 승인 앞에서 멈춘다. 7단계 NEEDS_REVISION에서 잠깐 멈춰 누가 무엇을 고칠지 묻는다. 모든 로그와 검수 결과는 수업용 고정 시나리오이며 실제 Claude 실행이 아니다. 실제 실습에서는 위임 대상·전달 경로·반환 결과를 확인한다. AI가 “검수했다”고 쓴 문장만으로 판정하지 않는다.' });
   s('loop-control', 'orchestrate', 'flow', 'Loop에도\n멈출 기준이 필요합니다.', { case: 'feedback', note: '검수에서 실패를 선택하면 보정 경로를 한 번 보여준다. 최대 2회 수정 후 중단. 실제 실행에서는 가드가 지침에만 머무는지 런타임에서 강제되는지도 확인한다.' });
   s('development-flow', 'orchestrate', 'flow', '개발 / 이슈 → PR 초안', { case: 'dev', note: '버그 재현 후 최소 수정. 개발자가 승인하기 전 PR 게시·병합·배포는 하지 않는다. Code 트랙의 파일 도구와 테스트 실행이 필요한 예다.' });
   s('hr-flow', 'orchestrate', 'flow', 'HR / 문의 → 근거 있는 답변', { case: 'hr', note: '일반 온보딩 정책 문의 사례이다. 채용 합격이나 개인별 예외를 Agent가 자동 결정하는 사례로 확장하지 않는다. 정책 근거 없으면 담당자에게 넘긴다.' });
@@ -280,7 +281,22 @@
   s('next-week', 'ship', 'editorial', '다음 주에는\n세 번의 실행 기록을 가져옵니다.', { eyebrow: 'NEXT 7 DAYS', intro: '한 번 더 써보면 처음에 놓친 조건이 보여요. 바꾼 지침과 결과를 함께 기록하세요.', rows: [['1회차', '실제 자료 몇 건으로 실행하고 안 된 부분을 적는다.'], ['2회차', '지침·기준을 고친 뒤 다른 입력으로 다시 실행한다.'], ['3회차', '동료 검수와 실제 소요 시간을 남긴다.'], ['30일', '누가 관리하고 언제 고칠지, 계속 쓸지 결정한다.']], note: '3회차 코칭 자료: Skill ZIP, 입력·출력, 바꾼 지침, 전후 지표. 회사 AX 사례는 적용 업무와 남은 책임까지 한 줄로 적는다.' });
   s('takeaway', 'ship', 'takeaway', '내 일의 설계도,\n그대로 가져가세요.', { note: '전체 질문·답변 MD는 설계 검토 프롬프트로 사용할 수 있다. 실제 수행 지침은 Project 지침과 Skill을 사용한다. 입력은 브라우저 저장소에만 있고 Claude에는 직접 붙여넣을 때 전달된다.' });
   s('troubleshooting', 'ship', 'troubleshooting', '실습이 막히면,\n여기부터 확인하세요.', { source: 'skills', note: '환경에 따라 UI와 사용 가능 기능이 다를 수 있다. 파일 생성 기능, Skill 활성화, 파일 구조, 입력 자료를 순서대로 확인한다. 미실행을 실행 성공으로 기록하지 않는다.' });
-  s('references', 'ship', 'references', '참고한 자료와\n유진이 다시 구성한 내용.', { note: '제공된 이미지의 문구와 구성을 복제하지 않고 문제·업무·역할·검증 순서로 재구성했다. 기술 경로는 공식 문서로 확인했다. Head/Sub와 YUJIN FLOW는 수업용 설명 프레임이다.' });
+  s('references', 'ship', 'references', '참고한 자료와\n유진이 다시 구성한 내용.', { note: '제공된 이미지의 문구와 구성을 복제하지 않고 문제·업무·역할·검증 순서로 재구성했다. 기술 경로는 공식 문서로 확인했다. YUJIN FLOW는 수업용 설명 프레임이다.' });
+  s('faq-agent-roles', 'ship', 'faq', '자주 묻는 질문.\nAgent 역할부터 정리합니다.', { items: [
+    ['Orchestrator는 정확히 뭘 하나요?', '큰 요청을 쪼개고, 누구에게 맡길지 정하고, 돌아온 결과를 합쳐 다음 행동을 판단합니다.', '총괄은 목표, 기준, 수정 한도, 승인 지점을 들고 있습니다. 직접 초안을 만들 수도 있고, 필요하면 Subagent에게 조사·검수·작성 일부를 맡길 수도 있습니다.'],
+    ['Subagent는 실행 담당인가요?', '맞습니다. Subagent는 Orchestrator가 맡긴 일을 별도 맥락에서 수행하고 결과를 반환합니다.', '예를 들어 review-cs는 원문, 출력, 기준 파일을 읽고 누락·근거 오류를 검사합니다. 모든 Subagent가 검수 전용인 것은 아닙니다.'],
+    ['Skill은 Agent인가요?', '아니요. Skill은 사람이 아니라 다시 쓰는 업무 절차입니다.', 'Skill은 입력, 순서, 출력 양식, 검수 기준을 담은 파일입니다. Agent가 필요할 때 읽어 쓰는 설명서에 가깝습니다.']
+  ], note: 'Head라는 별칭은 제거하고 실제 도구에서 더 많이 쓰는 orchestrator, main agent, worker/subagent 표현으로 정리한다.' });
+  s('faq-qa-loop', 'ship', 'faq', 'QA와 Loop는\n어디에서 쓰나요?', { items: [
+    ['QA 검수는 어떻게 하나요?', '기준을 먼저 정하고, 결과가 그 기준을 통과했는지 확인합니다.', '강의자료 Agent라면 입력 누락, 흐름, 표현, 실행 가능성, 최종 파일 열림 여부를 봅니다. “좋아 보인다”가 아니라 “업무에 써도 된다”를 판정합니다.'],
+    ['Loop는 뭔가요?', '실행 → 검수 → 수정 → 재실행을 반복하는 구조입니다.', 'QA가 “실습 설명 부족”이라고 돌려보내면 총괄이 해당 장표와 지침을 고쳐 다시 실행합니다. 무한 반복이 아니라 최대 횟수와 멈춤 기준이 필요합니다.'],
+    ['AI가 검수까지 하면 사람은 뭘 하나요?', '사람은 책임지는 기준과 최종 승인 지점을 정합니다.', 'AI는 누락·중복·형식 오류를 빠르게 찾을 수 있지만, 고객 발송, 채용 판단, 예산 집행, 외부 공개처럼 책임이 생기는 일은 사람이 확인합니다.']
+  ], note: 'QA는 별도 페이지와 실습에서 checklist로 이어질 수 있다. Loop는 품질 향상 장치이지만 멈춤 기준이 없으면 비용과 시간이 늘어난다는 점을 강조한다.' });
+  s('faq-practice', 'ship', 'faq', '실습 때 가장 많이 막히는 질문.', { items: [
+    ['내 Agent 예시는 CS 말고 다른 걸 해도 되나요?', '네. 오늘의 공통 예시는 CS지만, 각자는 자기 업무 하나로 바꿉니다.', '강사 시연은 강의자료 제작 Agent입니다. 수강생은 HR, 마케팅, 기획, 운영, 개발, 교육 등 자기 업무의 반복되는 산출물을 고르면 됩니다.'],
+    ['프롬프트만 잘 쓰면 Agent가 되나요?', '아니요. 프롬프트는 시작이고, Agent는 기준·자료·절차·검수·재실행이 함께 있어야 합니다.', '오늘 만든 다섯 파일 problem.md, job-story.md, workflow.md, boundaries.md, SKILL.md가 그 연결고리입니다.'],
+    ['동시에 접속하면 답변이 섞이나요?', '아니요. 이 덱의 입력값은 각자 브라우저의 로컬 저장소에만 남습니다.', 'GitHub Pages에 같이 접속해도 서버 DB에 저장하지 않습니다. 다만 같은 기기, 같은 브라우저 프로필을 함께 쓰면 그 프로필 안에서는 같은 기록을 볼 수 있습니다.']
+  ], note: '마지막 Q&A 직전 안내. 수강생의 심리적 허들을 낮추되, 프롬프트와 Agent 설계의 차이를 다시 잡는다.' });
   s('closing', 'ship', 'closing', '이제 내 업무에\n직접 써볼 차례입니다.', { subtitle: '오늘 만든 지침과 Skill을 가져가세요.\n다음에는 실제 업무에 써본 결과를 함께 봅니다.', note: '좋은 발표보다 다시 쓸 수 있는 파일과 기록을 남긴다. 다음 주에는 실제 실행에서 바뀐 점을 중심으로 이야기한다.' });
   labs.splice(labs.findIndex(l => l.id === 'ownflow'), 0, {
     id: 'mission', letter: 'LAB', title: '오류 수정하기: 12분 검수 미션', minutes: 12,
@@ -296,7 +312,7 @@
   });
   const missionAt = slides.findIndex(x => x.id === 'lab-run2') + 1;
   slides.splice(missionAt, 0,
-    { id: 'mission-brief', chapter: 'skill', type: 'mission-brief', title: '보고서는 완벽해 보였다.\n응답 하나가 사라지기 전까지.', note: '12분 타임박스 시작 전에 역할을 정한다. 한 명은 실행, 한 명은 검수 담당. 혼자라면 먼저 실행하고 검수 관점으로 다시 읽는다. ROUND 1은 누락 데이터, ROUND 2는 새 데이터, ROUND 3은 입력 오류다.' },
+    { id: 'mission-brief', chapter: 'skill', type: 'mission-brief', title: '그럴듯한 결과보다,\n빠진 입력을 먼저 봅니다.', note: '12분 타임박스 시작 전에 검수 관점을 정한다. 각자 만든 Agent 결과도 같은 방식으로 본다. 연습 데이터는 CS 문의지만 핵심은 입력 누락, 새 입력 재검증, 필수 입력 부족 시 질문·중단 판단이다. 한 명은 실행, 한 명은 검수 담당. 혼자라면 먼저 실행하고 검수 관점으로 다시 읽는다.' },
     { id: 'mission', chapter: 'skill', type: 'mission', title: '12분, 실무 투입 리허설.', note: '0~4분: A08 누락 찾고 되돌리기. 4~8분: B 파일을 Skill로 재실행하고 로컬 CSV 검사. 8~12분: 필수 열 누락 시 질문·중단 결정, Skill 한 줄 수정. 타이머는 진행 보조이며 종료해도 입력을 잠그지 않는다.' }
   );
   sources.jtbd = { title: 'Christensen Institute · Jobs to Be Done', url: 'https://www.christenseninstitute.org/theory/jobs-to-be-done/' };

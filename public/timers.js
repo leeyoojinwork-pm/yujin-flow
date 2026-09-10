@@ -2,7 +2,10 @@
   'use strict';
   const timers = new Map();
   let scheduled = null;
+  let soundEnabled = false, audio = null;
+  const soundKey = 'yujin-flow-timer-sound';
   const app = () => window.YFApp;
+  try { soundEnabled = localStorage.getItem(soundKey) === 'on'; } catch (_) { soundEnabled = false; }
   function get(id) {
     const lab = window.YF.labs.find(item => item.id === id);
     if (!lab) return null;
@@ -16,7 +19,32 @@
   function markup(id) {
     const timer = get(id);
     if (!timer) return '';
-    return '<div class="lab-timer" data-timer="' + app().esc(id) + '" role="group" aria-label="' + app().esc(timer.title) + ' 타이머"><button type="button" class="timer-toggle" data-action="timer-toggle" data-timer-id="' + app().esc(id) + '"><span data-timer-icon aria-hidden="true"></span><span data-timer-value></span></button><button type="button" class="timer-reset" data-action="timer-reset" data-timer-id="' + app().esc(id) + '" title="' + timer.minutes + '분으로 초기화" aria-label="' + timer.minutes + '분으로 초기화">' + app().icon('rotate-ccw') + '</button></div>';
+    return '<div class="lab-timer" data-timer="' + app().esc(id) + '" role="group" aria-label="' + app().esc(timer.title) + ' 타이머"><button type="button" class="timer-toggle" data-action="timer-toggle" data-timer-id="' + app().esc(id) + '"><span data-timer-icon aria-hidden="true"></span><span data-timer-value></span></button><button type="button" class="timer-sound" data-action="timer-sound" data-timer-id="' + app().esc(id) + '" title="타이머 사운드 켜기" aria-label="타이머 사운드 켜기" aria-pressed="false">' + app().icon('volume-2') + '</button><button type="button" class="timer-reset" data-action="timer-reset" data-timer-id="' + app().esc(id) + '" title="' + timer.minutes + '분으로 초기화" aria-label="' + timer.minutes + '분으로 초기화">' + app().icon('rotate-ccw') + '</button></div>';
+  }
+  function saveSound() {
+    try { localStorage.setItem(soundKey, soundEnabled ? 'on' : 'off'); } catch (_) {}
+  }
+  function tone(ctx, start, frequency, duration, gain = 0.035) {
+    const osc = ctx.createOscillator();
+    const amp = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(frequency, start);
+    amp.gain.setValueAtTime(0.0001, start);
+    amp.gain.exponentialRampToValueAtTime(gain, start + 0.015);
+    amp.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+    osc.connect(amp).connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start + duration + 0.02);
+  }
+  function playSound(kind) {
+    if (!soundEnabled) return;
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    audio = audio || new AudioContext();
+    if (audio.state === 'suspended') audio.resume();
+    const notes = kind === 'finish' ? [523, 659, 784, 1046, 784] : [659, 784, 988, 784];
+    const now = audio.currentTime + 0.03;
+    notes.forEach((frequency, i) => tone(audio, now + i * 0.105, frequency, 0.085, kind === 'finish' ? 0.045 : 0.032));
   }
   function render() {
     let changedIcons = false;
@@ -38,6 +66,18 @@
         el.querySelector('.timer-reset').disabled = timer.phase === 'idle';
         changedIcons = true;
       }
+      const sound = el.querySelector('.timer-sound');
+      if (sound) {
+        const label = soundEnabled ? '타이머 사운드 끄기' : '타이머 사운드 켜기';
+        sound.title = label;
+        sound.setAttribute('aria-label', label);
+        sound.setAttribute('aria-pressed', String(soundEnabled));
+        if (el.dataset.sound !== String(soundEnabled)) {
+          el.dataset.sound = String(soundEnabled);
+          sound.innerHTML = app().icon(soundEnabled ? 'volume-2' : 'volume-x');
+          changedIcons = true;
+        }
+      }
     });
     if (changedIcons) app().icons();
   }
@@ -57,11 +97,21 @@
       }
     });
     render();
-    if (finished.length) app().toast('시간 종료: ' + finished.join(' / ') + ' 기록은 계속 작성할 수 있어요.');
+    if (finished.length) {
+      playSound('finish');
+      app().toast('시간 종료: ' + finished.join(' / ') + ' 기록은 계속 작성할 수 있어요.');
+    }
     if ([...timers.values()].some(timer => timer.phase === 'running')) scheduled = setTimeout(refresh, 250);
   }
   function action(name, id) {
     const timer = get(id);
+    if (name === 'timer-sound') {
+      soundEnabled = !soundEnabled;
+      saveSound();
+      if (soundEnabled) playSound('start');
+      render();
+      return;
+    }
     if (!timer) return;
     if (name === 'timer-reset') {
       timer.remaining = timer.minutes * 60000;
@@ -76,6 +126,7 @@
         if (!timer.remaining) timer.remaining = timer.minutes * 60000;
         timer.deadline = Date.now() + timer.remaining;
         timer.phase = 'running';
+        playSound('start');
       }
     }
     refresh();

@@ -18,8 +18,8 @@
   const $ = selector => root && root.querySelector(selector);
   function markup() {
     const roles = [
-      ['Orchestrator', '총괄 · 누구에게 무엇을 맡길지 결정하고 결과를 통합합니다.', '기존 Head / Claude Code에서는 메인 대화가 담당 가능'],
-      ['Subagent', '독립 담당 · 별도 맥락에서 맡은 작업을 수행하고 결과를 반환합니다.', '기존 Sub / 이 예시는 검수 담당'],
+      ['Orchestrator', '총괄 · 누구에게 무엇을 맡길지 결정하고 결과를 통합합니다.', 'Claude Code에서는 메인 대화가 담당할 수 있습니다.'],
+      ['Subagent', '독립 담당 · 별도 맥락에서 맡은 작업을 수행하고 결과를 반환합니다.', '이 예시에서는 검수 담당입니다.'],
       ['Skill', '작업자가 참고하는 재사용 절차와 기준입니다.', '담당 Agent가 아님 / SKILL.md + 참고 파일'],
       ['Feedback Loop', '검수 결과에 따라 수정하고 다시 확인합니다.', '이 예시의 수정 한도: 2회 / 미통과 시 사람에게 이관']
     ];

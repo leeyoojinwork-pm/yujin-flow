@@ -59,11 +59,13 @@
       'solution-trap': '챗봇', 'rethink-work': '없애도 되는 일', 'yujin-framework': 'YUJIN FLOW',
       'problem-formula': '한 문장', 'jtbd': '문의 해결', 'hmw': '여러 해결책',
       'experiment': 'PoC', 'workflow-map': '여섯 칸', 'what-is-agent': 'Agent',
-      'onboarding': '일할 조건', 'orchestration-concept': 'Orchestration', 'orchestration-live': '다시 돌아갈까요?',
+      'onboarding': '일할 조건', 'orchestration-concept': 'Orchestration', 'split-criteria': '언제',
+      'orchestration-live': '다시 돌아갈까요?',
       'case-brief': '내 Agent', 'case-files': '두 곳', 'case-flow': '파일이 나올 때까지', 'skill-structure': '업무 절차 묶음',
-      'skill-vs-sub': '일하는 방법', 'code-start': '실제 역할', 'code-files': 'Sub가 검수', 'code-run': '실행 기록',
+      'skill-vs-sub': '일하는 방법', 'code-start': '실제 역할', 'code-files': 'Subagent 검수', 'code-run': '실행 기록',
       'loop-control': '끝나는 조건', 'evaluation': '운영 기준', 'success-metrics': '검수와 재작업',
       'next-week': '세 번의 실행 기록', 'takeaway': '내 일의 설계도', 'troubleshooting': '여기부터 확인',
+      'faq-agent-roles': 'Agent 역할', 'faq-qa-loop': 'QA와 Loop', 'faq-practice': '실습',
       'references': '유진의 재구성', 'closing': '실행 기준'
     }[s.id];
     return phrase ? s.title.split(phrase).map(esc).join('<span class="title-emphasis">' + esc(phrase) + '</span>') : esc(s.title);
@@ -142,6 +144,7 @@
       case 'pipeline': return '<div class="pipeline">' + s.steps.map((x, i) => '<div class="pipeline-node"><span class="num">STEP 0' + (i + 1) + '</span><h3>' + esc(x) + '</h3><p>' + esc(s.details[i]) + '</p></div>').join('') + '</div><p class="pipeline-note">앞 단계의 출력이 다음 단계의 입력이 됩니다.<br>“정리한다”를 “무엇을 읽어 어떤 표를 만든다”로 바꿔보세요.</p>';
       case 'concepts': return '<div class="table-scroll"><table class="concept-table"><thead><tr><th>구분</th><th>어떻게 일하나</th><th>우리 실습에서</th></tr></thead><tbody><tr><td>Prompt</td><td>한 번의 작업을 요청한다.</td><td>“이 CSV를 분류해줘.”</td></tr><tr><td>Workflow</td><td>정해둔 단계와 분기를 따른다.</td><td>읽기 → 분류 → 집계 → 검수</td></tr><tr class="highlight"><td>Agent</td><td>목표·관찰 결과에 맞춰 도구와 다음 행동을 선택한다.</td><td>누락을 발견하면 해당 입력을 다시 읽고 수정</td></tr><tr><td>Project / Skill</td><td>공통 맥락 / 재사용 절차를 제공한다.</td><td>기준 문서 / triage-and-draft</td></tr></tbody></table></div><p class="caption">웹 실습은 도구를 쓰는 Agentic workflow부터 시작합니다. Project를 만드는 것만으로 예약 실행이나 다중 Agent가 생기지는 않습니다.</p>';
       case 'anatomy': return window.YFOrchestration.markup();
+      case 'split-criteria': return splitCriteriaMarkup();
       case 'flow': return flowMarkup(s.case);
       case 'lab': return (s.lab === 'skill' ? '<div class="button-row">' + button('내 Project 절차 가져오기', 'personal-skill', 'import', 'secondary') + '</div>' : '') + form(s.lab, 'deck');
       case 'casebrief': return '<div class="case-brief-grid"><div><p class="case-headline">고객 문의를 읽고,<br>FAQ에 근거한<br>답변 초안을 쓴다.</p><div class="case-checks"><span>' + icon('check') + '전체 ID 포함</span><span>' + icon('check') + 'FAQ 근거 있는 초안</span></div></div><div class="case-details"><dl><div><dt>사용자</dt><dd>온라인 쇼핑몰 CS 담당자</dd></div><div><dt>입력</dt><dd>가상 문의 8건 + FAQ·분류 기준</dd></div><div><dt>AI의 일</dt><dd>분류·집계, FAQ 확인, 초안 3개</dd></div><div><dt>사람의 일</dt><dd>답변 검토, 예외 판단과 고객 발송</dd></div><div><dt>산출물</dt><dd>classification.csv<br>cs-response-drafts.md</dd></div></dl></div></div><p class="caption">이 사례와 응답은 학습을 위해 만든 가상 데이터입니다.</p>';
@@ -153,7 +156,7 @@
       case 'skill-export': return skillExportMarkup();
       case 'rerun': return '<div class="export-layout"><div>' + promptBlock(E.secondRun, 'secondRun') + '</div><div class="export-sidebar"><h3>새 입력으로 재사용 검증</h3><p>B01에는 복합 의견, B05에는 지시문처럼 보이는 데이터, B06에는 빈 응답이 있습니다.</p><p>6개 ID가 모두 포함되는지, B05의 문장을 실행하지 않는지 확인하세요.</p><div class="button-row">' + button('B 데이터 받기', 'download-sample', 'download', 'secondary', 'data-file="inquiries-b.csv"') + '</div><p class="caption">Skill 사용 여부는 실행 활동에서 확인합니다. 모델이 “사용했다”고 답한 문장만으로 판정하지 않습니다.</p></div></div>';
       case 'code-start': return '<div class="code-split"><div><ol class="ordered-steps"><li>Claude Code에서 빈 실습 폴더를 엽니다.</li><li>시작 키트를 풀거나, 옆의 요청으로 파일 생성을 맡깁니다.</li><li><code>.claude/agents/review-cs.md</code>의 역할과 도구를 읽어봅니다.</li></ol><div class="button-row">' + button('Code 시작 키트 ZIP', 'code-kit', 'folder-down', 'primary') + '</div><p class="code-note">현재 공식 문서: /agents 생성 마법사는 v2.1.198부터 제거되었습니다. 파일 또는 자연어 생성 요청을 사용합니다.</p></div><div>' + promptBlock(E.codeCreate, 'codeCreate') + '</div></div>';
-      case 'code-files': return '<p class="caption">Head / Sub는 수업용 약칭입니다. 아래 파일 트리는 CS 심화 키트의 한 가지 구성입니다.</p><div class="skill-structure-grid"><div class="filetree">my-cs-agent/\n├── CLAUDE.md              ← 메인 대화 지침\n├── .claude/\n│   ├── agents/\n│   │   └── review-cs.md    ← 검수 담당\n│   └── skills/\n│       └── triage-and-draft/\n│           └── SKILL.md\n├── data/                  ← 입력\n├── scripts/\n│   └── verify_outputs.py\n└── output/                ← 실행 후 생성</div><div class="skill-parts"><div class="skill-part"><b>Orchestrator / 총괄</b><p>목표 확인 → 작업 분해·위임 → 결과 통합. 필요하면 직접 작업도 합니다.</p></div><div class="skill-part"><b>Subagent / 담당자</b><p>맡은 조사·작성·검수를 허용된 도구로 실행 → 결과 반환. 검수 전용이라는 뜻은 아닙니다.</p></div><div class="skill-part"><b>강의자료 제작에 적용하면</b><p>총괄 → 자료 조사 담당·슬라이드 작성 담당·검수 담당에 위임 → 통합 → 강사 승인.</p></div><div class="skill-part"><b>이 CS 키트의 선택</b><p>메인이 초안을 만들고 review-cs는 읽기 전용 검수만 수행합니다. Skill은 각 담당자가 참고하는 절차입니다.</p></div></div></div>';
+      case 'code-files': return '<p class="caption">아래 파일 트리는 CS 심화 키트의 한 가지 구성입니다.</p><div class="skill-structure-grid"><div class="filetree">my-cs-agent/\n├── CLAUDE.md              ← Orchestrator 지침\n├── .claude/\n│   ├── agents/\n│   │   └── review-cs.md    ← 검수 담당 Subagent\n│   └── skills/\n│       └── triage-and-draft/\n│           └── SKILL.md\n├── data/                  ← 입력\n├── scripts/\n│   └── verify_outputs.py\n└── output/                ← 실행 후 생성</div><div class="skill-parts"><div class="skill-part"><b>Orchestrator / 총괄</b><p>목표 확인 → 작업 분해·위임 → 결과 통합. 필요하면 직접 작업도 합니다.</p></div><div class="skill-part"><b>Subagent / 담당자</b><p>맡은 조사·작성·검수를 허용된 도구로 실행 → 결과 반환. 검수 전용이라는 뜻은 아닙니다.</p></div><div class="skill-part"><b>강의자료 제작에 적용하면</b><p>총괄 → 자료 조사 담당·슬라이드 작성 담당·검수 담당에 위임 → 통합 → 강사 승인.</p></div><div class="skill-part"><b>이 CS 키트의 선택</b><p>Orchestrator가 초안을 만들고 review-cs는 읽기 전용 검수만 수행합니다. Skill은 각 담당자가 참고하는 절차입니다.</p></div></div></div>';
       case 'code-run': return window.YFCLI.markup();
       case 'metrics': return '<div class="metric-equation">기존 처리 시간 − (AI 처리 + 검수 + 재작업)<strong>= 실제로 돌려받은 시간</strong></div>' + metricValues() + '<p class="caption">아래 값은 내 실습노트의 입력으로 계산합니다. 미입력일 때는 결과를 표시하지 않습니다.</p><div class="button-row" style="margin-top:24px">' + button('내 시간 입력하기', 'goto', 'pencil', 'secondary', 'data-slide="lab-metrics"') + '</div>';
       case 'takeaway': return window.YFArtifacts.mapping() + window.YFArtifacts.panel('N') + takeawayMarkup();
@@ -165,7 +168,8 @@
         ['다른 기기에서 내 노트가 안 보여요.', '노트는 작성한 브라우저의 로컬 저장소에 있습니다. 내보낸 MD를 가져가세요. 브라우저 저장소를 지우거나 비공개 창을 닫으면 기록이 사라질 수 있습니다.'],
         ['이 HTML이 Claude를 직접 실행하나요?', '아니요. 이 덱은 설계·기록·파일 만들기와 학습용 순서도 시연을 제공합니다. 실제 AI 작업은 본인의 Claude에서 실행하고 관찰한 결과를 기록합니다.']
       ].map(x => '<details><summary>' + x[0] + '</summary><p>' + x[1] + '</p></details>').join('') + '</div>';
-      case 'references': return '<div class="source-list">' + Object.values(D.sources).map(x => '<div class="source-item">' + ext(x.url, x.title) + '<p>' + (x === D.sources.brunch ? '제공 자료 · 문제에서 출발하는 기획 관점' : '기술 개념과 실습 경로 확인 · ' + D.checked) + '</p></div>').join('') + '</div><p class="source-note">추가 참고: 사용자가 제공한 designbywani의 문제정의·JTBD·HMW 이미지, NAVER CONNECT TechRun의 AI 가능성 실험 이미지, AX·일의 변화 관련 게시물과 Trevari 소개 자료.</p><p class="source-note">YUJIN FLOW와 실습 사례·질문·파일은 이유진 강의 맥락으로 새로 구성했습니다. Head/Sub는 설명용 명칭이며 업계 공통 표준이나 특정 회사의 공식 프레임이라는 뜻은 아닙니다. 화면 안내는 학습용 재구성입니다.</p>';
+      case 'references': return '<div class="source-list">' + Object.values(D.sources).map(x => '<div class="source-item">' + ext(x.url, x.title) + '<p>' + (x === D.sources.brunch ? '제공 자료 · 문제에서 출발하는 기획 관점' : '기술 개념과 실습 경로 확인 · ' + D.checked) + '</p></div>').join('') + '</div><p class="source-note">추가 참고: 사용자가 제공한 designbywani의 문제정의·JTBD·HMW 이미지, NAVER CONNECT TechRun의 AI 가능성 실험 이미지, AX·일의 변화 관련 게시물과 Trevari 소개 자료.</p><p class="source-note">YUJIN FLOW와 실습 사례·질문·파일은 이유진 강의 맥락으로 새로 구성했습니다. 화면 안내는 학습용 재구성입니다.</p>';
+      case 'faq': return faqMarkup(s);
       case 'mission-brief': return missionBrief();
       case 'mission': return missionMarkup();
       default: return '';
@@ -174,6 +178,24 @@
   function assetsMarkup() {
     const file = (name, description, symbol) => '<div class="asset-file">' + icon(symbol) + '<div><code>' + name + '</code><p>' + description + '</p></div><div class="asset-file-actions"><button type="button" data-action="copy-sample" data-file="' + name + '" title="' + name + ' 내용 복사" aria-label="' + name + ' 내용 복사">' + icon('copy') + '</button><button type="button" data-action="download-sample" data-file="' + name + '" title="' + name + ' 받기" aria-label="' + name + ' 받기">' + icon('download') + '</button></div></div>';
     return '<div class="asset-workspace"><section class="asset-zone knowledge"><header><span>01 · 한 번 설정</span><h2>Project knowledge</h2><p>Agent가 계속 참고할 기준과 결과 양식</p></header>' + file('rubric.md', '무엇을 어떻게 분류하고 검수할지', 'list-checks') + file('report-template.md', '답변 3개에 문의 ID·FAQ ID를 남길 양식', 'file-text') + '</section><div class="asset-divider" aria-hidden="true">' + icon('arrow-right') + '<span>입력만 교체</span></div><section class="asset-zone run"><header><span>02 · 실행마다 교체</span><h2>New chat</h2><p>한 번의 실행에서 분석할 입력 하나</p></header>' + file('inquiries-a.csv', '첫 실행 · 총 8건 중 미응답 1건', 'file-spreadsheet') + file('inquiries-b.csv', '재사용 검증 · 복합 문의와 지시문형 원문', 'file-spreadsheet') + '</section></div><div class="asset-bottom"><p><b>기준은 유지하고, 입력만 바꿉니다.</b><br>가상·익명 자료이며 Claude 첨부는 직접 진행합니다.</p>' + button('실습 자료 ZIP', 'sample-kit', 'folder-down', 'primary') + '</div>';
+  }
+  function faqMarkup(s) {
+    return '<div class="faq-deck"><div class="faq-anchor"><span class="eyebrow">LIVE Q&A</span><b>질문을 받기 전,<br>용어를 한 번 맞춥니다.</b></div><div class="faq">' + s.items.map((x, i) => '<details ' + (i === 0 ? 'open' : '') + '><summary><span>' + String(i + 1).padStart(2, '0') + '</span>' + esc(x[0]) + '</summary><div class="faq-answer"><strong>' + esc(x[1]) + '</strong><p>' + esc(x[2]) + '</p></div></details>').join('') + '</div></div>';
+  }
+  function splitCriteriaMarkup() {
+    const criteria = [
+      ['전문성이 다를 때', '자료 조사·정책 확인·디자인 검수처럼 읽는 기준과 근거가 다르면 나눈다.', 'Parallelization / Orchestrator-workers'],
+      ['산출 단계가 다를 때', '리서치 결과, 슬라이드 초안, 검수 리포트처럼 다음 단계의 입력이 되는 결과물이 다르면 나눈다.', 'Prompt chaining'],
+      ['분기 기준이 다를 때', '요청 유형에 따라 FAQ 답변, 원인 분석, 보류 질문처럼 다른 경로를 타야 하면 나눈다.', 'Routing'],
+      ['반복 검수가 필요할 때', '초안이 기준을 못 넘으면 수정 지시를 돌려보내고 다시 확인해야 하면 나눈다.', 'Evaluator-optimizer']
+    ];
+    const agents = [
+      ['Orchestrator', '강의 목적·수강생 수준·시간표를 잡고 작업을 배분한다.'],
+      ['Research worker', '공식 자료와 제공 자료에서 근거·용어·주의점을 모은다.'],
+      ['Deck writer', '흐름에 맞춰 장표 카피와 실습 안내를 작성한다.'],
+      ['QA reviewer', '시간, 누락, 번역체, 검수 지점, 파일 열림 여부를 확인한다.']
+    ];
+    return '<div class="split-layout"><section class="split-rule"><span class="eyebrow">START SIMPLE</span><h2>처음부터 쪼개지 않습니다.</h2><p>하나의 Project와 Skill로 실행해보고, 역할을 나눌 이유가 생길 때만 Subagent를 둡니다.</p><div class="split-gate"><b>질문</b><span>이 일을 한 사람이 같은 기준으로 끝낼 수 있나?</span></div></section><section class="split-criteria-list">' + criteria.map((x, i) => '<div class="split-criterion"><span>0' + (i + 1) + '</span><h3>' + x[0] + '</h3><p>' + x[1] + '</p><small>' + x[2] + '</small></div>').join('') + '</section></div><div class="split-example"><div><span class="eyebrow">YUJIN FLOW → N</span><h3>강의자료 제작 Agent라면</h3><p>문제정의와 Journey에서 나눌 지점을 찾고, Intelligence Fit에서 사람이 승인할 곳을 정합니다.</p></div><ol>' + agents.map(x => '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>').join('') + '</ol></div>';
   }
   let exampleTimer = null, exampleIndex = 0, examplesPaused = false;
   const reducedExamples = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -252,10 +274,10 @@
   function flowNodes(c) {
     return [
       { id:'input', x:24, y:76, w:174, h:76, title:c.input, sub:'INPUT', kind:'start' },
-      { id:'head', x:256, y:76, w:176, h:76, title:c.head, sub:'HEAD', kind:'task' },
-      { id:'work1', x:488, y:76, w:176, h:76, title:c.workers[0], sub:'TASK / SUB 1', kind:'task' },
-      { id:'work2', x:720, y:76, w:176, h:76, title:c.workers[1], sub:'TASK / SUB 2', kind:'task' },
-      { id:'merge', x:720, y:308, w:176, h:76, title:c.merge, sub:'HEAD / SYNTHESIZE', kind:'task' },
+      { id:'head', x:256, y:76, w:176, h:76, title:c.head, sub:'ORCHESTRATOR', kind:'task' },
+      { id:'work1', x:488, y:76, w:176, h:76, title:c.workers[0], sub:'TASK / SUBAGENT 1', kind:'task' },
+      { id:'work2', x:720, y:76, w:176, h:76, title:c.workers[1], sub:'TASK / SUBAGENT 2', kind:'task' },
+      { id:'merge', x:720, y:308, w:176, h:76, title:c.merge, sub:'ORCHESTRATOR / SYNTHESIZE', kind:'task' },
       { id:'check', x:504, y:274, w:144, h:144, title:c.check, sub:'CHECK', kind:'decision' },
       { id:'human', x:256, y:308, w:176, h:76, title:c.human, sub:'HUMAN GATE', kind:'person' },
       { id:'output', x:24, y:308, w:174, h:76, title:c.output, sub:'OUTPUT', kind:'end' },
@@ -271,7 +293,7 @@
     const paths = '<path class="edge" d="M198 114H248"/><path class="edge" d="M432 114H480"/><path class="edge" d="M664 114H712"/><path class="edge" d="M808 152V300"/><path class="edge" d="M720 346H656"/><path class="edge" d="M504 346H440"/><path class="edge" d="M256 346H206"/><path class="edge loop-edge" d="M576 274V160"/><path class="edge loop-edge" d="M576 418V462"/>';
     const labels = '<text x="463" y="329" class="small" text-anchor="middle">통과</text><rect x="526" y="197" width="108" height="39" fill="#f7f8f5"/><text x="580" y="211" class="small" text-anchor="middle">수정 · 최대 2회</text><text x="580" y="229" class="small" text-anchor="middle">' + esc(c.returnLabel) + '</text><rect x="545" y="429" width="62" height="17" fill="#f7f8f5"/><text x="576" y="441" class="small" text-anchor="middle">한도 초과</text>';
     const shapes = nodes.map(n => '<g class="flow-node" data-flow-node="' + n.id + '" data-kind="' + n.kind + '">' + (n.kind === 'decision' ? '<polygon points="' + (n.x+n.w/2) + ',' + n.y + ' ' + (n.x+n.w) + ',' + (n.y+n.h/2) + ' ' + (n.x+n.w/2) + ',' + (n.y+n.h) + ' ' + n.x + ',' + (n.y+n.h/2) + '"/>' : '<rect x="' + n.x + '" y="' + n.y + '" width="' + n.w + '" height="' + n.h + '" rx="' + (['start','end'].includes(n.kind)?25:5) + '"/>') + '<text x="' + (n.x+n.w/2) + '" y="' + (n.y+n.h/2+7) + '" text-anchor="middle">' + esc(n.title) + '</text>' + (n.sub ? '<text class="small" x="' + (n.x+n.w/2) + '" y="' + (n.y+n.h/2-15) + '" text-anchor="middle">' + n.sub + '</text>' : '') + '</g>').join('');
-    return '<div class="flow-layout"><div class="flow-area"><div class="flow-toolbar"><div class="flow-controls">' + button('흐름 재생', 'flow-play', 'play', 'primary small') + '<button type="button" class="icon-button" data-action="flow-step" title="한 단계 진행" aria-label="한 단계 진행">' + icon('step-forward') + '</button><button type="button" class="icon-button" data-action="flow-reset" title="흐름 다시 시작" aria-label="흐름 다시 시작">' + icon('rotate-ccw') + '</button></div><span class="flow-label"><i></i>학습용 시연 · 실제 AI 호출 없음</span></div><svg class="workflow-svg" viewBox="0 0 920 540" role="img" aria-label="' + esc(c.name + ' 업무 순서도. 입력, Head, 작업 역할, 결과 통합, 검수. 실패하면 최대 2회 수정하고 사람 승인 후 완료한다.') + '"><defs><marker id="flow-arrow" viewBox="0 0 8 8" markerWidth="7" markerHeight="7" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#8d9884"/></marker></defs>' + paths + labels + shapes + '</svg><div class="flow-mobile">' + nodes.slice(0,8).map((n, i) => '<div class="flow-mobile-node" data-flow-node="' + n.id + '"><span>0' + (i + 1) + '</span><div><b>' + esc(n.title) + '</b><small>' + n.sub + '</small></div></div>').join('') + '<div class="loop-note">검수 실패 → ' + esc(c.returnLabel) + ' · 최대 2회<br>' + esc(c.stop) + '</div></div><div class="flow-log" role="status"><b id="flow-state-label">READY</b><span id="flow-message">재생하면 자료와 결과가 이동하는 순서를 볼 수 있습니다.</span></div><div class="gate-actions" id="gate-actions" hidden>' + button('승인하고 완료', 'flow-approve', 'check', 'primary small') + button('수정 요청', 'flow-reject', 'undo-2', 'secondary small') + '</div></div>' + flowRationale(c) + '</div>';
+    return '<div class="flow-layout"><div class="flow-area"><div class="flow-toolbar"><div class="flow-controls">' + button('흐름 재생', 'flow-play', 'play', 'primary small') + '<button type="button" class="icon-button" data-action="flow-step" title="한 단계 진행" aria-label="한 단계 진행">' + icon('step-forward') + '</button><button type="button" class="icon-button" data-action="flow-reset" title="흐름 다시 시작" aria-label="흐름 다시 시작">' + icon('rotate-ccw') + '</button></div><span class="flow-label"><i></i>학습용 시연 · 실제 AI 호출 없음</span></div><svg class="workflow-svg" viewBox="0 0 920 540" role="img" aria-label="' + esc(c.name + ' 업무 순서도. 입력, Orchestrator, 작업 역할, 결과 통합, 검수. 실패하면 최대 2회 수정하고 사람 승인 후 완료한다.') + '"><defs><marker id="flow-arrow" viewBox="0 0 8 8" markerWidth="7" markerHeight="7" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#8d9884"/></marker></defs>' + paths + labels + shapes + '</svg><div class="flow-mobile">' + nodes.slice(0,8).map((n, i) => '<div class="flow-mobile-node" data-flow-node="' + n.id + '"><span>0' + (i + 1) + '</span><div><b>' + esc(n.title) + '</b><small>' + n.sub + '</small></div></div>').join('') + '<div class="loop-note">검수 실패 → ' + esc(c.returnLabel) + ' · 최대 2회<br>' + esc(c.stop) + '</div></div><div class="flow-log" role="status"><b id="flow-state-label">READY</b><span id="flow-message">재생하면 자료와 결과가 이동하는 순서를 볼 수 있습니다.</span></div><div class="gate-actions" id="gate-actions" hidden>' + button('승인하고 완료', 'flow-approve', 'check', 'primary small') + button('수정 요청', 'flow-reject', 'undo-2', 'secondary small') + '</div></div>' + flowRationale(c) + '</div>';
   }
   function cancelFlow() { flowToken++; clearTimeout(flowTimer); flowTimer=null; flow=null; }
   function setupFlow(key) { flow = { key, step:-1, order:['input','head','work1','work2','merge','check','human','output'], failures:0, running:false, gate:false, done:false }; }
@@ -288,7 +310,7 @@
     const id=flow.order[flow.step];
     if (!id) return;
     markNode(id);
-    const messages={input:c.input+'가 들어왔습니다.',head:'Head가 목적과 입력을 확인하고 작업 순서를 정합니다.',work1:c.workers[0]+'를 수행합니다.',work2:c.workers[1]+' 결과를 모읍니다.',merge:c.merge+' 결과물을 준비합니다.',check:flow.failures?c.repaired:c.missing,human:'사람의 승인 앞에서 멈춥니다. 아래에서 승인 또는 수정을 선택하세요.',output:'검토된 결과를 남겼습니다. 이 화면에서는 외부 작업을 실행하지 않습니다.'};
+    const messages={input:c.input+'가 들어왔습니다.',head:'Orchestrator가 목적과 입력을 확인하고 작업 순서를 정합니다.',work1:c.workers[0]+'를 수행합니다.',work2:c.workers[1]+' 결과를 모읍니다.',merge:c.merge+' 결과물을 준비합니다.',check:flow.failures?c.repaired:c.missing,human:'사람의 승인 앞에서 멈춥니다. 아래에서 승인 또는 수정을 선택하세요.',output:'검토된 결과를 남겼습니다. 이 화면에서는 외부 작업을 실행하지 않습니다.'};
     flowMessage(id==='check'&&!flow.failures?'NEEDS REVISION':id==='human'?'WAITING FOR YOU':id.toUpperCase(),messages[id]);
     if(id==='check'&&!flow.failures)markNode('check','fail');
     if(id==='human'){flow.gate=true;flow.running=false;$('#gate-actions').hidden=false;setFlowPlay(false);return;}
@@ -394,7 +416,7 @@
       case 'download-skill':if(skillReady())download(E.skillMarkdown(state),'SKILL.md');break;
       case 'code-kit':await zipFiles(E.codeKit(),'YUJIN-FLOW-claude-code-starter.zip');break;
       case 'reset-all':confirm('내 기록 초기화','이 브라우저의 YUJIN FLOW 답변을 모두 지웁니다. 필요한 기록은 먼저 MD로 저장하세요.',()=>{state=E.blankState();window.YFTimers.resetAll();storageAvailable=true;save();if(mode==='notebook')notebook();else renderSlide(active);toast('내 실습 기록을 초기화했습니다.');});break;
-      case 'timer-toggle':case 'timer-reset':window.YFTimers.action(a,el.dataset.timerId);break;
+      case 'timer-toggle':case 'timer-reset':case 'timer-sound':window.YFTimers.action(a,el.dataset.timerId);break;
       case 'flow-play':
         if(!flow)return;
         if(flow.done||flow.gate){toast(flow.gate?'승인 또는 수정 요청을 선택하세요.':'완료된 흐름입니다. 다시 시작 버튼을 눌러보세요.');return;}
@@ -468,7 +490,7 @@
   if(!storageAvailable){$('#save-status').classList.add('error');$('#save-status').innerHTML=icon('triangle-alert')+'<span>저장소 사용 불가 · MD로 보관</span>';toast('브라우저 저장소를 사용할 수 없습니다. 이 창의 기록은 MD로 저장해주세요.');icons();}
 
   // Mission checks run locally without model requests.
-  function missionBrief(){return '<p class="caption">별도 CS 검수 미션 · 개인 제작 주제와 무관하게 오류를 찾는 연습입니다. 재실행은 아래 CS 예시 Skill을 사용하세요.</p><div class="button-row">'+button('CS 예시 Skill ZIP','example-skill','download','secondary')+'</div>' + (window.YFMission?window.YFMission.brief(button,icon):'');}
+  function missionBrief(){return '<p class="caption">QA 리허설 · CS 샘플 데이터로 연습하지만, 내 Agent 결과에도 같은 질문을 적용합니다. 재실행은 아래 CS 예시 Skill을 사용하세요.</p><div class="button-row">'+button('CS 예시 Skill ZIP','example-skill','download','secondary')+'</div>' + (window.YFMission?window.YFMission.brief(button,icon):'');}
   function missionMarkup(){return window.YFMission?window.YFMission.markup(button,icon,form):'';}
   function setupMission(){if(window.YFMission)window.YFMission.setup();}
   async function missionAction(a,el){if(window.YFMission)await window.YFMission.action(a,el);}

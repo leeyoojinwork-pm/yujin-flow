@@ -1,11 +1,12 @@
 .lab-timer{display:inline-flex;align-items:center;gap:4px;flex:none;border:1px solid var(--line);border-radius:6px;padding:3px;color:var(--muted);background:var(--paper);font-variant-numeric:tabular-nums}
 .lab-timer button{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;border:0;border-radius:3px;padding:0;background:transparent;color:inherit;cursor:pointer;font:inherit;font-size:14px;font-weight:600}
 .lab-timer .timer-toggle{width:94px;flex:none}
-.lab-timer .timer-reset{width:34px;flex:none}
+.lab-timer .timer-reset,.lab-timer .timer-sound{width:34px;flex:none}
 .lab-timer [data-timer-icon]{display:flex;align-items:center}
 .lab-timer svg{width:18px;height:18px;flex:none}
 .lab-timer [data-timer-value]{width:5ch;text-align:center}
 .lab-timer button:hover:not(:disabled){background:var(--accent-tint);color:var(--accent)}
+.lab-timer .timer-sound[aria-pressed=true]{background:var(--ink);color:var(--lime)}
 .lab-timer button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .lab-timer button:disabled{opacity:.3;cursor:default}
 .lab-timer[data-phase=running],.lab-timer[data-phase=paused]{border-color:var(--accent);color:var(--accent)}
