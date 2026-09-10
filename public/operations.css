@@ -1,0 +1,27 @@
+.success-strip{border-top:2px solid var(--ink);border-bottom:1px solid var(--line);padding:18px 0;margin:0 0 28px;display:grid;grid-template-columns:210px 1fr;gap:28px}
+.success-strip h2{font-size:20px;line-height:1.4;margin-top:7px}
+.success-strip ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin:0;padding:0;list-style:none;counter-reset:success}
+.success-strip li{font-size:16px;line-height:1.7;counter-increment:success}
+.success-strip li:before{content:'0' counter(success);display:block;color:var(--green);font-size:12px;font-weight:700;margin-bottom:6px}
+.checkpoint{display:flex;gap:13px;border-left:3px solid var(--green);background:#edf2e6;padding:16px 18px;margin-bottom:22px}
+.checkpoint svg{flex:none;margin-top:3px;color:var(--green)}
+.checkpoint b{font-size:16px;line-height:1.7}
+.checkpoint p{font-size:14px;color:var(--muted);line-height:1.8;margin-top:6px}
+.verification-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:26px}
+.verification-strip span{font-size:12px;color:var(--green);display:block;margin-bottom:8px}
+.verification-strip b{font-size:16px;line-height:1.6}
+.verification-strip p{font-size:14px;line-height:1.8;margin-top:6px;color:var(--muted)}
+.triage{border-top:2px solid var(--ink);padding:24px 0 30px;margin-bottom:18px}
+.triage-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.triage-heading h2{font-size:25px;line-height:1.4}
+.triage-heading>span{font-size:12px;color:var(--muted)}
+.triage-tabs{display:flex;flex-wrap:wrap;gap:20px;border-bottom:1px solid var(--line);margin-top:18px}
+.triage-tabs button{padding:13px 0;font-size:15px;color:var(--muted);border-bottom:3px solid transparent}
+.triage-tabs button[aria-selected=true]{color:var(--ink);border-color:var(--ink);font-weight:700}
+#triage-detail{padding:21px 0;min-height:255px}
+#triage-detail h3{font-size:21px;line-height:1.6}
+#triage-detail ol{padding-left:22px;font-size:16px;line-height:1.9;margin:14px 0}
+.triage-next{font-size:15px;line-height:1.9;padding:13px 16px;background:#eef1e9;border-left:3px solid var(--green)}
+.help-return{margin-bottom:20px}
+@media(max-width:1100px){.success-strip{grid-template-columns:1fr;gap:14px}.success-strip>div{display:flex;gap:16px;align-items:center}.success-strip h2{margin:0}.success-strip ol{gap:18px}}
+@media(max-width:600px){.success-strip{padding:16px 0;margin-bottom:24px}.success-strip>div{display:block}.success-strip h2{font-size:20px;margin-top:6px}.success-strip ol{grid-template-columns:1fr;gap:12px}.success-strip li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:15px}.success-strip li:before{margin-top:3px}.checkpoint{padding:13px;gap:9px}.checkpoint b{font-size:15px}.checkpoint p{font-size:14px}.verification-strip{grid-template-columns:1fr;gap:20px}.triage-heading{align-items:start;flex-direction:column;gap:8px}.triage-heading h2{font-size:23px}.triage-tabs{gap:17px}.triage-tabs button{font-size:14px}#triage-detail h3{font-size:19px}#triage-detail ol{font-size:15px}.triage-next{font-size:14px}#help-open{width:30px}.header-actions{gap:3px}}

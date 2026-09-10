@@ -1,0 +1,54 @@
+.title-emphasis,.motion-underline{background-image:linear-gradient(var(--red),var(--red));background-repeat:no-repeat;background-position:0 calc(100% - 1px);background-size:0 3px;animation:yujin-underline .72s cubic-bezier(.22,1,.36,1) .34s forwards;box-decoration-break:clone;-webkit-box-decoration-break:clone;padding-bottom:3px}
+@keyframes yujin-underline{to{background-size:100% 3px}}
+
+.agent-intro-slide{background:#19181d;color:#faf8ff}
+.agent-intro-slide .eyebrow,.agent-intro-slide .slide-index,.agent-intro-slide .slide-credit,.agent-intro-slide .stage-meta{color:#bbb5c8}
+.agent-intro-slide .slide-credit{border-color:#423c4c}
+.agent-intro-stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:16px 0 10px;min-width:0}
+.agent-intro-kicker{font:600 12px/1.5 monospace;color:#d7baff;margin-bottom:20px}
+.agent-intro-display{line-height:.94;font-weight:800;letter-spacing:0}
+.agent-intro-display>span{display:block;font-size:40px;color:#faf8ff;animation:agent-materialize .65s ease-out both}
+.agent-intro-display>strong{display:block;font-size:144px;color:#d7baff;margin-top:8px;animation:agent-materialize .85s cubic-bezier(.16,1,.3,1) .16s both}
+.agent-intro-period{color:#ff706d}
+.agent-intro-stage h1{font-size:28px;line-height:1.4;font-weight:600;margin-top:24px;animation:agent-materialize .7s ease-out .35s both}
+.agent-intro-stage h1 br{display:none}
+.agent-intro-sequence{list-style:none;padding:0;margin:34px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.agent-intro-sequence li{position:relative;min-width:0;border-top:1px solid #524a60;padding:18px 22px 0 0;animation:agent-materialize .65s ease-out calc(.55s + var(--step)*.2s) both}
+.agent-intro-sequence li:before{content:"";position:absolute;top:-2px;left:0;width:100%;height:3px;background:#d7baff;transform:scaleX(0);transform-origin:left;animation:agent-connect .45s ease-out calc(.8s + var(--step)*.2s) forwards}
+.agent-intro-sequence li:last-child:before{background:#90d5b2}
+.agent-intro-node{display:flex;gap:10px;align-items:center}.agent-intro-node>svg{color:#d7baff;width:22px;height:22px}.agent-intro-node b{font-size:19px}.agent-intro-node small{margin-left:auto;font:11px/1 monospace;color:#b4a9c5}
+.agent-intro-sequence p{font-size:13px;line-height:1.6;color:#c2bacd;margin-top:9px}
+.agent-intro-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:24px;color:#c2bacd}.agent-intro-bottom p{font-size:13px}.agent-intro-bottom .icon-button:hover{background:#38313f}
+@keyframes agent-materialize{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes agent-connect{to{transform:scaleX(1)}}
+@media(max-width:1000px){.agent-intro-display>strong{font-size:112px}.agent-intro-display>span{font-size:32px}.agent-intro-stage h1{font-size:25px}}
+@media(max-width:600px){.agent-intro-stage{padding-top:10px}.agent-intro-display>strong{font-size:70px}.agent-intro-display>span{font-size:25px}.agent-intro-stage h1{font-size:23px;line-height:1.5;margin-top:22px}.agent-intro-stage h1 br{display:block}.agent-intro-sequence{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px;margin-top:28px}.agent-intro-sequence li{padding:12px 0 0}.agent-intro-node b{font-size:17px}.agent-intro-node small{display:none}.agent-intro-sequence p{font-size:12px}.agent-intro-bottom{margin-top:18px}}
+@media(max-width:360px){.agent-intro-display>strong{font-size:60px}}
+@media(prefers-reduced-motion:reduce){.agent-intro-display>span,.agent-intro-display>strong,.agent-intro-stage h1,.agent-intro-sequence li{animation:none}.agent-intro-sequence li:before{animation:none;transform:scaleX(1)}}
+
+.taxi-scene{position:relative;height:238px;overflow:hidden;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);background:#f0edf5;isolation:isolate}
+.taxi-skyline{position:absolute;inset:auto 0 68px;height:92px;opacity:.52;background:linear-gradient(90deg,transparent 0 3%,#d5d0db 3% 10%,transparent 10% 13%,#c9c3d1 13% 22%,transparent 22% 25%,#d5d0db 25% 31%,transparent 31% 38%,#c9c3d1 38% 48%,transparent 48% 53%,#d5d0db 53% 61%,transparent 61% 66%,#c9c3d1 66% 76%,transparent 76% 80%,#d5d0db 80% 94%,transparent 94%)}
+.taxi-route{position:absolute;inset:18px 22px auto;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:650;color:var(--muted)}
+.taxi-route span{display:flex;align-items:center;gap:7px}.taxi-route span:before{content:"";width:8px;height:8px;border:2px solid currentColor;border-radius:50%;background:var(--paper)}
+.taxi-route .destination{color:var(--red)}
+.taxi-road{position:absolute;inset:auto 0 0;height:78px;background:var(--ink);border-top:5px solid #fff}
+.taxi-road:after{content:"";position:absolute;left:0;right:0;top:34px;height:3px;background:repeating-linear-gradient(90deg,#fff 0 34px,transparent 34px 64px);opacity:.7;animation:road-slide .58s linear 2}
+.taxi-car{position:absolute;z-index:2;left:47%;bottom:25px;width:154px;height:58px;transform:translateX(-50%);animation:taxi-arrive 1.18s cubic-bezier(.16,.84,.3,1) .16s both;transition:left .82s cubic-bezier(.64,0,.78,0),transform .82s cubic-bezier(.64,0,.78,0)}
+.taxi-car-body{position:absolute;inset:19px 0 5px;background:#ffc51b;border:2px solid var(--ink);border-radius:10px 16px 5px 5px}
+.taxi-car-body:before{content:"";position:absolute;left:36px;top:-20px;width:78px;height:26px;background:#ffc51b;border:2px solid var(--ink);border-bottom:0;clip-path:polygon(16% 100%,30% 0,78% 0,100% 100%)}
+.taxi-car-body:after{content:"";position:absolute;left:52px;top:-15px;width:45px;height:18px;background:#e9e7ef;clip-path:polygon(16% 100%,30% 0,78% 0,100% 100%)}
+.taxi-sign{position:absolute;z-index:2;left:61px;top:7px;padding:2px 8px;background:var(--paper);border:2px solid var(--ink);font:700 9px/1.2 monospace;color:var(--ink)}
+.taxi-wheel{position:absolute;z-index:3;bottom:0;width:25px;height:25px;border:6px solid var(--ink);border-radius:50%;background:#fff}.taxi-wheel.left{left:22px}.taxi-wheel.right{right:19px}
+.taxi-speed{position:absolute;right:100%;bottom:36px;width:90px;height:20px;background:repeating-linear-gradient(0deg,transparent 0 4px,var(--accent) 4px 6px);transform:skewX(-25deg);opacity:.7;animation:speed-fade 1.18s ease-out .16s both}
+.taxi-scene.is-revealed .taxi-car{animation:taxi-depart .82s cubic-bezier(.64,0,.78,0) both}
+.taxi-scene.is-revealed .taxi-road:after{animation:road-slide .42s linear 2}
+.taxi-copy{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:34px;align-items:start;margin-top:22px}
+.taxi-copy .reveal-question{margin:0;padding-top:5px}.taxi-copy .reveal-answer{margin:0;padding:18px 20px;background:#fff;border-left:4px solid var(--red);animation:answer-rise .5s cubic-bezier(.22,1,.36,1) both}.taxi-copy .reveal-answer h3{font-size:21px}.taxi-copy .reveal-answer p{font-size:14px;margin-top:11px}
+.taxi-action{margin-top:18px}
+@keyframes taxi-arrive{from{left:-22%;transform:translateX(-50%) translateY(3px)}70%{transform:translateX(-50%) translateY(-2px)}to{left:47%;transform:translateX(-50%) translateY(0)}}
+@keyframes taxi-depart{from{left:47%;transform:translateX(-50%) translateY(0);opacity:1}82%{opacity:1}to{left:118%;transform:translateX(0) translateY(2px);opacity:0}}
+@keyframes speed-fade{0%,65%{opacity:.75}to{opacity:0}}
+@keyframes road-slide{to{background-position:-64px 0}}
+@keyframes answer-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){.taxi-scene{height:204px}.taxi-car{width:132px;bottom:24px}.taxi-car-body:before{left:30px;width:69px}.taxi-car-body:after{left:44px}.taxi-sign{left:50px}.taxi-copy{grid-template-columns:1fr;gap:16px}.taxi-copy .reveal-answer{padding:16px}.taxi-copy .reveal-answer h3{font-size:18px}.taxi-action .button{width:100%}}
+@media(prefers-reduced-motion:reduce){.title-emphasis,.motion-underline{background-size:100% 3px}.taxi-car{animation:none}.taxi-speed{display:none}.taxi-road:after{animation:none}.taxi-copy .reveal-answer{animation:none}}

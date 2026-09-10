@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#141614">
+  <meta name="description" content="이유진의 YUJIN FLOW. 내 업무에서 출발해 Claude Project, Skill, Agent workflow를 만드는 인터랙티브 실습덱.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>YUJIN FLOW · Agent Workflow Lab</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./mission.css">
+  <link rel="stylesheet" href="./operations.css">
+  <link rel="stylesheet" href="./orchestration.css">
+  <link rel="stylesheet" href="./cli-demo.css">
+  <link rel="stylesheet" href="./timers.css">
+  <link rel="stylesheet" href="./theme.css">
+  <link rel="stylesheet" href="./motion.css">
+  <script src="./vendor/lucide.min.js" defer></script>
+  <script src="./vendor/jszip.min.js" defer></script>
+  <script src="./vendor/papaparse.min.js" defer></script>
+  <script src="./content.js" defer></script>
+  <script src="./engine.js" defer></script>
+  <script src="./timers.js" defer></script>
+  <script src="./mission.js" defer></script>
+  <script src="./operations.js" defer></script>
+  <script src="./cli-demo.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#slide">본문으로</a>
+  <header class="app-header">
+    <a href="#/opening" class="brand" aria-label="YUJIN FLOW 첫 장"><span class="brand-mark">Y<span>↗</span></span><span>YUJIN <b>FLOW</b><small>AFTER WORK AI CLUB</small></span></a>
+    <div class="view-switch" role="group" aria-label="보기 모드">
+      <button type="button" id="deck-mode" aria-pressed="true"><i data-lucide="presentation"></i><span>강의덱</span></button>
+      <button type="button" id="lab-mode" aria-pressed="false"><i data-lucide="notebook-pen"></i><span>내 실습노트</span><span id="lab-count" class="count">0</span></button>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="icon-button" id="help-open" title="실습이 막혔을 때" aria-label="실습이 막혔을 때"><i data-lucide="life-buoy"></i></button>
+      <span class="save-status" id="save-status" role="status"><i data-lucide="hard-drive"></i><span>이 브라우저에 저장</span></span>
+      <button type="button" class="icon-button" id="export-open" title="전체 질문·답변 내보내기" aria-label="전체 질문·답변 내보내기"><i data-lucide="download"></i></button>
+      <button type="button" class="icon-button" id="fullscreen" title="전체 화면" aria-label="전체 화면"><i data-lucide="maximize"></i></button>
+    </div>
+  </header>
+  <div class="app-layout">
+    <aside class="rail" aria-label="강의 목차"><button type="button" class="icon-button" id="index-open" aria-label="전체 슬라이드 목차" title="전체 슬라이드 목차"><i data-lucide="panel-left-open"></i></button><nav id="chapters"></nav><div class="rail-label">AWAC / 02</div></aside>
+    <main id="main"><article id="slide" tabindex="-1"></article><section id="notebook" hidden aria-label="내 실습노트"></section></main>
+  </div>
+  <footer class="deck-footer">
+    <div class="footer-context"><button type="button" id="chapter-label" title="전체 목차" aria-label="전체 슬라이드 목차">00 / OPENING</button><span id="slide-title">오늘, 내 일을 다시 설계합니다.</span></div>
+    <div class="footer-right"><button type="button" class="icon-button" id="notes-toggle" aria-label="강사 노트" aria-pressed="false" title="강사 노트"><i data-lucide="sticky-note"></i></button><span class="slide-counter"><b id="current">01</b><span>/</span><span id="total">58</span></span><button type="button" class="icon-button" id="previous" title="이전 슬라이드" aria-label="이전 슬라이드"><i data-lucide="arrow-left"></i></button><button type="button" class="icon-button next-button" id="next" title="다음 슬라이드" aria-label="다음 슬라이드"><i data-lucide="arrow-right"></i></button></div>
+    <div class="deck-progress"><div id="deck-progress-fill"></div></div>
+  </footer>
+  <aside id="speaker-notes" hidden></aside>
+  <dialog id="index-dialog" class="index-dialog"><div class="dialog-heading"><div><span class="eyebrow">CONTENTS</span><h2>오늘의 흐름</h2></div><button type="button" class="icon-button" data-close aria-label="목차 닫기"><i data-lucide="x"></i></button></div><div id="index-list"></div></dialog>
+  <dialog id="export-dialog"><div class="dialog-heading"><div><span class="eyebrow">YOUR WORK, READY TO GO</span><h2>질문부터 답변까지, 한 번에.</h2></div><button type="button" class="icon-button" data-close aria-label="내보내기 닫기"><i data-lucide="x"></i></button></div><p class="dialog-description">모든 실습 질문과 내가 작성한 답변을 묶었습니다. 빈 답변은 미입력으로 표시됩니다.</p><textarea id="export-preview" readonly aria-label="전체 프롬프트 미리보기" spellcheck="false"></textarea><div class="dialog-actions"><button type="button" class="button secondary" data-action="copy-all"><i data-lucide="copy"></i>전체 프롬프트 복사</button><button type="button" class="button primary" data-action="download-all"><i data-lucide="download"></i>MD로 저장</button></div></dialog>
+  <dialog id="confirm-dialog"><div class="dialog-heading"><h2 id="confirm-title">기록 초기화</h2><button type="button" class="icon-button" data-close aria-label="닫기"><i data-lucide="x"></i></button></div><p id="confirm-message"></p><div class="dialog-actions"><button type="button" class="button secondary" data-close>취소</button><button type="button" class="button danger" id="confirm-action">초기화</button></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <noscript>이 실습덱의 입력·저장·슬라이드 이동에는 JavaScript가 필요합니다.</noscript>
+</body>
+</html>

@@ -1,0 +1,56 @@
+#chapter-label{font-size:11px;color:var(--muted);white-space:nowrap;padding:9px 0;text-underline-offset:5px}
+#chapter-label:hover{text-decoration:underline}
+.mission-brief-slide{background:var(--dark);color:#f8faf3}
+.mission-brief-slide .eyebrow,.mission-brief-slide .slide-index,.mission-brief-slide .slide-credit,.mission-brief-slide .stage-meta{color:#b1bba8}
+.mission-brief-slide .slide-credit{border-color:#424a3c}
+.mission-brief-slide .slide-title{max-width:980px;font-size:46px}
+.mission-brief-layout{display:grid;grid-template-columns:1.7fr 1fr;gap:70px;align-items:start;padding:18px 0 25px}
+.mission-kicker{font-size:11px;font-weight:700;color:var(--lime)}
+.mission-opening{margin-top:22px;font-size:21px;line-height:1.9;color:#c6cebf}
+.mission-question{font-size:37px;font-weight:750;margin:28px 0;color:var(--lime)}
+.mission-rounds{border-top:1px solid #5a654f}
+.mission-rounds>div{padding:20px 0;border-bottom:1px solid #414a38}
+.mission-rounds span{font-size:11px;color:var(--lime)}
+.mission-rounds h3{font-size:23px;margin-top:11px}
+.mission-rounds p{font-size:13px;line-height:1.8;margin-top:21px;color:#a7b59b}
+.mission-slide .slide-title{font-size:37px}
+.mission-top{display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.mission-tabs{display:flex;gap:24px;align-self:stretch}
+.mission-tabs button{display:flex;gap:8px;align-items:center;border-bottom:3px solid transparent;padding:16px 0;font-size:12px;font-weight:650;color:var(--muted)}
+.mission-tabs button[aria-selected=true]{border-color:var(--ink);color:var(--ink)}
+.mission-tabs span{font-size:14px}
+.mission-clock{display:flex;align-items:center;gap:3px;flex:none;padding:10px 0}
+.mission-task{padding:4px 0 23px}
+.mission-task h3{font-size:23px;line-height:1.6;margin:10px 0 22px;max-width:1050px}
+.decision-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:26px}
+.decision-options button{border:1px solid var(--line);border-radius:6px;display:flex;gap:10px;text-align:left;align-items:center;padding:15px;font-size:14px;line-height:1.5;background:#fff;min-height:60px}
+.decision-options button:hover{border-color:var(--ink)}
+.decision-options button.chosen{border-color:var(--ink);background:var(--lime)}
+.decision-options svg{flex:none;width:18px}
+.mission-decision{font-size:14px;line-height:1.8;min-height:50px;padding:14px 0 0;color:var(--muted)}
+.mission-decision.pass{color:var(--green)}
+.mission-decision.fail{color:var(--red)}
+.local-checker{border-top:1px solid var(--ink);padding:23px 0 15px}
+.local-checker h3{font-size:22px;margin-top:9px}
+.local-checker p{font-size:13px;color:var(--muted);line-height:1.8;margin-top:11px}
+.checker-input{display:flex;gap:15px;align-items:center;margin:20px 0}
+.checker-input label{cursor:pointer}
+.checker-input>span{font-size:12px;color:var(--muted)}
+#mission-result-file{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;clip-path:inset(50%);overflow:hidden}
+.checker-input:focus-within label{outline:3px solid var(--blue);outline-offset:4px}
+.checker-status{font-size:17px;font-weight:700;border-top:1px solid var(--line);padding:19px 0 12px}
+.checker-status small{font-size:12px;margin-left:14px;color:var(--muted);font-weight:400;overflow-wrap:anywhere}
+.checker-status.pass{color:var(--green)}
+.checker-status.fail{color:var(--red)}
+.check-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px}
+.check-list li{display:flex;gap:10px;border-bottom:1px solid var(--line);padding:13px 0;align-items:start}
+.check-list b{font-size:13px}
+.check-list small{display:block;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.7}
+.check-list .pass>svg{color:var(--green)}
+.check-list .fail>svg{color:var(--red)}
+.check-list svg{margin-top:1px}
+.mission-notes{border-top:1px solid var(--line);margin-top:13px}
+.mission-notes>summary{cursor:pointer;padding:22px 0;font-size:18px;font-weight:650}
+@media(max-width:1100px){.mission-brief-layout{gap:35px}.mission-brief-slide .slide-title{font-size:38px}.mission-opening{font-size:19px}.mission-question{font-size:30px}.mission-top{gap:14px}.mission-tabs{gap:14px}.mission-tabs span{font-size:12px}.mission-clock .icon-button{width:30px}.mission-task h3{font-size:21px}.decision-options{gap:10px}.decision-options button{font-size:13px;padding:12px}}
+@media(max-width:750px){.mission-brief-layout{grid-template-columns:1fr;gap:30px}.mission-rounds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.mission-rounds h3{font-size:18px;line-height:1.5}.mission-rounds p{grid-column:1/-1;margin:0}.mission-top{flex-wrap:wrap;gap:0}.mission-tabs{width:100%;gap:0;justify-content:space-between}.mission-tabs button{padding:14px 2px}.mission-tabs span{font-size:11px}.mission-clock{margin-left:auto}.decision-options{grid-template-columns:1fr}.decision-options button{min-height:47px;font-size:14px}.check-list{grid-template-columns:1fr}.checker-input{flex-direction:column;align-items:start}.mission-task h3{font-size:18px}.local-checker h3{font-size:20px}}
+@media(max-width:600px){#chapter-label{font-size:9px}.mission-brief-slide .slide-title{font-size:29px;line-height:1.35}.mission-brief-layout{padding:4px 0 15px}.mission-opening{font-size:16px;line-height:1.9;margin-top:18px}.mission-question{font-size:27px;margin:23px 0}.mission-rounds h3{font-size:16px}.mission-rounds span{font-size:9px}.mission-slide .slide-title{font-size:28px}.mission-tabs button{gap:5px}.mission-tabs span{font-size:10px}.mission-task .button-row .button{font-size:11px}.mission-decision{font-size:13px}.mission-clock{padding:12px 0}.mission-notes>summary{font-size:16px}.checker-status small{display:block;margin:8px 0 0}}

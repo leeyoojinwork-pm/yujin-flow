@@ -1,0 +1,27 @@
+.anatomy-grid:has(.anatomy-tree){grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:48px;align-items:start}
+.anatomy-tree{margin:0;min-width:0;padding-top:4px}
+.tree-node{border:1px solid var(--ink);border-radius:4px;padding:20px;min-width:0;background:var(--paper)}
+.tree-head{width:min(320px,100%);margin:0 auto;background:var(--ink);color:var(--paper);text-align:center;min-height:128px}
+.tree-role{display:block;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:12px}
+.tree-head .tree-role{color:var(--lime)}
+.tree-node h2,.tree-node h3{font-size:20px;line-height:1.4}
+.tree-node p{font-size:14px;line-height:1.7;color:var(--muted);margin-top:8px}
+.tree-head p{color:#c2c9bd}
+.tree-branches{list-style:none;padding:0;margin:64px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;position:relative}
+.tree-branches:before{content:"";position:absolute;left:calc(25% - 6px);right:calc(25% - 6px);top:-32px;height:1px;background:var(--muted)}
+.tree-branches:after{content:"";position:absolute;left:50%;top:-64px;width:1px;height:32px;background:var(--muted)}
+.tree-branches>li{position:relative;min-width:0}
+.tree-branches>li:before{content:"";position:absolute;left:50%;top:-32px;width:1px;height:32px;background:var(--muted)}
+.tree-edge-label{position:absolute;z-index:1;left:50%;top:-28px;transform:translateX(-50%);font-size:12px;line-height:20px;padding:0 8px;background:var(--paper);color:var(--muted);white-space:nowrap}
+.tree-branches .tree-node{height:100%;min-height:188px}
+.tree-skill{border-style:dashed;border-color:var(--blue)}
+.tree-skill .tree-role{color:var(--blue)}
+.tree-skill code{display:block;font-size:12px;line-height:1.6;margin-top:16px;color:var(--muted)}
+.tree-return{display:block;border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-size:12px;line-height:1.6}
+.tree-loop{display:flex;align-items:flex-start;gap:12px;border-top:1px dashed var(--muted);padding-top:20px;margin-top:24px}
+.tree-loop svg{margin-top:4px}
+.tree-loop b{font-size:16px;line-height:1.6}
+.tree-loop p{font-size:14px;line-height:1.7;color:var(--muted);margin-top:4px}
+@media(max-width:1100px){.anatomy-grid:has(.anatomy-tree){gap:32px}.tree-node{padding:16px}.tree-node h2,.tree-node h3{font-size:18px}}
+@media(max-width:900px){.anatomy-grid:has(.anatomy-tree){grid-template-columns:minmax(0,1fr)}.anatomy-tree{grid-row:1;max-width:640px;width:100%;justify-self:center}}
+@media(max-width:600px){.tree-node{padding:16px 12px}.tree-role{font-size:20px}.tree-node h3{font-size:16px}.tree-node p{font-size:13px}.tree-head{width:min(280px,100%)}.tree-branches{gap:16px}.tree-branches:before{left:calc(25% - 4px);right:calc(25% - 4px)}.tree-return{font-size:12px}.tree-loop p{font-size:13px}}
