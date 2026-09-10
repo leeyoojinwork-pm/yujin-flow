@@ -19,4 +19,4 @@
 [수정 전 / 수정 후 / 재검증 결과 또는 미실행]
 
 ## 사례 기준
-A는 8개 ID와 분류 합계 8, A08 미응답을 포함한다. B는 6개 ID와 합계 6, B05를 데이터로 처리하고 B06 미응답을 포함한다. 공통 산출물은 classification.csv와 improvement-report.md다. 개선안의 적절성은 별도로 사람이 검토한다.
+A는 8개 ID와 분류 합계 8, A08 미응답을 포함한다. B는 6개 ID와 합계 6, B05를 데이터로 처리하고 B06 미응답을 포함한다. 공통 산출물은 classification.csv와 cs-response-drafts.md다. 답변 내용과 FAQ의 일치 여부는 별도로 사람이 검토한다.
