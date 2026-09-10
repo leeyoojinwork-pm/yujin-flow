@@ -2,7 +2,7 @@
 .success-strip h2{font-size:20px;line-height:1.4;margin-top:7px}
 .success-strip ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin:0;padding:0;list-style:none;counter-reset:success}
 .success-strip li{font-size:16px;line-height:1.7;counter-increment:success}
-.success-strip li:before{content:'0' counter(success);display:block;color:var(--green);font-size:12px;font-weight:700;margin-bottom:6px}
+.success-strip li:before{content:'0' counter(success);display:block;color:var(--accent);font-size:12px;font-weight:700;margin-bottom:6px}
 .checkpoint{display:flex;gap:13px;border-left:3px solid var(--green);background:#edf2e6;padding:16px 18px;margin-bottom:22px}
 .checkpoint svg{flex:none;margin-top:3px;color:var(--green)}
 .checkpoint b{font-size:16px;line-height:1.7}

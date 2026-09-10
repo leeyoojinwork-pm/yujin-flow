@@ -42,7 +42,7 @@
       return '<div class="field"><label for="' + domId + '"><span class="field-num">' + String(i + 1).padStart(2, '0') + '</span>' + esc(f.label) + '</label>' + input + '</div>';
     }).join('');
     const prompt = E.labPrompt(id, state);
-    return '<div class="lab-content">' + window.YFArtifacts.bridge(id) + window.YFOperations.checkpoint(id) + (id === 'problem' ? '<aside class="problem-anchor"><span class="eyebrow">AGENT DESIGN / 출발점</span><h2>이 문제정의가 뒤에서 만들 Agent의 기준입니다.</h2><p>누구의 어떤 어려움을 줄일지 정한 뒤, 지침과 검수 조건으로 옮깁니다.</p><div class="button-row">' + button('문제 → Project 지침', 'goto', 'arrow-right', 'secondary', 'data-slide="lab-instructions"') + button('성공 기준 → 검증', 'goto', 'check-check', 'secondary', 'data-slide="lab-experiment"') + '</div></aside>' : '') + (id === 'experiment' ? '<div class="poc-materials"><p>PoC 입력: 가상 문의 A01~A05 + rubric.md. 아래 두 파일을 Claude 대화에 첨부한 뒤, 이 실습의 프롬프트를 사용하세요.</p><div class="button-row">' + button('문의 CSV', 'download-sample', 'download', 'secondary', 'data-file="inquiries-a.csv"') + button('분류 기준·FAQ', 'download-sample', 'download', 'secondary', 'data-file="rubric.md"') + '</div></div>' : '') + '<div class="lab-heading"><p>' + esc(l.purpose) + '</p>' + window.YFTimers.markup(id) + '</div><div class="lab-form">' + fields + '</div>' + (id === 'metrics' ? metricInline() : '') + '<div class="lab-actions"><div class="lab-actions-left">' + (l.fields.some(f => f.example) ? '<button type="button" class="text-button" data-action="fill-example" data-lab-id="' + id + '">' + icon('corner-down-right') + 'CS 참고 예시 넣기</button>' : '<span class="lab-time">직접 실행한 결과를 기록합니다.</span>') + '<span class="lab-progress" data-progress="' + id + '">' + labCount(id) + ' 입력</span></div></div><section class="lab-prompt-panel" aria-label="Claude 실행 프롬프트"><div class="lab-prompt-heading"><div><span class="eyebrow">READY-TO-USE PROMPT</span><h3>Claude에 이렇게 요청하세요.</h3></div>' + icon('message-square-code') + '</div><p class="lab-prompt-task">' + esc(l.task) + '</p><p class="lab-prompt-note">위 질문과 내가 쓴 답변, 앞에서 정한 관련 맥락까지 자동으로 함께 붙습니다.</p><details><summary>복사되는 전체 프롬프트 미리보기' + icon('chevron-down') + '</summary><pre class="code-preview" data-lab-prompt="' + id + '">' + esc(prompt) + '</pre></details><div class="button-row">' + button('프롬프트 복사', 'copy-lab', 'copy', 'primary', 'data-lab-id="' + id + '"') + button('프롬프트 MD 저장', 'download-lab', 'download', 'secondary', 'data-lab-id="' + id + '"') + '</div></section></div>' + window.YFArtifacts.footer(id);
+    return '<div class="lab-content">' + window.YFArtifacts.bridge(id) + window.YFOperations.checkpoint(id) + (id === 'problem' ? '<aside class="problem-anchor"><span class="eyebrow">AGENT DESIGN / 출발점</span><h2>이 문제정의가 뒤에서 만들 Agent의 기준입니다.</h2><p>누구의 어떤 어려움을 줄일지 정한 뒤, 지침과 검수 조건으로 옮깁니다.</p><div class="button-row">' + button('문제 → Project 지침', 'goto', 'arrow-right', 'secondary', 'data-slide="lab-instructions"') + button('성공 기준 → 검증', 'goto', 'check-check', 'secondary', 'data-slide="lab-experiment"') + '</div></aside>' : '') + (id === 'experiment' ? '<div class="poc-materials"><p>PoC 입력: 가상 문의 A01~A05 + rubric.md. 아래 두 파일을 Claude 대화에 첨부한 뒤, 이 실습의 프롬프트를 사용하세요.</p><div class="button-row">' + button('문의 CSV', 'download-sample', 'download', 'secondary', 'data-file="inquiries-a.csv"') + button('분류 기준·FAQ', 'download-sample', 'download', 'secondary', 'data-file="rubric.md"') + '</div></div>' : '') + '<div class="lab-heading"><p>' + esc(l.purpose) + '</p>' + window.YFTimers.markup(id) + '</div><div class="lab-form">' + fields + '</div>' + (id === 'metrics' ? metricInline() : '') + '<div class="lab-actions"><div class="lab-actions-left">' + (l.fields.some(f => f.example) ? '<button type="button" class="text-button" data-action="fill-example" data-lab-id="' + id + '">' + icon('corner-down-right') + 'CS 참고 예시 넣기</button>' : '<span class="lab-time">직접 실행한 결과를 기록합니다.</span>') + '<span class="lab-progress" data-progress="' + id + '">' + labCount(id) + ' 입력</span></div></div><section class="lab-prompt-panel" aria-label="Claude 실행 프롬프트"><div class="lab-prompt-heading"><div><span class="eyebrow">READY-TO-USE PROMPT</span><h3>Claude에 이렇게 요청하세요.</h3></div>' + icon('message-square-code') + '</div><p class="lab-prompt-task">' + esc(l.task) + '</p><p class="lab-prompt-note">위 질문과 내가 쓴 답변, 앞에서 정한 관련 맥락까지 자동으로 함께 붙습니다.</p><details><summary>복사되는 전체 프롬프트 미리보기' + icon('chevron-down') + '</summary><pre class="code-preview" data-lab-prompt="' + id + '">' + esc(prompt) + '</pre></details><div class="button-row">' + button('프롬프트 복사', 'copy-lab', 'copy', 'primary', 'data-lab-id="' + id + '"') + button('프롬프트 MD 저장', 'download-lab', 'download', 'secondary', 'data-lab-id="' + id + '"') + '</div></section></div>';
   }
   function metricInline() {
     const m = E.metrics(state);
@@ -53,7 +53,8 @@
     return '<pre class="code-preview">' + esc(content) + '</pre><div class="button-row" style="margin-top:16px">' + button('복사', 'copy-prompt', 'copy', 'secondary', 'data-prompt="' + name + '"') + button('MD로 저장', 'download-prompt', 'download', 'secondary', 'data-prompt="' + name + '"') + '</div>';
   }
   function titleMarkup(s) {
-    if (s.id === 'yujin-framework') return '<span class="framework-title-lead">문제에서 실행까지.</span><span class="framework-wordmark">YUJIN <span class="title-emphasis">FLOW.</span><span class="framework-title-arrow">' + icon('arrow-up-right') + '</span></span>';
+    if (s.id === 'yujin-framework') return esc(s.title);
+    if (s.id === 'yujin-flow-map') return '문제에서 실행까지.<br><span>YUJIN FLOW.</span>';
     const phrase = {
       'opening': 'AI AGENT', 'finish-line': '결과물 4개', 'from-last-week': '내 업무', 'homework-to-poc': 'PoC 명세', 'taxi': '어떤 문제',
       'solution-trap': '챗봇', 'bottleneck-diagnosis': '병목 진단가', 'rethink-work': '없애도 되는 일', 'yujin-framework': 'YUJIN FLOW',
@@ -84,7 +85,7 @@
     active = Math.max(0, Math.min(D.slides.length - 1, n));
     const s = D.slides[active]; state.slide = s.id;
     const article = $('#slide');
-    article.className = s.type + '-slide slide-enter';
+    article.className = s.type + '-slide slide-' + s.id + ' slide-enter';
     if (s.type === 'hero') {
       article.innerHTML = '<div class="slide-inner">' + header(s, active) + '<div class="hero-copy"><div class="hero-name">YUJIN FLOW</div><h1>' + titleMarkup(s).replace(/\n/g, '<br>') + '</h1><div class="hero-corner" aria-hidden="true">↗</div></div><div class="hero-bottom"><div><p>' + esc(s.subtitle) + '</p>' + (s.impact ? '<p class="hero-impact">' + esc(s.impact) + '</p>' : '') + (s.hook ? '<p class="hero-hook">' + esc(s.hook) + '</p>' : '') + '</div><div class="hero-signature"><b>이유진</b><a href="mailto:lee.yoojin.work@gmail.com">lee.yoojin.work@gmail.com</a></div></div><div class="hero-strip"><span><b>Y</b>Why Gap<small>진짜 병목은?</small></span><span><b>U</b>User Job<small>입력과 출력은?</small></span><span><b>J</b>Journey<small>흐름과 예외는?</small></span><span><b>I</b>Intelligence Fit<small>AI가 맞는 일은?</small></span><span><b>N</b>Next Agent<small>어떻게 다시 쓰나?</small></span></div><div class="hero-start">' + button('오늘의 흐름', 'next', 'arrow-right', 'lime') + '</div></div>';
     } else if (s.type === 'agent-intro') {
@@ -92,7 +93,7 @@
     } else if (s.type === 'closing') {
       article.innerHTML = '<div class="slide-inner">' + header(s, active) + '<div class="closing-content"><h1>' + titleMarkup(s) + '</h1><p>' + esc(s.subtitle) + '</p><div class="button-row">' + button('내 결과물 가져가기', 'export-open', 'download', 'lime') + button('실습노트 열기', 'notebook', 'notebook-pen', 'secondary') + '</div></div><div class="closing-end"><b>YUJIN FLOW</b><span>일을 맡기는 사람, 이유진</span></div></div>';
     } else {
-      article.innerHTML = '<div class="slide-inner">' + header(s, active) + '<h1 class="slide-title">' + titleMarkup(s) + '</h1>' + (s.subtitle ? '<p class="slide-subtitle">' + esc(s.subtitle) + '</p>' : '') + '<div class="slide-body">' + window.YFOperations.criteria(s) + window.YFOperations.verification(s) + body(s) + window.YFArtifacts.slideFooter(s) + '</div>' + credit(s) + '</div>';
+      article.innerHTML = '<div class="slide-inner">' + header(s, active) + '<h1 class="slide-title">' + titleMarkup(s) + '</h1>' + (s.subtitle ? '<p class="slide-subtitle">' + esc(s.subtitle) + '</p>' : '') + '<div class="slide-body">' + (s.type === 'deliverables' ? '' : window.YFOperations.criteria(s) + window.YFOperations.verification(s)) + body(s) + (s.type === 'deliverables' ? '' : window.YFArtifacts.slideFooter(s)) + '</div>' + credit(s) + '</div>';
     }
     article.scrollTop = 0;
     $('#current').textContent = String(active + 1).padStart(2, '0');
@@ -125,34 +126,38 @@
         ['01', '내가 풀고 싶은 문제 하나', '기능 아이디어가 아니라 실제 업무 병목으로 바꿉니다.'],
         ['02', '왜 불편한지', '시간 지연·누락·재작업·판단 어려움 중 무엇인지 고릅니다.'],
         ['03', 'Agent가 해줬으면 하는 일', 'AI의 일과 사람의 검수 지점을 분리합니다.']
-      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p></article>').join('') + '</section><section class="poc-spec"><span class="eyebrow">TO POC SPEC</span><h2>오늘 검증할 여섯 칸</h2><div>' + [
-        ['문제정의', '누가 · 어떤 상황에서 · 무엇 때문에 막히나'],
-        ['검증 가설', 'AI가 어디까지 대신하면 좋아지는가'],
-        ['입력', '작은 샘플 데이터와 기준 문서'],
-        ['AI의 일', '분류 · 근거 매칭 · 초안 생성'],
-        ['사람 검수', '근거 · 표현 · 예외 · 누락 확인'],
-        ['성공 기준', '몇 건 중 몇 건이 통과해야 하는가']
-      ].map((x, i) => '<div><small>0' + (i + 1) + '</small><b>' + x[0] + '</b><p>' + x[1] + '</p></div>').join('') + '</div></section></div><p class="poc-one-line">PoC는 완성품이 아니라, 내 문제가 AI로 해결 가능한 구조인지 작은 데이터로 확인하는 실험입니다.</p>';
-      case 'deliverables': return '<div class="practice-cadence compact"><div class="contents-label"><span>CONTENTS</span><b>오늘의 흐름</b></div>' + [
-        ['01', '문제정의', '병목 찾기 · 문제 후보 고르기', '20분'],
-        ['02', 'Agent 설계', 'YUJIN → Project → Skill', '55분'],
-        ['03', '실행·검수', '첫 실행 · QA Loop · 2주차 과제', '45분']
-      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p><small>' + x[3] + '</small></article>').join('') + '</div><div class="deliverable-summary"><div class="contents-label"><span>OUTPUT</span><b>남는 결과물</b></div>' + [
-        ['folder-open', 'Project', '업무 지침과 기준 파일'],
-        ['package', 'Skill', '재사용 절차와 ZIP'],
-        ['git-branch', 'Workflow', '입력·처리·검수 흐름'],
-        ['file-check-2', 'Run Log', '2번 실행한 검수 기록']
-      ].map((x, i) => '<div class="deliverable-mini" style="--output-index:' + i + '">' + icon(x[0]) + '<span>0' + (i + 1) + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p></div>').join('') + '</div>';
+      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p></article>').join('') + '</section><section class="poc-spec"><span class="eyebrow">TODAY</span><h2>오늘은 이렇게 바꿉니다</h2><div>' + [
+        ['문제를 고른다', 'Agent로 만들 만한 문제인지 최소조건을 확인합니다.'],
+        ['업무 흐름으로 바꾼다', '언제 시작하고, 어떤 입력을 보고, 어떤 기준으로 판단하고, 결과물이 어디에 남아야 하는지 정합니다.'],
+        ['Claude Project / Skill로 만든다', '매번 새로 설명하지 않아도 일할 수 있게 지침과 파일로 저장합니다.'],
+        ['한 번 실행하고 검수한다', '결과가 맞는지 보고, 빠진 조건을 수정해서 다시 쓸 수 있게 만듭니다.']
+      ].map((x, i) => '<div><small>0' + (i + 1) + '</small><b>' + x[0] + '</b><p>' + x[1] + '</p></div>').join('') + '</div></section></div><p class="poc-one-line">지난주 답변 3개를 오늘 Agent가 일할 수 있는 설계와 실행 파일로 바꿉니다.</p>';
+      case 'deliverables': return '<div class="finish-practice-output"><section class="finish-source"><div class="contents-label"><span>START</span><b>1주차 답변</b></div>' + [
+        ['01', '내가 풀고 싶은 문제 하나'],
+        ['02', '왜 불편한지'],
+        ['03', 'AI Agent가 해줬으면 하는 일']
+      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b></article>').join('') + '</section><div class="finish-arrow">' + icon('arrow-down') + '</div><section class="finish-practices"><div class="contents-label"><span>PRACTICE</span><b>3가지 실습</b></div>' + [
+        ['01', '문제정의', '병목 찾기 · 문제 후보 고르기'],
+        ['02', 'Agent 설계', '역할 · 입력 · 기준 정하기'],
+        ['03', '실행·검수', '첫 실행 · 결과 확인 · 수정 기록']
+      ].map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p></article>').join('') + '</section><div class="finish-arrow">' + icon('arrow-down') + '</div><section class="finish-outputs"><div class="contents-label"><span>OUTPUT</span><b>나오는 결과물</b></div>' + [
+        ['folder-open', 'Agent 설계서'],
+        ['package', '업무 폴더 초안'],
+        ['git-branch', '작업 순서 파일'],
+        ['file-check-2', '검수 질문 3개']
+      ].map(x => '<article>' + icon(x[0]) + '<b>' + x[1] + '</b></article>').join('') + '</section></div>';
       case 'compare': return '<div class="compare-grid">' + [s.left, s.right].map(c => '<section class="compare-column"><p class="compare-label">' + esc(c.label) + '</p><h3>' + esc(c.title) + '</h3><ul>' + c.items.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section>').join('') + '</div>';
       case 'reveal': return taxiMarkup(s);
-      case 'editorial': return (s.intro ? '<p class="leadline">' + esc(s.intro) + '</p>' : '') + '<div class="editorial-list">' + s.rows.map(r => '<div class="editorial-row"><h3>' + esc(r[0]) + '</h3><p>' + esc(r[1]) + '</p></div>').join('') + '</div>' + (s.caption ? '<p class="caption">' + esc(s.caption) + '</p>' : '');
-      case 'framework': return '<div class="framework-grid">' + [
-        ['Y', 'Why Gap', '현재 업무 방식의 진짜 병목은 어디인가?', '원하는 상태와 지금 상태의 차이.', 'problem.md'],
-        ['U', 'User Job', 'AI에게 시킬 Input/Output 구조는 무엇인가?', '누가 어떤 결과를 얻으려는지.', 'job-story.md'],
-        ['J', 'Journey', '업무의 세부 흐름과 예외 상황은 어떻게 되는가?', '실제 업무의 앞뒤와 판단 지점.', 'workflow.md'],
-        ['I', 'Intelligence Fit', '이 단계에 맞는 AI 모델·툴은 무엇인가?', 'AI의 일, 사람의 일, 중단 기준.', 'boundaries.md'],
-        ['N', 'Next Agent', '이 흐름을 어떻게 지속 가능한 Agent로 만드는가?', '등록하고 실행하고 다시 쓸 설계.', 'SKILL.md']
-      ].map((r, i) => '<div class="framework-step" style="--i:' + i + '"><div class="framework-letter">' + r[0] + '</div><b>' + r[1] + '</b><strong class="framework-question">' + r[2] + '</strong><p>' + r[3] + '</p><button type="button" class="file-tag artifact-link" data-action="artifact-open" data-stage="' + r[0] + '" title="' + r[0] + ' 과제 시작">' + r[4] + icon('arrow-right') + '</button>' + window.YFArtifacts.assignment(r[0]) + '</div>').join('') + '</div><div class="framework-controls">' + button('한 단계씩 보기', 'framework-next', 'step-forward', 'secondary') + '<p class="framework-desc" id="framework-desc">병목 → 사용자 일 → 업무 흐름 → AI 적합성 → 실행 Agent로 번역합니다.</p></div>';
+      case 'editorial': return s.id === 'why-agent-fit' ? whyAgentFitMarkup(s) : (s.intro ? '<p class="leadline">' + esc(s.intro) + '</p>' : '') + '<div class="editorial-list">' + s.rows.map(r => '<div class="editorial-row"><h3>' + esc(r[0]) + '</h3><p>' + esc(r[1]) + '</p></div>').join('') + '</div>' + (s.caption ? '<p class="caption">' + esc(s.caption) + '</p>' : '');
+      case 'framework': return '<div class="framework-grid soft-framework">' + [
+        ['01', '반복되나요?', '한 번만 하는 일이 아니라 비슷한 형태로 다시 생기는 일인가요?'],
+        ['02', '입력 자료가 있나요?', 'Agent가 읽을 문서, 표, 메모, 예시 데이터가 있나요?'],
+        ['03', '판단 기준이 있나요?', '좋다/나쁘다, 통과/보류를 가르는 기준을 말로 설명할 수 있나요?'],
+        ['04', '결과물 형식이 있나요?', '메일 초안, 요약표, 분류표처럼 남겨야 할 모양이 있나요?'],
+        ['05', '사람이 검수할 수 있나요?', '최종 승인 전에 사람이 확인할 체크포인트가 있나요?']
+      ].map((r, i) => '<div class="framework-step" style="--i:' + i + '"><div class="framework-letter">' + r[0] + '</div><b>' + r[1] + '</b><p>' + r[2] + '</p></div>').join('') + '</div><div class="framework-controls soft-framework-note"><p class="framework-desc" id="framework-desc">최소조건이 보이면 오늘 실습 대상으로 가져가고, 없으면 문제를 더 작게 쪼갭니다.</p></div>';
+      case 'yujin-flow-map': return yujinFlowMapMarkup();
+      case 'problem-source': return problemSourceMarkup();
       case 'formula': return '<div class="formula-tokens">' + s.tokens.map(t => '<span>' + esc(t) + '</span>').join('') + '</div>' + (s.id === 'hmw' ? examplesMarkup() : '<p class="formula-example">' + esc(s.example) + '</p><p class="caption">' + esc(s.caption) + '</p>');
       case 'traffic': return '<p class="poc-definition"><b>PoC (Proof of Concept) · 개념 검증</b><br>작은 데이터로 구현 가능성과 품질을 확인합니다. 오늘은 가상 문의 5건으로 분류·FAQ 기반 초안을 검증합니다. 고객이 쓰는 최소 제품인 MVP나 실제 운영 배포와는 다릅니다.</p><div class="traffic-grid">' + [
         ['GREEN / 사용 가능', '이 범위에서는\n쓸 수 있다.', '작은 입력에서도 ID와 형식이 맞고 결과를 쉽게 확인할 수 있다.', '맡길 범위를 좁게 유지'],
@@ -216,7 +221,7 @@
       ['통제 설계', 'AI가 많이 할수록 설명, 거절, 수정, 중단, 복구 통로를 더 선명하게 둡니다.', 'J / Journey'],
       ['프로토타입 검증', '실제 개발 전 모의 데이터와 가상 결과로 사람이 알아차리고 개입할 수 있는지 봅니다.', 'N / Next Agent']
     ];
-    return '<div class="ax-principles"><section class="ax-principles-lead"><span class="eyebrow">HUMAN-CENTERED AX</span><h2>구현 비용은 내려가고,<br>문제정의의 <span>가치는 올라갑니다.</span></h2><p>그래서 AX 기획은 “무엇을 자동화할까?”보다 “사람은 무엇을 판단하고 책임질까?”에서 시작합니다.</p><div class="ax-principles-question">AI가 한 일 이후에, 사람은 무엇을 해야 하나요?</div></section><section class="ax-principle-list">' + items.map((x, i) => '<article><span>0' + (i + 1) + '</span><h3>' + x[0] + '</h3><p>' + x[1] + '</p><small>' + x[2] + '</small></article>').join('') + '</section></div><div class="ax-source-row">' + ['ax1','ax2','ax3','ax4'].map(key => ext(D.sources[key].url, D.sources[key].title.replace('Digital iNSIGHT · ', ''))).join('') + '</div>';
+    return '<div class="ax-principles"><section class="ax-principles-lead"><span class="eyebrow">HUMAN-CENTERED AX</span><h2>구현 비용은 내려가고,<br>문제정의의 <span>가치는 올라갑니다.</span></h2><p>그래서 AX 기획은 “무엇을 자동화할까?”보다 “사람은 무엇을 판단하고 책임질까?”에서 시작합니다.</p><div class="ax-principles-question">AI가 한 일 이후에, 사람은 무엇을 해야 하나요?</div></section><section class="ax-principle-list">' + items.map((x, i) => '<article><span>0' + (i + 1) + '</span><h3>' + x[0] + '</h3><p>' + x[1] + '</p><small>' + x[2] + '</small></article>').join('') + '</section></div>';
   }
   function governanceMarkup() {
     const items = [
@@ -239,7 +244,7 @@
       ['승인자', '누가 최종 사용·발송·제출을 결정하는가'],
       ['실패 시', '어디로 돌아가고 몇 번까지 수정하는가']
     ];
-    return '<div class="prd-translation"><section><span class="eyebrow">PROBLEM → PRD</span><h2>PoC는 결과가 아니라<br>요구스펙을 선명하게 만드는 과정입니다.</h2><p>수강생 산출물 이름은 상황에 맞게 바꿔도 됩니다.</p><div class="prd-names"><b>AI Agent 요구스펙</b><b>업무 병목 정의서</b><b>AX 적용 후보 검토서</b></div></section><ol>' + rows.map(x => '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>').join('') + '</ol></div><div class="button-row" style="margin-top:24px">' + button('PoC 질문 작성', 'goto', 'arrow-left', 'secondary', 'data-slide="lab-experiment"') + button('업무 흐름으로 이동', 'goto', 'arrow-right', 'primary', 'data-slide="workflow-map"') + '</div>';
+    return '<div class="prd-translation"><section><span class="eyebrow">Y/U/J/I → PRD</span><h2>이제 Agent에게 맡길 일을<br>한 장의 설계서로 묶습니다.</h2><p>문제, 사용자 목표, 업무 흐름, AI 역할과 검수 기준을 N 단계로 넘길 준비입니다.</p><div class="prd-names"><b>AI Agent PRD</b><b>업무 병목 정의서</b><b>AX 적용 후보 검토서</b></div></section><ol>' + rows.map(x => '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>').join('') + '</ol></div><div class="button-row" style="margin-top:24px">' + button('Guardrails로 돌아가기', 'goto', 'arrow-left', 'secondary', 'data-slide="lab-boundary"') + button('N 단계로 이동', 'goto', 'arrow-right', 'primary', 'data-slide="case-brief"') + '</div>';
   }
   function week2HomeworkMarkup() {
     const deliverables = [
@@ -317,6 +322,33 @@
     const key = '언제 차를 탈 수 있을지 몰라';
     const reveal = s.reveal.split(key).map(esc).join('<span class="motion-underline">' + esc(key) + '</span>');
     return '<div class="taxi-scene"><div class="taxi-route"><span>현재 위치</span><span class="destination">약속 장소</span></div><div class="taxi-skyline" aria-hidden="true"></div><div class="taxi-road" aria-hidden="true"></div><div class="taxi-car" aria-hidden="true"><div class="taxi-speed"></div><div class="taxi-sign">TAXI</div><div class="taxi-car-body"></div><span class="taxi-wheel left"></span><span class="taxi-wheel right"></span></div></div><div class="taxi-copy"><section class="taxi-purpose"><button type="button" class="button primary" data-action="taxi-answer" aria-controls="taxi-purpose-answer" aria-expanded="false">답 보기</button><div id="taxi-purpose-answer" role="status" aria-live="polite" hidden><span class="eyebrow">본질적 목적</span><p class="reveal-question"><span class="motion-underline">' + esc(s.prompt) + '</span></p><p class="caption">택시는 이 목적을 이루는 여러 수단 중 하나입니다.</p></div></section><button type="button" class="icon-button taxi-expand" data-action="reveal" aria-controls="taxi-context-answer" aria-label="상황을 더해 문제정의로 확장" title="상황을 더해 문제정의로 확장" aria-expanded="false" hidden>' + icon('arrow-right') + '</button><div id="taxi-context-answer" class="reveal-answer" role="status" aria-live="polite" hidden><span class="eyebrow">상황을 반영한 문제정의</span><h3>' + reveal.replace(/\n/g, '<br>') + '</h3><p>' + esc(s.after) + '</p><p class="caption">관찰로 확인할 문제 가설 예시</p></div></div>';
+  }
+  function whyAgentFitMarkup(s) {
+    return '<div class="why-fit-layout"><section class="why-fit-main"><div class="why-fit-message"><span class="eyebrow">CORE MESSAGE</span><h2>AI가 풀 수 있나?</h2><strong>보다</strong><h2>내가 맡기고<br>확인할 수 있나?</h2><p>Agent는 내가 정한 기준으로 반복 실행하는 구조입니다.</p></div><div class="why-fit-conditions"><span class="eyebrow">WHY 5 CONDITIONS</span><h3>그래서 오늘은<br>이 5가지만 봅니다.</h3><ol>' + [
+      ['반복성', '다시 생기는 일인가'],
+      ['입력 자료', 'AI가 읽을 재료가 있는가'],
+      ['판단 기준', '맞고 틀림을 설명할 수 있는가'],
+      ['결과물 형식', '남겨야 할 모양이 정해졌는가'],
+      ['사람 검수', '내가 확인하고 책임질 수 있는가']
+    ].map((x, i) => '<li><span>0' + (i + 1) + '</span><b>' + x[0] + '</b><em>' + x[1] + '</em></li>').join('') + '</ol></div></section><section class="why-fit-shift" aria-label="DX와 AX의 차이"><div><b>DX</b><span>기존 일을 더 빠르게</span></div><strong></strong><div><b>AX</b><span>AI가 들어올 자리부터 일의 흐름을 다시 설계</span></div></section><p class="why-fit-caption">' + esc(s.caption) + '</p></div>';
+  }
+  function problemSourceMarkup() {
+    const cards = [
+      ['user-round-check', '현직자', '내 업무에서', '지금 반복해서 처리하거나, 언젠가 AI로 자동화하고 싶었던 문제를 가져옵니다.', '반복 업무 · 입력 자료 · 검수 기준'],
+      ['graduation-cap', '취준생', '내 취준 루틴에서', '채용공고 읽기, 경험 연결, 자기소개서 초안, 면접 질문 정리처럼 반복되는 준비 과정을 고릅니다.', '공고 분석 · 지원서 초안 · 면접 준비'],
+      ['briefcase-business', '포트폴리오형', '희망 직무의 공개 자료에서', '현업 문제가 없으면 채용공고, 리뷰, FAQ, 커뮤니티 글에서 관찰 가능한 직무 문제를 잡습니다.', '직무 가설 · 공개 입력 · Agent 설계']
+    ];
+    return '<div class="problem-source-layout"><p class="problem-source-lead">회사 업무만 떠올리지 않아도 됩니다. 내 상황에 맞는 출발점에서, 5가지 조건이 보이는 문제를 고르면 됩니다.</p><section class="problem-source-cards">' + cards.map(x => '<article><div class="problem-source-icon">' + icon(x[0]) + '</div><span>' + x[1] + '</span><h2>' + x[2] + '</h2><p>' + x[3] + '</p><small>' + x[4] + '</small></article>').join('') + '</section><div class="problem-source-note"><b>현업 문제가 없다면?</b><p>실제 회사 내부 사정을 맞히는 게 목표가 아닙니다. “이 문제를 이렇게 정의하고 Agent로 설계할 수 있다”를 보여주는 것이 목표입니다.</p></div></div>';
+  }
+  function yujinFlowMapMarkup() {
+    const steps = [
+      ['Y', 'Why Gap', '현재 업무 방식의 진짜 병목은 어디인가?', '원하는 상태와 지금 상태의 차이.', 'problem.md', ['1. 1주차 메모 가져오기', '2. 문제정의 한 문장 확정'], '내 과제의 입력으로'],
+      ['U', 'User Job', 'AI에게 시킬 Input/Output 구조는 무엇인가?', '누가 어떤 결과를 얻으려는지.', 'job-story.md', ['1. 사용자와 상황·목표 작성', '2. 해결 대안 비교'], 'J 과제의 입력으로'],
+      ['J', 'Journey', '업무의 세부 흐름과 예외 상황은 어떻게 되는가?', '실제 업무의 앞뒤와 판단 지점.', 'workflow.md', ['1. 입력부터 결과까지 연결', '2. 분기·검수 위치 표시'], 'I 과제의 입력으로'],
+      ['I', 'Intelligence Fit', '이 단계에 맞는 AI 모델·툴은 무엇인가?', 'AI의 일, 사람의 일, 중단 기준.', 'boundaries.md', ['1. 작은 PoC로 확인', '2. 승인·재시도·중단 조건 작성'], 'N 과제의 입력으로'],
+      ['N', 'Next Agent', '이 흐름을 어떻게 지속 가능한 Agent로 만드는가?', '등록하고 실행하고 다시 쓸 설계.', 'SKILL.md', ['1. Project 지침 → 첫 실행', '2. Skill 등록 → 다른 입력 실행'], '내 Agent의 재사용 절차로']
+    ];
+    return '<div class="yujin-map-grid">' + steps.map((r, i) => '<article data-yujin-step="' + i + '"><small>0' + (i + 1) + '</small><strong>' + r[0] + '</strong><h2>' + r[1] + '</h2><h3>' + r[2] + '</h3><p>' + r[3] + '</p><code>' + r[4] + ' ' + icon('arrow-right') + '</code><ol>' + r[5].map(x => '<li>' + x + '</li>').join('') + '</ol><em>' + r[6] + '</em></article>').join('') + '</div><div class="yujin-map-bottom"><button type="button" class="button secondary small" data-action="yujin-map-next">' + icon('play') + '한 단계씩 보기</button><p id="yujin-map-desc">병목 → 사용자 일 → 업무 흐름 → AI 적합성 → 실행 Agent로 번역합니다.</p></div>';
   }
   function guideMarkup(id) {
     const g = D.guides[id], step = g.steps[guideStep];
@@ -481,6 +513,12 @@
         frameworkIndex=(frameworkIndex+1)%5;
         $$('.framework-step').forEach((el,i)=>el.classList.toggle('active',i===frameworkIndex));
         $('#framework-desc').textContent=['Y: 아직 기능을 정하지 않고, 줄일 차이를 적습니다.','U: 일을 겪는 사람과 최종 결과를 연결합니다.','J: 자료가 들어와 결과가 쓰일 때까지 펼칩니다.','I: AI가 할 수 있는 일과 사람이 맡을 일을 나눕니다.','N: Project와 Skill로 등록하고 새 입력으로 검증합니다.'][frameworkIndex];break;}
+      case 'yujin-map-next':{
+        frameworkIndex=(frameworkIndex+1)%5;
+        $$('[data-yujin-step]').forEach((node,i)=>node.classList.toggle('active',i===frameworkIndex));
+        const labels=['Y / 지금 줄일 차이와 문제 근거를 확정합니다.','U / 누가 어떤 결과를 얻어야 하는지 정합니다.','J / 입력부터 결과까지 업무 흐름을 펼칩니다.','I / AI가 맡을 일과 사람이 멈출 기준을 나눕니다.','N / Project와 Skill로 등록하고 다른 입력으로 다시 실행합니다.'];
+        const desc=$('#yujin-map-desc');if(desc)desc.textContent=labels[frameworkIndex];
+        break;}
       case 'copy-lab':await copy(E.labPrompt(el.dataset.labId,state));break;
       case 'download-lab':download(E.labPrompt(el.dataset.labId,state),'YUJIN-FLOW-'+el.dataset.labId+'.md');break;
       case 'fill-example':fillExample(el.dataset.labId);break;
@@ -517,7 +555,7 @@
   document.addEventListener('click',async e=>{
     const close=e.target.closest('[data-close]');if(close){close.closest('dialog').close();return;}
     const guide=e.target.closest('[data-guide-step]');if(guide){guideStep=Number(guide.dataset.guideStep);$('#guide-container').innerHTML=guideMarkup(D.slides[active].guide);icons();$('#guide-tab-'+guideStep).focus();return;}
-    const chapter=e.target.closest('[data-chapter]');if(chapter){go(D.slides.find(s=>s.chapter===chapter.dataset.chapter).id);return;}
+    const chapter=e.target.closest('[data-chapter]');if(chapter){const first=D.slides.find(s=>s.chapter===chapter.dataset.chapter);if(first)go(first.id);return;}
     const el=e.target.closest('[data-action]');if(el){try{await action(el);}catch(err){toast('작업을 완료하지 못했습니다. 기록을 MD로 저장하고 다시 시도해주세요.');console.error(err);}}
   });
   document.addEventListener('input',e=>{
@@ -540,7 +578,7 @@
   $('#index-open').addEventListener('click',showIndex);
   $('#chapter-label').addEventListener('click',showIndex);
   $('#export-open').addEventListener('click',openExport);
-  $('#help-open').addEventListener('click',()=>{if(state.slide!=='troubleshooting')helpOrigin=state.slide;go('troubleshooting');});
+  $('#help-open').addEventListener('click',showIndex);
   $('#confirm-action').addEventListener('click',()=>{$('#confirm-dialog').close();if(pendingConfirm){const fn=pendingConfirm;pendingConfirm=null;fn();}});
   $('#notes-toggle').addEventListener('click',()=>{notesVisible=!notesVisible;$('#speaker-notes').hidden=!notesVisible;$('#notes-toggle').setAttribute('aria-pressed',notesVisible);});
   $('#fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch(_){toast('이 브라우저에서는 전체 화면을 지원하지 않습니다.');}});

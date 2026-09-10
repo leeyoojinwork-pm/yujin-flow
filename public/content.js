@@ -30,25 +30,25 @@
     { id: 'ship', n: '06', name: '내 일에 적용', en: 'SHIP', minutes: 10 }
   ];
   const labs = [
-    { id: 'gap', letter: 'Y', title: '목표 정하기: 1주차 과제에서 원하는 변화 찾기', minutes: 3, purpose: '1주차에 쓴 문제, 불편한 이유, Agent에게 맡기고 싶은 일을 가져오세요. 원하는 결과와 현재 상태를 나눠봅니다.', task: '1주차 과제의 문제·불편·Agent에게 바라는 일을 먼저 읽어줘. 기능 아이디어와 실제 문제를 구분하고, 최근 불편했던 장면을 한 번에 하나씩 질문하며 내 답을 기다려줘. 원하는 결과와 현재 상태의 차이를 정리한 뒤 문제정의문을 제안해줘. 관찰 사실과 미검증 가설을 구분하고, 이 내용을 다음 Agent 지침의 목표·입력·완료 기준으로 어떻게 옮길지도 알려줘.', fields: [
-      field('homework_problem', '1주차 과제: 내가 풀고 싶은 문제는 무엇이었나요?', '1주차 상세 페이지에 쓴 내용을 그대로 붙여넣으세요. 안 썼다면 지금 떠오르는 문제 하나를 적어도 됩니다.', 'CS 문의가 많아서 챗봇을 만들고 싶다.'),
-      field('homework_pain', '1주차 과제: 왜 불편하다고 썼나요?', '언제 막히는지, 무엇을 반복하는지 적어둔 내용을 가져오세요.', '배송과 반품 문의가 몰릴 때 FAQ를 찾아 같은 답을 반복해서 쓴다.'),
-      field('homework_agent', '1주차 과제: Agent가 무엇을 해주길 바랐나요?', '1주차 전략과 프롬프트로 정리한 내용, 음성 입력으로 풀어놓은 메모도 좋습니다.', '문의를 분류하고 FAQ에 맞는 답변을 대신 준비해줬으면 한다.'),
-      field('desired', '이 일이 잘 끝나면 어떤 상태여야 하나요?', '예: CS 담당자가 일반 문의를 빠짐없이 분류하고, FAQ 근거가 있는 답변 초안을 검토할 수 있다.', 'CS 담당자가 일반 문의를 빠짐없이 분류하고, FAQ 근거가 있는 답변 초안을 검토할 수 있다.'),
-      field('current', '지금은 실제로 어떤 일이 벌어지나요?', '예: 배송·반품 문의가 몰리면 담당자가 FAQ를 매번 찾아 복사한다. 답변이 늦어지고 급한 문의를 놓친다. 아직 상담 기록으로 확인하지 않은 가설이다.', '배송·반품 문의가 몰리면 담당자가 FAQ를 매번 찾아 복사한다. 답변이 늦어지고 급한 문의를 놓친다. 아직 상담 기록으로 확인하지 않은 가설이다.'),
-      field('gap', '두 상태 사이에서 줄일 차이는 무엇인가요?', '예: FAQ를 찾고 초안을 쓰는 시간을 줄이되 문의 누락과 잘못된 안내는 늘리지 않는다.', 'FAQ를 찾고 초안을 쓰는 시간을 줄이되 문의 누락과 잘못된 안내는 늘리지 않는다.')
+    { id: 'gap', letter: 'Y', title: '지난주 답변에서\n오늘 만들 문제를 고릅니다.', minutes: 3, purpose: '1주차에 쓴 세 문장을 꺼내서, 오늘 Agent로 만들어볼 업무 하나를 고릅니다.', task: '내 1주차 답변을 읽고 오늘 실습할 문제 후보 하나를 골라줘. 기능 이름과 실제 업무 문제를 구분해줘. 최근에 언제 막혔는지, 무엇을 반복했는지, 결과가 어떻게 남아야 하는지 한 번에 하나씩 질문해줘. 마지막에는 오늘 만들 Agent의 문제 후보를 한 문장으로 정리해줘.', fields: [
+      field('homework_problem', '내가 풀고 싶은 문제 하나', '지난주에 쓴 문제를 그대로 붙여넣으세요. 안 썼다면 지금 떠오르는 업무 하나를 적어도 됩니다.', 'CS 문의가 많아 담당자가 매번 FAQ를 찾아 답변 초안을 만드는 데 시간이 오래 걸린다.'),
+      field('homework_pain', '왜 불편한지', '언제 귀찮고, 어디서 시간이 걸리고, 무엇이 자주 빠지는지 적어보세요.', '비슷한 문의가 반복되는데도 답변 근거를 매번 다시 찾아야 하고, 누락이나 잘못된 안내가 생길 수 있다.'),
+      field('homework_agent', 'AI Agent가 해줬으면 하는 일', 'Agent가 대신 읽고, 고르고, 정리하고, 초안으로 만들어줬으면 하는 일을 적으세요.', '문의 유형을 분류하고 FAQ 근거가 있는 답변 초안을 만들어줬으면 한다.'),
+      field('desired', '오늘 만들고 싶은 결과', '예: 문의 유형별 분류와 답변 초안을 바로 확인할 수 있다.', '문의 유형별 분류와 답변 초안을 바로 확인할 수 있다.'),
+      field('current', '지금 사람이 하는 일', '예: 담당자가 문의를 읽고 FAQ를 검색한 뒤 답변 문장을 다시 만든다.', '담당자가 문의를 읽고 FAQ를 검색한 뒤 답변 문장을 다시 만든다.'),
+      field('gap', '오늘 줄이고 싶은 부분', '예: 분류와 초안 작성 시간을 줄이되, 근거 없는 답변이 나가지 않게 한다.', '분류와 초안 작성 시간을 줄이되, 근거 없는 답변이 나가지 않게 한다.')
     ] },
     { id: 'problem', letter: 'Y', title: '문제 정의하기: Agent가 해결할 문제 확정', minutes: 3, purpose: '앞으로 만들 Agent가 해결할 문제를 한 문장으로 정하세요. 이후 지침과 검수 기준도 이 문장에서 출발합니다.', task: '아래의 사용자·상황·원인·어려움·근거를 이용해 문제정의문을 작성해줘. 원인이 입증되지 않았다면 가설로 표시하고 검증 질문을 제안해줘.', fields: [
       field('user', '누가 이 어려움을 겪나요?', '예: 온라인 쇼핑몰 CS 담당자', '온라인 쇼핑몰 CS 담당자'),
-      field('situation', '어떤 순간에 반복되나요?', '예: 오전 업무 시작 후 배송·반품 문의가 한꺼번에 들어올 때', '오전 업무 시작 후 배송·반품 문의가 한꺼번에 들어올 때'),
-      field('cause', '왜 어렵다고 생각하나요? 확인한 원인인가요?', '예: 문의마다 유형을 판단하고 여러 FAQ 문서를 다시 찾는다. 실제 지연 원인인지는 확인이 필요하다.', '문의마다 유형을 판단하고 여러 FAQ 문서를 다시 찾는다. 실제 지연 원인인지는 확인이 필요하다.'),
-      field('difficulty', '그래서 어떤 문제가 생기나요?', '예: 답변 대기 시간이 길어지고 추가 확인이 필요한 문의를 놓친다.', '답변 대기 시간이 길어지고 추가 확인이 필요한 문의를 놓친다.'),
-      field('evidence', '이 문제를 확인할 자료는 무엇인가요?', '예: 익명 상담 기록, 문의 접수·첫 답변 시각, FAQ 검색 과정. 현재 예시는 가설이며 실측 자료는 아직 없다.', '익명 상담 기록, 문의 접수·첫 답변 시각, FAQ 검색 과정. 현재 예시는 가설이며 실측 자료는 아직 없다.')
+      field('situation', '어떤 순간에 반복되나요?', '예: 문의가 몰려 답변 우선순위를 정해야 할 때', '문의가 몰려 답변 우선순위를 정해야 할 때'),
+      field('cause', '왜 어렵다고 생각하나요? 확인한 원인인가요?', '예: FAQ와 정책 근거를 매번 찾아야 하고 문의 유형이 섞여 있다.', 'FAQ와 정책 근거를 매번 찾아야 하고 문의 유형이 섞여 있다.'),
+      field('difficulty', '그래서 어떤 문제가 생기나요?', '예: 첫 답변이 늦어지고 근거 없는 답변 초안이 생길 수 있다.', '첫 답변이 늦어지고 근거 없는 답변 초안이 생길 수 있다.'),
+      field('evidence', '이 문제를 확인할 자료는 무엇인가요?', '예: 익명 문의 CSV, FAQ 문서, 기존 답변 템플릿, 처리 시간 기록.', '익명 문의 CSV, FAQ 문서, 기존 답변 템플릿, 처리 시간 기록.')
     ] },
     { id: 'job', letter: 'U', title: 'JTBD 쓰기: 사용자가 원하는 결과 정리', minutes: 2, purpose: '사용자가 어떤 상황에서 무엇을 해내고 싶은지, 그 결과가 왜 필요한지 적어보세요.', task: '아래 답변으로 JTBD 한 문장을 만들어줘. 화면 조작이나 도구 이름에 갇히지 않도록 사용자가 얻을 결과를 포함해줘.', fields: [
-      field('when', '어떤 상황에서 이 일이 필요하나요?', '예: 배송·반품 문의가 몰려 여러 고객을 응대해야 할 때', '배송·반품 문의가 몰려 여러 고객을 응대해야 할 때'),
-      field('job', '사용자는 무엇을 해내고 싶나요?', '예: 문의에 맞는 안내를 빠르게 찾고, 직접 판단할 문의를 구분하고 싶다.', '문의에 맞는 안내를 빠르게 찾고, 직접 판단할 문의를 구분하고 싶다.'),
-      field('outcome', '최종적으로 어떤 결과를 얻고 싶나요?', '예: 고객에게 정확한 첫 답변을 제때 보내고, 예외 문의도 놓치지 않고 처리하고 싶다.', '고객에게 정확한 첫 답변을 제때 보내고, 예외 문의도 놓치지 않고 처리하고 싶다.')
+      field('when', '어떤 상황에서 이 일이 필요하나요?', '예: 매주 작성 현황을 확인하고 리마인드해야 할 때', '매주 작성 현황을 확인하고 리마인드해야 할 때'),
+      field('job', '사용자는 무엇을 해내고 싶나요?', '예: 미작성자만 빠르게 골라내고 알림 메시지를 준비하고 싶다.', '미작성자만 빠르게 골라내고 알림 메시지를 준비하고 싶다.'),
+      field('outcome', '최종적으로 어떤 결과를 얻고 싶나요?', '예: 담당자는 대상자와 메시지만 검수한 뒤 승인할 수 있다.', '담당자는 대상자와 메시지만 검수한 뒤 승인할 수 있다.')
     ] },
     { id: 'hmw', letter: 'U', title: 'HMW로 대안 찾기: 세 가지 해결 방법 비교', minutes: 3, purpose: 'HMW 질문을 쓰고, AI를 쓰는 방법과 쓰지 않는 방법을 함께 비교하세요.', task: '아래 HMW와 대안을 비교해줘. 업무를 없애기·단순화하기·규칙 자동화하기·AI에게 맡기기를 함께 검토하고, 가장 작게 검증할 대안 하나를 골라 이유를 말해줘.', fields: [
       field('question', '어떻게 하면 누가 어떤 변화를 이룰 수 있을까요?', '예: 어떻게 하면 CS 담당자가 문의가 몰릴 때도 정확한 첫 답변을 빠르게 준비할 수 있을까?', '어떻게 하면 CS 담당자가 문의가 몰릴 때도 정확한 첫 답변을 빠르게 준비할 수 있을까?'),
@@ -225,16 +225,34 @@
   const s = (id, chapter, type, title, extra = {}) => slides.push({ id, chapter, type, title, ...extra });
   const lab = (id, chapter) => s('lab-' + id, chapter, 'lab', labs.find(x => x.id === id).title, { lab: id });
   s('opening', 'opening', 'hero', '내 일을 대신할\n나만의 AI AGENT 만들기.', { kicker: 'YUJIN FLOW', subtitle: '내 업무 발굴부터 PoC 검증,\nAI AGENT 설계 및 실행까지 End-to-End', note: '오프닝. 오늘 가져갈 것은 Project, Skill ZIP, 실행 기록이다. 코드 심화는 선택 트랙이며 기본 실습은 Claude 웹으로 진행한다. 문제정의 PM 포지션과 결과물, 실패 원인은 이어지는 장표에서 제시한다.' });
-  s('finish-line', 'opening', 'deliverables', '실습 3개로\n결과물 4개를 만듭니다.', { subtitle: '오늘의 결과물은 AI 기능이 아니라, 내 업무 병목을 실행 가능한 Agent 스펙으로 바꾼 문서입니다.', note: '오늘의 흐름은 문제정의, Agent 설계, 실행·검수 3개 덩어리로 안내한다. 결과물은 Project, Skill, Workflow, Run Log 네 가지로 정리한다. 직무 예시는 자신의 직무 한 개를 골라 본다. 수강생이 손에 가져갈 산출물을 첫 2분 안에 명확히 선언한다.' });
+  s('finish-line', 'opening', 'deliverables', '3가지 실습,\n그리고 나오는 결과물', { subtitle: '', note: '2페이지는 오늘 진행할 실습 3개와 그 결과로 남는 결과물 4개만 보여준다.' });
   s('from-last-week', 'opening', 'homework-bridge', '지난주에 적어온 문제,\n오늘의 출발점입니다.', { left: { label: 'LAST WEEK', title: '주어진 지침 실행', items: ['회사 조사와 리서치', '결과가 나오는 경험', '도구와 대화에 익숙해지기'] }, right: { label: 'THIS WEEK', title: '설계 · 등록 · 재실행', items: ['내 문제와 완료 기준', 'Project와 Skill 등록', '새 입력에서도 같은 기준 확인'] }, note: '잘 만든 프롬프트도 필요하다. 오늘은 그 앞의 업무 선택과 뒤의 파일·재사용·검수를 연결한다.' });
-  s('homework-to-poc', 'opening', 'homework-poc', '1주차 답변을\nPoC 명세로 바꿉니다.', { note: '수강생이 노션 1주차 상세 페이지에서 가져온 세 문장을 오늘의 실험 단위로 바꾸는 장표다. 불편함은 관찰 가능한 병목으로, Agent 희망 기능은 입력·처리·출력·검수 기준으로 바꾼다. PoC는 작은 데이터로 해결 가능성과 실패 방식을 확인하는 실험이라고 설명한다.' });
+  s('homework-to-poc', 'opening', 'homework-poc', '1주차 답변을\nAgent 설계로 바꿉니다.', { note: '수강생이 노션 1주차 상세 페이지에서 가져온 세 문장을 오늘의 실습 단위로 바꾸는 장표다. 불편함은 관찰 가능한 병목으로, Agent 희망 기능은 입력·처리·출력·검수 기준으로 바꾼다.' });
   s('taxi', 'opening', 'reveal', '택시는 사람의 어떤 문제를\n해결해 줄까요?', { prompt: '“원하는 때에, 원하는 곳으로 이동하고 싶다.”', reveal: '늦은 밤, 언제 차를 탈 수 있을지 몰라\n약속 시간에 맞춰 도착할 수 있을지 불안하다.', after: '원하는 이동을 가로막는 것은 무엇일까요? 이 장면에서는 기다림과 도착의 불확실성이 문제입니다.', note: '먼저 20초 동안 택시가 해결하는 문제에 대한 답을 받는다. 원하는 이동 결과를 짚고, 버튼을 눌러 구체적인 상황과 어려움으로 좁힌다. 속도·접근성·안전 등 다른 답도 받을 수 있다. 공개 문장은 관찰로 검증할 가설 예시이지 모든 택시 사용자의 유일한 문제는 아니다.' });
   s('solution-trap', 'opening', 'compare', '“CS 문의가 많아요.\n챗봇을 만들면 될까요?”', { left: { label: 'IDEA', title: 'CS 챗봇을 만들고 싶다', items: ['챗봇 말투', '채팅창 디자인', '자동 답변 기능'] }, right: { label: 'PROBLEM', title: '정확한 첫 답변이 늦어진다', items: ['반복 문의 유형 확인', 'FAQ를 찾는 데 걸리는 시간', '실제 지연 원인은 상담 기록으로 확인'] }, note: '기능은 후보가 될 수 있다. 그 후보가 해결할 상황과 손실을 적어야 비교와 검증이 가능해진다.' });
   s('bottleneck-diagnosis', 'opening', 'compare', '솔루션 제안자에서\n병목 진단가로.', { left: { label: 'SOLUTION SELLER', title: '무엇을 붙일까요?', items: ['챗봇 만들까요?', '자동화할까요?', 'GPT 붙일까요?'] }, right: { label: 'BOTTLENECK DIAGNOSER', title: '어디가 막히나요?', items: ['어떤 입력이 필요하나요?', '누가 무엇을 검수하나요?', '성공 기준은 무엇인가요?'] }, note: '강사의 포지션을 명확히 한다. AI 시대의 차이는 툴 선택보다 문제를 실행 가능한 구조로 바꾸는 능력에서 난다.' });
   s('rethink-work', 'opening', 'editorial', 'AI에 맡기기 전,\n업무를 먼저 정리합니다.', { eyebrow: 'AX / WORK REDESIGN', intro: '순서는 없애기 → 줄이기 → 규칙화 → AI에 맡기기. 아무도 안 쓰는 일을 더 빠르게 만드는 것은 자동화가 아닙니다.', rows: [['01 없애기', '누가 읽고 어떤 결정을 내리는지 확인한다.'], ['02 줄이기', '중복 입력과 불필요한 승인 단계를 줄인다.'], ['03 규칙화', '정해진 계산이나 형식 변환은 수식과 코드로 처리한다.'], ['04 AI에 맡기기', '자유롭게 쓴 문의처럼 내용을 읽고 해석해야 하는 일에 AI를 쓴다.']], note: '제공된 AX·일의 변화 자료를 수업 의사결정 순서로 재구성했다. 불필요한 업무를 AI 도입 후보에서 먼저 제외한다. 6페이지는 네 가지 옵션이 아니라 적용 순서로 읽히게 말한다.' });
-  s('ax-planning', 'opening', 'ax-principles', 'Solution은 쉬워지고,\nProblem은 비싸집니다.', { source: 'ax1', note: 'Digital iNSIGHT 인간 중심 AX 1~4편을 바탕으로 강의 맥락에 맞게 요약했다. 핵심은 AI 도입 여부가 아니라 업무 흐름, 인간-AI 역할, 판단·개입·복구 구조를 다시 설계하는 것이다. 세부 문구는 원문을 복제하지 않고 YUJIN FLOW와 2주차 실습 언어로 재구성한다.' });
-  s('yujin-framework', 'define', 'framework', '문제에서 실행까지.\nYUJIN FLOW.', { note: 'Y Why Gap, U User Job, J Journey, I Intelligence Fit, N Next Agent. YUJIN FLOW는 문제를 기능으로 바로 바꾸지 않고 병목 → 사용자 일 → 업무 흐름 → AI 적합성 → 실행 Agent로 번역하는 프레임이다. 수업을 위해 재구성한 교육 프레임이며 표준 기술 분류가 아니다.' });
+  s('ax-planning', 'opening', 'ax-principles', 'Solution은 쉬워지고,\nProblem은 비싸집니다.', { note: 'Digital iNSIGHT 인간 중심 AX 1~4편을 바탕으로 강의 맥락에 맞게 요약했다. 핵심은 AI 도입 여부가 아니라 업무 흐름, 인간-AI 역할, 판단·개입·복구 구조를 다시 설계하는 것이다. 세부 문구는 원문을 복제하지 않고 YUJIN FLOW와 2주차 실습 언어로 재구성한다. 장표에는 홈페이지 링크를 노출하지 않는다.' });
+  s('yujin-framework', 'define', 'framework', 'Agent로 만들 문제인지\n이 5가지만 먼저 봅니다.', { subtitle: '아무 업무나 Agent로 만드는 게 아닙니다. 오늘은 내 문제 후보가 실습 가능한지 최소조건만 확인합니다.', note: '10페이지는 문제선정 최소조건 장표다. YUJIN FLOW 소개가 아니라 반복성, 입력, 판단 기준, 결과물 형식, 사람 검수 가능성을 확인하게 한다.' });
   s('problem-governance', 'define', 'governance', '어떤 문제부터\nAgent로 만들까요?', { source: 'ax4', note: '문제 후보를 고르는 우선순위 기준을 Problem Governance로 제시한다. 반복 빈도와 소요 시간만 보지 않고 판단 기준, 입력 데이터, 승인 지점, 실패 리스크까지 함께 본다.' });
+  s('why-agent-fit', 'define', 'editorial', '내가 책임질 수 있는 문제만 Agent로 만듭니다.', {
+    intro: 'Agent는 일을 대신 끝내주는 사람이 아니라, 내가 정한 기준으로 반복 실행하는 구조입니다. 그래서 문제도 내가 설명하고 검수할 수 있는 범위에서 골라야 합니다.',
+    rows: [
+      ['내가 해결할 수 있어야 합니다', '업무 흐름을 모르고 결과도 판단할 수 없다면, Agent에게 맡겨도 검수할 수 없습니다.'],
+      ['AI는 대신 생각하지 않습니다', '반복되는 읽기, 분류, 초안 작성, 확인 작업을 같은 기준으로 다시 실행하게 만드는 데 의미가 있습니다.'],
+      ['DX는 일을 디지털화합니다', '폼, 시트, 자동화처럼 사람이 하던 절차를 더 빠르게 처리하는 방식입니다.'],
+      ['AX는 일을 다시 설계합니다', 'AI가 들어올 자리를 기준으로 입력, 판단, 출력, 검수, 승인까지 다시 짜는 것입니다.'],
+      ['그래서 5가지를 봅니다', '반복성, 입력 자료, 판단 기준, 결과물 형식, 사람 검수가 있어야 Agent가 일하고 사람이 책임질 수 있습니다.']
+    ],
+    caption: '오늘의 기준: AI가 할 수 있나? 보다 내가 맡길 수 있고, 확인할 수 있는가?',
+    note: '5가지 최소조건 장표 직후 연결 장표. 수강생이 최소조건을 제한이 아니라 실습 성공률을 높이는 장치로 이해하게 한다.'
+  });
+  s('choose-problem-source', 'define', 'problem-source', '문제를 고르는 출발점은\n각자 달라도 됩니다.', {
+    note: '현직자, 취준생, 포트폴리오 목적 수강생이 각자 어떤 문제를 가져오면 되는지 안내한다. 특히 현업 문제가 없는 경우에는 공개 자료로 관찰 가능한 직무 문제를 잡게 한다.'
+  });
+  s('yujin-flow-map', 'define', 'yujin-flow-map', '문제에서 실행까지.\nYUJIN FLOW.', {
+    note: 'YUJIN FLOW 전체 프레임워크 간지 페이지. 앞에서 고른 문제를 Why Gap, User Job, Journey, Intelligence Fit, Next Agent 순서로 실행 가능한 Agent 설계로 번역한다.'
+  });
   lab('gap', 'define');
   s('problem-formula', 'define', 'formula', 'Agent가 해결할 문제를\n한 문장으로 적어보세요.', { tokens: ['누가', '어떤 상황에서', '무엇 때문에', '어떤 어려움을'], example: 'CS 담당자는 문의가 몰릴 때, FAQ를 매번 찾아야 해서\n정확한 첫 답변을 준비하는 데 오래 걸린다.', caption: 'Problem Statement · 실제 원인과 지연 시간은 상담 기록으로 확인할 가설입니다.', note: '“AI가 없어서”를 원인으로 쓰지 않게 한다. 시간·누락·재작업처럼 관찰 가능한 어려움을 택한다.' });
   lab('problem', 'define');
@@ -243,7 +261,7 @@
   s('hmw', 'define', 'formula', 'HMW로 질문하고,\n여러 해결책을 비교해보세요.', { tokens: ['어떻게 하면', '이 사용자가', '이 상황에서', '이 변화를'], example: '어떻게 하면 CS 담당자가 문의가 몰릴 때도\n정확한 첫 답변을 빠르게 준비할 수 있을까?', caption: '문의 자체 줄이기 · FAQ 자동 안내 · AI 답변 초안을 함께 비교합니다.', note: 'HMW는 창의성을 열어두는 질문이다. 문제의 범위와 제약까지 모두 없애는 질문은 피한다.' });
   lab('hmw', 'define');
   s('experiment', 'define', 'traffic', 'PoC: 만들기 전에,\n작게 검증해봅니다.', { note: '기능을 만든 뒤가 아니라 샘플 3~5개로 성능과 실패 방식을 본다. 초록도 영구 무검수라는 뜻은 아니다.' });
-  s('agent-prd', 'define', 'agent-prd', '문제정의를\nAgent PRD로 번역합니다.', { note: 'PoC가 끝난 뒤 문제정의가 사라지지 않게 Agent PRD로 연결한다. 수강생 산출물 이름을 AI Agent 요구스펙, 업무 병목 정의서, AX 적용 후보 검토서로도 부를 수 있게 한다.' });
+  s('agent-prd', 'define', 'agent-prd', 'Y/U/J/I를\nAgent PRD로 묶습니다.', { note: 'PRD는 HMW 하나가 아니라 문제정의, 사용자 목표, 업무 흐름, AI 역할과 검수 기준을 모은 설계 문서다. Intelligence Fit까지 정리한 뒤 N 단계의 Project와 Skill로 옮긴다.' });
   lab('experiment', 'define');
   s('workflow-map', 'map', 'pipeline', '한 업무를 여섯 칸으로.', { steps: ['시작 조건', '입력', '처리', '판단', '출력', '검수'], details: ['언제 시작하나', '무엇을 받나', '어떤 작업을 하나', '어떤 기준을 쓰나', '무엇을 남기나', '누가 통과시키나'], note: '화면 클릭과 업무 단계를 구분한다. 각 단계의 출력이 다음 입력이 되는지 확인한다.' });
   lab('journey', 'map');
@@ -334,6 +352,33 @@
   slides.find(x => x.id === 'jtbd').source = 'jtbd';
   slides.find(x => x.id === 'hmw').source = 'hmw';
   slides.find(x => x.id === 'experiment').source = 'poc';
+  const removedSlides = new Set([
+    'from-last-week',
+    'homework-to-poc',
+    'problem-governance',
+    'rethink-work',
+    'ax-planning',
+    'jtbd'
+  ]);
+  for (let i = slides.length - 1; i >= 0; i--) {
+    if (removedSlides.has(slides[i].id)) slides.splice(i, 1);
+  }
+  const moveAfter = (ids, anchorId) => {
+    const moved = [];
+    for (let i = slides.length - 1; i >= 0; i--) {
+      if (ids.includes(slides[i].id)) moved.unshift(slides.splice(i, 1)[0]);
+    }
+    const anchorIndex = slides.findIndex(x => x.id === anchorId);
+    if (anchorIndex >= 0) slides.splice(anchorIndex + 1, 0, ...moved);
+  };
+  moveAfter(['taxi', 'solution-trap', 'bottleneck-diagnosis'], 'finish-line');
+  moveAfter(['yujin-framework', 'why-agent-fit', 'choose-problem-source'], 'bottleneck-diagnosis');
+  moveAfter(['agent-prd'], 'lab-boundary');
+  moveAfter(['lab-job'], 'lab-hmw');
+  const visibleChapters = new Set(slides.map(s => s.chapter));
+  for (let i = chapters.length - 1; i >= 0; i--) {
+    if (!visibleChapters.has(chapters[i].id)) chapters.splice(i, 1);
+  }
   const hmwExamples = [
     { domain: 'CS · 공통 사례', text: '어떻게 하면 CS 담당자가 문의가 몰릴 때도 정확한 첫 답변을 빠르게 준비할 수 있을까?', alternatives: '문의 자체 줄이기 · FAQ 자동 안내 · AI 답변 초안' },
     { domain: '개발', text: '어떻게 하면 개발자가 버그 제보를 받았을 때 원인을 빠르게 좁히고 수정 결과를 확인할 수 있을까?', alternatives: '제보 양식 개선 · 재현 테스트 · AI 코드 검토' },

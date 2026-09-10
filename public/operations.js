@@ -73,6 +73,7 @@
   }
   for (const [id, chapter] of Object.entries(entry)) {
     const slide = window.YF.slides.find(s => s.id === id);
+    if (!slide) continue;
     slide.note += '\n시작 멘트: 이 파트의 성공기준 세 가지를 먼저 읽는다. ' + goals[chapter].join(' / ') + ' 기본 성공 이후에만 확장을 연다.';
   }
   for (const lab of window.YF.labs) {
