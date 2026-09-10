@@ -100,6 +100,7 @@
     $('#next').disabled = active === D.slides.length - 1;
     $$('.chapter-button').forEach(b => b.setAttribute('aria-current', b.dataset.chapter === s.chapter ? 'step' : 'false'));
     $('#speaker-notes').innerHTML = '<b>INSTRUCTOR NOTE · ' + String(active + 1).padStart(2, '0') + '</b>' + esc(s.note || '');
+    window.YFMascot.mount(s);
     if (s.type === 'flow') setupFlow(s.case);
     if (s.type === 'mission') setupMission();
     if (s.type === 'code-run') window.YFCLI.setup();
@@ -270,7 +271,7 @@
   }
   function cancelFlow() { flowToken++; clearTimeout(flowTimer); flowTimer=null; flow=null; }
   function setupFlow(key) { flow = { key, step:-1, order:['input','head','work1','work2','merge','check','human','output'], failures:0, running:false, gate:false, done:false }; }
-  function flowMessage(label,message) { if ($('#flow-message')) { $('#flow-state-label').textContent=label; $('#flow-message').textContent=message; } }
+  function flowMessage(label,message) { if ($('#flow-message')) { $('#flow-state-label').textContent=label; $('#flow-message').textContent=message; window.YFMascot.react('flow',label); } }
   function markNode(id,status='active') { $$('[data-flow-node]').forEach(el=>{if(el.dataset.flowNode===id){el.classList.remove('fail','done','active');el.classList.add(status);}else if(el.classList.contains('active')){el.classList.remove('active');el.classList.add('done');}}); }
   function flowAdvance(auto=false) {
     if (!flow || flow.gate || flow.done) return;

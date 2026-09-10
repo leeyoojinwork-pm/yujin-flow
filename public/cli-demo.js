@@ -29,6 +29,7 @@
     const displayEvent = typing ? events[typing.event] : current;
     $('#cli-status').textContent = approved ? '시연 완료' : typing ? '입력 중 · ' + displayEvent.phase : current ? current.tone === 'fail' ? '수정 필요' : current.tone === 'pass' ? '검수 통과' : current.phase : '실행 준비';
     $('.cli-state').dataset.tone = approved || typing ? '' : current?.tone || '';
+    window.YFMascot.react('cli', approved ? 'APPROVED' : $('#cli-status').textContent);
     $('#cli-explanation').textContent = approved ? '실제 파일을 실행하거나 발송하지 않았습니다. 본인 실행에서는 결과와 근거를 직접 검토하세요.' : displayEvent ? displayEvent.note : '명령 입력부터 검수·수정·승인까지 한 번의 실행을 따라갑니다.';
     $('#cli-count').textContent = String(index + 1).padStart(2, '0') + ' / 12';
     $('#cli-progress-fill').style.width = ((index + 1) / events.length * 100) + '%';

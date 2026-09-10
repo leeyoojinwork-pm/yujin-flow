@@ -1,0 +1,67 @@
+.pixel-bot{position:relative;width:160px;aspect-ratio:8/5;flex-shrink:0;--bot-color:#d67856;--bot-eye:#211d19}
+.pixel-part{position:absolute;display:block;background:var(--bot-color);border-radius:0;transform-origin:center}
+.pixel-body{left:12.5%;top:0;width:75%;height:80%;--from-x:0px;--from-y:-65px}
+.pixel-arm-left{left:0;top:40%;width:12.5%;height:20%;--from-x:-75px;--from-y:0px}
+.pixel-arm-right{left:87.5%;top:40%;width:12.5%;height:20%;--from-x:75px;--from-y:0px}
+.pixel-leg-one,.pixel-leg-two,.pixel-leg-three,.pixel-leg-four{top:80%;width:6.25%;height:20%;--from-y:60px;--from-x:0px}
+.pixel-leg-one{left:18.75%}.pixel-leg-two{left:31.25%}.pixel-leg-three{left:62.5%}.pixel-leg-four{left:75%}
+.pixel-eye-left,.pixel-eye-right{top:20%;width:6.25%;height:20%;background:var(--bot-eye);z-index:1;--from-y:-30px;--from-x:0px}
+.pixel-eye-left{left:25%}.pixel-eye-right{left:68.75%}
+.agent-intro-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.65fr);align-items:center;gap:28px}
+.mascot-scene{position:relative;min-width:0;isolation:isolate}
+.mascot-stage{position:relative;width:100%;height:250px;display:flex;align-items:center;justify-content:center}
+.mascot-assemble .pixel-bot{width:190px}
+.mascot-baseline{position:absolute;bottom:36px;left:24%;right:24%;height:2px;background:currentColor;opacity:.18}
+.mascot-token{position:absolute;display:flex;align-items:center;gap:7px;color:#d7baff;white-space:nowrap}
+.mascot-token svg{width:20px;height:20px}.mascot-token small{font:600 12px/1.4 monospace}
+.mascot-assemble .token-0{left:2%;top:18px;--from-x:-30px;--from-y:20px}
+.mascot-assemble .token-1{right:2%;top:18px;--from-x:30px;--from-y:20px}
+.mascot-assemble .token-2{left:2%;bottom:9px;--from-x:-30px;--from-y:-20px}
+.mascot-assemble .token-3{right:2%;bottom:9px;--from-x:30px;--from-y:-20px}
+.mascot-replay{position:absolute;bottom:0;left:calc(50% - 16px);width:32px;height:32px;color:inherit;opacity:.65}
+.mascot-replay:hover,.mascot-replay:focus-visible{opacity:1}
+.mascot-playing.mascot-assemble .pixel-part{animation:pixel-assemble 1.2s cubic-bezier(.2,.8,.2,1) .2s both}
+.mascot-playing.mascot-assemble .pixel-arm-left,.mascot-playing.mascot-assemble .pixel-arm-right{animation-delay:.4s}
+.mascot-playing.mascot-assemble .pixel-leg-one,.mascot-playing.mascot-assemble .pixel-leg-three{animation-delay:.55s}
+.mascot-playing.mascot-assemble .pixel-leg-two,.mascot-playing.mascot-assemble .pixel-leg-four{animation-delay:.7s}
+.mascot-playing.mascot-assemble .pixel-eye-left,.mascot-playing.mascot-assemble .pixel-eye-right{animation:pixel-assemble 1s ease-out .95s both,pixel-blink .2s ease-in-out 2.8s 2}
+.mascot-playing.mascot-assemble .pixel-bot{animation:pixel-hop .65s ease-in-out 2.1s 2}
+.mascot-playing.mascot-assemble .mascot-token{animation:pixel-token .9s ease-out .8s both}
+.mascot-playing.mascot-assemble .token-1{animation-delay:1s}.mascot-playing.mascot-assemble .token-2{animation-delay:1.2s}.mascot-playing.mascot-assemble .token-3{animation-delay:1.4s}
+.mascot-skill-header{white-space:normal;border-bottom:1px solid var(--line);margin:0 0 22px;padding:0 0 12px}
+.mascot-read .mascot-stage{height:116px;justify-content:flex-end;padding-right:24px}
+.mascot-read .pixel-bot{width:112px}
+.mascot-read .mascot-token{left:14px;top:34px;color:var(--accent);border:1px solid var(--line);padding:10px;background:var(--paper)}
+.mascot-read .mascot-baseline{left:auto;right:20px;width:120px;bottom:6px}
+.mascot-read .mascot-replay{left:0;bottom:0;width:26px;height:26px}
+.mascot-playing.mascot-read .mascot-token{animation:skill-delivery 2.8s ease-in-out both}
+.mascot-playing.mascot-read .pixel-bot{animation:pixel-nod .65s ease-in-out 1.3s 2}
+.mascot-playing.mascot-read .pixel-arm-left{animation:pixel-wave .5s ease-in-out 1.5s 2}
+.mascot-inline{width:64px;height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.mascot-inline .pixel-bot{width:56px}
+.mascot-onboarding{display:flex;align-items:center;gap:26px;margin-bottom:24px}
+.mascot-onboarding .mascot-inline{width:112px;height:78px}.mascot-onboarding .pixel-bot{width:96px}.mascot-onboarding .leadline{margin:0}
+.flow-log .mascot-inline{align-self:center}.flow-log:has(.mascot-inline){align-items:center}
+.cli-state.has-mascot{display:grid;grid-template-columns:minmax(0,1fr) 64px;column-gap:12px}
+.cli-state.has-mascot>.mascot-inline{grid-column:2;grid-row:1/3;align-self:center}
+.cli-state.has-mascot>.eyebrow,.cli-state.has-mascot>h2{grid-column:1}
+.cli-state.has-mascot>p{grid-column:1/-1}
+.mascot-reacting[data-state="greet"] .pixel-arm-right{animation:pixel-wave .45s ease-in-out .3s 4}
+.mascot-reacting[data-state="work"] .pixel-bot{animation:pixel-nod .5s ease-in-out 2}
+.mascot-reacting[data-state="oops"] .pixel-bot{animation:pixel-oops .45s ease-in-out 2}
+.mascot-reacting[data-state="wait"] .pixel-eye-left,.mascot-reacting[data-state="wait"] .pixel-eye-right{animation:pixel-look 1.5s ease-in-out 1}
+.mascot-reacting[data-state="done"] .pixel-bot{animation:pixel-hop .6s ease-in-out 2}
+.mascot-reacting[data-state="done"] .pixel-arm-right{animation:pixel-wave .4s ease-in-out 3}
+@keyframes pixel-assemble{from{opacity:0;transform:translate(var(--from-x),var(--from-y))}to{opacity:1;transform:translate(0,0)}}
+@keyframes pixel-token{from{opacity:0;transform:translate(var(--from-x),var(--from-y))}to{opacity:1;transform:translate(0,0)}}
+@keyframes pixel-hop{0%,100%{transform:translateY(0)}45%{transform:translateY(-14px)}75%{transform:translateY(0) scaleY(.94)}}
+@keyframes pixel-nod{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(4px) rotate(-3deg)}}
+@keyframes pixel-wave{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes pixel-oops{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px) rotate(-4deg)}75%{transform:translateX(5px) rotate(4deg)}}
+@keyframes pixel-look{0%,100%{transform:translateX(0)}30%,70%{transform:translateX(3px)}}
+@keyframes pixel-blink{50%{transform:scaleY(.12)}}
+@keyframes skill-delivery{0%{opacity:0;transform:translateX(-12px)}25%{opacity:1;transform:translateX(0)}55%,75%{transform:translateX(28px) rotate(5deg)}100%{opacity:1;transform:translateX(0)}}
+@media(max-width:1000px){.agent-intro-hero{grid-template-columns:minmax(0,1fr) 230px;gap:12px}.mascot-assemble .pixel-bot{width:144px}.mascot-stage{height:222px}}
+@media(max-width:760px){.agent-intro-hero{grid-template-columns:1fr}.mascot-assemble .mascot-stage{height:172px}.mascot-assemble .pixel-bot{width:144px}.mascot-assemble{max-width:340px;width:100%;justify-self:center}.mascot-assemble .mascot-baseline{bottom:24px}.mascot-token svg{width:16px;height:16px}.mascot-assemble .token-0,.mascot-assemble .token-1{top:14px}.mascot-onboarding{gap:16px}.mascot-onboarding .mascot-inline{width:80px}.mascot-onboarding .pixel-bot{width:72px}}
+@media(max-width:480px){.flow-log .mascot-inline{width:44px}.flow-log .pixel-bot{width:40px}.mascot-read .pixel-bot{width:90px}.mascot-read .mascot-stage{padding-right:0}.mascot-read .mascot-token{left:0}.mascot-read .mascot-token small{font-size:11px}.mascot-read .mascot-token{padding:7px;gap:5px}}
+@media(prefers-reduced-motion:reduce){.mascot-scene *,.mascot-inline *{animation:none!important;transition:none!important}}
