@@ -387,8 +387,9 @@
   moveAfter(['yujin-framework', 'why-agent-fit', 'choose-problem-source'], 'bottleneck-diagnosis');
   moveAfter(['agent-prd'], 'lab-boundary');
   moveAfter(['workflow-map'], 'lab-hmw');
+  moveAfter(['team-share-poc'], 'lab-hmw');
+  moveAfter(['workflow-map'], 'team-share-poc');
   moveAfter(['experiment'], 'workflow-map');
-  moveAfter(['team-share-poc'], 'experiment');
   const experimentLabIndex = labs.findIndex(l => l.id === 'experiment');
   if (experimentLabIndex >= 0) labs.splice(experimentLabIndex, 1);
   const visibleChapters = new Set(slides.map(s => s.chapter));
