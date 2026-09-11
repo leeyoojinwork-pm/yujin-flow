@@ -21,7 +21,7 @@
     ['save-instructions', 'Project 지침 저장'],
     ['first-run', 'workflow 실행'], ['lab-run1', '첫 실행 기록'],
     ['skill-structure', 'Skill 구조 확인'],
-    ['lab-skill', '내 Skill 작성'], ['skill-export', 'Skill 파일 생성'],
+    ['lab-skill', '내 Skill 작성'],
     ['upload-skill', 'Skill 업로드·활성화'], ['second-run', '새 입력으로 실행'],
     ['lab-run2', '재사용 검증 기록']
   ];

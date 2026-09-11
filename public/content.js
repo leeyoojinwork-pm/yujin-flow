@@ -81,13 +81,13 @@
       field('output', '어떤 결과물을 만들까요?', '예: classification.csv: id, category, evidence. cs-response-drafts.md: 집계, 대상 문의 3건의 답변 초안, 문의 ID, FAQ ID, 담당자 확인 사항.', 'classification.csv: id, category, evidence. cs-response-drafts.md: 집계, 대상 문의 3건의 답변 초안, 문의 ID, FAQ ID, 담당자 확인 사항.'),
       field('check', '무엇을 확인하고 언제 멈추나요?', '예: 입력 ID 전부를 정확히 한 번 포함하고 집계를 비교한다. 각 답변의 FAQ 근거와 미확인 사항을 검수한다. 실패하면 최대 2회 수정 후 질문한다. 발송·환불·계정 변경은 하지 않는다.', '입력 ID 전부를 정확히 한 번 포함하고 집계를 비교한다. 각 답변의 FAQ 근거와 미확인 사항을 검수한다. 실패하면 최대 2회 수정 후 질문한다. 발송·환불·계정 변경은 하지 않는다.')
     ] },
-    { id: 'run1', letter: 'N', title: '첫 실행하기: 결과 확인하고 수정점 기록', minutes: 5, purpose: '실제 결과 파일을 열어보고, 예상과 다른 부분이나 고칠 지침을 기록하세요.', task: '다음 실행 기록을 분석하고 지침의 어느 부분을 바꾸면 좋을지 제안해줘. 실행 기록이 비어 있으면 먼저 실행을 요청해줘. 측정하지 않은 결과를 만들지 마.', fields: [
+    { id: 'run1', letter: 'N', title: '첫 실행 기록: 결과와 수정점만 남기기', minutes: 5, purpose: '방금 실행한 결과에서 파일명, 확인 근거, 수정할 지침만 짧게 남기세요.', task: '다음 실행 기록을 분석하고 지침의 어느 부분을 바꾸면 좋을지 제안해줘. 실행 기록이 비어 있으면 먼저 실행을 요청해줘. 측정하지 않은 결과를 만들지 마.', fields: [
       field('input', '어떤 입력으로 실행했나요?', '파일명과 실행 시각을 적으세요.', ''),
       field('result', '실제 나온 결과물은 무엇인가요?', '파일명·Claude 결과 중 확인한 부분을 적으세요.', ''),
       field('defect', '예상과 다른 점, 원본과 직접 대조한 근거는?', '예상 / 실제 / 원본 ID·합계·인용 검산. 미확인은 미확인으로.', ''),
       field('revision', '어느 지침을 어떻게 바꿨나요?', '수정 전 / 수정 후를 함께 적으세요.', '')
     ] },
-    { id: 'skill', letter: 'N', title: 'Skill 만들기: 반복할 절차를 파일로 정리', minutes: 6, purpose: '다시 쓸 업무 절차를 SKILL.md로 만들고 업로드할 ZIP으로 묶으세요.', task: '아래 Skill 설계를 SKILL.md로 작성해줘. name과 description을 YAML frontmatter에 넣고 본문에 입력·절차·출력·검수·중단 조건을 포함해줘. 이 파일은 자동으로 외부 도구 권한을 부여하지 않는다.', fields: [
+    { id: 'skill', letter: 'N', title: 'Skill 작성: 반복 절차를 SKILL.md로 정리', minutes: 6, purpose: '앞에서 검증한 절차를 재사용할 이름, 사용 조건, 순서, 출력, 중단 기준으로 정리하세요.', task: '아래 Skill 설계를 SKILL.md로 작성해줘. name과 description을 YAML frontmatter에 넣고 본문에 입력·절차·출력·검수·중단 조건을 포함해줘. 이 파일은 자동으로 외부 도구 권한을 부여하지 않는다.', fields: [
       field('name', 'Skill의 영문 이름은?', '예: triage-and-draft', 'triage-and-draft', { single: true, maxLength: 64 }),
       field('description', '언제 이 Skill을 사용하나요?', '예: 익명 CS 문의 CSV를 분류·집계하고, 가상 FAQ를 근거로 담당자가 검토할 답변 초안을 만들 때 사용한다.', '익명 CS 문의 CSV를 분류·집계하고, 가상 FAQ를 근거로 담당자가 검토할 답변 초안을 만들 때 사용한다.', {"maxLength":200}),
       field('input', '시작 전에 반드시 필요한 입력은?', '예: id, score, comment 열의 문의 CSV와 rubric.md, report-template.md. 자료가 없거나 필수 열이 없으면 요청한다.', 'id, score, comment 열의 문의 CSV와 rubric.md, report-template.md. 자료가 없거나 필수 열이 없으면 요청한다.'),
@@ -357,13 +357,16 @@
     'loop-control',
     'success-metrics',
     'expected-result',
+    'skill-export',
     'split-criteria',
     'skill-vs-sub',
     'lab-ownflow',
     'lab-peer',
+    'evaluation',
     'troubleshooting',
     'references',
-    'faq-practice'
+    'faq-practice',
+    'takeaway'
   ]);
   for (let i = slides.length - 1; i >= 0; i--) {
     if (removedSlides.has(slides[i].id)) slides.splice(i, 1);
