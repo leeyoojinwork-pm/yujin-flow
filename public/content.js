@@ -310,6 +310,7 @@
     ['프롬프트만 잘 쓰면 Agent가 되나요?', '아니요. 프롬프트는 시작이고, Agent는 기준·자료·절차·검수·재실행이 함께 있어야 합니다.', '오늘 만든 다섯 파일 problem.md, job-story.md, workflow.md, boundaries.md, SKILL.md가 그 연결고리입니다.'],
     ['동시에 접속하면 답변이 섞이나요?', '아니요. 이 덱의 입력값은 각자 브라우저의 로컬 저장소에만 남습니다.', 'GitHub Pages에 같이 접속해도 서버 DB에 저장하지 않습니다. 다만 같은 기기, 같은 브라우저 프로필을 함께 쓰면 그 프로필 안에서는 같은 기록을 볼 수 있습니다.']
   ], note: '마지막 Q&A 직전 안내. 수강생의 심리적 허들을 낮추되, 프롬프트와 Agent 설계의 차이를 다시 잡는다.' });
+  s('mentor-case', 'ship', 'mentor-case', '멘토 사례.\n피드백 운영 AI 파이프라인', { note: '2주차 과제 제출 직전 원페이지 사례. 메인 사례는 멘토 피드백 운영 AI 파이프라인 자동화이며, 뉴셀렉트 JD의 병목 발굴, Agent 솔루션 기획, 빌드/배포, 실행구조 고도화 4단계와 연결한다. FIN:NECT 강의는 방법론을 교육할 정도로 체계화했다는 보조 근거로만 짧게 언급한다.' });
   s('week2-homework', 'ship', 'homework2', '2주차 제출.\n내 업무 Agent 설계 보고서.', { note: '1주차 문제정의를 2주차 과제로 이어준다. 제출물은 완성된 Agent가 아니라 Agent가 일할 수 있을 만큼 업무를 설명한 보고서다. 실제 데이터가 없으면 가상 데이터를 만들게 한다. Notion 1주차 상세 페이지 하단에 붙이거나 week2-agent-report.md로 저장하게 안내한다.' });
   s('closing', 'ship', 'closing', '이제 내 업무에\n직접 써볼 차례입니다.', { subtitle: '오늘 만든 지침과 Skill을 가져가세요.\n다음에는 실제 업무에 써본 결과를 함께 봅니다.', note: '좋은 발표보다 다시 쓸 수 있는 파일과 기록을 남긴다. 다음 주에는 실제 실행에서 바뀐 점을 중심으로 이야기한다.' });
   s('survey-week2', 'ship', 'survey', '2주차 만족도 조사.', { url: 'https://docs.google.com/forms/d/e/1FAIpQLSdbXTYYYHfQilP4GmDDeqN5Lv7NHmWPfdeop8lTXHltEetiLg/viewform?usp=publish-editor', qr: './assets/survey-week2-qr.svg', note: '마지막 장에서 바로 QR을 띄워 참여자가 휴대폰으로 설문에 들어가게 한다. 링크도 함께 제공하되, 수업 마무리 멘트는 짧게 유지한다.' });

@@ -94,6 +94,7 @@
       'loop-control': '끝나는 조건', 'evaluation': '운영 기준', 'success-metrics': '검수와 재작업',
       'next-week': '세 번의 실행 기록', 'takeaway': '내 일의 설계도', 'troubleshooting': '여기부터 확인',
       'faq-agent-roles': 'Agent 역할', 'faq-qa-loop': 'QA와 Loop', 'faq-practice': '실습',
+      'mentor-case': '피드백 운영',
       'week2-homework': 'Agent 설계 보고서',
       'references': '유진의 재구성', 'closing': '실행 기준', 'survey-week2': '만족도 조사'
     }[s.id];
@@ -226,6 +227,7 @@
       ].map(x => '<details><summary>' + x[0] + '</summary><p>' + x[1] + '</p></details>').join('') + '</div>';
       case 'references': return '<div class="source-list">' + Object.values(D.sources).map(x => '<div class="source-item">' + ext(x.url, x.title) + '<p>공식 문서 또는 신뢰 가능한 기사 확인 · ' + D.checked + '</p></div>').join('') + '</div><p class="source-note">출처는 Claude/OpenAI/Microsoft/AWS/IDEO/Christensen Institute 공식 자료와 Digital iNSIGHT AX 기사 중심으로 정리했습니다.</p><p class="source-note">YUJIN FLOW와 실습 사례·질문·파일은 이유진 강의 맥락으로 새로 구성했습니다. 화면 안내는 학습용 재구성입니다.</p>';
       case 'faq': return faqMarkup(s);
+      case 'mentor-case': return mentorCaseMarkup();
       case 'homework2': return week2HomeworkMarkup();
       case 'survey': return surveyMarkup(s);
       case 'mission-brief': return missionBrief();
@@ -242,6 +244,21 @@
   }
   function surveyMarkup(s) {
     return '<div class="survey-layout"><section class="survey-copy"><span class="eyebrow">WRAP-UP</span><h2>휴대폰 카메라로 QR을 찍고<br>오늘 수업을 남겨주세요.</h2><p>좋았던 점, 헷갈린 지점, 다음 시간에 더 보고 싶은 실습을 적어주시면 3주차 흐름에 바로 반영합니다.</p><a class="button primary" href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer">' + icon('external-link') + '설문 링크 열기</a></section><section class="survey-qr-card"><img src="' + esc(s.qr) + '" alt="2주차 만족도 조사 QR 코드"><p>2주차 만족도 조사</p></section></div>';
+  }
+  function mentorCaseMarkup() {
+    const jd = [
+      ['01', '병목 발굴', '속도 문제가 아니라 피드백 깊이·톤의 품질 일관성 문제로 재정의'],
+      ['02', 'Agent 솔루션 기획', '수집 → 병렬 판정 → 병합 → 초안 → 검수 → 발송으로 구조화'],
+      ['03', '빌드·배포', '광라 3기 실데이터로 분류기와 초안 생성기 Skill 검증'],
+      ['04', '실행구조 고도화', '광라 2기·3기·KITECH에 재작성 없이 이식']
+    ];
+    const metrics = [
+      ['20분 → 5분', '건당 처리 시간'],
+      ['10h → 2.5h', '주당 운영 시간'],
+      ['96%', '직전 주 반영률'],
+      ['100%', '구조 준수율']
+    ];
+    return '<div class="mentor-case"><section class="mentor-logic"><span class="eyebrow">MENTOR CASE / LOGIC TREE</span><h2>겉보기 문제를<br>진짜 병목으로 바꿉니다.</h2><p>멘토 한 명이 16~30명 제출물에 피드백을 쓰던 운영. 처음에는 “시간이 오래 걸린다”였지만, 실제 병목은 멘토 컨디션에 따라 피드백 깊이와 톤이 흔들리는 <b>품질 일관성</b>이었습니다.</p><div class="jd-tree">' + jd.map(x => '<article><span>' + x[0] + '</span><b>' + x[1] + '</b><p>' + x[2] + '</p></article>').join('') + '</div></section><section class="mentor-flow"><span class="eyebrow">MERMAID FLOWCHART STYLE</span><div class="flowchart-card"><div class="flow-node root">수집</div><div class="flow-branches"><div>반영도 확인</div><div>설계파/실행파 구분</div><div>작동 증거 확인</div><div>좁히기 통과 확인</div></div><div class="flow-diamond"><div>유형 9종 판정<br><small>4축 병합</small></div></div><div class="flow-split"><div class="hold">보류 큐<br><small>멘토 확인 후 재투입</small></div><div class="draft">초안 생성</div></div><div class="flow-gate">Human Gate<br><small>사실관계 · 톤 · 최종 발송</small></div><div class="flow-node send">발송</div></div><div class="mentor-metrics">' + metrics.map(x => '<div><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join('') + '</div><p class="mentor-footnote">FIN:NECT 강의는 이 방법론을 남에게 가르칠 정도로 체계화했다는 보조 근거로 붙입니다.</p></section></div>';
   }
   function axPrinciplesMarkup() {
     const items = [
@@ -461,9 +478,10 @@
   function notebook() {
     const openIds=$$('.notebook-lab[open]').map(el=>el.dataset.notebookLab);
     const p=E.progress(state);
-    const labOrder = window.YFArtifacts.stages.flatMap(stage => stage.labs).concat(window.YFArtifacts.extras);
+    const existingLabs = ids => ids.map(getLab).filter(Boolean);
+    const labOrder = existingLabs(window.YFArtifacts.stages.flatMap(stage => stage.labs).concat(window.YFArtifacts.extras)).map(l => l.id);
     const renderLab = l => '<details class="notebook-lab" data-notebook-lab="' + l.id + '" ' + (openIds.includes(l.id) || (!openIds.length && l.id === 'gap') ? 'open' : '') + '><summary><span class="lab-letter">' + String(labOrder.indexOf(l.id)+1).padStart(2,'0') + '</span><h2>' + esc(l.title) + '</h2><span class="summary-count" data-summary-count="' + l.id + '">' + labCount(l.id) + '</span>' + icon('chevron-down') + '</summary>' + form(l.id,'notebook') + '</details>';
-    const groupedLabs = window.YFArtifacts.stages.map(stage => window.YFArtifacts.notebookGroup(stage,renderLab)).join('') + '<section class="artifact-extras"><h2>보완 과제 / 검수·동료 피드백·실행 계획</h2><p>다섯 MD를 만든 뒤 돌아보는 활동입니다. 기록은 전체 MD에 함께 저장됩니다.</p>' + window.YFArtifacts.extras.map(id => renderLab(getLab(id))).join('') + '</section>';
+    const groupedLabs = window.YFArtifacts.stages.map(stage => window.YFArtifacts.notebookGroup(stage,renderLab)).join('') + '<section class="artifact-extras"><h2>보완 과제 / 검수·동료 피드백·실행 계획</h2><p>다섯 MD를 만든 뒤 돌아보는 활동입니다. 기록은 전체 MD에 함께 저장됩니다.</p>' + existingLabs(window.YFArtifacts.extras).map(renderLab).join('') + '</section>';
     $('#notebook').innerHTML='<div class="notebook-header"><div><span class="eyebrow">MY WORKSPACE / YUJIN FLOW</span><h1>내 실습노트</h1><p>완료 <b id="notebook-complete">'+p.complete+'</b> / '+D.labs.length+'개 · 질문 <b id="notebook-filled">'+p.filled+'</b> / '+p.total+'개 작성</p></div><div class="notebook-toolbar">'+button('전체 프롬프트 복사','copy-all','copy','secondary')+button('전체 MD 저장','download-all','download','primary')+'</div></div><div class="notebook-list">'+groupedLabs+'</div><div class="notebook-bottom"><p>내 입력은 이 브라우저의 로컬 저장소에만 남습니다.<br>브라우저 데이터 삭제 전에는 MD로 보관하세요.</p><button type="button" class="text-button" data-action="reset-all">'+icon('trash-2')+'내 기록 초기화</button></div>';
     window.YFTimers.refresh();
     icons();
