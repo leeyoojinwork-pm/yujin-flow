@@ -82,10 +82,12 @@
     if (s.id === 'yujin-framework') return esc(s.title);
     if (s.id === 'yujin-flow-map') return '문제에서 실행까지.<br><span>YUJIN FLOW.</span>';
     const phrase = {
+      'seat-map': '좌석 배치표',
+      'fde-product': '제품화 가능한 해법', 'fde-venn': '교집합',
       'opening': 'AI AGENT', 'finish-line': '결과물 4개', 'from-last-week': '내 업무', 'homework-to-poc': 'PoC 명세', 'taxi': '어떤 문제',
       'solution-trap': '챗봇', 'bottleneck-diagnosis': '병목 진단가', 'rethink-work': '없애도 되는 일', 'yujin-framework': 'YUJIN FLOW',
       'ax-planning': 'Problem', 'problem-governance': '어떤 문제',
-      'problem-formula': '한 문장', 'jtbd': '문의 해결', 'hmw': '여러 해결책',
+      'problem-formula': '한 문장', 'jtbd': '문의 해결', 'hmw': '여러 해결책', 'hmw-bridge': '늦추는 질문',
       'experiment': 'PoC', 'agent-prd': 'Agent PRD', 'workflow-map': '여섯 칸', 'what-is-agent': 'Agent',
       'onboarding': '일할 조건', 'orchestration-concept': 'Orchestration', 'split-criteria': '언제',
       'example-gallery': '내 문제',
@@ -173,6 +175,9 @@
         ['git-branch', '작업 순서 파일'],
         ['file-check-2', '검수 질문 3개']
       ].map(x => '<article>' + icon(x[0]) + '<b>' + x[1] + '</b></article>').join('') + '</section></div>';
+      case 'seat-map': return '<figure class="seat-map-page"><img src="assets/group-seat-map.svg" alt="B조는 10시 방향, C조는 2시 방향, D조는 4시 방향, A조는 8시 방향에 배치된 조별 좌석 배치표"><figcaption>B 10시 · C 2시 · D 4시 · A 8시 / 강사와 화면은 맨 앞</figcaption></figure>';
+      case 'fde-product': return '<section class="fde-product-page"><span class="eyebrow">FDE / FORWARD DEPLOYED ENGINEER</span><p>FDE 직무는 고객의 문제를 해결하는 <b>재사용 가능한 Product</b>를 만들어내는 일입니다.</p><blockquote>“FDE는 단기적이고 손쉬운 컨설팅의 유혹을 경계해야 한다.”</blockquote><p class="fde-product-bottom">핵심은 서비스가 아니라, <b>제품화 가능한 해법</b>입니다.</p></section>';
+      case 'fde-venn': return '<figure class="fde-venn-page"><img src="assets/fde-venn-clean.svg" alt="Software Engineer, Consultant, Product Manager의 교집합에 FDE가 위치한다는 선형 도식"><figcaption>FDE = 고객 문제 진단 + 구현 가능한 구조 + 재사용 가능한 제품화</figcaption></figure>';
       case 'compare': return '<div class="compare-grid">' + [s.left, s.right].map(c => '<section class="compare-column"><p class="compare-label">' + esc(c.label) + '</p><h3>' + esc(c.title) + '</h3><ul>' + c.items.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section>').join('') + '</div>';
       case 'reveal': return taxiMarkup(s);
       case 'editorial': return s.id === 'why-agent-fit' ? whyAgentFitMarkup(s) : (s.intro ? '<p class="leadline">' + esc(s.intro) + '</p>' : '') + '<div class="editorial-list">' + s.rows.map(r => '<div class="editorial-row"><h3>' + esc(r[0]) + '</h3><p>' + esc(r[1]) + '</p></div>').join('') + '</div>' + (s.caption ? '<p class="caption">' + esc(s.caption) + '</p>' : '') + (s.id === 'evaluation' ? '<section class="agent-check-prompt"><div><span class="eyebrow">READY-TO-RUN PROMPT</span><h3>Agent 실행과 Subagent 구성을 함께 확인합니다.</h3><p>실행 결과만 보지 말고, Skill·Subagent·검수 기록이 실제로 남았는지 확인합니다.</p></div>' + dynamicPromptBlock(E.agentExecutionCheckPrompt(state), 'agentExecutionCheckPrompt', 'Agent 실행·Subagent 확인') + '</section>' : '');
@@ -186,6 +191,11 @@
       case 'yujin-flow-map': return yujinFlowMapMarkup();
       case 'problem-source': return problemSourceMarkup();
       case 'formula': return '<div class="formula-tokens">' + s.tokens.map(t => '<span>' + esc(t) + '</span>').join('') + '</div>' + (s.id === 'hmw' ? examplesMarkup() : '<p class="formula-example">' + esc(s.example) + '</p><p class="caption">' + esc(s.caption) + '</p>');
+      case 'hmw-bridge': return '<div class="hmw-bridge-layout"><section class="hmw-bridge-lead"><span class="eyebrow">WHY HMW</span><h2>문제를 보자마자<br>“챗봇 만들자”로 가지 않습니다.</h2><p>먼저 질문의 크기를 조절하고, 해결 방향을 비교합니다.</p></section><section class="hmw-question-scale">' + [
+        ['너무 좁음', '신청 버튼을 파란색으로 바꾸려면?', '이미 해결책을 정해버린 질문'],
+        ['너무 넓음', '교육을 어떻게 혁신할 수 있을까?', '어디서부터 손댈지 모르는 질문'],
+        ['적당함', '처음 방문한 사람이 자신에게 맞는 강의를 빠르게 찾게 하려면?', '원인과 대안을 함께 볼 수 있는 질문']
+      ].map((x, i) => '<article class="' + (i === 2 ? 'good' : '') + '"><span>0' + (i + 1) + '</span><b>' + x[0] + '</b><p>' + x[1] + '</p><small>' + x[2] + '</small></article>').join('') + '</section></div><p class="hmw-bridge-bottom">오늘은 내 문제를 Agent 기능으로 만들기 전에 <b>없애기 · 단순화 · 규칙 자동화 · AI Agent 적용</b>을 먼저 비교합니다.</p>';
       case 'poc-prompt': return pocPromptMarkup();
       case 'team-task': return teamTaskMarkup();
       case 'workflow-example': return workflowExampleMarkup();

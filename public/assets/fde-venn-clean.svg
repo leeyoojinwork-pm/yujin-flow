@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">FDE 역할 교집합</title>
+  <desc id="desc">Software Engineer, Consultant, Product Manager의 교집합에 FDE가 위치한다는 설명 도식</desc>
+  <rect width="1600" height="900" fill="#F7F8F5"/>
+  <text x="120" y="112" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="54" font-weight="850">FDE는 세 역할의 교집합에 있습니다.</text>
+  <text x="120" y="162" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="23" font-weight="600">엔지니어링으로 만들고, 컨설팅처럼 문제를 읽고, 제품처럼 재사용 가능하게 남깁니다.</text>
+  <line x1="120" y1="208" x2="1480" y2="208" stroke="#161916" stroke-width="3"/>
+
+  <g transform="translate(800 480)">
+    <circle cx="0" cy="-122" r="205" fill="#7A42D6" fill-opacity="0.10" stroke="#7A42D6" stroke-width="5"/>
+    <circle cx="-185" cy="106" r="205" fill="#207A4D" fill-opacity="0.10" stroke="#207A4D" stroke-width="5"/>
+    <circle cx="185" cy="106" r="205" fill="#D5FA42" fill-opacity="0.24" stroke="#9FBA22" stroke-width="5"/>
+
+    <circle cx="0" cy="28" r="92" fill="#161916"/>
+    <text x="0" y="13" text-anchor="middle" fill="#D5FA42" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="32" font-weight="900">FDE</text>
+    <text x="0" y="50" text-anchor="middle" fill="#FFFFFF" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="18" font-weight="750">제품화 가능한 해법</text>
+
+    <text x="0" y="-172" text-anchor="middle" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="34" font-weight="850">Software</text>
+    <text x="0" y="-130" text-anchor="middle" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="34" font-weight="850">Engineer</text>
+    <text x="0" y="-87" text-anchor="middle" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="18" font-weight="650">구현 가능한 구조</text>
+
+    <text x="-238" y="120" text-anchor="middle" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="34" font-weight="850">Consultant</text>
+    <text x="-238" y="163" text-anchor="middle" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="18" font-weight="650">고객 문제 진단</text>
+
+    <text x="238" y="105" text-anchor="middle" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="34" font-weight="850">Product</text>
+    <text x="238" y="147" text-anchor="middle" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="34" font-weight="850">Manager</text>
+    <text x="238" y="190" text-anchor="middle" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="18" font-weight="650">재사용 가능한 제품화</text>
+  </g>
+
+  <g transform="translate(120 806)">
+    <rect width="1360" height="54" rx="6" fill="#FFFFFF" stroke="#D9DDD5"/>
+    <text x="680" y="36" text-anchor="middle" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="20" font-weight="800">고객 한 명의 문제에서 끝나지 않고, 다음 고객에게도 쓸 수 있는 Product로 남기는 역할</text>
+  </g>
+</svg>

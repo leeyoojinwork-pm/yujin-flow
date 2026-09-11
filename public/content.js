@@ -217,7 +217,10 @@
   const slides = [];
   const s = (id, chapter, type, title, extra = {}) => slides.push({ id, chapter, type, title, ...extra });
   const lab = (id, chapter) => s('lab-' + id, chapter, 'lab', labs.find(x => x.id === id).title, { lab: id });
+  s('seat-map', 'opening', 'seat-map', '오늘의 조별\n좌석 배치표', { note: '입장 직후 보여주는 첫 페이지. B조는 10시 방향, C조는 2시 방향, D조는 4시 방향, A조는 8시 방향에 앉는다. 강사와 화면은 맨 앞에 있다.' });
   s('opening', 'opening', 'hero', '내 일을 대신할\n나만의 AI AGENT 만들기.', { kicker: 'YUJIN FLOW', subtitle: '내 업무 발굴부터 PoC 검증,\nAI AGENT 설계 및 실행까지 End-to-End', note: '오프닝. 오늘 가져갈 것은 Project, Skill ZIP, 실행 기록이다. 코드 심화는 선택 트랙이며 기본 실습은 Claude 웹으로 진행한다. 문제정의 PM 포지션과 결과물, 실패 원인은 이어지는 장표에서 제시한다.' });
+  s('fde-product', 'opening', 'fde-product', 'FDE는 고객의 문제를\n제품화 가능한 해법으로 바꿉니다.', { note: '표지 뒤 포지셔닝 장표. FDE는 단기 컨설팅의 유혹보다 고객 문제를 재사용 가능한 Product로 남기는 역할임을 짧게 선언한다.' });
+  s('fde-venn', 'opening', 'fde-venn', '엔지니어링, 컨설팅,\n제품화가 만나는 자리.', { note: 'Software Engineer, Consultant, Product Manager의 교집합으로 FDE 역할을 시각화한다. 첨부 이미지를 그대로 베끼지 않고 강의덱 톤에 맞게 선형 도식으로 재구성한다.' });
   s('finish-line', 'opening', 'deliverables', '3가지 실습,\n그리고 나오는 결과물', { subtitle: '', note: '2페이지는 오늘 진행할 실습 3개와 그 결과로 남는 결과물 4개만 보여준다.' });
   s('from-last-week', 'opening', 'homework-bridge', '지난주에 적어온 문제,\n오늘의 출발점입니다.', { left: { label: 'LAST WEEK', title: '주어진 지침 실행', items: ['회사 조사와 리서치', '결과가 나오는 경험', '도구와 대화에 익숙해지기'] }, right: { label: 'THIS WEEK', title: '설계 · 등록 · 재실행', items: ['내 문제와 완료 기준', 'Project와 Skill 등록', '새 입력에서도 같은 기준 확인'] }, note: '잘 만든 프롬프트도 필요하다. 오늘은 그 앞의 업무 선택과 뒤의 파일·재사용·검수를 연결한다.' });
   s('homework-to-poc', 'opening', 'homework-poc', '1주차 답변을\nAgent 설계로 바꿉니다.', { note: '수강생이 노션 1주차 상세 페이지에서 가져온 세 문장을 오늘의 실습 단위로 바꾸는 장표다. 불편함은 관찰 가능한 병목으로, Agent 희망 기능은 입력·처리·출력·검수 기준으로 바꾼다.' });
@@ -251,6 +254,7 @@
   lab('problem', 'define');
   s('jtbd', 'define', 'compare', '답변을 쓰는 것과\n문의를 해결하는 것은 다릅니다.', { left: { label: 'ACTION', title: '고객에게 답변을 보낸다', items: ['문의 읽기', 'FAQ 복사', '답변 전송'] }, right: { label: 'JOB TO BE DONE', title: '고객의 문의를 정확하게 해결한다', items: ['문의에 맞는 근거를 찾는다', '고객이 다음에 할 일을 안내한다', '예외 문의는 담당자에게 넘긴다'] }, note: '제공된 JTBD 예시를 재구성. 행동보다 최종 결과를 보되, 제품이 어디까지 책임질지 범위를 정한다.' });
   s('hmw', 'define', 'formula', 'HMW(How Might We)로 질문하고,\n여러 해결책을 비교해보세요.', { tokens: ['어떻게 하면', '이 사용자가', '이 상황에서', '이 변화를'], example: '어떻게 하면 CS 담당자가 문의가 몰릴 때도\n정확한 첫 답변을 빠르게 준비할 수 있을까?', caption: '문의 자체 줄이기 · FAQ 자동 안내 · AI 답변 초안을 함께 비교합니다.', note: 'HMW(How Might We)는 창의성을 열어두는 질문이다. 문제의 범위와 제약까지 모두 없애는 질문은 피한다.' });
+  s('hmw-bridge', 'define', 'hmw-bridge', 'HMW는 해결책을\n늦추는 질문입니다.', { note: 'HMW 실습 직전 브릿지. 문제를 보자마자 챗봇·자동화·버튼 수정으로 좁히지 않고, 너무 좁은 질문과 너무 넓은 질문 사이에서 실행 가능한 질문을 찾게 한다. 이후 없애기, 단순화, 규칙 자동화, AI Agent 적용을 비교한다.' });
   lab('hmw', 'define');
   s('experiment', 'define', 'poc-prompt', 'I: HTML 프로토타입으로\n먼저 확인합니다.', { note: 'I 단계는 긴 실습노트보다, 앞에서 쓴 Y/U/J/I를 붙여 사용자가 볼 수 있는 HTML 프로토타입을 만들어보게 한다. 꼭 대시보드가 아니라 검토 화면·체크리스트·상태판이어도 된다.' });
   s('team-share-poc', 'define', 'team-task', '팀끼리 문제와 화면을\n짧게 확인합니다.', { note: '17페이지 HTML 프로토타입 프롬프트 직후 팀 공유. 각자 어떤 문제를 골랐는지, 입력·판단 기준·사람 검수 지점이 있는지 말하고 오늘 만들 화면의 범위를 한 줄로 확정한다. 토론이 길어지지 않게 누락 질문 하나와 확정 문장 하나만 남긴다.' });

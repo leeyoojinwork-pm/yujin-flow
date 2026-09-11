@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">AWAC 조별 좌석 배치표</title>
+  <desc id="desc">B조는 10시 방향, C조는 2시 방향, D조는 4시 방향, A조는 8시 방향에 배치된 좌석 안내 이미지</desc>
+  <rect width="1600" height="900" fill="#F7F8F5"/>
+  <text x="120" y="116" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="54" font-weight="800">조별 좌석 배치표</text>
+  <text x="120" y="164" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="23" font-weight="600">입장 후 본인 조 위치에 앉아주세요.</text>
+  <line x1="120" y1="208" x2="1480" y2="208" stroke="#161916" stroke-width="3"/>
+
+  <g opacity="0.94">
+    <rect x="560" y="222" width="480" height="78" rx="8" fill="#161916"/>
+    <text x="800" y="255" text-anchor="middle" fill="#D5FA42" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="19" font-weight="800">FRONT</text>
+    <text x="800" y="284" text-anchor="middle" fill="#FFFFFF" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="30" font-weight="850">강사 / 화면</text>
+  </g>
+
+  <g transform="translate(250 330)">
+    <rect x="0" y="0" width="430" height="218" rx="8" fill="#FFFFFF" stroke="#7A42D6" stroke-width="5"/>
+    <rect x="0" y="0" width="430" height="18" fill="#7A42D6"/>
+    <text x="42" y="86" fill="#7A42D6" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="72" font-weight="900">B</text>
+    <text x="42" y="138" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="30" font-weight="800">B조</text>
+    <text x="42" y="177" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="20" font-weight="600">10시 방향</text>
+  </g>
+
+  <g transform="translate(920 330)">
+    <rect x="0" y="0" width="430" height="218" rx="8" fill="#FFFFFF" stroke="#7A42D6" stroke-width="5"/>
+    <rect x="0" y="0" width="430" height="18" fill="#7A42D6"/>
+    <text x="42" y="86" fill="#7A42D6" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="72" font-weight="900">C</text>
+    <text x="42" y="138" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="30" font-weight="800">C조</text>
+    <text x="42" y="177" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="20" font-weight="600">2시 방향</text>
+  </g>
+
+  <g transform="translate(920 590)">
+    <rect x="0" y="0" width="430" height="218" rx="8" fill="#FFFFFF" stroke="#161916" stroke-width="5"/>
+    <rect x="0" y="0" width="430" height="18" fill="#D5FA42"/>
+    <text x="42" y="86" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="72" font-weight="900">D</text>
+    <text x="42" y="138" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="30" font-weight="800">D조</text>
+    <text x="42" y="177" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="20" font-weight="600">4시 방향</text>
+  </g>
+
+  <g transform="translate(250 590)">
+    <rect x="0" y="0" width="430" height="218" rx="8" fill="#FFFFFF" stroke="#161916" stroke-width="5"/>
+    <rect x="0" y="0" width="430" height="18" fill="#D5FA42"/>
+    <text x="42" y="86" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="72" font-weight="900">A</text>
+    <text x="42" y="138" fill="#161916" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="30" font-weight="800">A조</text>
+    <text x="42" y="177" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="20" font-weight="600">8시 방향</text>
+  </g>
+
+  <path d="M670 300 C620 326 594 352 560 394" fill="none" stroke="#A7AEA1" stroke-width="3" stroke-dasharray="9 9"/>
+  <path d="M930 300 C980 326 1006 352 1040 394" fill="none" stroke="#A7AEA1" stroke-width="3" stroke-dasharray="9 9"/>
+  <path d="M973 300 C1040 400 1104 504 1138 612" fill="none" stroke="#A7AEA1" stroke-width="3" stroke-dasharray="9 9"/>
+  <path d="M627 300 C560 400 496 504 462 612" fill="none" stroke="#A7AEA1" stroke-width="3" stroke-dasharray="9 9"/>
+
+  <text x="800" y="846" text-anchor="middle" fill="#646B64" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="18" font-weight="600">B: 10시 · C: 2시 · D: 4시 · A: 8시</text>
+</svg>
