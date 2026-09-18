@@ -243,6 +243,26 @@ body{background:
 .cover-footer{display:grid;grid-template-columns:150px 1fr auto;gap:18px;align-items:center;margin-top:76px;padding-top:17px;border-top:1px solid var(--line);font-size:12px;color:rgba(243,240,232,.48);}
 .cover-footer strong{color:var(--paper);font-size:14px;font-weight:600;letter-spacing:-.02em;}
 .cover-credit{justify-self:end;color:rgba(243,240,232,.44);}
+.journey-page{display:flex;min-height:68%;flex-direction:column;justify-content:center;}
+.journey-strip{display:grid;grid-template-columns:max-content 52px max-content 52px max-content 52px max-content;align-items:center;justify-content:space-between;margin-top:38px;padding:58px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.journey-strip strong{font-size:clamp(30px,4vw,58px);line-height:1;letter-spacing:-.055em;color:var(--paper);white-space:nowrap;}
+.journey-strip strong.accent{color:var(--coral);}
+.journey-strip span{font-size:38px;color:var(--coral);text-align:center;}
+.agent-tree{position:relative;max-width:940px;margin-left:auto;margin-right:auto;}
+.agent-tree-root{position:relative;width:300px;margin:0 auto;padding:20px 24px;text-align:center;border:1px solid var(--coral);background:rgba(255,107,74,.10);border-radius:4px;}
+.agent-tree-root span,.agent-tree-node span{display:block;margin-bottom:7px;color:var(--coral);font-size:10px;font-weight:800;letter-spacing:.14em;}
+.agent-tree-root strong{font-size:24px;color:var(--paper);}
+.agent-tree-root:after{content:"";position:absolute;left:50%;bottom:-42px;width:1px;height:42px;background:rgba(255,107,74,.7);}
+.agent-tree-branches{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:90px;margin-top:82px;}
+.agent-tree-branches:before{content:"";position:absolute;left:25%;right:25%;top:-41px;height:1px;background:rgba(255,107,74,.7);}
+.agent-tree-node{position:relative;padding:24px 26px;border:1px solid var(--line);background:rgba(243,240,232,.04);border-radius:4px;}
+.agent-tree-node:before{content:"";position:absolute;left:50%;top:-42px;width:1px;height:42px;background:rgba(255,107,74,.7);}
+.agent-tree-node.hot{border-color:var(--coral);background:rgba(255,107,74,.08);}
+.agent-tree-node strong{display:block;margin-bottom:18px;color:var(--paper);font-size:22px;}
+.agent-tree-node div{padding-top:13px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;}
+.agent-tree-node b{color:var(--mint);margin-right:8px;}
+.one-agent-rule{max-width:940px;margin:22px auto 0;text-align:center;box-shadow:none;}
+.one-agent-rule .bmlbl{text-align:center}.one-agent-rule .bmtxt{text-align:center;font-size:26px;}
 .stage:before{content:"↗";position:absolute;right:7.5%;top:10%;font-size:112px;line-height:1;color:rgba(255,107,74,.74);font-weight:300;z-index:0;pointer-events:none;}
 .slide>*{position:relative;z-index:1;}
 
@@ -262,6 +282,8 @@ body{background:
 @media(max-width:900px){.slide{padding:28px 44px}.claude-guide{right:10px;bottom:12px;width:92px}.claude-guide img{width:92px}.tb-meta{display:none}}
 @media(max-width:700px){.cover-title{font-size:62px}.cover-copy{font-size:17px}.cover-footer{grid-template-columns:1fr;gap:8px;margin-top:48px}.cover-credit{justify-self:start}}
 @media(max-width:800px){.topbar{padding:0 10px;gap:8px}.tb-badge{font-size:9px;padding:4px 6px}.tb-title{font-size:11px;line-height:1.05;max-width:72px}.tb-right{gap:5px}.dots{display:none}.counter{font-size:10px}.tb-btn{padding:4px 6px;font-size:10px}}
+@media(max-width:960px){.journey-strip{grid-template-columns:1fr;gap:12px;text-align:center;padding:28px 0}.journey-strip span{transform:rotate(90deg);font-size:24px}.journey-strip strong{font-size:32px}}
+@media(max-width:800px){.agent-tree-root{width:230px}.agent-tree-branches{grid-template-columns:1fr;gap:28px;margin-top:52px}.agent-tree-branches:before{display:none}.agent-tree-node:before{display:none}.agent-tree-root:after{height:24px;bottom:-24px}.one-agent-rule{margin-top:16px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 
 .panelshot{display:inline-block;position:relative;margin-top:10px;border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;background:#fff;line-height:0;}
@@ -320,6 +342,7 @@ body{background:
 
 /* 도입부 전용 구조 시각화 스타일 */
 .route,.workflow{display:flex;align-items:stretch;gap:12px}.route-node,.wfbox{flex:1;min-width:0;overflow:hidden;padding:20px;background:rgba(243,240,232,.05);border:1px solid var(--line);border-radius:4px;display:flex;flex-direction:column;gap:8px}.route-node.hot,.wfbox.accent{border-color:var(--coral);background:rgba(255,107,74,.10)}.route-node span,.wfbox span{font-size:10px;color:var(--coral);font-weight:800;letter-spacing:.12em}.route-node strong,.wfbox strong{font-size:16px;color:var(--paper);word-break:keep-all}.route-node small,.wfbox small{font-size:12px;color:var(--muted);line-height:1.5;word-break:keep-all}.route-node b,.wfbox small{font-family:monospace}.route-arrow,.wfarr{display:flex;align-items:center;color:var(--coral);font-size:22px;flex:none}.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}.compare-col{padding:22px;border:1px solid var(--line);border-radius:4px;background:rgba(243,240,232,.04)}.compare-col.hot{border-color:var(--coral);background:rgba(255,107,74,.08)}.tree-root{font-size:18px;font-weight:800;color:var(--paper);margin:22px 0 9px}.tree-line{font:14px/1.9 monospace;color:var(--mint);padding-left:6px}@media(max-width:800px){.route,.workflow{flex-direction:column}.route-arrow,.wfarr{justify-content:center;transform:rotate(90deg)}.compare{grid-template-columns:1fr}}
+.tree-line.agent-line{color:var(--coral);font-weight:800}.tree-line.sub-line{color:var(--mint)}
 
 /* ── 오늘 파이프라인 ── */
 .pipe{display:flex;align-items:stretch;justify-content:center;gap:0;margin-top:16px;}
@@ -425,17 +448,14 @@ SLIDES[0] = {notes:"오늘은 AI 한 명에게 맡기던 일을 두 역할로 �
   <div class="cover-copy">한 번에 하던 일을 ‘작성’과 ‘확인’으로 나눠,<br/>AI 두 명이 이어서 일하게 합니다.</div>
   <div class="cover-footer"><span>오늘의 목표</span><strong>Multi Agent를 완성하고, AI가 일하는 흐름을 그림으로 확인합니다.</strong><span class="cover-credit">이유진 · AX 교육</span></div>
 </div>`};
-SLIDES[1] = {notes:"시간을 나눠 설명하지 않고, 오늘 직접 해볼 세 가지 일만 보여줍니다. 각 단계가 끝나면 어떤 파일이 생기는지 확인합니다.",html:`<div class="inner" style="max-width:1120px;">
-  <div class="kicker">오늘의 실습</div>
-  <div class="h2">세 번의 실습으로 AI 두 명을 만듭니다</div>
-  <div class="route" style="margin-top:30px;">
-    <div class="route-node"><span>실습 1</span><strong>무슨 일을 맡길지 정하기</strong><small>받은 자료와 ‘끝난 상태’를 정합니다</small><b>background.md</b></div>
-    <div class="route-arrow">→</div>
-    <div class="route-node"><span>실습 2</span><strong>작성하는 AI 만들기</strong><small>작성 Agent가 초안을 만듭니다</small><b>draft.md</b></div>
-    <div class="route-arrow">→</div>
-    <div class="route-node hot"><span>실습 3</span><strong>확인하는 AI 붙이기</strong><small>확인 Agent를 붙이고, 둘의 일을 그림으로 봅니다</small><b>review.md + 그림</b></div>
+SLIDES[1] = {notes:"오늘은 이 네 단계만 갑니다. 내 업무를 하나 고르고, Agent로 만들고, 두 Agent로 나눈 뒤, 일하는 모습을 눈으로 확인합니다.",html:`<div class="inner journey-page" style="max-width:1320px;">
+  <div class="kicker">오늘의 흐름</div>
+  <div class="journey-strip">
+    <strong>내 업무</strong><span>→</span>
+    <strong>AGENT</strong><span>→</span>
+    <strong>MULTI AGENT</strong><span>→</span>
+    <strong class="accent">시각화</strong>
   </div>
-  <div class="term" style="margin-top:28px;"><span class="tt">읽는 법</span><span class="tb"><b>주제</b>는 “무엇을 할지”이고, <b>하는 일</b>은 “실제로 무엇을 하는지”입니다. <b>결과 파일</b>은 다음 AI에게 넘깁니다.</span></div>
 </div>`};
 SLIDES[2] = {notes:"모든 설명을 ‘누가 무엇을 해서 무엇을 만든다’로 통일합니다. 이 문장만 기억하면 됩니다.",html:`<div class="inner" style="max-width:1040px;">
   <div class="kicker">설계 언어</div>
@@ -447,28 +467,49 @@ SLIDES[2] = {notes:"모든 설명을 ‘누가 무엇을 해서 무엇을 만든
   </div>
   <div class="bigmsg" style="margin-top:24px;"><div class="bmlbl">오늘 사용할 문장</div><div class="bmtxt">작성 Agent가 <span class="hl">회의록을 정리해 draft.md를 만듭니다.</span><br/>확인 Agent가 <span class="hl">draft.md에서 빠진 내용을 찾아 review.md에 적습니다.</span></div></div>
 </div>`};
-SLIDES[3] = {notes:"Single은 한 AI가 작성과 확인을 모두 합니다. Multi는 작성하는 AI와 확인하는 AI를 나눕니다.",html:`<div class="inner" style="max-width:1120px;">
-  <div class="kicker">핵심 개념</div>
-  <div class="h2">한 AI가 하던 일을 두 AI로 나눕니다</div>
+SLIDES[3] = {notes:"왼쪽은 Agent 하나가 Skill 하나로 이력서를 맞춥니다. 오른쪽은 이력서와 면접을 서로 다른 Agent가 맡습니다. Multi Agent의 핵심은 Skill 수가 아니라 역할이 다른 Agent를 연결하는 것입니다.",html:`<div class="inner" style="max-width:1180px;">
+  <div class="kicker">예시 · 취업 준비를 맡긴다면</div>
+  <div class="h2">Single은 Agent 하나, Multi는 역할을 나눈 Agent입니다</div>
   <div class="compare" style="margin-top:25px;">
-    <div class="compare-col"><div class="ctag">SINGLE AGENT · 한 AI</div><div class="tree-root">회의록 AI</div><div class="tree-line">├── 회의록을 읽습니다</div><div class="tree-line">├── 결정사항을 정리합니다</div><div class="tree-line">└── 결과를 확인합니다</div><div class="cl" style="margin-top:15px">한 AI가 <strong>작성과 확인</strong>을 모두 합니다.</div></div>
-    <div class="compare-col hot"><div class="ctag">MULTI AGENT · 두 AI</div><div class="tree-root">회의록 AI</div><div class="tree-line">├── 작성 AI → draft.md</div><div class="tree-line">└── 확인 AI → review.md</div><div class="cl" style="margin-top:15px">작성하는 AI와 <strong>확인하는 AI</strong>를 나눕니다.</div></div>
+    <div class="compare-col">
+      <div class="ctag">SINGLE AGENT · 한 Agent</div>
+      <div class="tree-root">이력서 Agent</div>
+      <div class="tree-line">└── 이력서 맞춤 Skill</div>
+      <div class="cl" style="margin-top:62px">Agent 하나가 <strong>한 가지 일</strong>을 합니다.</div>
+    </div>
+    <div class="compare-col hot">
+      <div class="ctag">MULTI AGENT · 역할을 나눈 Agent</div>
+      <div class="tree-root">취준 Agent</div>
+      <div class="tree-line agent-line">├── 이력서 Agent</div>
+      <div class="tree-line sub-line">│&nbsp;&nbsp;&nbsp;└── 이력서 맞춤 Skill</div>
+      <div class="tree-line agent-line">└── 면접 Agent</div>
+      <div class="tree-line sub-line">&nbsp;&nbsp;&nbsp;&nbsp;└── 예상 질문 Skill</div>
+      <div class="cl" style="margin-top:18px"><strong>서로 다른 일을 맡은 Agent</strong>를 연결합니다.</div>
+    </div>
   </div>
-  <div class="sub" style="margin-top:22px;">한 AI가 한 번에 맡기 어려운 업무라면, 작성과 확인을 나눕니다.</div>
+  <div class="term" style="margin-top:18px"><span class="tt">용어</span><span class="tb"><b>Agent</b> = 일을 맡은 AI &nbsp;·&nbsp; <b>Skill</b> = 그 AI가 일하는 방법</span></div>
 </div>`};
-SLIDES[4] = {notes:"두 AI는 대화로 이어지는 것이 아니라 파일로 이어집니다. 첫 번째 AI가 만든 draft.md를 두 번째 AI가 읽습니다.",html:`<div class="inner" style="max-width:1120px;">
-  <div class="kicker">업무 구조 예시</div>
-  <div class="h2">첫 번째 AI의 결과를 두 번째 AI가 확인합니다</div>
-  <div class="workflow" style="margin-top:28px;">
-    <div class="wfbox"><span>받은 자료</span><strong>회의록 원문</strong><small>input/meeting.md</small></div><div class="wfarr">→</div>
-    <div class="wfbox accent"><span>작성 AI</span><strong>회의록 초안 작성</strong><small>output/draft.md</small></div><div class="wfarr">→</div>
-    <div class="wfbox accent"><span>확인 AI</span><strong>빠진 내용 확인</strong><small>output/review.md</small></div>
+SLIDES[4] = {notes:"Multi Agent를 만들 때 가장 중요한 원칙은 한 Agent에게 한 업무만 맡기는 것입니다. 취업 준비라면 이력서와 면접을 서로 다른 Agent에게 맡깁니다.",html:`<div class="inner" style="max-width:1120px;">
+  <div class="kicker">MULTI AGENT 설계 원칙</div>
+  <div class="h2">한 Agent는 한 업무만 맡습니다</div>
+  <div class="agent-tree" style="margin-top:30px;">
+    <div class="agent-tree-root"><span>내 업무</span><strong>취업 준비</strong></div>
+    <div class="agent-tree-branches">
+      <div class="agent-tree-node">
+        <span>업무 1 · 이력서 맞춤</span><strong>이력서 Agent</strong>
+        <div><b>Skill</b> JD에 맞춰 이력서 고치기</div>
+      </div>
+      <div class="agent-tree-node hot">
+        <span>업무 2 · 면접 준비</span><strong>면접 Agent</strong>
+        <div><b>Skill</b> 예상 질문 만들기</div>
+      </div>
+    </div>
   </div>
-  <div class="g2" style="margin-top:28px;"><div class="card"><div class="ctag">사람이 정합니다</div><div class="ct">무엇을 꼭 확인할지 정합니다</div><div class="cb">결정사항, 담당자, 기한처럼 빠지면 안 되는 항목을 정합니다.</div></div><div class="card"><div class="ctag">AI가 합니다</div><div class="ct">정리하고, 파일로 넘깁니다</div><div class="cb">작성 AI가 draft.md를 만들고, 확인 AI가 review.md를 만듭니다.</div></div></div>
+  <div class="bigmsg one-agent-rule"><div class="bmlbl">기억할 한 줄</div><div class="bmtxt"><span class="hl">한 Agent = 한 업무</span></div></div>
 </div>`};
 
 /* 60분 입문 강의용 30장 버전: 중복 설명·간지·확장 개념은 덜어내고 핵심 흐름만 유지 */
-const KEEP_SLIDES = [0,1,2,3,4,5,16,17,18,19,24,26,28,30,31,34,36,37,38,39,41,42,43];
+const KEEP_SLIDES = [0,1,3,4,5,17,18,19,24,26,28,30,31,34,36,37,38,39,41,42,43];
 SLIDES.splice(0, SLIDES.length, ...KEEP_SLIDES.map(i => SLIDES[i]));
 const BEGINNER_TITLES = [
   ['섞이면 안 되는 판단이 둘 이상일 때','작성과 확인을 나누면 실수가 줄어듭니다'],
@@ -542,7 +583,7 @@ function show(idx){
   const next = document.getElementById('sl' + idx);
   if (prev && prev !== next) { prev.classList.remove('active'); prev.classList.add('exit'); setTimeout(() => prev.classList.remove('exit'), 380); }
   cur = idx;
-  document.body.classList.toggle('character-on', [17,18,19].includes(cur));
+  document.body.classList.toggle('character-on', [15,16,17].includes(cur));
   next.classList.remove('exit');
   next.classList.add('active');
   document.getElementById('cur').textContent = cur + 1;
