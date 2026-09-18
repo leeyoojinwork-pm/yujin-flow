@@ -468,7 +468,7 @@ SLIDES[4] = {notes:"두 AI는 대화로 이어지는 것이 아니라 파일로 
 </div>`};
 
 /* 60분 입문 강의용 30장 버전: 중복 설명·간지·확장 개념은 덜어내고 핵심 흐름만 유지 */
-const KEEP_SLIDES = [0,1,2,3,4,5,6,16,17,18,19,24,26,28,30,31,34,36,37,38,39,41,42,43];
+const KEEP_SLIDES = [0,1,2,3,4,5,16,17,18,19,24,26,28,30,31,34,36,37,38,39,41,42,43];
 SLIDES.splice(0, SLIDES.length, ...KEEP_SLIDES.map(i => SLIDES[i]));
 const BEGINNER_TITLES = [
   ['섞이면 안 되는 판단이 둘 이상일 때','작성과 확인을 나누면 실수가 줄어듭니다'],
@@ -542,7 +542,7 @@ function show(idx){
   const next = document.getElementById('sl' + idx);
   if (prev && prev !== next) { prev.classList.remove('active'); prev.classList.add('exit'); setTimeout(() => prev.classList.remove('exit'), 380); }
   cur = idx;
-  document.body.classList.toggle('character-on', [18,19,20].includes(cur));
+  document.body.classList.toggle('character-on', [17,18,19].includes(cur));
   next.classList.remove('exit');
   next.classList.add('active');
   document.getElementById('cur').textContent = cur + 1;
