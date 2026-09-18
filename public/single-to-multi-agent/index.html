@@ -248,6 +248,12 @@ body{background:
 .journey-strip strong{font-size:clamp(30px,4vw,58px);line-height:1;letter-spacing:-.055em;color:var(--paper);white-space:nowrap;}
 .journey-strip strong.accent{color:var(--coral);}
 .journey-strip span{font-size:38px;color:var(--coral);text-align:center;}
+.journey-cards{display:grid;grid-template-columns:1fr 44px 1fr 44px 1fr 44px 1fr;align-items:stretch;margin-top:34px;}
+.journey-card{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;border:1px solid var(--line);background:rgba(243,240,232,.035);border-radius:4px;text-align:center;}
+.journey-card span{margin-bottom:18px;color:var(--coral);font-size:12px;font-weight:800;letter-spacing:.12em;}
+.journey-card strong{color:var(--paper);font-size:clamp(24px,2.4vw,38px);line-height:1.08;letter-spacing:-.045em;}
+.journey-card.hot{border-color:var(--coral);background:rgba(255,107,74,.10);}
+.journey-arrow{display:flex;align-items:center;justify-content:center;color:var(--coral);font-size:30px;font-weight:700;}
 .agent-tree{position:relative;max-width:940px;margin-left:auto;margin-right:auto;}
 .agent-tree-root{position:relative;width:300px;margin:0 auto;padding:20px 24px;text-align:center;border:1px solid var(--coral);background:rgba(255,107,74,.10);border-radius:4px;}
 .agent-tree-root span,.agent-tree-node span{display:block;margin-bottom:7px;color:var(--coral);font-size:10px;font-weight:800;letter-spacing:.14em;}
@@ -283,6 +289,7 @@ body{background:
 @media(max-width:700px){.cover-title{font-size:62px}.cover-copy{font-size:17px}.cover-footer{grid-template-columns:1fr;gap:8px;margin-top:48px}.cover-credit{justify-self:start}}
 @media(max-width:800px){.topbar{padding:0 10px;gap:8px}.tb-badge{font-size:9px;padding:4px 6px}.tb-title{font-size:11px;line-height:1.05;max-width:72px}.tb-right{gap:5px}.dots{display:none}.counter{font-size:10px}.tb-btn{padding:4px 6px;font-size:10px}}
 @media(max-width:960px){.journey-strip{grid-template-columns:1fr;gap:12px;text-align:center;padding:28px 0}.journey-strip span{transform:rotate(90deg);font-size:24px}.journey-strip strong{font-size:32px}}
+@media(max-width:960px){.journey-cards{grid-template-columns:1fr;gap:10px}.journey-card{min-height:112px}.journey-arrow{height:20px;transform:rotate(90deg)}}
 @media(max-width:800px){.agent-tree-root{width:230px}.agent-tree-branches{grid-template-columns:1fr;gap:28px;margin-top:52px}.agent-tree-branches:before{display:none}.agent-tree-node:before{display:none}.agent-tree-root:after{height:24px;bottom:-24px}.one-agent-rule{margin-top:16px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 
@@ -448,13 +455,17 @@ SLIDES[0] = {notes:"오늘은 AI 한 명에게 맡기던 일을 두 역할로 �
   <div class="cover-copy">한 번에 하던 일을 ‘작성’과 ‘확인’으로 나눠,<br/>AI 두 명이 이어서 일하게 합니다.</div>
   <div class="cover-footer"><span>오늘의 목표</span><strong>Multi Agent를 완성하고, AI가 일하는 흐름을 그림으로 확인합니다.</strong><span class="cover-credit">이유진 · AX 교육</span></div>
 </div>`};
-SLIDES[1] = {notes:"오늘은 이 네 단계만 갑니다. 내 업무를 하나 고르고, Agent로 만들고, 두 Agent로 나눈 뒤, 일하는 모습을 눈으로 확인합니다.",html:`<div class="inner journey-page" style="max-width:1320px;">
+SLIDES[1] = {notes:"오늘은 이 네 단계만 갑니다. 내 업무를 하나 고르고, Single Agent로 만들고, Multi Agent로 나눈 뒤, 일하는 모습을 눈으로 확인합니다.",html:`<div class="inner journey-page" style="max-width:1380px;">
   <div class="kicker">오늘의 흐름</div>
-  <div class="journey-strip">
-    <strong>내 업무</strong><span>→</span>
-    <strong>AGENT</strong><span>→</span>
-    <strong>MULTI AGENT</strong><span>→</span>
-    <strong class="accent">시각화</strong>
+  <div class="h2">오늘 여기까지 갑니다</div>
+  <div class="journey-cards">
+    <div class="journey-card"><span>시작</span><strong>내 업무</strong></div>
+    <div class="journey-arrow">→</div>
+    <div class="journey-card"><span>실습 1</span><strong>Single Agent</strong></div>
+    <div class="journey-arrow">→</div>
+    <div class="journey-card"><span>실습 2</span><strong>Multi Agent</strong></div>
+    <div class="journey-arrow">→</div>
+    <div class="journey-card hot"><span>시연</span><strong>시각화</strong></div>
   </div>
 </div>`};
 SLIDES[2] = {notes:"모든 설명을 ‘누가 무엇을 해서 무엇을 만든다’로 통일합니다. 이 문장만 기억하면 됩니다.",html:`<div class="inner" style="max-width:1040px;">
