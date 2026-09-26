@@ -6,7 +6,7 @@
   <title>멘토링 Agent 품질 보증 구조</title>
   <style>
     *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#fff;font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:#161916}
-    main{height:100%;display:grid;grid-template-rows:auto 1fr;padding:30px 44px 24px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#6c3bf2}.title{margin:7px 0 0;font-size:38px;line-height:1.15;letter-spacing:-.045em}.title span{color:#6c3bf2}svg{width:100%;height:100%;display:block}.arrow{stroke:#6f6878;stroke-width:2;fill:none}.loop{stroke:#6c3bf2;stroke-width:2.5;stroke-dasharray:8 6;fill:none}.node{fill:white;stroke:#ded8e3;stroke-width:1.5}.head{fill:#f3edff;stroke:#6c3bf2;stroke-width:2}.agent{fill:#ffffff;stroke:#17141f;stroke-width:1.5}.gate{fill:#fff0e8;stroke:#ff7048;stroke-width:2}.memory{fill:#241a3d;stroke:#6c3bf2;stroke-width:2}.name{font-size:16px;font-weight:850;fill:#17141f}.sub{font-size:11px;font-weight:600;fill:#6f6878}.memory-name{font-size:16px;font-weight:850;fill:#9b7bff}.memory-sub{font-size:11px;font-weight:600;fill:#eee8f0}.skill{fill:#f5f1f7;stroke:#ded8e3;stroke-width:1}.skill-text{font-size:9px;font-weight:800;fill:#6c3bf2}.label-bg{fill:#faf8f5}.label{font-size:10px;font-weight:800;fill:#6f6878}.pass{font-size:10px;font-weight:850;fill:#6c3bf2}.fail{font-size:10px;font-weight:850;fill:#c34c33}
+    main{height:100%;display:grid;grid-template-rows:auto 1fr;padding:30px 44px 24px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#6c3bf2}.title{margin:7px 0 0;font-size:38px;line-height:1.15;letter-spacing:-.045em}.title span{color:#6c3bf2}svg{width:100%;height:100%;display:block}.arrow{stroke:#6f6878;stroke-width:2;fill:none}.loop{stroke:#6c3bf2;stroke-width:2.5;stroke-dasharray:8 6;fill:none}.node{fill:white;stroke:#ded8e3;stroke-width:1.5}.head{fill:#f3edff;stroke:#6c3bf2;stroke-width:2}.agent{fill:#ffffff;stroke:#17141f;stroke-width:1.5}.gate{fill:#fff0e8;stroke:#ff7048;stroke-width:2}.memory{fill:#241a3d;stroke:#6c3bf2;stroke-width:2}.name{font-size:16px;font-weight:850;fill:#17141f}.sub{font-size:11px;font-weight:600;fill:#6f6878}.memory-name{font-size:16px;font-weight:850;fill:#9b7bff}.memory-sub{font-size:11px;font-weight:600;fill:#eee8f0}.skill{fill:#f5f1f7;stroke:#ded8e3;stroke-width:1}.skill-text{font-size:9px;font-weight:800;fill:#6c3bf2}.label-bg{fill:#faf8f5}.label{font-size:10px;font-weight:800;fill:#6f6878}.pass{font-size:10px;font-weight:850;fill:#6c3bf2}.fail{font-size:10px;font-weight:850;fill:#c34c33}.runner{filter:drop-shadow(0 5px 6px rgba(36,26,61,.2))}.pdf-agent-highlight,.gate-highlight{fill:none;stroke-width:4;opacity:0}.pdf-agent-highlight{stroke:#6c3bf2;animation:agentFocus 10s ease infinite}.gate-highlight{stroke:#ff7048;animation:gateFocus 10s ease infinite}.pdf-output{opacity:0;animation:pdfDeliver 10s cubic-bezier(.2,.75,.25,1) infinite}.pdf-paper{fill:#fff;stroke:#6c3bf2;stroke-width:2}.pdf-fold{fill:#f3edff}.pdf-line{stroke:#bcb3c7;stroke-width:2}.pdf-title{font-size:10px;font-weight:850;fill:#6c3bf2}@keyframes agentFocus{0%,34%,66%,100%{opacity:0}38%,58%{opacity:1}}@keyframes gateFocus{0%,58%,86%,100%{opacity:0}64%,80%{opacity:1}}@keyframes pdfDeliver{0%,38%{opacity:0;transform:translate(0,8px) scale(.82)}44%{opacity:1;transform:translate(0,0) scale(1)}58%{opacity:1;transform:translate(70px,0) scale(1)}66%,100%{opacity:0;transform:translate(96px,0) scale(.92)}}@media(prefers-reduced-motion:reduce){.runner{display:none}.pdf-agent-highlight,.gate-highlight,.pdf-output{animation:none;opacity:0}}
   </style>
 </head>
 <body>
@@ -33,6 +33,18 @@
     <rect class="gate" x="888" y="158" width="196" height="112" rx="8"/><text class="name" x="986" y="194" text-anchor="middle">자동 품질 게이트</text><text class="sub" x="986" y="219" text-anchor="middle">진단 일치, 행동 가능성</text><text class="sub" x="986" y="239" text-anchor="middle">톤 구분, 발송 안전성</text>
     <rect class="gate" x="1136" y="158" width="168" height="108" rx="8"/><text class="name" x="1220" y="194" text-anchor="middle">멘토 승인</text><text class="sub" x="1220" y="219" text-anchor="middle">최종 판단과 표현</text><text class="sub" x="1220" y="239" text-anchor="middle">외부 발송 여부</text>
     <rect class="memory" x="1132" y="372" width="176" height="120" rx="8"/><text class="memory-name" x="1220" y="408" text-anchor="middle">기억층</text><text class="memory-sub" x="1220" y="434" text-anchor="middle">검수 기록과 수정 이유</text><text class="memory-sub" x="1220" y="454" text-anchor="middle">다음 확인 포인트</text><text class="memory-sub" x="1220" y="474" text-anchor="middle">다음 실행의 입력</text>
+    <rect class="pdf-agent-highlight" x="578" y="158" width="234" height="112" rx="12"/>
+    <rect class="gate-highlight" x="880" y="150" width="212" height="128" rx="12"/>
+    <g class="pdf-output">
+      <rect class="pdf-paper" x="806" y="170" width="58" height="72" rx="5"/>
+      <path class="pdf-fold" d="M848 170 H864 V186 Z"/>
+      <text class="pdf-title" x="835" y="197" text-anchor="middle">피드백 PDF</text>
+      <path class="pdf-line" d="M817 208 H853 M817 218 H847 M817 228 H851"/>
+    </g>
+    <g class="runner" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-22" y="-18" width="44" height="36"/>
+      <animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;0.16;0.34;0.58;0.82;1" keyPoints="0;0.18;0.42;0.68;1;1" calcMode="linear" path="M121 92 L374 92 L540 154 L695 154 L986 154"/>
+    </g>
   </svg>
 </main>
 </body>
