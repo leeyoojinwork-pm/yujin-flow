@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VS Code 실행 화면 — 멘토링 운영 OS Agent</title>
+<title>VS Code 실행 화면 - 멘토링 운영 OS Agent</title>
 <style>
   :root{
     --ed:#1e1e1e; --side:#252526; --act:#333333; --bar:#3c3c3c;
@@ -70,7 +70,7 @@
   <div class="win">
     <div class="title">
       <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-      <span class="t">mentoring-os — Claude Code</span>
+      <span class="t">mentoring-os - Claude Code</span>
     </div>
     <div class="body">
       <div class="act"><span class="on">🗂</span><span>🔍</span><span>⎇</span><span>🐞</span><span>⬢</span></div>
@@ -125,7 +125,7 @@ const ORDER_MD=[
 ];
 const RESULT_MD=[
   ['1','# 김OO 멘티   1주차 피드백','h1'],['2','',''],
-  ['3','유형: 3유형 — 실행은 했으나 검증이 빠짐','com'],['4','',''],
+  ['3','유형: 3유형 - 실행은 했으나 검증이 빠짐','com'],['4','',''],
   ['5','## 잘한 점','key'],['6','아이디어를 실제 실행까지 옮긴 점이 좋았습니다.','cur'],['7','',''],
   ['8','## 짚을 점','key'],['9','결과를 확인할 기준이 없어 재현이 어렵습니다.','cur'],['10','',''],
   ['11','## 넥스트 스텝','key'],
@@ -166,7 +166,7 @@ async function run(){
   addFile('피드백_리포트.pdf');
   termLine('<span class="ok">●</span> Write <span class="cur">04_결과물/피드백_리포트.pdf</span> <span class="ok">✓</span>');await sleep(550);
   termLine('<span class="gate">───────────────────────────────────────────────</span>');
-  termLine('<span class="gate">⏸  멘토 검수 게이트 — 유진님이 확인 후 슬랙 발송. AI는 여기서 멈춤.</span>');
+  termLine('<span class="gate">⏸  멘토 검수 게이트 - 유진님이 확인 후 슬랙 발송. AI는 여기서 멈춤.</span>');
   $('#term').scrollTop=$('#term').scrollHeight;
   $('#replay').disabled=false;$('#replay').style.opacity=1;running=false;
 }
