@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VS Code 실행 화면 — 멘토링 운영 OS Agent</title>
+<style>
+  :root{
+    --ed:#1e1e1e; --side:#252526; --act:#333333; --bar:#3c3c3c;
+    --tx:#cccccc; --acc:#007acc; --grn:#73c991; --org:#ce9178; --pur:#c586c0; --kw:#569cd6; --red:#f48771;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{overflow:hidden;}
+  *{scrollbar-width:none;}
+  *::-webkit-scrollbar{display:none;}
+  body{background:#f7f9fb;font-family:"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;
+       width:100vw;height:100vh;min-height:0;display:flex;flex-direction:column;align-items:center;gap:0;padding:0;overflow:hidden;}
+  .ctrls{display:none!important;}
+  .ctrls button{font:inherit;font-size:14px;font-weight:600;color:#fff;background:var(--acc);
+                border:0;border-radius:8px;padding:9px 18px;cursor:pointer;}
+  .ctrls .cap{font-size:13px;color:#555;}
+  .win{width:100%;height:100%;background:var(--ed);border-radius:0;overflow:hidden;
+       box-shadow:none;display:flex;flex-direction:column;
+       font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
+  .title{height:34px;background:var(--bar);display:flex;align-items:center;padding:0 12px;gap:8px;flex:none;}
+  .dot{width:12px;height:12px;border-radius:50%;}
+  .dot.r{background:#ff5f57;} .dot.y{background:#febc2e;} .dot.g{background:#28c840;}
+  .title .t{flex:1;text-align:center;color:#9d9d9d;font-size:12.5px;font-family:"Apple SD Gothic Neo",sans-serif;}
+  .body{flex:1;display:flex;min-height:0;}
+  .act{width:48px;background:var(--act);flex:none;display:flex;flex-direction:column;align-items:center;padding-top:12px;gap:20px;color:#858585;font-size:21px;}
+  .act .on{color:#fff;}
+  .side{width:288px;background:var(--side);flex:none;color:var(--tx);overflow:hidden;display:flex;flex-direction:column;}
+  .side .hd{font-size:11px;letter-spacing:1px;color:#bbb;padding:12px 16px 6px;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600;}
+  .tree{font-size:13px;padding:4px 0 0;overflow:hidden;}
+  .row{display:flex;align-items:center;gap:5px;padding:3px 10px;white-space:nowrap;}
+  .row.active{background:#37373d;}
+  .tw{color:#c5c5c5;width:12px;display:inline-block;text-align:center;font-size:10px;}
+  .fold{color:#dcb67a;} .file{color:#9cdcfe;}
+  .nm{color:#cfcfcf;font-family:"Apple SD Gothic Neo",sans-serif;}
+  .badge{margin-left:auto;color:var(--grn);font-weight:700;font-size:12px;padding-left:8px;}
+  .row.new{animation:flashIn .5s ease;}
+  @keyframes flashIn{from{background:#2e4b32;}to{background:transparent;}}
+  .main{flex:1;display:flex;flex-direction:column;min-width:0;}
+  .tabs{height:36px;background:#2d2d2d;display:flex;flex:none;}
+  .tab{display:flex;align-items:center;gap:8px;padding:0 16px;font-size:12.5px;color:#fff;background:var(--ed);font-family:"Apple SD Gothic Neo",sans-serif;}
+  .tab .fi{color:#9cdcfe;font-family:monospace;}
+  .editor{flex:1;background:var(--ed);overflow:hidden;padding:14px 0;min-height:0;}
+  .code{font-size:13px;line-height:1.7;color:var(--tx);white-space:pre-wrap;}
+  .code .ln{display:flex;}
+  .code .g{width:46px;flex:none;text-align:right;padding-right:18px;color:#5a5a5a;user-select:none;}
+  .code .c{flex:1;padding-right:20px;}
+  .h1{color:var(--pur);} .key{color:var(--kw);} .str{color:var(--org);} .com{color:#6a9955;} .cur{color:var(--grn);}
+  .panel{height:250px;background:var(--ed);border-top:1px solid #333;flex:none;display:flex;flex-direction:column;}
+  .ptabs{height:30px;background:#252526;display:flex;align-items:center;gap:18px;padding:0 16px;flex:none;}
+  .ptabs span{font-size:11px;letter-spacing:.5px;color:#858585;font-family:"Apple SD Gothic Neo",sans-serif;}
+  .ptabs .on{color:#fff;border-bottom:1px solid #fff;height:30px;display:flex;align-items:center;}
+  .term{flex:1;overflow:hidden;padding:10px 16px;font-size:13px;line-height:1.7;color:#d4d4d4;}
+  .term .p{color:#5ac8a8;} .term .u{color:#e6e6e6;} .term .a{color:#c5a3ff;} .term .ok{color:var(--grn);} .term .dim{color:#7a7a7a;}
+  .term .acc{color:#dcdcaa;} .term .gate{color:#f48771;font-weight:700;}
+  .vsrun-cur{display:inline-block;width:7px;height:1em;background:#d4d4d4;vertical-align:-2px;animation:bk 1s step-end infinite;}
+  @keyframes bk{50%{opacity:0;}}
+</style>
+</head>
+<body>
+  <div class="ctrls">
+    <button id="replay">▶ 처음부터 다시 보기</button>
+    <span class="cap">실제 실행하면 VS Code 터미널에서 이렇게 진행됩니다 (멋사 멘토링 운영 OS 예시)</span>
+  </div>
+
+  <div class="win">
+    <div class="title">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="t">mentoring-os — Claude Code</span>
+    </div>
+    <div class="body">
+      <div class="act"><span class="on">🗂</span><span>🔍</span><span>⎇</span><span>🐞</span><span>⬢</span></div>
+
+      <div class="side">
+        <div class="hd">탐색기   MENTORING-OS</div>
+        <div class="tree" id="tree">
+          <div class="row"><span class="tw">▾</span><span class="fold">📂</span><span class="nm">mentoring-os</span></div>
+
+          <div class="row" style="padding-left:24px"><span class="tw">▾</span><span class="fold">📁</span><span class="nm">00_admin</span></div>
+          <div class="row" style="padding-left:48px"><span class="tw"></span><span class="file">📄</span><span class="nm">멘토_역할지침.md</span></div>
+          <div class="row" style="padding-left:48px"><span class="tw"></span><span class="file">📄</span><span class="nm">절대_하지_말_것.md</span></div>
+
+          <div class="row" style="padding-left:24px"><span class="tw">▾</span><span class="fold">📁</span><span class="nm">01_이번제출물</span></div>
+          <div class="row r-submit" style="padding-left:48px"><span class="tw"></span><span class="file">📄</span><span class="nm">멘티_제출물.md</span></div>
+          <div class="row" style="padding-left:48px"><span class="tw"></span><span class="file">📄</span><span class="nm">회고_한줄.md</span></div>
+
+          <div class="row" style="padding-left:24px"><span class="tw">▾</span><span class="fold">📁</span><span class="nm">02_반복기준</span></div>
+          <div class="row r-type" style="padding-left:48px"><span class="tw"></span><span class="file">📄</span><span class="nm">6가지_피드백_유형.md</span></div>
+          <div class="row" style="padding-left:48px"><span class="tw"></span><span class="file">📄</span><span class="nm">멘토_피드백_톤.md</span></div>
+          <div class="row" style="padding-left:48px"><span class="tw"></span><span class="file">📄</span><span class="nm">넥스트스텝_3원칙.md</span></div>
+
+          <div class="row" style="padding-left:24px"><span class="tw">▾</span><span class="fold">📁</span><span class="nm">03_작업순서</span></div>
+          <div class="row active r-order" style="padding-left:48px"><span class="tw"></span><span class="file">📄</span><span class="nm">피드백_생성.md</span></div>
+
+          <div class="row" style="padding-left:24px"><span class="tw">▾</span><span class="fold">📁</span><span class="nm">04_결과물</span></div>
+          <div id="slot" style="padding-left:48px"></div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="tabs" id="tabs"><div class="tab"><span class="fi">📄</span><span id="tabname">피드백_생성.md</span></div></div>
+        <div class="editor"><div class="code" id="code"></div></div>
+        <div class="panel">
+          <div class="ptabs"><span>문제</span><span>출력</span><span class="on">터미널</span><span>포트</span></div>
+          <div class="term" id="term"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const $=s=>document.querySelector(s);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const ORDER_MD=[
+  ['1','# 피드백 생성','h1'],['2','',''],
+  ['3','목표: 제출물을 피드백 초안 + 넥스트 스텝 3개로 바꾼다','com'],['4','',''],
+  ['5','읽을 파일:','key'],['6','  - 00_admin, 01_이번제출물, 02_반복기준','str'],['7','',''],
+  ['8','순서:','key'],['9','  분류 → 초안 → 넥스트 스텝 → 검수','cur'],['10','',''],
+  ['11','금지: 정답 떠먹이기   AI 자동 발송 금지','com'],
+  ['12','출력: 피드백 초안 + 넥스트 스텝 3 + PDF','key'],
+];
+const RESULT_MD=[
+  ['1','# 김OO 멘티   1주차 피드백','h1'],['2','',''],
+  ['3','유형: 3유형 — 실행은 했으나 검증이 빠짐','com'],['4','',''],
+  ['5','## 잘한 점','key'],['6','아이디어를 실제 실행까지 옮긴 점이 좋았습니다.','cur'],['7','',''],
+  ['8','## 짚을 점','key'],['9','결과를 확인할 기준이 없어 재현이 어렵습니다.','cur'],['10','',''],
+  ['11','## 넥스트 스텝','key'],
+  ['12','1. 검증 지표 1개를 숫자로 정하기','str'],
+  ['13','2. 결과를 검수표 3줄로 남기기','str'],
+  ['14','3. 틀린 기준은 반복기준 파일에 반영하기','str'],
+];
+function renderCode(rows,cur){
+  const c=$('#code');c.innerHTML='';
+  rows.forEach(([g,t,cls])=>{const ln=document.createElement('div');ln.className='ln';
+    ln.innerHTML=`<span class="g">${g}</span><span class="c ${cls||''}">${t||' '}</span>`;c.appendChild(ln);});
+  if(cur){const last=c.lastChild.querySelector('.c');const s=document.createElement('span');s.className='vsrun-cur';last.appendChild(s);}
+}
+function termLine(html){const t=$('#term');const d=document.createElement('div');d.innerHTML=html;t.appendChild(d);t.scrollTop=t.scrollHeight;return d;}
+async function typeInto(el,text,sp=32){for(let i=0;i<text.length;i++){el.textContent+=text[i];await sleep(sp);$('#term').scrollTop=$('#term').scrollHeight;}}
+function highlight(sel){const r=document.querySelector(sel);if(r){r.style.background='#264f78';setTimeout(()=>r.style.background='',900);}}
+function addFile(name){const slot=$('#slot');const row=document.createElement('div');row.className='row new';
+  row.innerHTML=`<span class="tw"></span><span class="file">📄</span><span class="nm">${name}</span><span class="badge">U</span>`;slot.appendChild(row);$('#tree').scrollTop=$('#tree').scrollHeight;}
+let running=false;
+async function run(){
+  if(running)return;running=true;$('#term').innerHTML='';$('#slot').innerHTML='';
+  $('#tabname').textContent='피드백_생성.md';renderCode(ORDER_MD,false);
+  $('#replay').disabled=true;$('#replay').style.opacity=.5;
+  await sleep(450);
+  termLine('<span class="p">➜ mentoring-os</span> <span class="dim">claude</span>');await sleep(380);
+  const pl=termLine('<span class="a">❯ </span><span class="u"></span>');
+  await typeInto(pl.querySelector('.u'),'이번 주 제출물 피드백 만들어줘. 03_작업순서 따라서.');await sleep(450);
+  termLine('<span class="a">● </span><span class="dim">작업 순서 읽는 중… 분류 → 초안 → 넥스트 스텝 → 검수</span>');await sleep(650);
+  termLine('<span class="ok">●</span> Read <span class="dim">00_admin/멘토_역할지침.md</span>');highlight('.r-order');await sleep(520);
+  termLine('<span class="ok">●</span> Read <span class="dim">01_이번제출물/멘티_제출물.md</span>');highlight('.r-submit');await sleep(520);
+  termLine('<span class="ok">●</span> Read <span class="dim">02_반복기준/6가지_피드백_유형.md</span>');highlight('.r-type');await sleep(650);
+  termLine('<span class="acc">●</span> <span class="dim">유형 분류:</span> <span class="acc">3유형</span> <span class="dim">(실행했으나 검증 부족)</span>');await sleep(750);
+  addFile('피드백_초안.md');
+  termLine('<span class="ok">●</span> Write <span class="cur">04_결과물/피드백_초안.md</span> <span class="ok">✓</span>');
+  $('#tabname').textContent='피드백_초안.md';
+  for(let i=1;i<=RESULT_MD.length;i++){renderCode(RESULT_MD.slice(0,i),true);await sleep(165);}
+  await sleep(450);
+  addFile('피드백_리포트.pdf');
+  termLine('<span class="ok">●</span> Write <span class="cur">04_결과물/피드백_리포트.pdf</span> <span class="ok">✓</span>');await sleep(550);
+  termLine('<span class="gate">───────────────────────────────────────────────</span>');
+  termLine('<span class="gate">⏸  멘토 검수 게이트 — 유진님이 확인 후 슬랙 발송. AI는 여기서 멈춤.</span>');
+  $('#term').scrollTop=$('#term').scrollHeight;
+  $('#replay').disabled=false;$('#replay').style.opacity=1;running=false;
+}
+$('#replay').addEventListener('click',run);
+renderCode(ORDER_MD,false);
+window.addEventListener('load',()=>setTimeout(run,500));
+</script>
+</body>
+</html>
