@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>멘토링 피드백 문제 우선순위 구조</title>
+  <style>
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#f7f8f5;font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:#161916}
+    main{height:100%;display:grid;grid-template-rows:auto 1fr;padding:34px 48px 28px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#6c3bf2}.title{margin:8px 0 0;font-size:40px;line-height:1.15;letter-spacing:-.045em}.title span{color:#6c3bf2}.diagram{width:100%;height:100%}svg{width:100%;height:100%;display:block}.name{font-size:18px;font-weight:800;fill:#17141f}.sub{font-size:12px;font-weight:600;fill:#6f6878}.small{font-size:11px;font-weight:700;fill:#6f6878}.focus{fill:#6c3bf2}.focus-text{font-size:23px;font-weight:850;fill:white}.focus-sub{font-size:12px;font-weight:600;fill:#f4efff}.arrow{stroke:#948b9e;stroke-width:2;fill:none}.arrow-main{stroke:#6c3bf2;stroke-width:3;fill:none}.box{fill:white;stroke:#ded8e3;stroke-width:1.5}.box-root{fill:#f3edff;stroke:#6c3bf2;stroke-width:2}.impact{fill:#f5f1f7;stroke:#ded8e3;stroke-width:1.5}.label-bg{fill:#faf8f5}.label{font-size:10px;font-weight:800;fill:#6c3bf2;letter-spacing:.06em}
+  </style>
+</head>
+<body>
+<main>
+  <header><div class="eyebrow">WHY TREE / PRIORITY</div><h1 class="title">무엇을 먼저 바로잡을 것인가</h1></header>
+  <svg class="diagram" viewBox="0 0 1280 540" role="img" aria-labelledby="ttl desc">
+    <title id="ttl">멘토링 피드백 품질 문제 이슈 트리</title>
+    <desc id="desc">결과 품질을 보증하기 어렵다는 핵심 문제를 기준, 산출물, 검수 기록 원인으로 나누고 판단 기준을 파일로 옮기는 해결 우선순위를 보여준다.</desc>
+    <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#948b9e"/></marker><marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6c3bf2"/></marker></defs>
+    <path class="arrow" marker-end="url(#arrow)" d="M640 120 V176 H244 V218"/>
+    <path class="arrow" marker-end="url(#arrow)" d="M640 176 H640 V218"/>
+    <path class="arrow" marker-end="url(#arrow)" d="M640 176 H1036 V218"/>
+    <path class="arrow" marker-end="url(#arrow)" d="M244 316 V362 H640"/>
+    <path class="arrow" marker-end="url(#arrow)" d="M640 316 V362"/>
+    <path class="arrow" marker-end="url(#arrow)" d="M1036 316 V362 H640"/>
+    <path class="arrow-main" marker-end="url(#arrowBlue)" d="M640 362 V410"/>
+    <rect class="label-bg" x="552" y="163" width="176" height="24"/><text class="label" x="640" y="179" text-anchor="middle">핵심 원인을 세 갈래로 분해</text>
+    <rect class="box-root" x="430" y="28" width="420" height="92" rx="8"/><text class="name" x="640" y="66" text-anchor="middle">결과의 품질을 보증하기 어렵다</text><text class="sub" x="640" y="91" text-anchor="middle">같은 입력이 같은 기준과 검수 과정을 거쳤는지 설명할 수 없음</text>
+    <rect class="box" x="64" y="218" width="360" height="98" rx="8"/><text class="name" x="244" y="253" text-anchor="middle">기준이 사람의 머릿속에만 있음</text><text class="sub" x="244" y="279" text-anchor="middle">Agent가 읽을 수 있는 판단 기준이 없음</text><text class="small" x="244" y="299" text-anchor="middle">원인 01</text>
+    <rect class="box" x="460" y="218" width="360" height="98" rx="8"/><text class="name" x="640" y="253" text-anchor="middle">PDF와 Slack 멘트가 다름</text><text class="sub" x="640" y="279" text-anchor="middle">산출물마다 다른 진단과 다음 행동을 제안</text><text class="small" x="640" y="299" text-anchor="middle">원인 02</text>
+    <rect class="box" x="856" y="218" width="360" height="98" rx="8"/><text class="name" x="1036" y="253" text-anchor="middle">검수와 수정 이유가 남지 않음</text><text class="sub" x="1036" y="279" text-anchor="middle">다음 실행에서 같은 오류와 수정을 반복</text><text class="small" x="1036" y="299" text-anchor="middle">원인 03</text>
+    <circle cx="640" cy="362" r="5" fill="#161916"/>
+    <rect class="focus" x="380" y="410" width="520" height="96" rx="8"/><text class="focus-text" x="640" y="451" text-anchor="middle">판단 기준을 파일로 옮긴다</text><text class="focus-sub" x="640" y="478" text-anchor="middle">속도보다 먼저 기준, 통과 조건, 수정 이유를 재사용 가능한 자산으로 남긴다</text>
+  </svg>
+</main>
+</body>
+</html>
