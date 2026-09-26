@@ -7,7 +7,7 @@
   <style>
     *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#fff;font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:#17141f}
     main{height:100%;display:grid;grid-template-rows:auto 1fr;padding:30px 44px 22px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#6c3bf2}.title{margin:7px 0 2px;font-size:38px;line-height:1.14;letter-spacing:-.045em}.title span{color:#6c3bf2}.subtitle{margin:8px 0 0;font-size:14px;font-weight:650;color:#6f6878}svg{width:100%;height:100%;display:block}
-    .line{stroke:#756e7d;stroke-width:2;fill:none}.feedback{stroke:#ff7048;stroke-width:2.5;fill:none}.memory-line{stroke:#6c3bf2;stroke-width:2.5;stroke-dasharray:8 6;fill:none}.region{fill:#fbf9ff;stroke:#d7caff;stroke-width:1.5}.region-eval{fill:#fff9f5;stroke:#ffc3b0;stroke-width:1.5}.node{fill:#fff;stroke:#ded8e3;stroke-width:1.5}.orchestrator{fill:#f1eaff;stroke:#6c3bf2;stroke-width:2}.worker{fill:#fff;stroke:#8b8393;stroke-width:1.4}.evaluator{fill:#fff0e8;stroke:#ff7048;stroke-width:2}.human{fill:#17141f;stroke:#17141f;stroke-width:2}.memory{fill:#f3edff;stroke:#6c3bf2;stroke-width:1.8}.pattern{font-size:11px;font-weight:900;letter-spacing:.09em;fill:#6c3bf2}.pattern-orange{fill:#d84e2d}.name{font-size:17px;font-weight:850;fill:#17141f}.sub{font-size:11px;font-weight:650;fill:#6f6878}.tiny{font-size:10px;font-weight:750;fill:#6f6878}.human-name{font-size:17px;font-weight:850;fill:#fff}.human-sub{font-size:11px;font-weight:650;fill:#ddd7e2}.memory-name{font-size:16px;font-weight:850;fill:#6c3bf2}.label-bg{fill:#fff}.label{font-size:10px;font-weight:850;fill:#6f6878}.label-orange{fill:#c34c33}.label-purple{fill:#6c3bf2}.runner{filter:drop-shadow(0 4px 5px rgba(36,26,61,.18))}.worker-highlight,.eval-highlight{fill:none;stroke-width:4;opacity:0}.worker-highlight{stroke:#6c3bf2;animation:workerFocus 10s ease infinite}.eval-highlight{stroke:#ff7048;animation:evalFocus 10s ease infinite}.pdf-output{opacity:0;animation:pdfDeliver 10s cubic-bezier(.2,.75,.25,1) infinite}.pdf-paper{fill:#fff;stroke:#6c3bf2;stroke-width:2}.pdf-fold{fill:#f3edff}.pdf-line{stroke:#bcb3c7;stroke-width:2}.pdf-title{font-size:9px;font-weight:850;fill:#6c3bf2}@keyframes workerFocus{0%,25%,60%,100%{opacity:0}30%,52%{opacity:1}}@keyframes evalFocus{0%,50%,82%,100%{opacity:0}58%,75%{opacity:1}}@keyframes pdfDeliver{0%,32%{opacity:0;transform:translate(0,6px) scale(.84)}38%{opacity:1;transform:translate(0,0) scale(1)}54%{opacity:1;transform:translate(116px,0) scale(1)}62%,100%{opacity:0;transform:translate(144px,0) scale(.92)}}@media(prefers-reduced-motion:reduce){.runner{display:none}.worker-highlight,.eval-highlight,.pdf-output{animation:none;opacity:0}}
+    .line{stroke:#756e7d;stroke-width:2;fill:none}.feedback{stroke:#ff7048;stroke-width:2.5;fill:none}.memory-line{stroke:#6c3bf2;stroke-width:2.5;stroke-dasharray:8 6;fill:none}.region{fill:#fbf9ff;stroke:#d7caff;stroke-width:1.5}.region-eval{fill:#fff9f5;stroke:#ffc3b0;stroke-width:1.5}.node{fill:#fff;stroke:#ded8e3;stroke-width:1.5}.orchestrator{fill:#f1eaff;stroke:#6c3bf2;stroke-width:2}.worker{fill:#fff;stroke:#8b8393;stroke-width:1.4}.evaluator{fill:#fff0e8;stroke:#ff7048;stroke-width:2}.human{fill:#17141f;stroke:#17141f;stroke-width:2}.memory{fill:#f3edff;stroke:#6c3bf2;stroke-width:1.8}.pattern{font-size:11px;font-weight:900;letter-spacing:.09em;fill:#6c3bf2}.pattern-orange{fill:#d84e2d}.name{font-size:17px;font-weight:850;fill:#17141f}.sub{font-size:11px;font-weight:650;fill:#6f6878}.tiny{font-size:10px;font-weight:750;fill:#6f6878}.human-name{font-size:17px;font-weight:850;fill:#fff}.human-sub{font-size:11px;font-weight:650;fill:#ddd7e2}.memory-name{font-size:16px;font-weight:850;fill:#6c3bf2}.label-bg{fill:#fff}.label{font-size:10px;font-weight:850;fill:#6f6878}.label-orange{fill:#c34c33}.label-purple{fill:#6c3bf2}.runner{filter:drop-shadow(0 4px 5px rgba(36,26,61,.18));opacity:0}.runner.worker-copy{filter:drop-shadow(0 3px 4px rgba(36,26,61,.16))}.runner.return-copy{filter:drop-shadow(0 3px 4px rgba(255,112,72,.22))}.worker-highlight,.eval-highlight{fill:none;stroke-width:4;opacity:0}.worker-highlight{stroke:#6c3bf2;animation:workerFocus 16s ease infinite}.eval-highlight{stroke:#ff7048;animation:evalFocus 16s ease infinite}.pdf-output{opacity:0;animation:pdfDeliver 16s cubic-bezier(.2,.75,.25,1) infinite}.pdf-paper{fill:#fff;stroke:#6c3bf2;stroke-width:2}.pdf-fold{fill:#f3edff}.pdf-line{stroke:#bcb3c7;stroke-width:2}.pdf-title{font-size:9px;font-weight:850;fill:#6c3bf2}@keyframes workerFocus{0%,14%,44%,100%{opacity:0}18%,38%{opacity:1}}@keyframes evalFocus{0%,38%,72%,100%{opacity:0}42%,66%{opacity:1}}@keyframes pdfDeliver{0%,28%{opacity:0;transform:translate(0,6px) scale(.84)}32%{opacity:1;transform:translate(0,0) scale(1)}40%{opacity:1;transform:translate(116px,0) scale(1)}44%,100%{opacity:0;transform:translate(144px,0) scale(.92)}}@media(prefers-reduced-motion:reduce){.runner{display:none}.worker-highlight,.eval-highlight,.pdf-output{animation:none;opacity:0}}
   </style>
 </head>
 <body>
@@ -37,7 +37,7 @@
     <path class="line" d="M792 304 H824 V224"/>
     <path class="line" marker-end="url(#arrow)" d="M824 224 H912"/>
     <path class="line" marker-end="url(#arrow)" d="M1040 224 H1112"/>
-    <path class="feedback" marker-end="url(#orange)" d="M976 288 V348 H792"/>
+    <path class="feedback" marker-end="url(#orange)" d="M976 288 V364 H836 V224 H792"/>
     <path class="line" marker-end="url(#arrow)" d="M1200 280 V416"/>
     <path class="memory-line" marker-end="url(#purple)" d="M1112 464 H396 V280"/>
     <rect class="label-bg" x="832" y="205" width="64" height="20" rx="2"/><text class="label" x="864" y="219" text-anchor="middle">평가</text>
@@ -84,7 +84,63 @@
     </g>
     <g class="runner" aria-hidden="true">
       <image href="claude-agent-character-cutout.png" x="-22" y="-18" width="44" height="36"/>
-      <animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;0.18;0.36;0.60;0.82;1" keyPoints="0;0.18;0.42;0.66;1;1" calcMode="linear" path="M111 156 L394 156 L540 144 L690 144 L976 144"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.02;.13;.16;1" values="0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.02;.13;.16;1" keyPoints="0;0;1;1;1" calcMode="linear" path="M111 224 H394"/>
+    </g>
+    <g class="runner worker-copy" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-18" y="-15" width="36" height="30"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.15;.18;.28;.31;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.15;.18;.28;.31;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M394 224 H540 V144 H690"/>
+    </g>
+    <g class="runner worker-copy" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-18" y="-15" width="36" height="30"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.15;.18;.28;.31;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.15;.18;.28;.31;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M394 224 H690"/>
+    </g>
+    <g class="runner worker-copy" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-18" y="-15" width="36" height="30"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.15;.18;.28;.31;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.15;.18;.28;.31;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M394 224 H540 V304 H690"/>
+    </g>
+    <g class="runner worker-copy" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-18" y="-15" width="36" height="30"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.30;.33;.42;.45;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.30;.33;.42;.45;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M690 144 H824 V224 H976"/>
+    </g>
+    <g class="runner worker-copy" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-18" y="-15" width="36" height="30"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.30;.33;.42;.45;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.30;.33;.42;.45;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M690 224 H976"/>
+    </g>
+    <g class="runner worker-copy" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-18" y="-15" width="36" height="30"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.30;.33;.42;.45;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.30;.33;.42;.45;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M690 304 H824 V224 H976"/>
+    </g>
+    <g class="runner return-copy" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-18" y="-15" width="36" height="30"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.44;.47;.55;.58;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.44;.47;.55;.58;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M976 224 V364 H836 V224 H792"/>
+    </g>
+    <g class="runner worker-copy" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-18" y="-15" width="36" height="30"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.57;.60;.67;.70;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.57;.60;.67;.70;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M690 224 H976"/>
+    </g>
+    <g class="runner" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-20" y="-16" width="40" height="32"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.69;.72;.78;.81;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.69;.72;.78;.81;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M976 224 H1200"/>
+    </g>
+    <g class="runner" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-20" y="-16" width="40" height="32"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.80;.83;.88;.91;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.80;.83;.88;.91;1" keyPoints="0;0;0;1;1;1" calcMode="linear" path="M1200 224 V464"/>
+    </g>
+    <g class="runner" aria-hidden="true">
+      <image href="claude-agent-character-cutout.png" x="-20" y="-16" width="40" height="32"/>
+      <animate attributeName="opacity" dur="16s" repeatCount="indefinite" keyTimes="0;.90;.92;.98;1" values="0;0;1;1;0"/>
+      <animateMotion dur="16s" repeatCount="indefinite" keyTimes="0;.90;.92;.98;1" keyPoints="0;0;0;1;1" calcMode="linear" path="M1200 464 H396 V224"/>
     </g>
   </svg>
 </main>
