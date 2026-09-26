@@ -3,47 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>멘토링 Agent 품질 보증 구조</title>
+  <title>멘토링 Agent 오케스트레이션 구조</title>
   <style>
-    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#fff;font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:#161916}
-    main{height:100%;display:grid;grid-template-rows:auto 1fr;padding:30px 44px 24px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#6c3bf2}.title{margin:7px 0 0;font-size:38px;line-height:1.15;letter-spacing:-.045em}.title span{color:#6c3bf2}svg{width:100%;height:100%;display:block}.arrow{stroke:#6f6878;stroke-width:2;fill:none}.loop{stroke:#6c3bf2;stroke-width:2.5;stroke-dasharray:8 6;fill:none}.node{fill:white;stroke:#ded8e3;stroke-width:1.5}.head{fill:#f3edff;stroke:#6c3bf2;stroke-width:2}.agent{fill:#ffffff;stroke:#17141f;stroke-width:1.5}.gate{fill:#fff0e8;stroke:#ff7048;stroke-width:2}.memory{fill:#241a3d;stroke:#6c3bf2;stroke-width:2}.name{font-size:16px;font-weight:850;fill:#17141f}.sub{font-size:11px;font-weight:600;fill:#6f6878}.memory-name{font-size:16px;font-weight:850;fill:#9b7bff}.memory-sub{font-size:11px;font-weight:600;fill:#eee8f0}.skill{fill:#f5f1f7;stroke:#ded8e3;stroke-width:1}.skill-text{font-size:9px;font-weight:800;fill:#6c3bf2}.label-bg{fill:#faf8f5}.label{font-size:10px;font-weight:800;fill:#6f6878}.pass{font-size:10px;font-weight:850;fill:#6c3bf2}.fail{font-size:10px;font-weight:850;fill:#c34c33}.runner{filter:drop-shadow(0 5px 6px rgba(36,26,61,.2))}.pdf-agent-highlight,.gate-highlight{fill:none;stroke-width:4;opacity:0}.pdf-agent-highlight{stroke:#6c3bf2;animation:agentFocus 10s ease infinite}.gate-highlight{stroke:#ff7048;animation:gateFocus 10s ease infinite}.pdf-output{opacity:0;animation:pdfDeliver 10s cubic-bezier(.2,.75,.25,1) infinite}.pdf-paper{fill:#fff;stroke:#6c3bf2;stroke-width:2}.pdf-fold{fill:#f3edff}.pdf-line{stroke:#bcb3c7;stroke-width:2}.pdf-title{font-size:10px;font-weight:850;fill:#6c3bf2}@keyframes agentFocus{0%,34%,66%,100%{opacity:0}38%,58%{opacity:1}}@keyframes gateFocus{0%,58%,86%,100%{opacity:0}64%,80%{opacity:1}}@keyframes pdfDeliver{0%,38%{opacity:0;transform:translate(0,8px) scale(.82)}44%{opacity:1;transform:translate(0,0) scale(1)}58%{opacity:1;transform:translate(70px,0) scale(1)}66%,100%{opacity:0;transform:translate(96px,0) scale(.92)}}@media(prefers-reduced-motion:reduce){.runner{display:none}.pdf-agent-highlight,.gate-highlight,.pdf-output{animation:none;opacity:0}}
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#fff;font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:#17141f}
+    main{height:100%;display:grid;grid-template-rows:auto 1fr;padding:30px 44px 22px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#6c3bf2}.title{margin:7px 0 2px;font-size:38px;line-height:1.14;letter-spacing:-.045em}.title span{color:#6c3bf2}.subtitle{margin:8px 0 0;font-size:14px;font-weight:650;color:#6f6878}svg{width:100%;height:100%;display:block}
+    .line{stroke:#756e7d;stroke-width:2;fill:none}.feedback{stroke:#ff7048;stroke-width:2.5;fill:none}.memory-line{stroke:#6c3bf2;stroke-width:2.5;stroke-dasharray:8 6;fill:none}.region{fill:#fbf9ff;stroke:#d7caff;stroke-width:1.5}.region-eval{fill:#fff9f5;stroke:#ffc3b0;stroke-width:1.5}.node{fill:#fff;stroke:#ded8e3;stroke-width:1.5}.orchestrator{fill:#f1eaff;stroke:#6c3bf2;stroke-width:2}.worker{fill:#fff;stroke:#8b8393;stroke-width:1.4}.evaluator{fill:#fff0e8;stroke:#ff7048;stroke-width:2}.human{fill:#17141f;stroke:#17141f;stroke-width:2}.memory{fill:#f3edff;stroke:#6c3bf2;stroke-width:1.8}.pattern{font-size:11px;font-weight:900;letter-spacing:.09em;fill:#6c3bf2}.pattern-orange{fill:#d84e2d}.name{font-size:17px;font-weight:850;fill:#17141f}.sub{font-size:11px;font-weight:650;fill:#6f6878}.tiny{font-size:10px;font-weight:750;fill:#6f6878}.human-name{font-size:17px;font-weight:850;fill:#fff}.human-sub{font-size:11px;font-weight:650;fill:#ddd7e2}.memory-name{font-size:16px;font-weight:850;fill:#6c3bf2}.label-bg{fill:#fff}.label{font-size:10px;font-weight:850;fill:#6f6878}.label-orange{fill:#c34c33}.label-purple{fill:#6c3bf2}.runner{filter:drop-shadow(0 4px 5px rgba(36,26,61,.18))}.worker-highlight,.eval-highlight{fill:none;stroke-width:4;opacity:0}.worker-highlight{stroke:#6c3bf2;animation:workerFocus 10s ease infinite}.eval-highlight{stroke:#ff7048;animation:evalFocus 10s ease infinite}.pdf-output{opacity:0;animation:pdfDeliver 10s cubic-bezier(.2,.75,.25,1) infinite}.pdf-paper{fill:#fff;stroke:#6c3bf2;stroke-width:2}.pdf-fold{fill:#f3edff}.pdf-line{stroke:#bcb3c7;stroke-width:2}.pdf-title{font-size:9px;font-weight:850;fill:#6c3bf2}@keyframes workerFocus{0%,25%,60%,100%{opacity:0}30%,52%{opacity:1}}@keyframes evalFocus{0%,50%,82%,100%{opacity:0}58%,75%{opacity:1}}@keyframes pdfDeliver{0%,32%{opacity:0;transform:translate(0,6px) scale(.84)}38%{opacity:1;transform:translate(0,0) scale(1)}54%{opacity:1;transform:translate(116px,0) scale(1)}62%,100%{opacity:0;transform:translate(144px,0) scale(.92)}}@media(prefers-reduced-motion:reduce){.runner{display:none}.worker-highlight,.eval-highlight,.pdf-output{animation:none;opacity:0}}
   </style>
 </head>
 <body>
 <main>
-  <header><div class="eyebrow">SOLUTION ARCHITECTURE / QUALITY ASSURANCE</div><h1 class="title">Agent가 만들고, <span>구조가 품질을 보증</span>합니다.</h1></header>
-  <svg viewBox="0 0 1320 560" role="img" aria-label="Notion 입력을 Head Agent가 분배하고 네 Agent가 Skills를 사용해 결과물을 만든 뒤 자동 검수와 사람 승인을 거쳐 기록이 다음 실행으로 돌아가는 구조">
-    <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6f6878"/></marker><marker id="blue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6c3bf2"/></marker><marker id="red" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#c34c33"/></marker></defs>
-    <path class="arrow" marker-end="url(#arrow)" d="M206 152 H274"/>
-    <path class="arrow" d="M474 152 H526"/><path class="arrow" d="M526 152 V90 H586"/><path class="arrow" d="M526 152 V214 H586"/><path class="arrow" d="M526 152 V338 H586"/><path class="arrow" marker-end="url(#arrow)" d="M526 152 V462 H586"/>
-    <path class="arrow" d="M804 90 H842 V214"/><path class="arrow" d="M804 214 H842"/><path class="arrow" d="M804 338 H842 V214"/><path class="arrow" d="M804 462 H842 V214"/><path class="arrow" marker-end="url(#arrow)" d="M842 214 H888"/>
-    <path class="loop" marker-end="url(#blue)" d="M1084 214 H1136"/>
-    <path class="arrow" marker-end="url(#arrow)" d="M1228 266 V372"/>
-    <path class="loop" marker-end="url(#blue)" d="M1220 492 V536 H374 V214"/>
-    <rect class="label-bg" x="746" y="522" width="156" height="22"/><text class="pass" x="824" y="537" text-anchor="middle">다음 실행 기준</text>
-    <path stroke="#c34c33" stroke-width="2" fill="none" marker-end="url(#red)" d="M986 270 V504 H804"/>
-    <rect class="label-bg" x="954" y="494" width="120" height="22"/><text class="fail" x="1014" y="509" text-anchor="middle">불일치 재실행</text>
-    <rect class="label-bg" x="1082" y="194" width="100" height="22"/><text class="pass" x="1132" y="209" text-anchor="middle">통과</text>
-    <rect class="node" x="36" y="102" width="170" height="100" rx="8"/><text class="name" x="121" y="136" text-anchor="middle">입력 자료</text><text class="sub" x="121" y="161" text-anchor="middle">Notion 제출물</text><text class="sub" x="121" y="181" text-anchor="middle">지난 피드백과 기준 문서</text>
-    <rect class="head" x="274" y="96" width="200" height="112" rx="8"/><text class="name" x="374" y="132" text-anchor="middle">Head Agent</text><text class="sub" x="374" y="157" text-anchor="middle">작업 분배와 결과 취합</text><rect class="skill" x="316" y="172" width="116" height="22" rx="4"/><text class="skill-text" x="374" y="187" text-anchor="middle">weekly-ops</text>
-    <rect class="agent" x="586" y="42" width="218" height="96" rx="8"/><text class="name" x="695" y="72" text-anchor="middle">진단 Agent</text><text class="sub" x="695" y="94" text-anchor="middle">핵심 문제와 우선순위</text><rect class="skill" x="614" y="106" width="162" height="22" rx="4"/><text class="skill-text" x="695" y="121" text-anchor="middle">feedback-classifier</text>
-    <rect class="agent" x="586" y="166" width="218" height="96" rx="8"/><text class="name" x="695" y="196" text-anchor="middle">PDF Agent</text><text class="sub" x="695" y="218" text-anchor="middle">피드백 리포트</text><rect class="skill" x="614" y="230" width="162" height="22" rx="4"/><text class="skill-text" x="695" y="245" text-anchor="middle">pdf-formatter</text>
-    <rect class="agent" x="586" y="290" width="218" height="96" rx="8"/><text class="name" x="695" y="320" text-anchor="middle">멘트 Agent</text><text class="sub" x="695" y="342" text-anchor="middle">Slack 전달 멘트</text><rect class="skill" x="614" y="354" width="162" height="22" rx="4"/><text class="skill-text" x="695" y="369" text-anchor="middle">slack-mention</text>
-    <rect class="agent" x="586" y="414" width="218" height="96" rx="8"/><text class="name" x="695" y="444" text-anchor="middle">검수 Agent</text><text class="sub" x="695" y="466" text-anchor="middle">진단과 문장 일치 확인</text><rect class="skill" x="614" y="478" width="162" height="22" rx="4"/><text class="skill-text" x="695" y="493" text-anchor="middle">consistency-check</text>
-    <rect class="gate" x="888" y="158" width="196" height="112" rx="8"/><text class="name" x="986" y="194" text-anchor="middle">자동 품질 게이트</text><text class="sub" x="986" y="219" text-anchor="middle">진단 일치, 행동 가능성</text><text class="sub" x="986" y="239" text-anchor="middle">톤 구분, 발송 안전성</text>
-    <rect class="gate" x="1136" y="158" width="168" height="108" rx="8"/><text class="name" x="1220" y="194" text-anchor="middle">멘토 승인</text><text class="sub" x="1220" y="219" text-anchor="middle">최종 판단과 표현</text><text class="sub" x="1220" y="239" text-anchor="middle">외부 발송 여부</text>
-    <rect class="memory" x="1132" y="372" width="176" height="120" rx="8"/><text class="memory-name" x="1220" y="408" text-anchor="middle">기억층</text><text class="memory-sub" x="1220" y="434" text-anchor="middle">검수 기록과 수정 이유</text><text class="memory-sub" x="1220" y="454" text-anchor="middle">다음 확인 포인트</text><text class="memory-sub" x="1220" y="474" text-anchor="middle">다음 실행의 입력</text>
-    <rect class="pdf-agent-highlight" x="578" y="158" width="234" height="112" rx="12"/>
-    <rect class="gate-highlight" x="880" y="150" width="212" height="128" rx="12"/>
+  <header>
+    <div class="eyebrow">OFFICIAL AGENT WORKFLOW PATTERNS</div>
+    <h1 class="title"><span>오케스트레이션</span>과 평가 루프를 연결했습니다.</h1>
+    <p class="subtitle">Head Agent가 작업을 나누고, Evaluator가 기준을 통과할 때까지 수정합니다.</p>
+  </header>
+  <svg viewBox="0 0 1320 540" role="img" aria-label="입력 자료를 오케스트레이터가 역할별 Agent에게 배분하고 Evaluator가 평가와 수정을 반복한 뒤 멘토 승인과 기억층으로 연결하는 구조">
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#756e7d"/></marker>
+      <marker id="orange" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#ff7048"/></marker>
+      <marker id="purple" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6c3bf2"/></marker>
+    </defs>
+    <rect class="region" x="252" y="68" width="600" height="316" rx="12"/>
+    <text class="pattern" x="276" y="96">ORCHESTRATOR-WORKERS</text>
+    <rect class="region-eval" x="880" y="68" width="192" height="316" rx="12"/>
+    <text class="pattern pattern-orange" x="904" y="96">EVALUATOR-OPTIMIZER</text>
+    <path class="line" marker-end="url(#arrow)" d="M190 224 H292"/>
+    <path class="line" d="M496 224 H540"/>
+    <path class="line" marker-end="url(#arrow)" d="M540 224 V144 H588"/>
+    <path class="line" marker-end="url(#arrow)" d="M540 224 H588"/>
+    <path class="line" marker-end="url(#arrow)" d="M540 224 V304 H588"/>
+    <path class="line" d="M792 144 H824 V224"/>
+    <path class="line" d="M792 224 H824"/>
+    <path class="line" d="M792 304 H824 V224"/>
+    <path class="line" marker-end="url(#arrow)" d="M824 224 H912"/>
+    <path class="line" marker-end="url(#arrow)" d="M1040 224 H1112"/>
+    <path class="feedback" marker-end="url(#orange)" d="M976 288 V348 H792"/>
+    <path class="line" marker-end="url(#arrow)" d="M1200 280 V416"/>
+    <path class="memory-line" marker-end="url(#purple)" d="M1112 464 H396 V280"/>
+    <rect class="label-bg" x="832" y="205" width="64" height="20" rx="2"/><text class="label" x="864" y="219" text-anchor="middle">평가</text>
+    <rect class="label-bg" x="1050" y="205" width="54" height="20" rx="2"/><text class="label label-purple" x="1077" y="219" text-anchor="middle">통과</text>
+    <rect class="label-bg" x="832" y="337" width="86" height="20" rx="2"/><text class="label label-orange" x="875" y="351" text-anchor="middle">수정 요청</text>
+    <rect class="label-bg" x="706" y="451" width="128" height="20" rx="2"/><text class="label label-purple" x="770" y="465" text-anchor="middle">다음 실행 기준</text>
+    <rect class="node" x="32" y="174" width="158" height="100" rx="8"/>
+    <text class="name" x="111" y="210" text-anchor="middle">입력 자료</text>
+    <text class="sub" x="111" y="236" text-anchor="middle">Notion 제출물</text>
+    <text class="sub" x="111" y="256" text-anchor="middle">기준 문서와 지난 기록</text>
+    <rect class="orchestrator" x="292" y="168" width="204" height="112" rx="8"/>
+    <text class="tiny" x="394" y="194" text-anchor="middle">ORCHESTRATOR</text>
+    <text class="name" x="394" y="222" text-anchor="middle">Head Agent</text>
+    <text class="sub" x="394" y="248" text-anchor="middle">작업 배분과 결과 취합</text>
+    <rect class="worker" x="588" y="108" width="204" height="72" rx="8"/>
+    <text class="name" x="690" y="138" text-anchor="middle">진단 Agent</text>
+    <text class="sub" x="690" y="160" text-anchor="middle">핵심 문제와 우선순위</text>
+    <rect class="worker" x="588" y="188" width="204" height="72" rx="8"/>
+    <text class="name" x="690" y="218" text-anchor="middle">PDF Agent</text>
+    <text class="sub" x="690" y="240" text-anchor="middle">피드백 리포트 생성</text>
+    <rect class="worker" x="588" y="268" width="204" height="72" rx="8"/>
+    <text class="name" x="690" y="298" text-anchor="middle">멘트 Agent</text>
+    <text class="sub" x="690" y="320" text-anchor="middle">Slack 전달 멘트 생성</text>
+    <rect class="evaluator" x="912" y="160" width="128" height="128" rx="8"/>
+    <text class="tiny" x="976" y="188" text-anchor="middle">EVALUATOR</text>
+    <text class="name" x="976" y="218" text-anchor="middle">검수 Agent</text>
+    <text class="sub" x="976" y="244" text-anchor="middle">기준 일치 평가</text>
+    <text class="sub" x="976" y="264" text-anchor="middle">통과 여부 결정</text>
+    <rect class="human" x="1112" y="168" width="176" height="112" rx="8"/>
+    <text class="tiny human-sub" x="1200" y="194" text-anchor="middle">HUMAN IN THE LOOP</text>
+    <text class="human-name" x="1200" y="224" text-anchor="middle">멘토 승인</text>
+    <text class="human-sub" x="1200" y="250" text-anchor="middle">최종 판단과 외부 발송</text>
+    <rect class="memory" x="1112" y="416" width="176" height="96" rx="8"/>
+    <text class="memory-name" x="1200" y="448" text-anchor="middle">기억층</text>
+    <text class="sub" x="1200" y="474" text-anchor="middle">검수 기록과 수정 이유</text>
+    <text class="sub" x="1200" y="494" text-anchor="middle">다음 실행의 기준</text>
+    <rect class="worker-highlight" x="580" y="180" width="220" height="88" rx="12"/>
+    <rect class="eval-highlight" x="904" y="152" width="144" height="144" rx="12"/>
     <g class="pdf-output">
-      <rect class="pdf-paper" x="806" y="170" width="58" height="72" rx="5"/>
-      <path class="pdf-fold" d="M848 170 H864 V186 Z"/>
-      <text class="pdf-title" x="835" y="197" text-anchor="middle">피드백 PDF</text>
-      <path class="pdf-line" d="M817 208 H853 M817 218 H847 M817 228 H851"/>
+      <rect class="pdf-paper" x="798" y="184" width="54" height="68" rx="5"/>
+      <path class="pdf-fold" d="M838 184 H852 V198 Z"/>
+      <text class="pdf-title" x="825" y="210" text-anchor="middle">피드백 PDF</text>
+      <path class="pdf-line" d="M808 220 H842 M808 230 H838 M808 240 H840"/>
     </g>
     <g class="runner" aria-hidden="true">
       <image href="claude-agent-character-cutout.png" x="-22" y="-18" width="44" height="36"/>
-      <animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;0.16;0.34;0.58;0.82;1" keyPoints="0;0.18;0.42;0.68;1;1" calcMode="linear" path="M121 92 L374 92 L540 154 L695 154 L986 154"/>
+      <animateMotion dur="10s" repeatCount="indefinite" keyTimes="0;0.18;0.36;0.60;0.82;1" keyPoints="0;0.18;0.42;0.66;1;1" calcMode="linear" path="M111 156 L394 156 L540 144 L690 144 L976 144"/>
     </g>
   </svg>
 </main>
