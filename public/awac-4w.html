@@ -42,8 +42,9 @@
     .problem-card.actual{border:3px solid var(--accent);background:#f3edff}.problem-card.actual strong{color:var(--accent)}.problem-shift{display:grid;place-items:center;font-size:30px;color:var(--accent)}
     .quality-signals{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.quality-signals div{border-top:3px solid var(--ink);padding:12px 4px}.quality-signals b{display:block;font-size:15px;margin-bottom:5px}.quality-signals span{color:var(--muted);font-size:12px;line-height:1.4}
     .story-toc{margin-top:24px;border-top:2px solid var(--ink)}
-    .toc-row{display:grid;grid-template-columns:54px 1fr;gap:18px;padding:15px 4px;border-bottom:1px solid var(--line)}
-    .toc-row>span{color:var(--accent);font:800 13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}.toc-row strong{display:block;font-size:20px;line-height:1.35}.toc-row ul{margin:7px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:5px 18px}.toc-row li{color:var(--muted);font-size:12px;line-height:1.4}.toc-row li:before{content:"- ";color:var(--accent)}
+    .toc-row{display:grid;grid-template-columns:54px 1fr;gap:18px;padding:17px 4px;border-bottom:1px solid var(--line)}
+    .toc-row>span{color:var(--accent);font:800 13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}.toc-row strong{display:block;font-size:21px;line-height:1.3}.toc-row p{margin-top:5px;color:var(--muted);font-size:12px;line-height:1.4}
+    .toc-slide{padding-top:28px;padding-bottom:18px}.toc-slide .slide-head{margin-bottom:14px}.toc-slide .title{font-size:clamp(36px,4.4vw,60px)}.toc-slide .body{margin-top:20px}.toc-slide .story-toc{margin-top:0}.toc-slide .toc-row{padding:12px 4px}.toc-slide .toc-row strong{font-size:19px}.toc-slide .toc-row p{font-size:11px;margin-top:3px}
     .agent-avatar{display:block;width:44px;height:29px;object-fit:contain;margin:0 auto 10px;image-rendering:pixelated}
     .tree-root{text-align:center}
     .tree-root .agent-label,.tree-branch-card .agent-label{text-align:center}
@@ -89,7 +90,7 @@
     .visual-slide .case-image,.demo-slide .demo-frame{opacity:0;transform:translateY(18px);animation:caseRise .55s ease forwards}
     @keyframes caseRise{to{opacity:1;transform:translateY(0)}}
     @media(max-width:600px){.visual-slide{padding:10px}.case-image{max-height:calc(100dvh - var(--header) - var(--footer) - 20px);box-shadow:none}.demo-slide{padding:18px 12px}.demo-frame iframe{min-height:360px}.story-captions{grid-template-columns:1fr}.story-image{height:auto;object-fit:contain}.visual-frame{min-height:620px}.resource-layout{grid-template-columns:1fr}.data-map{grid-template-columns:1fr 1fr}.pds{grid-template-columns:1fr}.pds-arrow{transform:rotate(90deg)}}
-    @media(max-width:900px){.question-flow{grid-template-columns:1fr}.question-arrow{transform:rotate(90deg);padding:4px}.problem-compare{grid-template-columns:1fr}.problem-shift{transform:rotate(90deg);min-height:42px}.quality-signals{grid-template-columns:1fr}}
+    @media(max-width:900px){.question-flow{grid-template-columns:1fr}.question-arrow{transform:rotate(90deg);padding:4px}.problem-compare{grid-template-columns:1fr}.problem-shift{transform:rotate(90deg);min-height:42px}.quality-signals{grid-template-columns:1fr}.hero .title{font-size:34px}.hero .hero-side{font-size:40px}.toc-slide{padding-top:22px}.toc-slide .title{font-size:42px}.toc-slide .toc-row{padding:10px 4px}}
     @media(prefers-reduced-motion:reduce){.visual-slide .case-image,.demo-slide .demo-frame{animation:none;opacity:1;transform:none}}
   </style>
 </head>
@@ -100,11 +101,11 @@
   <main><section class="deck" id="deck" tabindex="-1">
     <article class="slide dark hero" data-title="오늘의 질문">
       <div class="slide-head"><span class="eyebrow">AI AGENT CASE STUDY</span><span class="num">01</span></div>
-      <div class="hero-copy"><div class="hero-side">MENTORING</div><h1 class="title">매번 달라지는 피드백을<br><span class="lime">품질이 보증되는 Agent</span>로 바꾸다</h1><div class="hero-line"></div><p class="subtitle"><b>사람의 판단 기준을 폴더와 Skills로 구조화하고,</b><br><b>멀티 Agent와 사람 검수로 운영한 멘토링 사례입니다.</b></p></div>
+      <div class="hero-copy"><div class="hero-side">MENTORING</div><h1 class="title">매번 달라지는 피드백에<br><span class="lime">기준을 만들다</span></h1><div class="hero-line"></div><p class="subtitle"><b>판단 기준을 Skills로 구조화해,</b><br><b>멀티 Agent와 사람 검수로 운영했습니다.</b></p></div>
       <div class="hero-bottom"><span>반복 업무에 기준을 남기는 멘토링 Agent 설계</span><span>YUJIN FLOW</span></div>
     </article>
-    <article class="slide" data-title="오늘의 이야기">
-      <div class="slide-head"><span class="eyebrow">STORYLINE</span><span class="num">02</span></div><h1 class="title">오늘 이야기할 순서</h1><div class="body"><div class="story-toc"><section class="toc-row"><span>01</span><div><strong>문제는 시간이 오래 걸린다는 것 하나가 아니었다</strong><ul><li>판단 기준이 사람의 머릿속에만 있었다</li><li>PDF와 멘트가 다른 진단을 말했다</li><li>검수 근거가 남지 않았다</li></ul></div></section><section class="toc-row"><span>02</span><div><strong>무엇을 먼저 바로잡을 것인가</strong><ul><li>속도보다 품질을 설명할 수 있는 기준부터 설계한다</li></ul></div></section><section class="toc-row"><span>03</span><div><strong>멘토링 Agent를 위한 세 가지 변화</strong><ul><li>판단 기준을 파일로 남기기</li><li>Agent와 Skills를 역할별로 나누기</li><li>사람 검수와 기록을 운영 루프로 만들기</li></ul></div></section><section class="toc-row"><span>04</span><div><strong>실제 작업 화면으로 확인한 실행 구조</strong></div></section><section class="toc-row"><span>05</span><div><strong>자동화 다음에 남겨야 할 품질 보증 구조</strong></div></section></div></div>
+    <article class="slide toc-slide" data-title="오늘의 이야기">
+      <div class="slide-head"><span class="eyebrow">STORYLINE</span><span class="num">02</span></div><h1 class="title">오늘 이야기할 순서</h1><div class="body"><div class="story-toc"><section class="toc-row"><span>01</span><div><strong>문제 발견</strong><p>피드백 품질이 매번 달라진 진짜 이유</p></div></section><section class="toc-row"><span>02</span><div><strong>우선순위 설정</strong><p>속도보다 판단 기준을 먼저 바로잡은 이유</p></div></section><section class="toc-row"><span>03</span><div><strong>Agent 구조 설계</strong><p>기준, 역할별 Agent, Skills, 사람 검수</p></div></section><section class="toc-row"><span>04</span><div><strong>실제 구현</strong><p>폴더 구조와 Claude Code 실행 화면</p></div></section><section class="toc-row"><span>05</span><div><strong>운영과 확장</strong><p>품질 보증 구조와 Plan, Do, See</p></div></section></div></div>
     </article>
     <article class="slide" data-title="문제의 본질">
       <div class="slide-head"><span class="eyebrow">THE REAL PROBLEM</span><span class="num">03</span></div><h1 class="title">문제는 <span class="accent">시간이 오래 걸린다</span>는 것<br>하나가 아니었습니다.</h1><div class="body"><div class="problem-compare"><section class="problem-card"><small>겉으로 보이는 문제</small><strong>피드백 제작이 느리다</strong><p>PDF와 멘트를 매번 새로 만들기 때문에 반복 업무에 시간이 듭니다.</p></section><div class="problem-shift">→</div><section class="problem-card actual"><small>실제로 해결할 문제</small><strong>결과의 품질을 보증하기 어렵다</strong><p>판단 기준, 검수 과정, 수정 이유가 남지 않아 결과가 왜 통과했는지 설명할 수 없습니다.</p></section></div><div class="quality-signals"><div><b>기준이 머릿속에만 있음</b><span>Agent가 읽을 수 있는 명시적인 판단 기준이 없습니다.</span></div><div><b>산출물이 서로 다름</b><span>PDF와 멘트가 다른 진단과 행동을 제안할 수 있습니다.</span></div><div><b>검수 근거가 남지 않음</b><span>무엇을 왜 고쳤는지 다음 실행에서 재사용하기 어렵습니다.</span></div></div></div>
