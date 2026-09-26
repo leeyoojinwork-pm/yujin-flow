@@ -6,22 +6,21 @@
   <title>멘토링 Agent 품질 보증 구조</title>
   <style>
     *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#f7f8f5;font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:#161916}
-    main{height:100%;display:grid;grid-template-rows:auto 1fr;padding:30px 44px 24px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#6c3bf2}.title{margin:7px 0 0;font-size:38px;line-height:1.15;letter-spacing:-.045em}.title span{color:#6c3bf2}svg{width:100%;height:100%;display:block}.arrow{stroke:#6f6878;stroke-width:2;fill:none}.loop{stroke:#6c3bf2;stroke-width:2.5;fill:none}.node{fill:white;stroke:#ded8e3;stroke-width:1.5}.head{fill:#f3edff;stroke:#6c3bf2;stroke-width:2}.agent{fill:#ffffff;stroke:#17141f;stroke-width:1.5}.gate{fill:#fff0e8;stroke:#ff7048;stroke-width:2}.memory{fill:#17131d;stroke:#17131d;stroke-width:1.5}.name{font-size:16px;font-weight:850;fill:#17141f}.sub{font-size:11px;font-weight:600;fill:#6f6878}.memory-name{font-size:16px;font-weight:850;fill:#ffad3d}.memory-sub{font-size:11px;font-weight:600;fill:#eee8f0}.skill{fill:#f5f1f7;stroke:#ded8e3;stroke-width:1}.skill-text{font-size:9px;font-weight:800;fill:#6c3bf2}.label-bg{fill:#faf8f5}.label{font-size:10px;font-weight:800;fill:#6f6878}.pass{font-size:10px;font-weight:850;fill:#6c3bf2}.fail{font-size:10px;font-weight:850;fill:#c34c33}
+    main{height:100%;display:grid;grid-template-rows:auto 1fr;padding:30px 44px 24px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#6c3bf2}.title{margin:7px 0 0;font-size:38px;line-height:1.15;letter-spacing:-.045em}.title span{color:#6c3bf2}svg{width:100%;height:100%;display:block}.arrow{stroke:#6f6878;stroke-width:2;fill:none}.loop{stroke:#6c3bf2;stroke-width:2.5;stroke-dasharray:8 6;fill:none}.node{fill:white;stroke:#ded8e3;stroke-width:1.5}.head{fill:#f3edff;stroke:#6c3bf2;stroke-width:2}.agent{fill:#ffffff;stroke:#17141f;stroke-width:1.5}.gate{fill:#fff0e8;stroke:#ff7048;stroke-width:2}.memory{fill:#241a3d;stroke:#6c3bf2;stroke-width:2}.name{font-size:16px;font-weight:850;fill:#17141f}.sub{font-size:11px;font-weight:600;fill:#6f6878}.memory-name{font-size:16px;font-weight:850;fill:#9b7bff}.memory-sub{font-size:11px;font-weight:600;fill:#eee8f0}.skill{fill:#f5f1f7;stroke:#ded8e3;stroke-width:1}.skill-text{font-size:9px;font-weight:800;fill:#6c3bf2}.label-bg{fill:#faf8f5}.label{font-size:10px;font-weight:800;fill:#6f6878}.pass{font-size:10px;font-weight:850;fill:#6c3bf2}.fail{font-size:10px;font-weight:850;fill:#c34c33}
   </style>
 </head>
 <body>
 <main>
   <header><div class="eyebrow">SOLUTION ARCHITECTURE / QUALITY ASSURANCE</div><h1 class="title">Agent가 만들고, <span>구조가 품질을 보증</span>합니다.</h1></header>
-  <svg viewBox="0 0 1320 560" role="img" aria-labelledby="ttl desc">
-    <title id="ttl">멘토링 Agent 품질 보증 아키텍처</title>
-    <desc id="desc">Notion 입력을 Head Agent가 분배하고 네 Agent가 Skills를 사용해 결과물을 만든 뒤 자동 검수와 사람 승인을 거쳐 기록이 다음 실행으로 돌아간다.</desc>
+  <svg viewBox="0 0 1320 560" role="img" aria-label="Notion 입력을 Head Agent가 분배하고 네 Agent가 Skills를 사용해 결과물을 만든 뒤 자동 검수와 사람 승인을 거쳐 기록이 다음 실행으로 돌아가는 구조">
     <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6f6878"/></marker><marker id="blue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6c3bf2"/></marker><marker id="red" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#c34c33"/></marker></defs>
     <path class="arrow" marker-end="url(#arrow)" d="M206 152 H274"/>
     <path class="arrow" d="M474 152 H526"/><path class="arrow" d="M526 152 V90 H586"/><path class="arrow" d="M526 152 V214 H586"/><path class="arrow" d="M526 152 V338 H586"/><path class="arrow" marker-end="url(#arrow)" d="M526 152 V462 H586"/>
     <path class="arrow" d="M804 90 H842 V214"/><path class="arrow" d="M804 214 H842"/><path class="arrow" d="M804 338 H842 V214"/><path class="arrow" d="M804 462 H842 V214"/><path class="arrow" marker-end="url(#arrow)" d="M842 214 H888"/>
     <path class="loop" marker-end="url(#blue)" d="M1084 214 H1136"/>
     <path class="arrow" marker-end="url(#arrow)" d="M1228 266 V372"/>
-    <path class="loop" marker-end="url(#blue)" d="M1132 432 H474 V206"/>
+    <path class="loop" marker-end="url(#blue)" d="M1220 492 V536 H374 V214"/>
+    <rect class="label-bg" x="746" y="522" width="156" height="22"/><text class="pass" x="824" y="537" text-anchor="middle">다음 실행 기준</text>
     <path stroke="#c34c33" stroke-width="2" fill="none" marker-end="url(#red)" d="M986 270 V504 H804"/>
     <rect class="label-bg" x="954" y="494" width="120" height="22"/><text class="fail" x="1014" y="509" text-anchor="middle">불일치 재실행</text>
     <rect class="label-bg" x="1082" y="194" width="100" height="22"/><text class="pass" x="1132" y="209" text-anchor="middle">통과</text>
