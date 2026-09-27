@@ -197,6 +197,8 @@
   <footer class="bottom"><div class="bottom-left"><b id="chapter">01 / 오늘의 질문</b><span id="caption">반복 업무에 기준을 남기는 Agent를 설계합니다.</span></div><div class="controls"><button id="prev" aria-label="이전 슬라이드">←</button><span class="counter"><b id="current">01</b> / <span id="total">14</span></span><button id="next" class="next" aria-label="다음 슬라이드">→</button></div><div class="progress"><i id="progress"></i></div></footer>
   <script>
     const slides=[...document.querySelectorAll('.slide')];
+    const flowLabels=[null,null,'02 / USER','01 / DEFINE','01 / DEFINE','01 / DEFINE','03 / JOURNEY','04 / INTELLIGENCE FIT','01 / DEFINE','03 / JOURNEY','04 / INTELLIGENCE FIT','04 / INTELLIGENCE FIT','05 / NEXT AGENT','05 / NEXT AGENT','05 / NEXT AGENT'];
+    slides.forEach((slide,i)=>{const eyebrow=slide.querySelector('.eyebrow');if(eyebrow&&flowLabels[i])eyebrow.textContent=flowLabels[i]});
     const rail=document.getElementById('rail');
     let index=0;
     slides.forEach((slide,i)=>{const b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0');b.title=slide.dataset.title;b.addEventListener('click',()=>show(i));rail.appendChild(b)});
